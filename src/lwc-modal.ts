@@ -83,7 +83,7 @@ export class LwcModal extends LitElement {
     }
     await window.webln.enable();
 
-    const event = new Event('lwc-connected', {bubbles: true, composed: true});
+    const event = new Event('lwc:connected', {bubbles: true, composed: true});
     this.dispatchEvent(event);
 
     this.onConnect?.();
