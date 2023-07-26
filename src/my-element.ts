@@ -29,13 +29,19 @@ export class MyElement extends LitElement {
    * The name to say "Hello" to.
    */
   @property()
-  name = 'World';
+  declare name: string;
 
   /**
    * The number of times the button has been clicked.
    */
   @property({type: Number})
-  count = 0;
+  declare count: number;
+
+  constructor() {
+    super();
+    this.name = "World";
+    this.count = 0;
+  }
 
   override render() {
     return html`
