@@ -4,25 +4,9 @@
   <head>
     <meta charset="utf-8" />
     <title>&lt;my-element> Demo</title>
-    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../node_modules/lit/polyfill-support.js"></script>
-    <script type="module" src="../my-element.js"></script>
-    <script type="module" src="../lwc-button.js"></script>
-    <script type="module" src="../lwc-modal.js"></script>
-    <style>
-      p {
-        border: solid 1px blue;
-        padding: 8px;
-      }
-    </style>
+    <script src="../dist/index.browser.js"></script>
   </head>
   <body>
-    <my-element>
-      <p>This is child content 2</p>
-    </my-element>
-
-    
     <lwc-button on-connect="(nwcUrl) => alert('Connected')"></lwc-button>
-      
   </body>
 </html>

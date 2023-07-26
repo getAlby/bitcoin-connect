@@ -24,3 +24,5 @@ lwc-modal.d.ts
 lwc-modal.d.ts.map
 # only generated for size check
 lwc-modal.bundled.js
+
+dist
