@@ -2,26 +2,7 @@
 /lib/
 /test/
 custom-elements.json
-# top level source
-my-element.js
-my-element.js.map
-my-element.d.ts
-my-element.d.ts.map
-# only generated for size check
-my-element.bundled.js
 
-lwc-button.js
-lwc-button.js.map
-lwc-button.d.ts
-lwc-button.d.ts.map
-# only generated for size check
-lwc-button.bundled.js
-
-
-lwc-modal.js
-lwc-modal.js.map
-lwc-modal.d.ts
-lwc-modal.d.ts.map
 # only generated for size check
 lwc-modal.bundled.js
 
