@@ -75,7 +75,7 @@ return lwcConnected ? <>
 ```
 
 
-# Lit
+# 🔥 Lit
 
 This template is generated from the `lit-starter-ts` package in [the main Lit
 repo](https://github.com/lit/lit). Issues and PRs for this template should be
@@ -83,7 +83,7 @@ filed in that repo.
 
 See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
 
-# Local development
+# 🛠️ Development
 See [dev/README](dev/README.md)
 
 ## Build
@@ -91,3 +91,13 @@ See [dev/README](dev/README.md)
 
 ## Testing
 `yarn test`
+
+## Need help?
+
+We are happy to help, please contact us or create an issue.
+
+* [Twitter: @getAlby](https://twitter.com/getAlby)
+* [Telegram group](https://t.me/getAlby)
+* support at getalby.com
+* [bitcoin.design](https://bitcoin.design/) Discord community (find us on the #alby channel)
+* Read the [Alby developer guide](https://guides.getalby.com/overall-guide/alby-for-developers/getting-started) to better understand how Alby packages and APIs can be used to power your app.
