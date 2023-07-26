@@ -44,7 +44,7 @@ export class LwcButton extends LitElement {
       <button @click=${this._onClick} part="button">
         Connect Lightning Wallet
       </button>
-      ${this._modalOpen ? html`<lwc-modal .onClose=${this._closeModal} .onConnect=${this.onConnect}/>` : html``}
+      ${this._modalOpen ? html`<lwc-modal .onClose=${this._closeModal} .onConnect=${this.onConnect} />` : html``}
     </div>`;
   }
 
