@@ -3,10 +3,11 @@
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-
-import {LitElement, html, css} from 'lit';
+import {LitElement, html} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import "./lwc-modal.js";
+import {withTwind} from "./twind/withTwind";
+
 /**
  * An example element.
  *
@@ -15,16 +16,8 @@ import "./lwc-modal.js";
  * @csspart button - The button
  */
 @customElement('lwc-button')
+@withTwind
 export class LwcButton extends LitElement {
-  static override styles = css`
-    :host {
-      display: block;
-      border: solid 1px gray;
-      padding: 16px;
-      max-width: 800px;
-    }
-  `;
-
   @state()
   private _modalOpen = false;
 
@@ -41,7 +34,7 @@ export class LwcButton extends LitElement {
   override render() {
     return html`
     <div>
-      <button @click=${this._onClick} part="button">
+      <button @click=${this._onClick} part="button" class="text-3xl bg-red-500">
         Connect Lightning Wallet
       </button>
       ${this._modalOpen ? html`<lwc-modal .onClose=${this._closeModal} .onConnect=${this.onConnect} />` : html``}
