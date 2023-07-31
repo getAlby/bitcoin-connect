@@ -101,3 +101,7 @@ We are happy to help, please contact us or create an issue.
 * support at getalby.com
 * [bitcoin.design](https://bitcoin.design/) Discord community (find us on the #alby channel)
 * Read the [Alby developer guide](https://guides.getalby.com/overall-guide/alby-for-developers/getting-started) to better understand how Alby packages and APIs can be used to power your app.
+
+## License
+
+MIT
