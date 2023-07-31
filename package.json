@@ -21,9 +21,10 @@
     "build:browser": "esbuild dist/index.modern.js --bundle --outfile=dist/index.browser.js",
     "clean": "rm -rf dist",
     "build": "microbundle && yarn build:browser",
-    "dev": "microbundle watch",
+    "dev": "concurrently \"yarn dev:build\" \"yarn dev:browser\" \"yarn dev:serve\"",
+    "dev:build": "microbundle watch",
     "dev:browser": "yarn build:browser --watch",
-    "dev:serve": "wds --watch",
+    "dev:serve": "wds --open dev/index.html --watch",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer",
@@ -57,11 +58,15 @@
     "@web/test-runner-playwright": "^0.9.0",
     "@webbtc/webln-types": "^1.0.12",
     "@webcomponents/webcomponentsjs": "^2.6.0",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.2.0",
     "esbuild": "^0.18.17",
     "eslint": "^8.15.0",
     "lit-analyzer": "^1.2.1",
     "microbundle": "^0.15.1",
+    "postcss": "^8.4.27",
     "prettier": "^2.6.2",
+    "tailwindcss": "^3.3.3",
     "typescript": "~4.7.4"
   }
 }

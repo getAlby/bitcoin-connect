@@ -77,14 +77,12 @@ return lwcConnected ? <>
 
 # 🔥 Lit
 
-This template is generated from the `lit-starter-ts` package in [the main Lit
-repo](https://github.com/lit/lit). Issues and PRs for this template should be
-filed in that repo.
+This project is powered by Lit.
 
 See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
 
 # 🛠️ Development
-See [dev/README](dev/README.md)
+`yarn dev`
 
 ## Build
 `yarn build`
