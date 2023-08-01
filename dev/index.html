@@ -5,8 +5,22 @@
     <meta charset="utf-8" />
     <title>LWC Development</title>
     <script src="../dist/index.browser.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <lwc-button on-connect="(nwcUrl) => alert('Connected')"></lwc-button>
+    <div style="display: flex; flex-direction: column; gap: 1rem">
+      <code> &lt;lwc-button on-connect="() =&gt; alert('Connected')/&gt; </code>
+      <lwc-button on-connect="() => alert('Connected')"></lwc-button>
+      <code>
+        &lt;lwc-button icon-only on-connect="() =&gt; alert('Connected')"/&gt;
+      </code>
+      <lwc-button icon-only on-connect="() => alert('Connected')"></lwc-button>
+      <code>
+        &lt;lwc-connector-list on-connect="() =&gt; alert('Connected')"/&gt;
+      </code>
+      <lwc-connector-list
+        on-connect="() => alert('Connected')"
+      ></lwc-connector-list>
+    </div>
   </body>
 </html>

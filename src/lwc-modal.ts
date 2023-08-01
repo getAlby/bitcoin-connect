@@ -1,92 +1,68 @@
-/**
- * @license
- * Copyright 2019 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
-import { WebLNProvider } from '@webbtc/webln-types';
-import { webln } from 'alby-js-sdk';
-import {LitElement, html, css} from 'lit';
+// import { WebLNProvider } from '@webbtc/webln-types';
+// import { webln } from 'alby-js-sdk';
+import {html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
+import {LwcElement} from './lwc-element';
+import {lwcIconColored} from './icons/lwcIconColored';
+import {crossIcon} from './icons/crossIcon';
+import './lwc-connector-list.js';
+import {withTwindExtended} from './twind/withTwind';
 
-/**
- * An example element.
- *
- * @fires count-changed - Indicates when the count changes
- * @slot - This element has a slot
- * @csspart button - The button
- */
 @customElement('lwc-modal')
-export class LwcModal extends LitElement {
-
-  static override styles = css`
-    :host {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: white;
-      display: flex;
-    }
-  `;
-  /**
-   * Called when user successfully connects to a webln-compatible wallet.
-   * It will expose window.webln
-   */
-  @property({
-    attribute: "on-connect",
-    converter: (v) => v && typeof v === "string" ? eval(v) : v
-  })
-  onConnect?: () => void;
-
+export class LwcModal extends withTwindExtended({
+  animation: {
+    'slide-up': 'slide-up 0.5s ease-in-out forwards',
+  },
+  keyframes: {
+    'slide-up': {
+      '0%': {top: '100%'},
+      '100%': {top: '0%'},
+    },
+  },
+})(LwcElement) {
   /**
    * Called when modal is closed
    */
   @property({
-    attribute: "on-close",
-    converter: (v) => v && typeof v === "string" ? eval(v) : v
+    attribute: 'on-close',
+    converter: (v) => (v && typeof v === 'string' ? eval(v) : v),
   })
   onClose?: () => void;
 
+  constructor() {
+    super();
+    this.addEventListener('lwc:connected', this._onConnect);
+  }
+
   // TODO: move buttons to a separate component so they can be displayed outside of a modal
   override render() {
-    return html`
-    <div>
-      ${window.webln && html`<button @click=${this._connectWithExtension}>Connect with Browser Extension</button>`}
-      <button @click=${this._connectWithAlbyNWC}>Connect with Alby (NWC)</button>
-      <button @click=${this._onClickClose}>CANCEL</button>
+    return html` <div
+      part="modal"
+      class="fixed left-0 w-full h-full flex justify-center items-end sm:items-center animate-slide-up z-[21000]"
+    >
+      <div
+        class="p-4 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center bg-white w-full max-w-md max-sm:rounded-b-none"
+      >
+        <div class="flex justify-center items-center gap-2 w-full relative">
+          <div class="absolute right-0 h-full flex items-center justify-center">
+            <div class="cursor-pointer" @click=${this._onClickClose}>
+              ${crossIcon}
+            </div>
+          </div>
+          ${lwcIconColored}
+          <span class="font-medium font-sans">Lightning Wallet Connect</span>
+        </div>
+        <h1 class="font-sans text-gray-500 my-8">
+          Choose your wallet to connect
+        </h1>
+
+        <lwc-connector-list />
+      </div>
     </div>`;
   }
 
-  private async _connectWithExtension() {
-    if (!window.webln) {
-      throw new Error("No webln provided");
-    }
-    return this._connect();
-  }
-
-  private async _connectWithAlbyNWC() {
-    const nwc = webln.NostrWebLNProvider.withNewSecret();
-
-    await nwc.initNWC({
-      name: "LWC Test",
-    });
-    // FIXME: typings
-    window.webln = nwc as unknown as WebLNProvider;
-    return this._connect();
-  }
-
-  private async _connect() {
-    if (!window.webln) {
-      throw new Error("No webln provided");
-    }
-    await window.webln.enable();
-
-    const event = new Event('lwc:connected', {bubbles: true, composed: true});
-    this.dispatchEvent(event);
-
-    this.onConnect?.();
+  protected override _onConnect() {
+    super._onConnect();
     this.onClose?.();
   }
 
