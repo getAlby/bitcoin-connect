@@ -1,6 +1,6 @@
 {
-  "name": "lwc-test",
-  "version": "1.0.2",
+  "name": "@getalby/lightning-wallet-connect",
+  "version": "1.0.0",
   "description": "Web components to connect to a lightning wallet and power a website with WebLN",
   "type": "module",
   "source": "src/index.ts",

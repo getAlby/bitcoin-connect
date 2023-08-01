@@ -10,13 +10,13 @@
   <body>
     <div style="display: flex; flex-direction: column; gap: 1rem">
       <code> &lt;lwc-button /&gt; </code>
-      <lwc-button on-connect="() => alert('Connected')"></lwc-button>
+      <lwc-button></lwc-button>
+      <code> &lt;lwc-button disabled /&gt; </code>
+      <lwc-button disabled></lwc-button>
       <code> &lt;lwc-button icon-only/&gt; </code>
-      <lwc-button icon-only on-connect="() => alert('Connected')"></lwc-button>
+      <lwc-button icon-only></lwc-button>
       <code> &lt;lwc-connector-list/&gt; </code>
-      <lwc-connector-list
-        on-connect="() => alert('Connected')"
-      ></lwc-connector-list>
+      <lwc-connector-list></lwc-connector-list>
     </div>
     <script>
       window.addEventListener('lwc:connected', async () => {

@@ -33,6 +33,7 @@ Lightning wallet connect exposes the following web components for allowing user 
 - `<lwc-button/>` - launches the LWC Modal on click
   - Optional Arguments:
     - `icon-only` - display the button as an icon without "Connect wallet"
+    - `disabled` - mark the button as disabled. _NOTE: in react disabled={false} will not work - attribute must be omitted_
 - `<lwc-modal/>` - render the modal on its own
   - Optional Arguments:
     - `on-close` - callback when modal is closed
