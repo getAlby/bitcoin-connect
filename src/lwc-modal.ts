@@ -25,7 +25,6 @@ export class LwcModal extends withTwindExtended({
    */
   @property({
     attribute: 'on-close',
-    converter: (v) => (v && typeof v === 'string' ? eval(v) : v),
   })
   onClose?: () => void;
 
@@ -45,7 +44,7 @@ export class LwcModal extends withTwindExtended({
       >
         <div class="flex justify-center items-center gap-2 w-full relative">
           <div class="absolute right-0 h-full flex items-center justify-center">
-            <div class="cursor-pointer" @click=${this._onClickClose}>
+            <div class="cursor-pointer" @click=${this._onClose}>
               ${crossIcon}
             </div>
           </div>
@@ -63,10 +62,11 @@ export class LwcModal extends withTwindExtended({
 
   protected override _onConnect() {
     super._onConnect();
-    this.onClose?.();
+    this._onClose();
   }
 
-  private _onClickClose() {
+  private _onClose() {
+    this._dispatchLwcEvent('lwc:modalclosed');
     this.onClose?.();
   }
 }

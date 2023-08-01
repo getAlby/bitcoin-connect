@@ -36,7 +36,6 @@ export abstract class LwcConnector extends withTwind(LwcElement) {
 
     await window.webln.enable();
 
-    const event = new Event('lwc:connected', {bubbles: true, composed: true});
-    this.dispatchEvent(event);
+    this._dispatchLwcEvent('lwc:connected');
   }
 }

@@ -31,12 +31,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "**/*.ts"
-      ],
-      "rules": {
-        "no-eval": "off"
-      }
+      "files": ["**/*.ts"]
     },
     {
       "files": ["web-test-runner.config.js"],
