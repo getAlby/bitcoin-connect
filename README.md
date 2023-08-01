@@ -1,7 +1,6 @@
 # Lightning Wallet Connect
 
-This project includes web components for connecting to Lightning Wallets and enabling [WebLN](https://webln.guide).
-These components work with pure HTML and all Javascript libraries frameworks such as React, Angular, Vue, Solid.js, etc.
+This project includes web components for connecting to Lightning Wallets and enabling [WebLN](https://webln.guide). Websites only need to implement a single interface to connect with multiple wallets (WebLN), and users can connect from both desktop and mobile devices. These components work with pure HTML and all Javascript libraries frameworks such as React, Angular, Vue, Solid.js, etc.
 
 ## 🚀 Quick Start
 
@@ -18,7 +17,6 @@ yarn add @getalby/lightning-wallet-connect
 or for use without any build tools:
 
 ```
-// alby-tools now available at window.albyTools
 <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.0/dist/index.browser.js"></script>
 ```
 
@@ -35,8 +33,6 @@ Lightning wallet connect exposes the following web components for allowing user 
     - `icon-only` - display the button as an icon without "Connect wallet"
     - `disabled` - mark the button as disabled. _NOTE: in react disabled={false} will not work - attribute must be omitted_
 - `<lwc-modal/>` - render the modal on its own
-  - Optional Arguments:
-    - `on-close` - callback when modal is closed
 - `<lwc-connector-list/>` - render the list of connectors on their own
 - _more components coming soon_
 
