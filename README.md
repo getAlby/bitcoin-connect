@@ -48,6 +48,8 @@ Current wallets supported:
 
 ### Pure HTML
 
+> Example codepen: https://codepen.io/rolznz/pen/ZEmXGLd
+
 ```html
 <html>
   <body>
@@ -66,6 +68,8 @@ Current wallets supported:
 ```
 
 ### React
+
+> Example replit: https://replit.com/@rolznz/make-me-an-image-lwc-version
 
 ```tsx
 import '@getalby/lightning-wallet-connect';
