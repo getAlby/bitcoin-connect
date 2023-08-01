@@ -55,7 +55,7 @@ Current wallets supported:
 ```html
 <html>
   <body>
-    <lwc-button />
+    <lwc-button></lwc-button>
     <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.0/dist/index.browser.js"></script>
     <script>
       window.addEventListener('lwc:connected', async () => {
