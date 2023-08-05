@@ -99,11 +99,29 @@ Coming soon
 
 # 🛠️ Development
 
+## Install
+
+Run `yarn install && (cd dev/vite && yarn install)`
+
+## Run Vite
+
+Run `yarn dev`
+
+## Other dev options
+
 Open [dev](dev/README.md)
 
-## Build
+## Production Build
 
 `yarn build`
+
+### Build (Watch mode - no pure html support)
+
+`yarn dev:build`
+
+### Build (Watch mode - with pure html support)
+
+`yarn dev:build:browser`
 
 ## Testing
 
