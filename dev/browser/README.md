@@ -1,4 +1,4 @@
-# demos/browser
+# dev/browser
 
 Develop Lightning Connect for pure html import (e.g. `<script src="index.browser.js"></script>`)
 

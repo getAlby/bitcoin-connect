@@ -99,7 +99,7 @@ Coming soon
 
 # 🛠️ Development
 
-Open [demos](README.md)
+Open [dev](dev/README.md)
 
 ## Build
 

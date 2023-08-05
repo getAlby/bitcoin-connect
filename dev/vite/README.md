@@ -1,4 +1,4 @@
-# demos/vite
+# dev/vite
 
 Develop Lightning Connect components using [Vite](https://vitejs.dev/)
 

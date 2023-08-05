@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite serve ../.. --open demos/vite/index.html",
+    "dev": "vite serve ../.. --open dev/vite/index.html",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
