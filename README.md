@@ -95,7 +95,7 @@ return lwcConnected ? <>
 
 # Demos
 
-Coming soon
+Open [demos](demos/README.md)
 
 # 🛠️ Development
 
