@@ -101,7 +101,7 @@ See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for mor
 
 # 🛠️ Development
 
-`yarn dev`
+Build the project in watch mode with `yarn dev` (or `yarn dev:browser` to include support for pure html) and then run one of the [demos](demos/README.md).
 
 ## Build
 

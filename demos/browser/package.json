@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "wds -r ../.. -o ./demos/browser/index.html --watch"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.31"
+  }
+}

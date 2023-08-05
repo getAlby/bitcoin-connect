@@ -1393,19 +1393,14 @@
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/semver-v6/-/semver-v6-6.3.3.tgz#ea6d23ade78a325f7a52750aab1526b02b628c29"
   integrity sha512-3Yc1fUTs69MG/uZbJlLSI3JISMn2UV2rg+1D/vROUqZyh3l6iYHCs7GMp+M40ZD7yOdDbYjJcU1oTJhrc+dGKg==
 
-"@noble/curves@1.0.0", "@noble/curves@~1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-1.0.0.tgz#e40be8c7daf088aaf291887cbc73f43464a92932"
-  integrity sha512-2upgEu0iLiDVDZkNLeFV2+ht0BAVgQnEmCk6JsOch9Rp8xfkMCbvbAZlA2pBHQc73dbl+vFOXfqkf4uemdn0bw==
+"@noble/curves@1.1.0", "@noble/curves@~1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-1.1.0.tgz#f13fc667c89184bc04cccb9b11e8e7bae27d8c3d"
+  integrity sha512-091oBExgENk/kGj3AZmtBDMpxQPDtxQABR2B9lb1JbVTs6ytdzZNwvhxQ4MWasRNEzlbEH8jCWFCwhF/Obj5AA==
   dependencies:
-    "@noble/hashes" "1.3.0"
+    "@noble/hashes" "1.3.1"
 
-"@noble/hashes@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.0.tgz#085fd70f6d7d9d109671090ccae1d3bec62554a1"
-  integrity sha512-ilHEACi9DwqJB0pw7kv+Apvh50jiiSyR/cQ3y4W7lOR5mhvn/50FLUfsnfJz0BDZtl/RR16kXvptiv6q1msYZg==
-
-"@noble/hashes@~1.3.0":
+"@noble/hashes@1.3.1", "@noble/hashes@~1.3.0", "@noble/hashes@~1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.1.tgz#8831ef002114670c603c458ab8b11328406953a9"
   integrity sha512-EbqwksQwz9xDRGfDST86whPBgM65E0OH/pCgqW0GBVzO22bNE+NuIbeTb714+IfSjU3aRk47EUvXIb5bTsenKA==
@@ -1588,19 +1583,19 @@
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.1.tgz#ebb651ee52ff84f420097055f4bf46cfba403938"
   integrity sha512-ZxOhsSyxYwLJj3pLZCefNitxsj093tb2vq90mp2txoYeBqbcjDjqFhyM8eUjq/uFm6zJ+mUuqxlS2FkuSY1MTA==
 
-"@scure/bip32@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.3.0.tgz#6c8d980ef3f290987736acd0ee2e0f0d50068d87"
-  integrity sha512-bcKpo1oj54hGholplGLpqPHRbIsnbixFtc06nwuNM5/dwSXOq/AAYoIBRsBmnZJSdfeNW5rnff7NTAz3ZCqR9Q==
+"@scure/bip32@1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.3.1.tgz#7248aea723667f98160f593d621c47e208ccbb10"
+  integrity sha512-osvveYtyzdEVbt3OfwwXFr4P2iVBL5u1Q3q4ONBfDY/UpOuXmOlbgwc1xECEboY8wIays8Yt6onaWMUdUbfl0A==
   dependencies:
-    "@noble/curves" "~1.0.0"
-    "@noble/hashes" "~1.3.0"
+    "@noble/curves" "~1.1.0"
+    "@noble/hashes" "~1.3.1"
     "@scure/base" "~1.1.0"
 
-"@scure/bip39@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.0.tgz#a207e2ef96de354de7d0002292ba1503538fc77b"
-  integrity sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==
+"@scure/bip39@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.1.tgz#5cee8978656b272a917b7871c981e0541ad6ac2a"
+  integrity sha512-Z3/Fsz1yr904dduJD0NpiyRHhRYHdcnyh73FZWiV+/qhWi83wNJ3NWolYqCEN+ZWsUz2TWwajJggcRE9r1zUYg==
   dependencies:
     "@noble/hashes" "~1.3.0"
     "@scure/base" "~1.1.0"
@@ -2088,7 +2083,7 @@
     rollup "^2.67.0"
     whatwg-url "^11.0.0"
 
-"@web/dev-server@^0.1.31", "@web/dev-server@^0.1.38":
+"@web/dev-server@^0.1.38":
   version "0.1.38"
   resolved "https://registry.yarnpkg.com/@web/dev-server/-/dev-server-0.1.38.tgz#d755092d66aeb923c546237a6c460439ea3ddd29"
   integrity sha512-WUq7Zi8KeJ5/UZmmpZ+kzUpUlFlMP/rcreJKYg9Lxiz998KYl4G5Rv24akX0piTuqXG7r6h+zszg8V/hdzjCoA==
@@ -2308,13 +2303,13 @@ ajv@^6.10.0, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-alby-js-sdk@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.0.tgz#4c12dab8b3acfa927b0bd8789ee93bb9e80ede99"
-  integrity sha512-fpKDwT3vTkVgBmjTFVshw6yh3TITfEwMgYIT0f1l2EByJss7BcZ7CJjvrGYtIkhZMPWQm1g8dJuzpjAc6PKOlQ==
+alby-js-sdk@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.2.tgz#fc822832eb68f8dd08067d84924fc2bb8d9f74fd"
+  integrity sha512-dl3sKcfH14kZ3vPokSWp7u64hJx2WoKXA0PejKh+yiVC3bNkS2Os3NPB9bvX0Tlgcqsse4b8b0t1iQknHxOTQg==
   dependencies:
     crypto-js "^4.1.1"
-    nostr-tools "^1.10.0"
+    nostr-tools "^1.13.1"
 
 ansi-escapes@^4.3.0:
   version "4.3.2"
@@ -5239,16 +5234,16 @@ normalize-url@^6.0.1:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-6.1.0.tgz#40d0885b535deffe3f3147bec877d05fe4c5668a"
   integrity sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==
 
-nostr-tools@^1.10.0:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.12.1.tgz#4ac9c0d1cff8c7107b0d3ef647571137c2250557"
-  integrity sha512-ZeoV7g3jBUAlb4mKa3C+6hrc84htPkbebMShfGNgV4vAiz18e/sQukUBFL6vb/+sxZy+dBQFkRwsJIaVFs8Gfw==
+nostr-tools@^1.13.1:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.14.0.tgz#5cb21cd9f7b1a471b9010e3feed6c74d126ab106"
+  integrity sha512-hwq2i1z5/DneXRE5Zu/TzQuKzVLcB+gOdfT9CeoiScvNw/2dWRGJvyTXIdF92d7NQ7nMcEwqVJPDytLpEpiiKw==
   dependencies:
-    "@noble/curves" "1.0.0"
-    "@noble/hashes" "1.3.0"
+    "@noble/curves" "1.1.0"
+    "@noble/hashes" "1.3.1"
     "@scure/base" "1.1.1"
-    "@scure/bip32" "1.3.0"
-    "@scure/bip39" "1.2.0"
+    "@scure/bip32" "1.3.1"
+    "@scure/bip39" "1.2.1"
 
 nth-check@^2.0.1:
   version "2.1.1"

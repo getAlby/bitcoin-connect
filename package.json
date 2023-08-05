@@ -19,12 +19,10 @@
     "prebuild": "yarn run clean",
     "prepack": "yarn run build",
     "build:browser": "esbuild dist/index.modern.js --bundle --outfile=dist/index.browser.js",
-    "clean": "rm -rf dist",
     "build": "microbundle && yarn build:browser",
-    "dev": "concurrently \"yarn dev:build\" \"yarn dev:browser\" \"yarn dev:serve\"",
-    "dev:build": "microbundle watch",
-    "dev:browser": "yarn build:browser --watch",
-    "dev:serve": "wds --open dev/index.html --watch",
+    "clean": "rm -rf dist",
+    "dev": "microbundle watch",
+    "dev:browser": "concurrently \"yarn dev\" \"yarn build:browser --watch\"",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer",
@@ -43,9 +41,9 @@
     "lit"
   ],
   "author": "Alby",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "dependencies": {
-    "alby-js-sdk": "^2.1.0",
+    "alby-js-sdk": "^2.1.2",
     "lit": "^2.2.4"
   },
   "devDependencies": {
@@ -55,7 +53,6 @@
     "@twind/with-web-components": "^1.1.3",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
-    "@web/dev-server": "^0.1.31",
     "@web/dev-server-esbuild": "^0.4.1",
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-playwright": "^0.9.0",
