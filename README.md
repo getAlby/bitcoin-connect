@@ -93,15 +93,13 @@ return lwcConnected ? <>
   </> : <lwc-button/>;
 ```
 
-# 🔥 Lit
+# Demos
 
-This project is powered by Lit.
-
-See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
+Coming soon
 
 # 🛠️ Development
 
-Build the project in watch mode with `yarn dev` (or `yarn dev:browser` to include support for pure html) and then run one of the [demos](demos/README.md).
+Open [demos](README.md)
 
 ## Build
 
@@ -120,6 +118,12 @@ We are happy to help, please contact us or create an issue.
 - support at getalby.com
 - [bitcoin.design](https://bitcoin.design/) Discord community (find us on the #alby channel)
 - Read the [Alby developer guide](https://guides.getalby.com/overall-guide/alby-for-developers/getting-started) to better understand how Alby packages and APIs can be used to power your app.
+
+# 🔥 Lit
+
+This project is powered by Lit.
+
+See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
 
 ## License
 
