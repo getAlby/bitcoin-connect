@@ -8,6 +8,7 @@ import {crossIcon} from './icons/crossIcon';
 import './lwc-connector-list.js';
 import {withTwindExtended} from './twind/withTwind';
 import store from '../state/store';
+import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
 
 @customElement('lwc-modal')
 export class LwcModal extends withTwindExtended({
@@ -76,8 +77,7 @@ export class LwcModal extends withTwindExtended({
   }
 
   private _handleClose() {
-    alert('FIXME: fire close modal event');
-    //this._dispatchLwcEvent('lwc:modalclosed');
+    dispatchLwcEvent('lwc:modalclosed');
     this.onClose?.();
   }
 }

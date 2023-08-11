@@ -2,6 +2,7 @@ import {createStore} from 'zustand/vanilla';
 import {Connector} from '../connectors/Connector';
 import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
+import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
 
 interface Store {
   readonly connector: Connector | undefined;
@@ -27,8 +28,7 @@ const store = createStore<Store>((set) => ({
       connected: true,
       connecting: false,
     });
-    const event = new Event('lwc:connected', {bubbles: true, composed: true});
-    window.dispatchEvent(event);
+    dispatchLwcEvent('lwc:connected');
 
     saveConfig(config);
   },
