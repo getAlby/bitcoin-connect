@@ -1,4 +1,4 @@
-import {LitElement} from 'lit';
+import {LitElement, css} from 'lit';
 import {loadFonts} from './loadFonts';
 
 /**
@@ -10,6 +10,13 @@ export class LwcElement extends LitElement {
     this.addEventListener('lwc:connected', this._onConnect);
     loadFonts();
   }
+
+  // global css reset in shadow DOM
+  static override styles = css`
+    :host {
+      all: initial;
+    }
+  `;
 
   protected _onConnect() {}
 
