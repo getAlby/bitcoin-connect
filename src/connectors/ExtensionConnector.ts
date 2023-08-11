@@ -7,12 +7,8 @@ export class ExtensionConnector extends Connector {
   }
 
   override async init() {
-    // FIXME: wait for extension to be loaded
-    await new Promise<void>((resolve) =>
-      setTimeout(async () => {
-        await super.init();
-        resolve();
-      }, 1000)
-    );
+    // FIXME: wait for extension to be loaded (current bug in Alby)
+    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+    await super.init();
   }
 }

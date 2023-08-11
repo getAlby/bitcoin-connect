@@ -31,7 +31,6 @@ export class LwcModal extends withTwindExtended({
 
   constructor() {
     super();
-    this.addEventListener('lwc:connected', this._onConnect);
 
     // TODO: handle unsubscribe
     store.subscribe((store, prevStore) => {
