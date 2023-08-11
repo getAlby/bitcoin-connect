@@ -7,6 +7,7 @@ import {lwcIconColored} from './icons/lwcIconColored';
 import {crossIcon} from './icons/crossIcon';
 import './lwc-connector-list.js';
 import {withTwindExtended} from './twind/withTwind';
+import store from '../state/store';
 
 @customElement('lwc-modal')
 export class LwcModal extends withTwindExtended({
@@ -31,6 +32,13 @@ export class LwcModal extends withTwindExtended({
   constructor() {
     super();
     this.addEventListener('lwc:connected', this._onConnect);
+
+    // TODO: handle unsubscribe
+    store.subscribe((store, prevStore) => {
+      if (store.connected !== prevStore.connected) {
+        this._handleClose();
+      }
+    });
   }
 
   // TODO: move buttons to a separate component so they can be displayed outside of a modal
@@ -44,29 +52,33 @@ export class LwcModal extends withTwindExtended({
       >
         <div class="flex justify-center items-center gap-2 w-full relative">
           <div class="absolute right-0 h-full flex items-center justify-center">
-            <div class="cursor-pointer" @click=${this._onClose}>
+            <div class="cursor-pointer" @click=${this._handleClose}>
               ${crossIcon}
             </div>
           </div>
           ${lwcIconColored}
           <span class="font-medium font-sans">Lightning Wallet Connect</span>
         </div>
-        <h1 class="font-sans text-gray-500 my-8">
-          Choose your wallet to connect
-        </h1>
+        ${this._connected
+          ? html`<button @click=${this._handleDisconnect}>DISCONNECT</button>`
+          : html`
+              <h1 class="font-sans text-gray-500 my-8">
+                Choose your wallet to connect
+              </h1>
 
-        <lwc-connector-list />
+              <lwc-connector-list />
+            `}
       </div>
     </div>`;
   }
 
-  protected override _onConnect() {
-    super._onConnect();
-    this._onClose();
+  private _handleDisconnect() {
+    store.getState().disconnect();
   }
 
-  private _onClose() {
-    this._dispatchLwcEvent('lwc:modalclosed');
+  private _handleClose() {
+    alert('FIXME: fire close modal event');
+    //this._dispatchLwcEvent('lwc:modalclosed');
     this.onClose?.();
   }
 }

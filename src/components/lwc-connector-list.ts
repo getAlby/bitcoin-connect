@@ -18,8 +18,9 @@ export class LwcConnectorList extends withTwind(LwcElement) {
       part="connector-list"
       class="flex justify-center items-start flex-wrap"
     >
-      ${window.webln &&
-      html`<lwc-extension-connector></lwc-extension-connector>`}
+      ${window.webln
+        ? html`<lwc-extension-connector></lwc-extension-connector>`
+        : html``}
       <lwc-alby-nwc-connector></lwc-alby-nwc-connector>
       <lwc-nwc-connector></lwc-nwc-connector>
     </div>`;

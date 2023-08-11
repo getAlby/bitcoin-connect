@@ -1,13 +1,12 @@
 import {customElement} from 'lit/decorators.js';
 import {LwcConnector} from './lwc-connector';
 import {nwcIcon} from '../icons/nwcIcon';
-import {webln} from 'alby-js-sdk';
-import {WebLNProvider} from '@webbtc/webln-types';
+import store from '../../state/store';
 
 @customElement('lwc-nwc-connector')
 export class LwcGenericNWCConnector extends LwcConnector {
   constructor() {
-    super('NWC Generic', '#7E22CD', nwcIcon);
+    super('nwc.generic', 'NWC Generic', '#7E22CD', nwcIcon);
   }
 
   protected async _onClick() {
@@ -17,13 +16,10 @@ export class LwcGenericNWCConnector extends LwcConnector {
       return;
     }
 
-    const nwc = new webln.NostrWebLNProvider({
-      nostrWalletConnectUrl,
+    store.getState().connect({
+      connectorType: this._connectorType,
+      nwcUrl: nostrWalletConnectUrl,
     });
-
-    // FIXME: typings
-    window.webln = nwc as unknown as WebLNProvider;
-    return this._connect();
   }
 }
 

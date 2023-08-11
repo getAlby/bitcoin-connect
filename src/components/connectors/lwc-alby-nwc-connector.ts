@@ -2,12 +2,13 @@ import {customElement} from 'lit/decorators.js';
 import {LwcConnector} from './lwc-connector';
 import {albyIcon} from '../icons/albyIcon';
 import {webln} from 'alby-js-sdk';
-import {WebLNProvider} from '@webbtc/webln-types';
+import store from '../../state/store';
 
 @customElement('lwc-alby-nwc-connector')
 export class LwcAlbyNWCConnector extends LwcConnector {
   constructor() {
     super(
+      'nwc.alby',
       'Alby NWC',
       'linear-gradient(180deg, #FFDE6E 63.72%, #F8C455 95.24%)',
       albyIcon
@@ -21,9 +22,11 @@ export class LwcAlbyNWCConnector extends LwcConnector {
       // TODO: pass to component
       name: 'Lightning Wallet Connect',
     });
-    // FIXME: typings
-    window.webln = nwc as unknown as WebLNProvider;
-    return this._connect();
+
+    store.getState().connect({
+      connectorType: this._connectorType,
+      nwcUrl: nwc.getNostrWalletConnectUrl(true),
+    });
   }
 }
 
