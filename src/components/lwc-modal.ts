@@ -1,5 +1,3 @@
-// import { WebLNProvider } from '@webbtc/webln-types';
-// import { webln } from 'alby-js-sdk';
 import {html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {LwcElement} from './lwc-element';

@@ -1,4 +1,4 @@
-import {webln} from 'alby-js-sdk';
+import {webln} from '@getalby/sdk';
 import {Connector} from './Connector';
 import {ConnectorConfig} from '../types/ConnectorConfig';
 import {WebLNProvider} from '@webbtc/webln-types';

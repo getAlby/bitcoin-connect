@@ -1,7 +1,7 @@
 import {customElement} from 'lit/decorators.js';
 import {LwcConnector} from './lwc-connector';
 import {albyIcon} from '../icons/albyIcon';
-import {webln} from 'alby-js-sdk';
+import {webln} from '@getalby/sdk';
 import store from '../../state/store';
 
 @customElement('lwc-alby-nwc-connector')
