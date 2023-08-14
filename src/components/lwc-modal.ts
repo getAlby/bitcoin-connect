@@ -68,7 +68,12 @@ export class LwcModal extends withTwindExtended({
           <span class="font-medium font-sans">Lightning Wallet Connect</span>
         </div>
         ${this._connected
-          ? html`<button @click=${this._handleDisconnect}>DISCONNECT</button>`
+          ? html`<button
+              @click=${this._handleDisconnect}
+              class="mt-4 w-64 py-2 px-7 font-medium font-sans shadow rounded-md flex gap-2 justify-center items-center bg-gray-300"
+            >
+              DISCONNECT
+            </button>`
           : html`
               <h1 class="font-sans text-gray-500 my-8">
                 Choose your wallet to connect
