@@ -17,7 +17,7 @@ yarn add @getalby/lightning-wallet-connect
 or for use without any build tools:
 
 ```
-<script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.0/dist/index.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.4/dist/index.browser.js"></script>
 ```
 
 ## 📽️ Demo
@@ -58,7 +58,7 @@ Current wallets supported:
 <html>
   <body>
     <lwc-button></lwc-button>
-    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.0/dist/index.browser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.4/dist/index.browser.js"></script>
     <script>
       window.addEventListener('lwc:connected', async () => {
         // TODO: hide the lwc-button
