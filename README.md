@@ -149,4 +149,4 @@ See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for mor
 
 ## License
 
-MIT
+[MIT](./LICENSE)
