@@ -30,6 +30,4 @@ export class LwcElement extends LitElement {
       all: initial;
     }
   `;
-
-  // protected _dispatchLwcEvent(eventType: 'lwc:connected' | 'lwc:modalclosed') {}
 }

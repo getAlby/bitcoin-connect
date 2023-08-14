@@ -6,5 +6,3 @@ export const connectors = {
   'nwc.alby': NWCConnector,
   'nwc.generic': NWCConnector,
 };
-
-export type ConnectorType = keyof typeof connectors;

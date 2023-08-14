@@ -39,6 +39,8 @@ Lightning wallet connect exposes the following web components for allowing user 
 Lightning wallet connect exposes the following events:
 
 - `lwc:connected` window event which fires when a wallet is connected and window.webln is ready to use
+- `lwc:connecting` window event which fires when LWC is connecting to a wallet
+- `lwc:disconnected` window event which fires when user has disconnected from their wallet
 - `lwc:modalclosed` window event which fires when Lightning Wallet Connect modal is closed
 
 Current wallets supported:

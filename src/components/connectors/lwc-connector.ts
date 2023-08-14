@@ -1,7 +1,7 @@
 import {TemplateResult, html} from 'lit';
 import {LwcElement} from '../lwc-element';
 import {withTwind} from '../twind/withTwind';
-import {ConnectorType} from '../../connectors';
+import {ConnectorType} from '../../types/ConnectorType';
 
 export abstract class LwcConnector extends withTwind(LwcElement) {
   private _title: string;

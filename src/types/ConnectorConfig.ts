@@ -1,4 +1,4 @@
-import {ConnectorType} from '../connectors';
+import {ConnectorType} from './ConnectorType';
 
 export type ConnectorConfig = {
   connectorType: ConnectorType;

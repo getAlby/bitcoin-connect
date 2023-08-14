@@ -18,6 +18,7 @@ const store = createStore<Store>((set) => ({
   connected: false,
   connecting: false,
   connect: async (config: ConnectorConfig) => {
+    dispatchLwcEvent('lwc:connecting');
     set({
       connecting: true,
     });
@@ -38,6 +39,7 @@ const store = createStore<Store>((set) => ({
       connector: undefined,
     });
     deleteConfig();
+    dispatchLwcEvent('lwc:disconnected');
   },
 }));
 
