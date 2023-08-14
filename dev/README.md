@@ -1,2 +1,2 @@
 - [vite](vite/README.md)
-- [browser](browser/README.md)
+- [Pure HTML](html/README.md)
