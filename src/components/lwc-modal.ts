@@ -39,6 +39,16 @@ export class LwcModal extends withTwindExtended({
     });
   }
 
+  override connectedCallback() {
+    super.connectedCallback();
+    dispatchLwcEvent('lwc:modalopened');
+  }
+
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+    dispatchLwcEvent('lwc:modalclosed');
+  }
+
   // TODO: move buttons to a separate component so they can be displayed outside of a modal
   override render() {
     return html` <div
@@ -75,7 +85,6 @@ export class LwcModal extends withTwindExtended({
   }
 
   private _handleClose() {
-    dispatchLwcEvent('lwc:modalclosed');
     this.onClose?.();
   }
 }
