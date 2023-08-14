@@ -48,6 +48,7 @@ Current wallets supported:
 
 - [Alby Browser extension] (https://getalby.com)
 - [Alby NWC](https://nwc.getalby.com)
+- [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
 
 ### Pure HTML
 
