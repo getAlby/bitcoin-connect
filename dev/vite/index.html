@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
     <script type="module" src="../../src/index.ts"></script>
+    <script>
+      window.addEventListener('lwc:connected', () =>
+        console.info('Received connected event from html')
+      );
+      window.addEventListener('lwc:connecting', () =>
+        console.info('Received connecting event from html')
+      );
+      window.addEventListener('lwc:disconnected', () =>
+        console.info('Received disconnected event from html')
+      );
+      window.addEventListener('lwc:modalopened', () =>
+        console.info('Received modalopened event from html')
+      );
+      window.addEventListener('lwc:modalclosed', () =>
+        console.info('Received modalclosed event from html')
+      );
+    </script>
   </head>
   <body>
     <h1>Vite + Lit + TS</h1>

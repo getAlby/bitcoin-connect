@@ -1,6 +1,6 @@
 # dev/vite
 
-Develop Lightning Connect components using [Vite](https://vitejs.dev/)
+Develop Lightning Wallet Connect components using [Vite](https://vitejs.dev/)
 
 ## Install
 

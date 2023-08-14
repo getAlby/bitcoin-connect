@@ -1,14 +1,22 @@
 import {TemplateResult, html} from 'lit';
 import {LwcElement} from '../lwc-element';
 import {withTwind} from '../twind/withTwind';
+import {ConnectorType} from '../../types/ConnectorType';
 
 export abstract class LwcConnector extends withTwind(LwcElement) {
   private _title: string;
   private _background: string;
   private _icon: TemplateResult<2>;
+  protected _connectorType: ConnectorType;
   protected abstract _onClick(): void;
-  constructor(title: string, background: string, icon: TemplateResult<2>) {
+  constructor(
+    connectorType: ConnectorType,
+    title: string,
+    background: string,
+    icon: TemplateResult<2>
+  ) {
     super();
+    this._connectorType = connectorType;
     this._title = title;
     this._background = background;
     this._icon = icon;
@@ -27,15 +35,5 @@ export abstract class LwcConnector extends withTwind(LwcElement) {
       </div>
       <span class="text-sm font-sans font-medium">${this._title}</span>
     </div>`;
-  }
-
-  protected async _connect() {
-    if (!window.webln) {
-      throw new Error('No webln provided');
-    }
-
-    await window.webln.enable();
-
-    this._dispatchLwcEvent('lwc:connected');
   }
 }

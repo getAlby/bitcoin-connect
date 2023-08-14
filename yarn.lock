@@ -1299,6 +1299,14 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
+"@getalby/sdk@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.2.3.tgz#fda6de0bc241b59e7ed813204067c4d14b794668"
+  integrity sha512-8NvzGtpyne8EmRlCcg/sF3kUZWeHRXqZwS1HNuP1ytNNfmKFUZpo3GOauwzEpFFmaD+Fht5bjT3Y/XLk0QtFSw==
+  dependencies:
+    crypto-js "^4.1.1"
+    nostr-tools "1.13.1"
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.10.tgz#5a3ffe32cc9306365fb3fd572596cd602d5e12d2"
@@ -2302,14 +2310,6 @@ ajv@^6.10.0, ajv@^6.12.4:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
-
-alby-js-sdk@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.2.tgz#fc822832eb68f8dd08067d84924fc2bb8d9f74fd"
-  integrity sha512-dl3sKcfH14kZ3vPokSWp7u64hJx2WoKXA0PejKh+yiVC3bNkS2Os3NPB9bvX0Tlgcqsse4b8b0t1iQknHxOTQg==
-  dependencies:
-    crypto-js "^4.1.1"
-    nostr-tools "^1.13.1"
 
 ansi-escapes@^4.3.0:
   version "4.3.2"
@@ -5234,10 +5234,10 @@ normalize-url@^6.0.1:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-6.1.0.tgz#40d0885b535deffe3f3147bec877d05fe4c5668a"
   integrity sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==
 
-nostr-tools@^1.13.1:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.14.0.tgz#5cb21cd9f7b1a471b9010e3feed6c74d126ab106"
-  integrity sha512-hwq2i1z5/DneXRE5Zu/TzQuKzVLcB+gOdfT9CeoiScvNw/2dWRGJvyTXIdF92d7NQ7nMcEwqVJPDytLpEpiiKw==
+nostr-tools@1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/nostr-tools/-/nostr-tools-1.13.1.tgz#191298d85a977cc50790e1c1d1cb83b86d3a9656"
+  integrity sha512-DTwpbxTH1/ar+afWd4gmVdpHH8CF290kdaxi00Llra88SHE6e38XuyzlRABVTcrBaceLMnoDdHmV3x16MoEFJg==
   dependencies:
     "@noble/curves" "1.1.0"
     "@noble/hashes" "1.3.1"
@@ -6864,6 +6864,11 @@ urix@^0.1.0:
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==
 
+use-sync-external-store@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
@@ -7134,3 +7139,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zustand@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.1.tgz#0cd3a3e4756f21811bd956418fdc686877e8b3b0"
+  integrity sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==
+  dependencies:
+    use-sync-external-store "1.2.0"

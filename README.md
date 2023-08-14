@@ -17,7 +17,7 @@ yarn add @getalby/lightning-wallet-connect
 or for use without any build tools:
 
 ```
-<script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.0/dist/index.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.5/dist/index.browser.js"></script>
 ```
 
 ## 📽️ Demo
@@ -39,12 +39,16 @@ Lightning wallet connect exposes the following web components for allowing user 
 Lightning wallet connect exposes the following events:
 
 - `lwc:connected` window event which fires when a wallet is connected and window.webln is ready to use
+- `lwc:connecting` window event which fires when LWC is connecting to a wallet
+- `lwc:disconnected` window event which fires when user has disconnected from their wallet
+- `lwc:modalopened` window event which fires when Lightning Wallet Connect modal is opened
 - `lwc:modalclosed` window event which fires when Lightning Wallet Connect modal is closed
 
 Current wallets supported:
 
 - [Alby Browser extension] (https://getalby.com)
 - [Alby NWC](https://nwc.getalby.com)
+- [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
 
 ### Pure HTML
 
@@ -54,7 +58,7 @@ Current wallets supported:
 <html>
   <body>
     <lwc-button></lwc-button>
-    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.0/dist/index.browser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.5/dist/index.browser.js"></script>
     <script>
       window.addEventListener('lwc:connected', async () => {
         // TODO: hide the lwc-button

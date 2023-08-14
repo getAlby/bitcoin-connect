@@ -1,5 +1,3 @@
-// import { WebLNProvider } from '@webbtc/webln-types';
-// import { webln } from 'alby-js-sdk';
 import {html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {LwcElement} from './lwc-element';
@@ -7,6 +5,8 @@ import {lwcIconColored} from './icons/lwcIconColored';
 import {crossIcon} from './icons/crossIcon';
 import './lwc-connector-list.js';
 import {withTwindExtended} from './twind/withTwind';
+import store from '../state/store';
+import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
 
 @customElement('lwc-modal')
 export class LwcModal extends withTwindExtended({
@@ -30,7 +30,23 @@ export class LwcModal extends withTwindExtended({
 
   constructor() {
     super();
-    this.addEventListener('lwc:connected', this._onConnect);
+
+    // TODO: handle unsubscribe
+    store.subscribe((store, prevStore) => {
+      if (store.connected !== prevStore.connected) {
+        this._handleClose();
+      }
+    });
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    dispatchLwcEvent('lwc:modalopened');
+  }
+
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+    dispatchLwcEvent('lwc:modalclosed');
   }
 
   // TODO: move buttons to a separate component so they can be displayed outside of a modal
@@ -44,29 +60,36 @@ export class LwcModal extends withTwindExtended({
       >
         <div class="flex justify-center items-center gap-2 w-full relative">
           <div class="absolute right-0 h-full flex items-center justify-center">
-            <div class="cursor-pointer" @click=${this._onClose}>
+            <div class="cursor-pointer" @click=${this._handleClose}>
               ${crossIcon}
             </div>
           </div>
           ${lwcIconColored}
           <span class="font-medium font-sans">Lightning Wallet Connect</span>
         </div>
-        <h1 class="font-sans text-gray-500 my-8">
-          Choose your wallet to connect
-        </h1>
+        ${this._connected
+          ? html`<button
+              @click=${this._handleDisconnect}
+              class="mt-4 w-64 py-2 px-7 font-medium font-sans shadow rounded-md flex gap-2 justify-center items-center bg-gray-300"
+            >
+              DISCONNECT
+            </button>`
+          : html`
+              <h1 class="font-sans text-gray-500 my-8">
+                Choose your wallet to connect
+              </h1>
 
-        <lwc-connector-list />
+              <lwc-connector-list />
+            `}
       </div>
     </div>`;
   }
 
-  protected override _onConnect() {
-    super._onConnect();
-    this._onClose();
+  private _handleDisconnect() {
+    store.getState().disconnect();
   }
 
-  private _onClose() {
-    this._dispatchLwcEvent('lwc:modalclosed');
+  private _handleClose() {
     this.onClose?.();
   }
 }
