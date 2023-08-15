@@ -8,6 +8,7 @@ export const withTwindExtended = (extend?: object) =>
       theme: {
         fontFamily: {
           sans: ['Inter', 'sans-serif'],
+          mono: ['Roboto Mono', 'monospace'],
         },
         extend,
       },
