@@ -7,7 +7,6 @@ import {withTwind} from './twind/withTwind.js';
 import {loadingIcon} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
 import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
-import store from '../state/store.js';
 
 /**
  * A button that when clicked launches the LWC modal.
