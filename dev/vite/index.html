@@ -22,18 +22,26 @@
         console.info('Received modalclosed event from html')
       );
     </script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <h1>Vite + Lit + TS</h1>
+    <h1>Components</h1>
+    <h2>Buttons</h2>
     <lwc-button></lwc-button><br /><br />
     <lwc-button
       color-gradient1="red"
       color-gradient2="pink"
       color-primary="black"
       color-secondary="yellow"
-    ></lwc-button
-    ><br /><br />
+    ></lwc-button>
+    <br /><br />
     <lwc-button icon-only></lwc-button>
+
+    <h2>Connector List</h2>
     <lwc-connector-list></lwc-connector-list>
   </body>
 </html>
