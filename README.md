@@ -148,15 +148,15 @@ Yes! that's the main benefit.
 
 - Does it work with a desktop extension enabled?
 
-Yes. But it will use the desktop extension as the default connector if it exists.
+Yes. It will use the desktop extension as the default connector if it exists.
 
 - Can I connect it to my mobile wallet?
 
-Probably not. The connection to your lightning node / wallet needs to be asynchronous so that you can use Bitcoin Connect natively on mobile websites or PWAs.
+That depends. The connection to your lightning node / wallet needs to be asynchronous so that you can use Bitcoin Connect natively on mobile websites or PWAs.
 
-- Does it work for any user with any lightning wallet?
+- Can a user connect any lightning wallet?
 
-It will only work for the connectors that are shown in the modal. Feel free to contribute to add a new connector.
+It will only work for the connectors that are shown in the modal. Some of these connectors (e.g. the Alby Browser Extension) allow to connect multiple wallets themselves. Feel free to contribute to add a new connector.
 
 - Does it "remember" the user if they leave the page or close the browser?
 
