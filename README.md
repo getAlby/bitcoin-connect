@@ -131,7 +131,7 @@ Open [dev](dev/README.md)
 
 `yarn test`
 
-## Need help?
+# Need help?
 
 We are happy to help, please contact us or create an issue.
 
@@ -140,6 +140,19 @@ We are happy to help, please contact us or create an issue.
 - support at getalby.com
 - [bitcoin.design](https://bitcoin.design/) Discord community (find us on the #alby channel)
 - Read the [Alby developer guide](https://guides.getalby.com/overall-guide/alby-for-developers/getting-started) to better understand how Alby packages and APIs can be used to power your app.
+
+## FAQ
+- Does it work for any user with any lightning wallet?
+
+It will only work for the connectors that are shown in the modal. Feel free to contribute to add a new connector.
+
+- Does it "remember" the user if they leave the page or close the browser?
+
+Yes. Your connection is saved to localStorage
+
+- Is this safe?
+
+You should have a certain level of trust on the website you decide to connect your wallet with, and that they ensure there is no malicious third-party scripts which would intend to read the wallet connection configuration, either from memory or storage. Connectors with budget controls or confirmation dialogs (Alby extension or NWC) are recommend so you have full control over your connection.
 
 # 🔥 Lit
 
