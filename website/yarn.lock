@@ -154,10 +154,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.47.0.tgz#5478fdf443ff8158f9de171c704ae45308696c7d"
   integrity sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==
 
-"@getalby/lightning-wallet-connect@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@getalby/lightning-wallet-connect/-/lightning-wallet-connect-1.0.6.tgz#0e018f1c864654d8e151a1d14da2c2d4ca0e06a9"
-  integrity sha512-zAMCrUibBhyEKJJUSOtL7GboPWoEY/pZDmeDqJZUuoy3eP0HJW2U6MObF0+W0URCXTXx1GRAFNcUUNS9GRtxtw==
+"@getalby/lightning-wallet-connect@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-wallet-connect/-/lightning-wallet-connect-1.0.7.tgz#279cc75e1fa37b283bcf351379e22b80227a861a"
+  integrity sha512-H5HaRQSlTNuunJ617HA3xanl8QH7qoqVYLDgRhKaFkABAqqElNuncq7xuoJavYEsttHiH7zM7iWRNzACEOQKWw==
   dependencies:
     "@getalby/sdk" "^2.2.3"
     lit "^2.2.4"
@@ -170,6 +170,11 @@
   dependencies:
     crypto-js "^4.1.1"
     nostr-tools "1.13.1"
+
+"@heroicons/react@^2.0.18":
+  version "2.0.18"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.0.18.tgz#f80301907c243df03c7e9fd76c0286e95361f7c1"
+  integrity sha512-7TyMjRrZZMBPa+/5Y8lN0iyvUU/01PeMGX2+RE7cQWpEUIcb4QotzUObFkJDejj/HUH4qjP/eQ0gzzKs2f+6Yw==
 
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"

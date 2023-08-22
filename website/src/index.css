@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[data-theme='dark'] {
+  --lwc-color-gradient-1: #2ea7ff;
+  --lwc-color-gradient-2: #0045b1;
+  --lwc-color-primary: #fff;
+  --lwc-color-secondary: #000;
+  --lwc-color-tertiary: #404040;
+}

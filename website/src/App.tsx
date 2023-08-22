@@ -1,3 +1,4 @@
+import {ChevronRightIcon} from '@heroicons/react/20/solid';
 import {useAppStore} from './AppStore';
 import {Header} from './components/Header';
 import '@getalby/lightning-wallet-connect';
@@ -10,10 +11,55 @@ function App() {
       data-theme={isDarkMode ? 'dark' : 'light'}
       className="h-full bg-base-100 p-4 flex items-start justify-center"
     >
-      <div className="max-w-4xl flex flex-col items-center gap-4">
+      <div className="max-w-4xl flex flex-col items-center gap-8">
         <Header />
         <div
-          className="flex border border-gray-400 rounded-3xl p-4 w-full h-96 flex-col items-center justify-center"
+          className="flex border border-gray-400 rounded-3xl w-full flex-col items-center justify-center relative overflow-hidden shadow-2xl"
+          // style={{
+          //   background: `linear-gradient(180deg, #0000 10%, #fff6 100%), linear-gradient(180deg, ${
+          //     isDarkMode ? '#000A, #000A' : '#fffA, #fffA'
+          //   }), repeating-conic-gradient(#808080 0% 25%, transparent 0% 50%) 50% / 128px 128px`,
+          // }}
+        >
+          <video autoPlay muted loop controls={false} className="rounded-3xl">
+            <source
+              type="video/mp4"
+              src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_data_driven_testing_csv.mp4"
+            />
+          </video>
+        </div>
+        <p className="text-primary text-2xl">
+          <span className="font-semibold">Bitcoin Connect</span> is an elegantly
+          simple yet powerful library that enables users to connect their wallet
+          to lightning-powered websites on any browser through{' '}
+          <a href="https://webln.guide" target="_blank">
+            <span className="font-semibold">WebLN</span>
+          </a>
+          , the open protocol for Lightning on the Web. &nbsp;
+          <span className="text-secondary">
+            Designed with both developers and end users in mind, it is easy to
+            integrate and customize, bringing to life a sleek and unique
+            experience.
+          </span>
+        </p>
+        <a
+          className="self-start"
+          href="https://github.com/getAlby/lightning-wallet-connect"
+          target="_blank"
+        >
+          <button className="btn">
+            View the docs
+            <ChevronRightIcon className="h-6 w-6 text-secondary" />
+          </button>
+        </a>
+        <p className="text-primary text-2xl">
+          Delightful, customizable UI. &nbsp;
+          <span className="text-secondary">
+            Match your site's theme with only a few CSS variables.
+          </span>
+        </p>
+        <div
+          className="flex border border-gray-400 rounded-3xl p-4 w-full h-96 flex-col items-center justify-center shadow-2xl"
           style={{
             background: `linear-gradient(180deg, #0000 10%, #fff6 100%), linear-gradient(180deg, ${
               isDarkMode ? '#000A, #000A' : '#fffA, #fffA'
@@ -23,6 +69,18 @@ function App() {
           {/* @ts-ignore */}
           <lwc-button />
         </div>
+
+        <p className="text-primary text-2xl mt-8">
+          Bitcoin Connect&nbsp;
+          <span className="text-secondary">In the Wild</span>
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <div
+            className="flex border border-gray-400 rounded-3xl p-4 w-64 h-48 flex-col items-center justify-center shadow-2xl bg-cover bg-center"
+            style={{background: 'url(/zappy-bird.png)'}}
+          ></div>
+        </div>
+
         <p>
           Bitcoin ipsum dolor sit amet. Public key soft fork fee market
           electronic cash Satoshi Nakamoto blockchain, block height, space
