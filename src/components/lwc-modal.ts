@@ -9,6 +9,7 @@ import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
 import {bcLogo} from './icons/bcLogo';
 import {loadingIcon2} from './icons/loadingIcon';
 import {exitIcon} from './icons/exitIcon';
+import {color} from './utils/colors';
 
 @customElement('lwc-modal')
 export class LwcModal extends withTwindExtended({
@@ -20,12 +21,12 @@ export class LwcModal extends withTwindExtended({
   },
   keyframes: {
     darken: {
-      '0%': {'background-color': '#0000'},
-      '100%': {'background-color': '#000A'},
+      '0%': {opacity: 0},
+      '100%': {opacity: 0.5},
     },
     lighten: {
-      '0%': {'background-color': '#000A'},
-      '100%': {'background-color': '#0000'},
+      '0%': {opacity: 0.5},
+      '100%': {opacity: 0},
     },
     'fade-in': {
       '0%': {opacity: 0},
@@ -73,12 +74,18 @@ export class LwcModal extends withTwindExtended({
   override render() {
     return html` <div
       part="modal"
-      class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]
-      ${this._closing ? 'animate-lighten' : 'animate-darken'}"
+      class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
     >
       <div
-        class="transition-all p-4 pt-6 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center bg-white w-full max-w-md max-sm:rounded-b-none
+        class="absolute top-0 left-0 w-full h-full ${this._closing
+          ? 'animate-lighten'
+          : 'animate-darken'}"
+        style="background: ${color('secondary')}"
+      ></div>
+      <div
+        class="transition-all p-4 pt-6 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center w-full max-w-md max-sm:rounded-b-none
         ${this._closing ? 'animate-fade-out' : 'animate-fade-in'}"
+        style="background: ${color('primary')}"
       >
         <div class="flex justify-center items-center gap-2 w-full relative">
           <div class="absolute right-0 h-full flex items-center justify-center">
@@ -91,14 +98,16 @@ export class LwcModal extends withTwindExtended({
         ${this._connecting
           ? html`<div class="py-32">${loadingIcon2}</div>`
           : this._connected
-          ? html` <h1 class="font-sans text-lg text-neutral-700 my-8">
+          ? html` <h1 class="font-sans text-lg my-8" style="color: ${color(
+              'tertiary'
+            )}">
                 Hello,
                 <span
                   class="font-bold"
                   style="
-              background: -webkit-linear-gradient(${this.colorGradient1}, ${
-              this.colorGradient2
-            });
+              background: -webkit-linear-gradient(${color(
+                'gradient-1'
+              )}, ${color('gradient-2')});
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               "
@@ -107,15 +116,19 @@ export class LwcModal extends withTwindExtended({
                 </span>
               </h1>
 
-              <span class="font-sans text-xs text-neutral-700 mb-2">Balance</span>
+              <span class="font-sans text-xs mb-2" style="color: ${color(
+                'tertiary'
+              )}">Balance</span>
 
-              <h2 class="font-sans text-2xl text-neutral-700 mb-12">
+              <h2 class="font-sans text-2xl mb-12" style="color: ${color(
+                'tertiary'
+              )}">
                 <span
                   class="font-bold font-mono text-4xl align-bottom"
                   style="
-              background: -webkit-linear-gradient(${this.colorGradient1}, ${
-              this.colorGradient2
-            });
+              background: -webkit-linear-gradient(${color(
+                'gradient-1'
+              )}, ${color('gradient-2')});
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               "
@@ -124,9 +137,9 @@ export class LwcModal extends withTwindExtended({
 
               <hr class="border border-neutral-200 w-full mb-4"></div>
 
-              <span class="font-sans text-xs text-neutral-700 mb-4">Connected through ${
-                this._connectorName
-              }</span>
+              <span class="font-sans text-xs mb-4" style="color: ${color(
+                'tertiary'
+              )}">Connected through ${this._connectorName}</span>
 
               <button
                 @click=${this._handleDisconnect}
@@ -135,23 +148,25 @@ export class LwcModal extends withTwindExtended({
                 <div
                   class="absolute -z-10 top-0 left-0 w-full h-full border-2 border-solid border-transparent rounded-lg"
                   style="
-                  background-image: linear-gradient(white, white), linear-gradient(to bottom, ${
-                    this.colorGradient1
-                  }, ${this.colorGradient2});
+                  background-image: linear-gradient(${color(
+                    'primary'
+                  )}, ${color('primary')}), linear-gradient(to bottom, ${color(
+              'gradient-1'
+            )}, ${color('gradient-2')});
                   background-origin: border-box;
                   background-clip: content-box, border-box;"
                 ></div>
                 ${exitIcon}
                 <span style="
-                background: -webkit-linear-gradient(${this.colorGradient1}, ${
-              this.colorGradient2
-            });
+                background: -webkit-linear-gradient(${color(
+                  'gradient-1'
+                )}, ${color('gradient-2')});
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
               ">Disconnect</span>
               </button>`
           : html`
-              <h1 class="font-sans text-neutral-700 my-8">
+              <h1 class="font-sans my-8" style="color: ${color('tertiary')}">
                 How would you like to connect?
               </h1>
 

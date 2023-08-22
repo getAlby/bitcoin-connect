@@ -52,7 +52,17 @@ Current wallets supported:
 
 ### Styling
 
-- the following attributes can be configured as hex or rgb: `color-gradient1`, `color-gradient2`, `color-primary`, `color-secondary`
+- the following css variables can be configured as hex or rgb: `lwc-color-gradient1`, `lwc-color-gradient2`, `lwc-color-primary`, `lwc-color-secondary`, `lwc-color-tertiary`
+
+```css
+html {
+  --lwc-color-gradient-1: #ffc837;
+  --lwc-color-gradient-2: #ff8008;
+  --lwc-color-primary: black;
+  --lwc-color-secondary: yellow;
+  --lwc-color-tertiary: green;
+}
+```
 
 ### Pure HTML
 

@@ -26,18 +26,22 @@
       body {
         font-family: Arial, Helvetica, sans-serif;
       }
+      .styled {
+        --lwc-color-gradient-1: #ffc837;
+        --lwc-color-gradient-2: #ff8008;
+        --lwc-color-primary: black;
+        --lwc-color-secondary: #ccc;
+        --lwc-color-tertiary: #ca9;
+      }
     </style>
   </head>
   <body>
     <h1>Components</h1>
     <h2>Buttons</h2>
     <lwc-button></lwc-button><br /><br />
-    <lwc-button
-      color-gradient1="#FFC837"
-      color-gradient2="#FF8008"
-      color-primary="black"
-      color-secondary="yellow"
-    ></lwc-button>
+    <div class="styled">
+      <lwc-button></lwc-button>
+    </div>
     <br /><br />
     <lwc-button icon-only></lwc-button>
 

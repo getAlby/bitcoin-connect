@@ -7,6 +7,7 @@ import {withTwind} from './twind/withTwind.js';
 import {loadingIcon} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
 import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
+import {color} from './utils/colors.js';
 
 /**
  * A button that when clicked launches the LWC modal.
@@ -55,7 +56,9 @@ export class LwcButton extends withTwind(LwcElement) {
           ? 'rounded-lg gap-2 justify-center items-center'
           : ''}"
         style="${this._connected && !iconOnly
-          ? `background: linear-gradient(180deg, #fff6 0%, #fff0 100%), linear-gradient(180deg, ${this.colorSecondary} 0%, ${this.colorSecondary} 100%);`
+          ? `background: linear-gradient(180deg, #fff6 0%, #fff0 100%), linear-gradient(180deg, ${color(
+              'secondary'
+            )}, ${color('secondary')} 100%)`
           : ''}"
         @click=${this._onClick}
       >
@@ -71,13 +74,15 @@ export class LwcButton extends withTwind(LwcElement) {
           relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
           ${this.disabled ? 'bg-gray-300 opacity-50' : ''}"
           style="${!this.disabled &&
-          `background: linear-gradient(180deg, ${this.colorGradient1} 0%, ${this.colorGradient2} 100%); color: ${this.colorPrimary};
+          `background: linear-gradient(180deg, ${color(
+            'gradient-1'
+          )} 0%, ${color('gradient-2')} 100%); color: ${color('primary')};
           `}"
           ?disabled=${this.disabled}
         >
           <div
-            class="absolute top-0 left-0 w-full h-full rounded-lg border-2"
-            style="border-color: #fff1;"
+            class="absolute top-0 left-0 w-full h-full rounded-lg border-2 opacity-10"
+            style="border-color: ${color('primary')}"
           ></div>
           ${isLoading
             ? loadingIcon
@@ -97,7 +102,7 @@ export class LwcButton extends withTwind(LwcElement) {
         ${this._connected && !iconOnly && this._balance !== undefined
           ? html`<span
               class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5"
-              style="color: ${this.colorPrimary}"
+              style="color: ${color('primary')}"
               >${satIcon}<span class="font-mono">${this._balance}</span></span
             >`
           : html``}
