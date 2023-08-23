@@ -1,4 +1,4 @@
-import {ChevronRightIcon} from '@heroicons/react/20/solid';
+import {ChevronRightIcon} from '@heroicons/react/24/solid';
 import {useAppStore} from './AppStore';
 import {Header} from './components/Header';
 import '@getalby/lightning-wallet-connect';
@@ -20,8 +20,15 @@ function App() {
       <div className="max-w-4xl flex flex-col items-center gap-8">
         <Header />
 
+        <p className="text-primary text-2xl">
+          Access Lightning-Powered Websites on every browser.&nbsp;
+          <span className="text-secondary">
+            Mobile Browsers, PWAs, Tablets, Desktop Browsers.
+          </span>
+          &nbsp;No extension needed. No switching to/from your wallet.
+        </p>
         <div
-          className="flex border border-gray-400 rounded-3xl p-4 w-full items-center justify-center shadow-2xl"
+          className="flex border border-gray-400 rounded-3xl px-4 w-full items-center justify-center shadow-2xl"
           style={{
             background: `linear-gradient(180deg, #0000 10%, #fff6 100%), linear-gradient(180deg, ${
               isDarkMode ? '#000A, #000A' : '#fffA, #000C'
@@ -73,12 +80,11 @@ function App() {
         </div>
 
         <p className="text-primary text-2xl">
-          <span className="font-semibold">Bitcoin Connect</span> is an elegantly
-          simple yet powerful library that enables users to connect their wallet
-          to lightning-powered websites for native interaction on any browser
-          through{' '}
+          Bitcoin Connect is an elegantly simple yet powerful library that
+          enables users to connect their wallet to lightning-powered websites on
+          any browser through the power of{' '}
           <a href="https://webln.guide" target="_blank">
-            <span className="font-semibold">WebLN</span>
+            <span className="link">WebLN</span>
           </a>
           , the open protocol for Lightning on the Web. &nbsp;
           <span className="text-secondary">
@@ -97,7 +103,7 @@ function App() {
             <ChevronRightIcon className="h-6 w-6 text-secondary" />
           </button>
         </a>
-        <p className="text-primary text-2xl">
+        <p className="text-primary text-2xl mt-8">
           Delightful, customizable UI. &nbsp;
           <span className="text-secondary">
             Match your site's theme with only a few CSS variables.
