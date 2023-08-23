@@ -57,8 +57,8 @@ export class LwcButton extends withTwind(LwcElement) {
           : ''}"
         style="${this._connected && !iconOnly
           ? `background: linear-gradient(180deg, #fff6 0%, #fff0 100%), linear-gradient(180deg, ${color(
-              'secondary'
-            )}, ${color('secondary')} 100%)`
+              'bg-secondary'
+            )}, ${color('bg-secondary')} 100%)`
           : ''}"
         @click=${this._onClick}
       >
@@ -74,15 +74,15 @@ export class LwcButton extends withTwind(LwcElement) {
           relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
           ${this.disabled ? 'bg-gray-300 opacity-50' : ''}"
           style="${!this.disabled &&
-          `background: linear-gradient(180deg, ${color(
-            'gradient-1'
-          )} 0%, ${color('gradient-2')} 100%); color: ${color('primary')};
+          `background: linear-gradient(180deg, ${color('primary')} 0%, ${color(
+            'secondary'
+          )} 100%); color: ${color('text-primary')};
           `}"
           ?disabled=${this.disabled}
         >
           <div
             class="absolute top-0 left-0 w-full h-full rounded-lg border-2 opacity-10"
-            style="border-color: ${color('primary')}"
+            style="border-color: ${color('bg-primary')}"
           ></div>
           ${isLoading
             ? loadingIcon
@@ -91,18 +91,20 @@ export class LwcButton extends withTwind(LwcElement) {
               ? lwcConnectedIcon
               : null
             : lwcIcon}
-          ${iconOnly
-            ? null
-            : isLoading
-            ? html`Connecting...`
-            : this._connected
-            ? html`${this._alias || 'Connected'}`
-            : html`Connect Wallet`}
+          <span class="font-semibold">
+            ${iconOnly
+              ? null
+              : isLoading
+              ? html`Connecting...`
+              : this._connected
+              ? html`${this._alias || 'Connected'}`
+              : html`Connect Wallet`}
+          </span>
         </button>
         ${this._connected && !iconOnly && this._balance !== undefined
           ? html`<span
               class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5"
-              style="color: ${color('primary')}"
+              style="color: ${color('text-tertiary')}"
               >${satIcon}<span class="font-mono">${this._balance}</span></span
             >`
           : html``}

@@ -80,12 +80,12 @@ export class LwcModal extends withTwindExtended({
         class="absolute top-0 left-0 w-full h-full ${this._closing
           ? 'animate-lighten'
           : 'animate-darken'}"
-        style="background: ${color('secondary')}"
+        style="background: ${color('bg-secondary')}"
       ></div>
       <div
         class="transition-all p-4 pt-6 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center w-full max-w-md max-sm:rounded-b-none
         ${this._closing ? 'animate-fade-out' : 'animate-fade-in'}"
-        style="background: ${color('primary')}"
+        style="background: ${color('bg-primary')}"
       >
         <div class="flex justify-center items-center gap-2 w-full relative">
           <div class="absolute right-0 h-full flex items-center justify-center">
@@ -99,15 +99,15 @@ export class LwcModal extends withTwindExtended({
           ? html`<div class="py-32">${loadingIcon2}</div>`
           : this._connected
           ? html` <h1 class="font-sans text-lg my-8" style="color: ${color(
-              'tertiary'
+              'text-secondary'
             )}">
                 Hello,
                 <span
                   class="font-bold"
                   style="
-              background: -webkit-linear-gradient(${color(
-                'gradient-1'
-              )}, ${color('gradient-2')});
+              background: -webkit-linear-gradient(${color('primary')}, ${color(
+              'secondary'
+            )});
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               "
@@ -117,18 +117,18 @@ export class LwcModal extends withTwindExtended({
               </h1>
 
               <span class="font-sans text-xs mb-2" style="color: ${color(
-                'tertiary'
+                'text-secondary'
               )}">Balance</span>
 
               <h2 class="font-sans text-2xl mb-12" style="color: ${color(
-                'tertiary'
+                'text-secondary'
               )}">
                 <span
                   class="font-bold font-mono text-4xl align-bottom"
                   style="
-              background: -webkit-linear-gradient(${color(
-                'gradient-1'
-              )}, ${color('gradient-2')});
+              background: -webkit-linear-gradient(${color('primary')}, ${color(
+              'secondary'
+            )});
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               "
@@ -138,7 +138,7 @@ export class LwcModal extends withTwindExtended({
               <hr class="border border-neutral-200 w-full mb-4"></div>
 
               <span class="font-sans text-xs mb-4" style="color: ${color(
-                'tertiary'
+                'text-secondary'
               )}">Connected through ${this._connectorName}</span>
 
               <button
@@ -149,24 +149,29 @@ export class LwcModal extends withTwindExtended({
                   class="absolute -z-10 top-0 left-0 w-full h-full border-2 border-solid border-transparent rounded-lg"
                   style="
                   background-image: linear-gradient(${color(
-                    'primary'
-                  )}, ${color('primary')}), linear-gradient(to bottom, ${color(
-              'gradient-1'
-            )}, ${color('gradient-2')});
+                    'bg-primary'
+                  )}, ${color(
+              'bg-primary'
+            )}), linear-gradient(to bottom, ${color('primary')}, ${color(
+              'secondary'
+            )});
                   background-origin: border-box;
                   background-clip: content-box, border-box;"
                 ></div>
                 ${exitIcon}
                 <span style="
                 background: -webkit-linear-gradient(${color(
-                  'gradient-1'
-                )}, ${color('gradient-2')});
+                  'primary'
+                )}, ${color('secondary')});
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
               ">Disconnect</span>
               </button>`
           : html`
-              <h1 class="font-sans my-8" style="color: ${color('tertiary')}">
+              <h1
+                class="font-sans my-8"
+                style="color: ${color('text-secondary')}"
+              >
                 How would you like to connect?
               </h1>
 

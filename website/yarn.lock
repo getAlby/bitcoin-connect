@@ -154,10 +154,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.47.0.tgz#5478fdf443ff8158f9de171c704ae45308696c7d"
   integrity sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==
 
-"@getalby/lightning-wallet-connect@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@getalby/lightning-wallet-connect/-/lightning-wallet-connect-1.0.7.tgz#279cc75e1fa37b283bcf351379e22b80227a861a"
-  integrity sha512-H5HaRQSlTNuunJ617HA3xanl8QH7qoqVYLDgRhKaFkABAqqElNuncq7xuoJavYEsttHiH7zM7iWRNzACEOQKWw==
+"@getalby/lightning-wallet-connect@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-wallet-connect/-/lightning-wallet-connect-1.0.8.tgz#2cffb7e9d49e16744a207936c22337d3ff21f520"
+  integrity sha512-tj67qMe6Op0ziXprJc5kSraw7BqhorVAZ2na6RcUOM5V3Ds6/siXojKMLYc9wcl1g7H8CmmseCnJjmTbOC56jQ==
   dependencies:
     "@getalby/sdk" "^2.2.3"
     lit "^2.2.4"

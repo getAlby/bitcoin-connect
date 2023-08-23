@@ -26,23 +26,52 @@
       body {
         font-family: Arial, Helvetica, sans-serif;
       }
-      .styled {
-        --lwc-color-gradient-1: #ffc837;
-        --lwc-color-gradient-2: #ff8008;
-        --lwc-color-primary: black;
-        --lwc-color-secondary: #ccc;
-        --lwc-color-tertiary: #ca9;
+      .theme-default-dark {
+        --lwc-color-bg-primary: #222;
+        --lwc-color-bg-secondary: #000;
+        --lwc-color-text-secondary: #808080;
+      }
+      .theme-geyser-dark {
+        --lwc-color-primary: #21ecc7;
+        --lwc-color-secondary: #21ecc7;
+        --lwc-color-bg-primary: black;
+        --lwc-color-bg-secondary: black;
+        --lwc-color-text-primary: black;
+        --lwc-color-text-secondary: #f4f4f4;
+        --lwc-color-text-tertiary: white;
+      }
+      .theme-orange-dark {
+        --lwc-color-primary: #ffc837;
+        --lwc-color-secondary: #ff8008;
+        --lwc-color-bg-primary: black;
+        --lwc-color-bg-secondary: black;
+        --lwc-color-text-primary: black;
+        --lwc-color-text-secondary: #ca9;
       }
     </style>
   </head>
   <body>
     <h1>Components</h1>
-    <h2>Buttons</h2>
+    <h2>Button</h2>
+    <h3>Light</h3>
     <lwc-button></lwc-button><br /><br />
-    <div class="styled">
-      <lwc-button></lwc-button>
+    <h3>Dark</h3>
+    <div style="background-color: #111; padding: 8px">
+      <div class="theme-default-dark">
+        <lwc-button></lwc-button>
+      </div>
+      <br /><br />
+
+      <div class="theme-geyser-dark">
+        <lwc-button></lwc-button>
+      </div>
+      <br /><br />
+
+      <div class="theme-orange-dark">
+        <lwc-button></lwc-button>
+      </div>
     </div>
-    <br /><br />
+    <h3>Icon only</h3>
     <lwc-button icon-only></lwc-button>
 
     <h2>Connector List</h2>

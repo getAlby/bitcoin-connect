@@ -124,7 +124,7 @@ function App() {
             <lwc-button />
           </div>
           <div className="flex gap-4 justify-center item theme p-2 rounded-lg shadow-xl bg-black bg-opacity-30">
-            {[0, 1].map((index) => (
+            {[...new Array(4)].map((_, index) => (
               <div className={`theme-${index}`} key={index}>
                 <div
                   onClick={() => setThemeIndex(index)}
@@ -133,7 +133,7 @@ function App() {
                   }`}
                   style={{
                     background:
-                      'linear-gradient(180deg, var(--lwc-color-gradient-1) 0%, var(--lwc-color-gradient-2) 100%)',
+                      'linear-gradient(180deg, var(--lwc-color-primary) 0%, var(--lwc-color-secondary) 100%)',
                   }}
                 />
               </div>

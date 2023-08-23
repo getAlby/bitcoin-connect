@@ -3,24 +3,50 @@
 @tailwind utilities;
 
 [data-theme='dark'] {
-  --lwc-color-gradient-1: #2ea7ff;
-  --lwc-color-gradient-2: #0045b1;
-  --lwc-color-primary: #fff;
-  --lwc-color-secondary: #000;
-  --lwc-color-tertiary: #404040;
+  --lwc-color-bg-primary: #222;
+  --lwc-color-bg-secondary: #000;
+  --lwc-color-text-primary: #000;
+  --lwc-color-text-secondary: #808080;
+}
+
+[data-theme='dark'] .theme-2 {
+  --lwc-color-primary: #21ecc7;
+  --lwc-color-secondary: #21ecc7;
+  --lwc-color-bg-primary: black;
+  --lwc-color-bg-secondary: black;
+  --lwc-color-text-primary: black;
+  --lwc-color-text-secondary: #f4f4f4;
+  --lwc-color-text-tertiary: white;
 }
 
 .theme-0 {
-  --lwc-color-gradient-1: #2ea7ff;
-  --lwc-color-gradient-2: #0045b1;
-  --lwc-color-primary: #fff;
-  --lwc-color-secondary: #000;
-  --lwc-color-tertiary: #404040;
+  --lwc-color-primary: #2ea7ff;
+  --lwc-color-secondary: #0045b1;
 }
 .theme-1 {
-  --lwc-color-gradient-1: #fada5e;
-  --lwc-color-gradient-2: #fada5e;
-  --lwc-color-primary: #000;
-  --lwc-color-secondary: rgb(245 245 245);
-  --lwc-color-tertiary: rgb(245 245 245);
+  --lwc-color-primary: #fada5e;
+  --lwc-color-secondary: #fada5e;
+  --lwc-color-bg-primary: #000;
+  --lwc-color-bg-secondary: #000;
+  --lwc-color-text-primary: black;
+  --lwc-color-text-secondary: rgb(245 245 245);
+  --lwc-color-text-tertiary: white;
+}
+.theme-2 {
+  --lwc-color-primary: #21ecc7;
+  --lwc-color-secondary: #21ecc7;
+  --lwc-color-bg-primary: white;
+  --lwc-color-bg-secondary: black;
+  --lwc-color-text-primary: black;
+  --lwc-color-text-secondary: #1a202c;
+  --lwc-color-text-tertiary: white;
+}
+
+.theme-3 {
+  --lwc-color-primary: #ffc837;
+  --lwc-color-secondary: #ff8008;
+  --lwc-color-bg-primary: black;
+  --lwc-color-bg-secondary: black;
+  --lwc-color-text-primary: black;
+  --lwc-color-text-secondary: #ca9;
 }

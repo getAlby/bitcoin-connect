@@ -52,15 +52,17 @@ Current wallets supported:
 
 ### Styling
 
-- the following css variables can be configured as hex or rgb: `lwc-color-gradient1`, `lwc-color-gradient2`, `lwc-color-primary`, `lwc-color-secondary`, `lwc-color-tertiary`
+- the following css variables can be configured as hex or rgb:
 
 ```css
 html {
-  --lwc-color-gradient-1: #ffc837;
-  --lwc-color-gradient-2: #ff8008;
-  --lwc-color-primary: black;
-  --lwc-color-secondary: yellow;
-  --lwc-color-tertiary: green;
+  --lwc-color-primary: #21ecc7;
+  --lwc-color-secondary: #21ecc7;
+  --lwc-color-bg-primary: black;
+  --lwc-color-bg-secondary: black;
+  --lwc-color-text-primary: black;
+  --lwc-color-text-secondary: #f4f4f4;
+  --lwc-color-text-tertiary: white;
 }
 ```
 
@@ -159,6 +161,7 @@ We are happy to help, please contact us or create an issue.
 - Read the [Alby developer guide](https://guides.getalby.com/overall-guide/alby-for-developers/getting-started) to better understand how Alby packages and APIs can be used to power your app.
 
 ## FAQ
+
 - Does this work on mobile browsers and mobile PWAs, or desktop browsers without a WebLN extension?
 
 Yes! that's the main benefit.
@@ -187,8 +190,6 @@ You should have a certain level of trust on the website you decide to connect yo
 
 1. add the "Connect Wallet" button
 2. wait for a connection event (using window.addEventListener) and then request to pay the invoice with window.webln
-
-
 
 # 🔥 Lit
 

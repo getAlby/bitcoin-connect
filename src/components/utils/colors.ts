@@ -1,11 +1,13 @@
 const prefix = 'lwc-color-';
 
 const colors = {
-  'gradient-1': '#2EA7FF',
-  'gradient-2': '#0045B1',
-  primary: '#FFFFFF',
-  secondary: '#000000',
-  tertiary: '#404040',
+  primary: '#2EA7FF',
+  secondary: '#0045B1',
+  'bg-primary': '#FFFFFF',
+  'bg-secondary': '#000000',
+  'text-primary': '#FFFFFF',
+  'text-secondary': '#404040',
+  'text-tertiary': '#FFFFFF',
 };
 
 export function color(key: keyof typeof colors) {
