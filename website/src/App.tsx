@@ -2,6 +2,7 @@ import {ChevronRightIcon} from '@heroicons/react/20/solid';
 import {useAppStore} from './AppStore';
 import {Header} from './components/Header';
 import '@getalby/lightning-wallet-connect';
+import zappyBirdImageUrl from './assets/zappy-bird.png';
 
 function App() {
   const isDarkMode = useAppStore((store) => store.isDarkMode);
@@ -77,7 +78,7 @@ function App() {
         <div className="flex flex-wrap gap-4">
           <div
             className="flex border border-gray-400 rounded-3xl p-4 w-64 h-48 flex-col items-center justify-center shadow-2xl bg-cover bg-center"
-            style={{background: 'url(/zappy-bird.png)'}}
+            style={{background: `url(${zappyBirdImageUrl})`}}
           ></div>
         </div>
 
