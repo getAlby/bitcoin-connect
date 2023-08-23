@@ -2,10 +2,15 @@ import {ChevronRightIcon} from '@heroicons/react/20/solid';
 import {useAppStore} from './AppStore';
 import {Header} from './components/Header';
 import '@getalby/lightning-wallet-connect';
+import desktopImageUrl from './assets/monitor.png';
+import phoneImageUrl from './assets/phone.png';
 import zappyBirdImageUrl from './assets/zappy-bird.png';
+import {ShowcaseCard} from './components/ShowcaseCard';
+import React from 'react';
 
 function App() {
   const isDarkMode = useAppStore((store) => store.isDarkMode);
+  const [themeIndex, setThemeIndex] = React.useState(0);
 
   return (
     <div
@@ -14,25 +19,64 @@ function App() {
     >
       <div className="max-w-4xl flex flex-col items-center gap-8">
         <Header />
+
         <div
-          className="flex border border-gray-400 rounded-3xl w-full flex-col items-center justify-center relative overflow-hidden shadow-2xl"
-          // style={{
-          //   background: `linear-gradient(180deg, #0000 10%, #fff6 100%), linear-gradient(180deg, ${
-          //     isDarkMode ? '#000A, #000A' : '#fffA, #fffA'
-          //   }), repeating-conic-gradient(#808080 0% 25%, transparent 0% 50%) 50% / 128px 128px`,
-          // }}
+          className="flex border border-gray-400 rounded-3xl p-4 w-full items-center justify-center shadow-2xl"
+          style={{
+            background: `linear-gradient(180deg, #0000 10%, #fff6 100%), linear-gradient(180deg, ${
+              isDarkMode ? '#000A, #000A' : '#fffA, #000C'
+            }), repeating-conic-gradient(#808080 0% 25%, transparent 0% 50%) 50% / 128px 128px`,
+          }}
         >
-          <video autoPlay muted loop controls={false} className="rounded-3xl">
-            <source
-              type="video/mp4"
-              src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_data_driven_testing_csv.mp4"
+          <div className="flex items-center justify-center relative overflow-hidden w-[50%]">
+            <div
+              className="absolute w-full h-full bg-contain bg-no-repeat bg-center z-10"
+              style={{backgroundImage: `url(${phoneImageUrl})`}}
             />
-          </video>
+            <div className="flex mx-[6%] mb-[0%] mt-[3%] rounded-3xl w-full h-0 pb-[100%] flex-col items-center justify-center relative">
+              <video
+                autoPlay
+                muted
+                loop
+                controls={false}
+                className="absolute top-0 left-0 w-full h-full"
+                // onLoadedData={() => setVideoLoaded(true)}
+              >
+                <source
+                  type="video/mp4"
+                  src="/lightning-wallet-connect/demo-mobile.mp4"
+                />
+              </video>
+            </div>
+          </div>
+          <div className="flex items-center justify-center relative overflow-hidden w-[70%]">
+            <div
+              className="absolute w-full h-full bg-contain bg-no-repeat bg-center z-10"
+              style={{backgroundImage: `url(${desktopImageUrl})`}}
+            />
+            <div className="flex mx-[7.5%] my-[7.5%] rounded-3xl w-full h-0 pb-[90%] flex-col items-center justify-center relative">
+              <video
+                autoPlay
+                muted
+                loop
+                controls={false}
+                className="absolute top-0 left-0 w-full h-full translate-y-[-7%]"
+                // onLoadedData={() => setVideoLoaded(true)}
+              >
+                <source
+                  type="video/mp4"
+                  src="/lightning-wallet-connect/demo.mp4"
+                />
+              </video>
+            </div>
+          </div>
         </div>
+
         <p className="text-primary text-2xl">
           <span className="font-semibold">Bitcoin Connect</span> is an elegantly
           simple yet powerful library that enables users to connect their wallet
-          to lightning-powered websites on any browser through{' '}
+          to lightning-powered websites for native interaction on any browser
+          through{' '}
           <a href="https://webln.guide" target="_blank">
             <span className="font-semibold">WebLN</span>
           </a>
@@ -60,26 +104,55 @@ function App() {
           </span>
         </p>
         <div
-          className="flex border border-gray-400 rounded-3xl p-4 w-full h-96 flex-col items-center justify-center shadow-2xl"
+          className="flex border border-gray-400 rounded-3xl p-4 w-full h-96 flex-col items-center justify-between shadow-2xl"
           style={{
             background: `linear-gradient(180deg, #0000 10%, #fff6 100%), linear-gradient(180deg, ${
               isDarkMode ? '#000A, #000A' : '#fffA, #fffA'
             }), repeating-conic-gradient(#808080 0% 25%, transparent 0% 50%) 50% / 128px 128px`,
           }}
         >
-          {/* @ts-ignore */}
-          <lwc-button />
+          <div
+            className={`flex-1 flex justify-center items-center theme-${themeIndex}`}
+          >
+            {/* @ts-ignore */}
+            <lwc-button />
+          </div>
+          <div className="flex gap-4 justify-center item theme p-2 rounded-lg shadow-xl bg-black bg-opacity-30">
+            {[0, 1].map((index) => (
+              <div className={`theme-${index}`} key={index}>
+                <div
+                  onClick={() => setThemeIndex(index)}
+                  className={`rounded-full w-8 h-8 cursor-pointer hover:brightness-110 active:scale-95 transition-all shadow-lg ${
+                    themeIndex === index && 'border-2 border-white'
+                  }`}
+                  style={{
+                    background:
+                      'linear-gradient(180deg, var(--lwc-color-gradient-1) 0%, var(--lwc-color-gradient-2) 100%)',
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <p className="text-primary text-2xl mt-8">
-          Bitcoin Connect&nbsp;
-          <span className="text-secondary">In the Wild</span>
+        <p className="text-primary text-2xl mt-8 text-center">
+          Bitcoin Connect
+          <br />
+          <span className="text-secondary text-lg">In the Wild</span>
         </p>
-        <div className="flex flex-wrap gap-4">
-          <div
-            className="flex border border-gray-400 rounded-3xl p-4 w-64 h-48 flex-col items-center justify-center shadow-2xl bg-cover bg-center"
-            style={{background: `url(${zappyBirdImageUrl})`}}
-          ></div>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <ShowcaseCard
+            title="Zappy Bird"
+            url="https://rolznz.github.io/zappy-bird/"
+            imageUrl={zappyBirdImageUrl}
+          />
+          <ShowcaseCard
+            title="Make me an Image"
+            url="https://make-me-an-image-lwc-version.rolznz.repl.co/"
+            imageUrl={
+              'https://make-me-an-image-lwc-version.rolznz.repl.co/profile.png'
+            }
+          />
         </div>
 
         <p>
@@ -112,6 +185,7 @@ function App() {
           nonce outputs consensus, block reward sats! Block height timestamp
           server SHA-256 freefall together public key, halvening nonce?
         </p>
+        <p>Made with 💓 by Alby</p>
       </div>
     </div>
   );

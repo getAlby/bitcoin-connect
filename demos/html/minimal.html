@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LWC Development</title>
+    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.7/dist/index.browser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="position: absolute; right: 16px; top: 16px">
+      <lwc-button></lwc-button>
+    </div>
+    <script>
+      window.addEventListener('lwc:connected', async () => {
+        window.confetti();
+      });
+    </script>
+  </body>
+</html>

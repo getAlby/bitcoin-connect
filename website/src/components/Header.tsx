@@ -6,7 +6,7 @@ export function Header() {
   const store = useAppStore();
 
   return (
-    <div className="flex w-full justify-between items-center">
+    <div className="flex w-full justify-between items-center max-sm:flex-col max-sm:gap-4">
       <div className="flex gap-4 justify-center items-center">
         <BCLogo />
         <div className="badge badge-outline badge-sm mt-1">1.0.0</div>

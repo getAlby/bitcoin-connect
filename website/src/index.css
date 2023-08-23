@@ -9,3 +9,18 @@
   --lwc-color-secondary: #000;
   --lwc-color-tertiary: #404040;
 }
+
+.theme-1 {
+  --lwc-color-gradient-1: #2ea7ff;
+  --lwc-color-gradient-2: #0045b1;
+  --lwc-color-primary: #fff;
+  --lwc-color-secondary: #000;
+  --lwc-color-tertiary: #404040;
+}
+.theme-1 {
+  --lwc-color-gradient-1: #fada5e;
+  --lwc-color-gradient-2: #fada5e;
+  --lwc-color-primary: #000;
+  --lwc-color-secondary: rgb(245 245 245);
+  --lwc-color-tertiary: rgb(245 245 245);
+}
