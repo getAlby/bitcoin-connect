@@ -161,6 +161,17 @@ function App() {
           />
         </div>
 
+        <h2 className="text-primary text-2xl mt-8 text-center">
+          Supported Wallets
+        </h2>
+        <div className="flex flex-wrap gap-4">
+          <p>Alby Extension</p>
+          <p>Alby NWC</p>
+          <p>Alby NWC (Umbrel)</p>
+          <p>NWC (Generic)</p>
+          <p>WebLN Browser Extension (Generic)</p>
+        </div>
+
         <p>
           Bitcoin ipsum dolor sit amet. Public key soft fork fee market
           electronic cash Satoshi Nakamoto blockchain, block height, space
