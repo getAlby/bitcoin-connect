@@ -4,6 +4,9 @@ import './lwc-modal.js';
 import {LwcElement} from './lwc-element.js';
 import {lwcIcon} from './icons/lwcIcon.js';
 import {withTwind} from './twind/withTwind.js';
+import {loadingIcon} from './icons/loadingIcon.js';
+import {satIcon} from './icons/satIcon.js';
+import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
 
 /**
  * A button that when clicked launches the LWC modal.
@@ -20,36 +23,85 @@ export class LwcButton extends withTwind(LwcElement) {
     type: Boolean,
   })
   iconOnly?: boolean;
+  @property({
+    attribute: 'connected-icon-only',
+    type: Boolean,
+  })
+  connectedIconOnly?: boolean;
 
   @property({
     type: Boolean,
   })
   disabled = false;
 
+  constructor() {
+    super();
+  }
+
+  // FIXME:
+  // - inner border icon should be a gradient
+  // - some hardcoded transparent whites should be transparent(primaryColor)
+  // TODO:
+  // - extract common button styles
+  // - extract common inner border styles
   override render() {
+    const isLoading = this._connecting || (!this._connected && this._modalOpen);
+    const iconOnly =
+      this.iconOnly || (this.connectedIconOnly && this._connected);
     return html`<div>
-      <button
-        @click=${this._onClick}
-        part="button"
-        class="${this.iconOnly ? 'p-2' : ''} ${!this.iconOnly
-          ? 'w-64 py-2 px-7'
-          : ''} font-medium font-sans shadow rounded-md flex gap-2 justify-center items-center ${this
-          .disabled
-          ? 'bg-gray-300 opacity-50'
+      <div
+        class="relative inline-flex transition-all hover:brightness-110 active:scale-95 cursor-pointer ${this
+          ._connected && !iconOnly
+          ? 'rounded-lg gap-2 justify-center items-center'
           : ''}"
-        style="${!this.disabled &&
-        'background: linear-gradient(180deg, #FFDE6E 63.72%, #F8C455 95.24%);'}"
-        ?disabled=${this.disabled}
+        style="${this._connected && !iconOnly
+          ? `background: linear-gradient(180deg, #fff6 0%, #fff0 100%), linear-gradient(180deg, ${this.colorSecondary} 0%, ${this.colorSecondary} 100%);`
+          : ''}"
+        @click=${this._onClick}
       >
-        ${lwcIcon}
-        ${this.iconOnly
-          ? null
-          : this._connecting
-          ? html`Connecting...`
-          : this._connected
-          ? html`Connected`
-          : html`Connect Wallet`}
-      </button>
+        ${this._connected
+          ? html` <div
+              class="absolute top-0 left-0 w-full h-full rounded-lg border-2"
+              style="border-color: #fff2; pointer-events: none;"
+            ></div>`
+          : html``}
+        <button
+          part="button"
+          class="${iconOnly ? 'w-8 h-8' : `h-10 px-4`} 
+          relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
+          ${this.disabled ? 'bg-gray-300 opacity-50' : ''}"
+          style="${!this.disabled &&
+          `background: linear-gradient(180deg, ${this.colorGradient1} 0%, ${this.colorGradient2} 100%); color: ${this.colorPrimary};
+          `}"
+          ?disabled=${this.disabled}
+        >
+          <div
+            class="absolute top-0 left-0 w-full h-full rounded-lg border-2"
+            style="border-color: #fff1;"
+          ></div>
+          ${isLoading
+            ? loadingIcon
+            : this._connected
+            ? iconOnly
+              ? lwcConnectedIcon
+              : null
+            : lwcIcon}
+          ${iconOnly
+            ? null
+            : isLoading
+            ? html`Connecting...`
+            : this._connected
+            ? html`${this._alias || 'Connected'}`
+            : html`Connect Wallet`}
+        </button>
+        ${this._connected && !iconOnly && this._balance !== undefined
+          ? html`<span
+              class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5"
+              style="color: ${this.colorPrimary}"
+              >${satIcon}<span class="font-mono">${this._balance}</span></span
+            >`
+          : html``}
+      </div>
       ${this._modalOpen
         ? html`<lwc-modal .onClose=${this._closeModal} />`
         : html``}

@@ -17,6 +17,7 @@ export class LwcGenericNWCConnector extends LwcConnector {
     }
 
     store.getState().connect({
+      connectorName: this._title,
       connectorType: this._connectorType,
       nwcUrl: nostrWalletConnectUrl,
     });

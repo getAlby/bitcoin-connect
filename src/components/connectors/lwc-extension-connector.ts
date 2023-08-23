@@ -16,6 +16,7 @@ export class LwcExtensionConnector extends LwcConnector {
 
   protected _onClick() {
     store.getState().connect({
+      connectorName: this._title,
       connectorType: this._connectorType,
     });
   }

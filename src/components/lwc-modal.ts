@@ -1,22 +1,39 @@
 import {html} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 import {LwcElement} from './lwc-element';
-import {lwcIconColored} from './icons/lwcIconColored';
 import {crossIcon} from './icons/crossIcon';
 import './lwc-connector-list.js';
 import {withTwindExtended} from './twind/withTwind';
 import store from '../state/store';
 import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
+import {bcLogo} from './icons/bcLogo';
+import {loadingIcon2} from './icons/loadingIcon';
+import {exitIcon} from './icons/exitIcon';
 
 @customElement('lwc-modal')
 export class LwcModal extends withTwindExtended({
   animation: {
-    'slide-up': 'slide-up 0.5s ease-in-out forwards',
+    darken: 'darken 0.2s ease-out forwards',
+    lighten: 'lighten 0.2s ease-out forwards',
+    'fade-in': 'fade-in 0.2s ease-out forwards',
+    'fade-out': 'fade-out 0.2s ease-out forwards',
   },
   keyframes: {
-    'slide-up': {
-      '0%': {top: '100%'},
-      '100%': {top: '0%'},
+    darken: {
+      '0%': {'background-color': '#0000'},
+      '100%': {'background-color': '#000A'},
+    },
+    lighten: {
+      '0%': {'background-color': '#000A'},
+      '100%': {'background-color': '#0000'},
+    },
+    'fade-in': {
+      '0%': {opacity: 0},
+      '100%': {opacity: 1},
+    },
+    'fade-out': {
+      '0%': {opacity: 1},
+      '100%': {opacity: 0},
     },
   },
 })(LwcElement) {
@@ -28,12 +45,15 @@ export class LwcModal extends withTwindExtended({
   })
   onClose?: () => void;
 
+  @state()
+  protected _closing = false;
+
   constructor() {
     super();
 
     // TODO: handle unsubscribe
     store.subscribe((store, prevStore) => {
-      if (store.connected !== prevStore.connected) {
+      if (store.connected !== prevStore.connected && !store.connected) {
         this._handleClose();
       }
     });
@@ -53,10 +73,12 @@ export class LwcModal extends withTwindExtended({
   override render() {
     return html` <div
       part="modal"
-      class="fixed left-0 w-full h-full flex justify-center items-end sm:items-center animate-slide-up z-[21000]"
+      class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]
+      ${this._closing ? 'animate-lighten' : 'animate-darken'}"
     >
       <div
-        class="p-4 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center bg-white w-full max-w-md max-sm:rounded-b-none"
+        class="transition-all p-4 pt-6 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center bg-white w-full max-w-md max-sm:rounded-b-none
+        ${this._closing ? 'animate-fade-out' : 'animate-fade-in'}"
       >
         <div class="flex justify-center items-center gap-2 w-full relative">
           <div class="absolute right-0 h-full flex items-center justify-center">
@@ -64,19 +86,73 @@ export class LwcModal extends withTwindExtended({
               ${crossIcon}
             </div>
           </div>
-          ${lwcIconColored}
-          <span class="font-medium font-sans">Lightning Wallet Connect</span>
+          ${bcLogo}
         </div>
-        ${this._connected
-          ? html`<button
-              @click=${this._handleDisconnect}
-              class="mt-4 w-64 py-2 px-7 font-medium font-sans shadow rounded-md flex gap-2 justify-center items-center bg-gray-300"
-            >
-              DISCONNECT
-            </button>`
+        ${this._connecting
+          ? html`<div class="py-32">${loadingIcon2}</div>`
+          : this._connected
+          ? html` <h1 class="font-sans text-lg text-neutral-700 my-8">
+                Hello,
+                <span
+                  class="font-bold"
+                  style="
+              background: -webkit-linear-gradient(${this.colorGradient1}, ${
+              this.colorGradient2
+            });
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              "
+                >
+                  ${this._alias || 'Anon'}
+                </span>
+              </h1>
+
+              <span class="font-sans text-xs text-neutral-700 mb-2">Balance</span>
+
+              <h2 class="font-sans text-2xl text-neutral-700 mb-12">
+                <span
+                  class="font-bold font-mono text-4xl align-bottom"
+                  style="
+              background: -webkit-linear-gradient(${this.colorGradient1}, ${
+              this.colorGradient2
+            });
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              "
+                >${this._balance || 0}</span>&nbsp;sats
+              </h2>
+
+              <hr class="border border-neutral-200 w-full mb-4"></div>
+
+              <span class="font-sans text-xs text-neutral-700 mb-4">Connected through ${
+                this._connectorName
+              }</span>
+
+              <button
+                @click=${this._handleDisconnect}
+                class="relative mt-4 h-8 px-3 font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center"
+              >
+                <div
+                  class="absolute -z-10 top-0 left-0 w-full h-full border-2 border-solid border-transparent rounded-lg"
+                  style="
+                  background-image: linear-gradient(white, white), linear-gradient(to bottom, ${
+                    this.colorGradient1
+                  }, ${this.colorGradient2});
+                  background-origin: border-box;
+                  background-clip: content-box, border-box;"
+                ></div>
+                ${exitIcon}
+                <span style="
+                background: -webkit-linear-gradient(${this.colorGradient1}, ${
+              this.colorGradient2
+            });
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+              ">Disconnect</span>
+              </button>`
           : html`
-              <h1 class="font-sans text-gray-500 my-8">
-                Choose your wallet to connect
+              <h1 class="font-sans text-neutral-700 my-8">
+                How would you like to connect?
               </h1>
 
               <lwc-connector-list />
@@ -90,7 +166,8 @@ export class LwcModal extends withTwindExtended({
   }
 
   private _handleClose() {
-    this.onClose?.();
+    this._closing = true;
+    setTimeout(() => this.onClose?.(), 750);
   }
 }
 

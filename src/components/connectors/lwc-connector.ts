@@ -4,9 +4,9 @@ import {withTwind} from '../twind/withTwind';
 import {ConnectorType} from '../../types/ConnectorType';
 
 export abstract class LwcConnector extends withTwind(LwcElement) {
-  private _title: string;
   private _background: string;
   private _icon: TemplateResult<2>;
+  protected _title: string;
   protected _connectorType: ConnectorType;
   protected abstract _onClick(): void;
   constructor(

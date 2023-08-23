@@ -1,6 +1,6 @@
 {
   "name": "@getalby/lightning-wallet-connect",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Web components to connect to a lightning wallet and power a website with WebLN",
   "type": "module",
   "source": "src/index.ts",
