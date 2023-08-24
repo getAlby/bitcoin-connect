@@ -2,6 +2,7 @@ import {TemplateResult, html} from 'lit';
 import {LwcElement} from '../lwc-element';
 import {withTwind} from '../twind/withTwind';
 import {ConnectorType} from '../../types/ConnectorType';
+import {color} from '../utils/colors';
 
 export abstract class LwcConnector extends withTwind(LwcElement) {
   private _background: string;
@@ -33,7 +34,11 @@ export abstract class LwcConnector extends withTwind(LwcElement) {
       >
         ${this._icon}
       </div>
-      <span class="text-sm font-sans font-medium">${this._title}</span>
+      <span
+        class="text-sm font-sans font-medium"
+        style="color: ${color('text-secondary')}"
+        >${this._title}</span
+      >
     </div>`;
   }
 }

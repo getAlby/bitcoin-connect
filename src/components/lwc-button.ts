@@ -94,15 +94,15 @@ export class LwcButton extends withTwind(LwcElement) {
               ? lwcConnectedIcon
               : null
             : lwcIcon}
-          <span class="font-semibold">
-            ${iconOnly
-              ? null
-              : isLoading
-              ? html`Connecting...`
-              : this._connected
-              ? html`${this._alias || 'Connected'}`
-              : html`Connect Wallet`}
-          </span>
+          ${!iconOnly
+            ? html`<span class="font-semibold">
+                ${isLoading
+                  ? html`Connecting...`
+                  : this._connected
+                  ? html`${this._alias || 'Connected'}`
+                  : html`Connect Wallet`}
+              </span>`
+            : null}
         </button>
         ${this._connected && !iconOnly && this._balance !== undefined
           ? html`<span
