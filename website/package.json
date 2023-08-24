@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@getalby/lightning-wallet-connect": "^1.0.9",
+    "@getalby/lightning-wallet-connect": "^1.0.10",
     "@heroicons/react": "^2.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

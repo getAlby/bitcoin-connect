@@ -31,6 +31,16 @@
         --lwc-color-bg-secondary: #000;
         --lwc-color-text-secondary: #808080;
       }
+      .theme-geyser-light {
+        --lwc-color-primary: #10caa8;
+        --lwc-color-secondary: #10caa8;
+        --lwc-color-tertiary: #21ecc7;
+        --lwc-color-bg-primary: white;
+        --lwc-color-bg-secondary: black;
+        --lwc-color-text-primary: black;
+        --lwc-color-text-secondary: #1a202c;
+        --lwc-color-text-tertiary: white;
+      }
       .theme-geyser-dark {
         --lwc-color-primary: #21ecc7;
         --lwc-color-secondary: #21ecc7;
@@ -55,6 +65,10 @@
     <h2>Button</h2>
     <h3>Light</h3>
     <lwc-button></lwc-button><br /><br />
+    <div class="theme-geyser-light">
+      <lwc-button></lwc-button>
+    </div>
+    <br /><br />
     <h3>Dark</h3>
     <div style="background-color: #111; padding: 8px">
       <div class="theme-default-dark">

@@ -12,6 +12,7 @@
 [data-theme='dark'] .theme-2 {
   --lwc-color-primary: #21ecc7;
   --lwc-color-secondary: #21ecc7;
+  --lwc-color-tertiary: unset;
   --lwc-color-bg-primary: black;
   --lwc-color-bg-secondary: black;
   --lwc-color-text-primary: black;
@@ -33,8 +34,9 @@
   --lwc-color-text-tertiary: white;
 }
 .theme-2 {
-  --lwc-color-primary: #21ecc7;
-  --lwc-color-secondary: #21ecc7;
+  --lwc-color-tertiary: #21ecc7;
+  --lwc-color-primary: #10caa8;
+  --lwc-color-secondary: #10caa8;
   --lwc-color-bg-primary: white;
   --lwc-color-bg-secondary: black;
   --lwc-color-text-primary: black;

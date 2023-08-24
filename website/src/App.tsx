@@ -7,6 +7,7 @@ import phoneImageUrl from './assets/phone.png';
 import zappyBirdImageUrl from './assets/zappy-bird.png';
 import {ShowcaseCard} from './components/ShowcaseCard';
 import React from 'react';
+import {DarkModeToggle} from './components/DarkModeToggle';
 
 function App() {
   const isDarkMode = useAppStore((store) => store.isDarkMode);
@@ -124,6 +125,7 @@ function App() {
             <lwc-button />
           </div>
           <div className="flex gap-4 justify-center item theme p-2 rounded-lg shadow-xl bg-black bg-opacity-30">
+            <DarkModeToggle />
             {[...new Array(4)].map((_, index) => (
               <div className={`theme-${index}`} key={index}>
                 <div

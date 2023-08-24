@@ -74,9 +74,12 @@ export class LwcButton extends withTwind(LwcElement) {
           relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
           ${this.disabled ? 'bg-gray-300 opacity-50' : ''}"
           style="${!this.disabled &&
-          `background: linear-gradient(180deg, ${color('primary')} 0%, ${color(
-            'secondary'
-          )} 100%); color: ${color('text-primary')};
+          `
+            background: linear-gradient(180deg, ${color(
+              'tertiary',
+              color('primary')
+            )} 0%, ${color('tertiary', color('secondary'))} 100%);
+            color: ${color('text-primary')};
           `}"
           ?disabled=${this.disabled}
         >

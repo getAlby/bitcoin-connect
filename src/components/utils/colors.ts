@@ -3,6 +3,7 @@ const prefix = 'lwc-color-';
 const colors = {
   primary: '#2EA7FF',
   secondary: '#0045B1',
+  tertiary: undefined,
   'bg-primary': '#FFFFFF',
   'bg-secondary': '#000000',
   'text-primary': '#FFFFFF',
@@ -10,6 +11,6 @@ const colors = {
   'text-tertiary': '#FFFFFF',
 };
 
-export function color(key: keyof typeof colors) {
-  return `var(--${prefix}${key}, ${colors[key]})`;
+export function color(key: keyof typeof colors, fallback = colors[key]) {
+  return `var(--${prefix}${key}, ${fallback})`;
 }
