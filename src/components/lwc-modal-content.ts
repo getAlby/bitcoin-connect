@@ -7,7 +7,9 @@ import store from '../state/store';
 import {loadingIcon2} from './icons/loadingIcon';
 import {exitIcon} from './icons/exitIcon';
 import {color} from './utils/colors';
+import {gradientText} from './utils/gradientText';
 
+// TODO: split up this component into disconnected and connected
 @customElement('lwc-modal-content')
 export class LwcModalContent extends withTwind(LwcElement) {
   override render() {
@@ -24,13 +26,7 @@ export class LwcModalContent extends withTwind(LwcElement) {
             Hello,
             <span
               class="font-bold"
-              style="
-          background: -webkit-linear-gradient(${color('primary')}, ${color(
-            'secondary'
-          )});
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          "
+              style="${gradientText()}"
             >
               ${this._alias || 'Anon'}
             </span>
@@ -45,13 +41,7 @@ export class LwcModalContent extends withTwind(LwcElement) {
           )}">
             <span
               class="font-bold font-mono text-4xl align-bottom"
-              style="
-          background: -webkit-linear-gradient(${color('primary')}, ${color(
-            'secondary'
-          )});
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          "
+              style="${gradientText()}"
             >${this._balance || 0}</span>&nbsp;sats
           </h2>
 
@@ -77,13 +67,7 @@ export class LwcModalContent extends withTwind(LwcElement) {
               background-clip: content-box, border-box;"
             ></div>
             ${exitIcon}
-            <span style="
-            background: -webkit-linear-gradient(${color('primary')}, ${color(
-            'secondary'
-          )});
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          ">Disconnect</span>
+            <span style="${gradientText()}">Disconnect</span>
           </button>`
         : html`
             <h1
