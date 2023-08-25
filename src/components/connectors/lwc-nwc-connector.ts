@@ -1,7 +1,6 @@
 import {customElement} from 'lit/decorators.js';
 import {LwcConnector} from './lwc-connector';
 import {nwcIcon} from '../icons/nwcIcon';
-import store from '../../state/store';
 
 @customElement('lwc-nwc-connector')
 export class LwcGenericNWCConnector extends LwcConnector {
@@ -16,9 +15,7 @@ export class LwcGenericNWCConnector extends LwcConnector {
       return;
     }
 
-    store.getState().connect({
-      connectorName: this._title,
-      connectorType: this._connectorType,
+    this._connect({
       nwcUrl: nostrWalletConnectUrl,
     });
   }

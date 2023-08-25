@@ -3,6 +3,8 @@ import {LwcElement} from '../lwc-element';
 import {withTwind} from '../twind/withTwind';
 import {ConnectorType} from '../../types/ConnectorType';
 import {color} from '../utils/colors';
+import {ConnectorConfig} from '../../types/ConnectorConfig';
+import store from '../../state/store';
 
 export abstract class LwcConnector extends withTwind(LwcElement) {
   private _background: string;
@@ -40,5 +42,15 @@ export abstract class LwcConnector extends withTwind(LwcElement) {
         >${this._title}</span
       >
     </div>`;
+  }
+
+  protected _connect(
+    config: Omit<ConnectorConfig, 'connectorName' | 'connectorType'>
+  ) {
+    store.getState().connect({
+      ...config,
+      connectorName: this._title,
+      connectorType: this._connectorType,
+    });
   }
 }
