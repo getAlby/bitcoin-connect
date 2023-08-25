@@ -4,7 +4,7 @@ import {LwcElement} from './lwc-element';
 import './lwc-connector-list.js';
 import {withTwind} from './twind/withTwind';
 import store from '../state/store';
-import {loadingIcon2} from './icons/loadingIcon';
+import {loadingIconSecondary} from './icons/loadingIcon';
 import {exitIcon} from './icons/exitIcon';
 import {color} from './css/colors';
 import {gradientText} from './css/gradientText';
@@ -18,7 +18,7 @@ export class LwcModalContent extends withTwind()(LwcElement) {
       class="flex flex-col justify-center items-center w-full"
     >
       ${this._connecting
-        ? html`<div class="py-32">${loadingIcon2}</div>`
+        ? html`<div class="py-32">${loadingIconSecondary}</div>`
         : this._connected
         ? html` <h1 class="font-sans text-lg my-8" style="color: ${color(
             'text-secondary'

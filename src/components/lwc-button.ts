@@ -4,7 +4,7 @@ import './lwc-modal.js';
 import {LwcElement} from './lwc-element.js';
 import {lwcIcon} from './icons/lwcIcon.js';
 import {withTwind} from './twind/withTwind.js';
-import {loadingIcon} from './icons/loadingIcon.js';
+import {loadingIconPrimary} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
 import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
 import {color} from './css/colors';
@@ -81,7 +81,7 @@ export class LwcButton extends withTwind()(LwcElement) {
         >
           ${innerBorder()}
           ${isLoading
-            ? loadingIcon
+            ? loadingIconPrimary
             : this._connected
             ? iconOnly
               ? lwcConnectedIcon
