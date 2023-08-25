@@ -1,5 +1,5 @@
 import {svg} from 'lit';
-import {color} from '../utils/colors';
+import {color} from '../css/colors';
 
 export const bcLogo = svg`<svg width="172" height="24" viewBox="0 0 172 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M21.5709 14.1773C20.3688 18.9988 15.4849 21.9331 10.6623 20.7307C5.84177 19.5287 2.90717 14.645 4.10993 9.82385C5.31156 5.00182 10.1954 2.06726 15.0166 3.26932C19.8388 4.47139 22.7731 9.35557 21.5709 14.1773Z" fill="url(#paint0_linear_204_1469)"/>

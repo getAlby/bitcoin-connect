@@ -2,11 +2,11 @@ import {TemplateResult, html} from 'lit';
 import {LwcElement} from '../lwc-element';
 import {withTwind} from '../twind/withTwind';
 import {ConnectorType} from '../../types/ConnectorType';
-import {color} from '../utils/colors';
+import {color} from '../css/colors';
 import {ConnectorConfig} from '../../types/ConnectorConfig';
 import store from '../../state/store';
 
-export abstract class LwcConnector extends withTwind(LwcElement) {
+export abstract class LwcConnector extends withTwind()(LwcElement) {
   private _background: string;
   private _icon: TemplateResult<2>;
   protected _title: string;

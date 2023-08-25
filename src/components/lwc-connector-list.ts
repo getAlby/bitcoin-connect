@@ -12,7 +12,7 @@ import './connectors/lwc-nwc-connector.js';
  * @csspart connector-list
  */
 @customElement('lwc-connector-list')
-export class LwcConnectorList extends withTwind(LwcElement) {
+export class LwcConnectorList extends withTwind()(LwcElement) {
   override render() {
     return html` <div
       part="connector-list"

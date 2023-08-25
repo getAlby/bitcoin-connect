@@ -1,5 +1,5 @@
 import {svg} from 'lit';
-import {color} from '../utils/colors';
+import {color} from '../css/colors';
 
 export const loadingIcon = svg`
 <svg class="animate-spin h-5 w-5 ${color(

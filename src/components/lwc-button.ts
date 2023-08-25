@@ -7,7 +7,7 @@ import {withTwind} from './twind/withTwind.js';
 import {loadingIcon} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
 import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
-import {color} from './utils/colors.js';
+import {color} from './css/colors';
 import {innerBorder} from './templates/innerBorder.js';
 
 /**
@@ -16,7 +16,7 @@ import {innerBorder} from './templates/innerBorder.js';
  * @csspart button - The button
  */
 @customElement('lwc-button')
-export class LwcButton extends withTwind(LwcElement) {
+export class LwcButton extends withTwind()(LwcElement) {
   @state()
   private _modalOpen = false;
 

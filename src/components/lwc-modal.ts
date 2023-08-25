@@ -2,40 +2,15 @@ import {html} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import {LwcElement} from './lwc-element';
 import './lwc-modal-content.js';
-import {withTwindExtended} from './twind/withTwind';
 import store from '../state/store';
 import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
-import {color} from './utils/colors';
+import {color} from './css/colors';
 import {crossIcon} from './icons/crossIcon';
 import {bcLogo} from './icons/bcLogo';
+import {withTwind} from './twind/withTwind';
 
 @customElement('lwc-modal')
-export class LwcModal extends withTwindExtended({
-  animation: {
-    darken: 'darken 0.2s ease-out forwards',
-    lighten: 'lighten 0.2s ease-out forwards',
-    'fade-in': 'fade-in 0.2s ease-out forwards',
-    'fade-out': 'fade-out 0.2s ease-out forwards',
-  },
-  keyframes: {
-    darken: {
-      '0%': {opacity: 0},
-      '100%': {opacity: 0.5},
-    },
-    lighten: {
-      '0%': {opacity: 0.5},
-      '100%': {opacity: 0},
-    },
-    'fade-in': {
-      '0%': {opacity: 0},
-      '100%': {opacity: 1},
-    },
-    'fade-out': {
-      '0%': {opacity: 1},
-      '100%': {opacity: 0},
-    },
-  },
-})(LwcElement) {
+export class LwcModal extends withTwind()(LwcElement) {
   /**
    * Called when modal is closed
    */
@@ -92,7 +67,6 @@ export class LwcModal extends withTwindExtended({
           </div>
           ${bcLogo}
         </div>
-
         <lwc-modal-content class="flex w-full"></lwc-modal-content>
       </div>
     </div>`;

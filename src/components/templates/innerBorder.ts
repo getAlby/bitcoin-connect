@@ -1,5 +1,5 @@
 import {html} from 'lit';
-import {color} from '../utils/colors';
+import {color} from '../css/colors';
 
 export function innerBorder() {
   return html`<div

@@ -6,12 +6,12 @@ import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {loadingIcon2} from './icons/loadingIcon';
 import {exitIcon} from './icons/exitIcon';
-import {color} from './utils/colors';
-import {gradientText} from './utils/gradientText';
+import {color} from './css/colors';
+import {gradientText} from './css/gradientText';
 
 // TODO: split up this component into disconnected and connected
 @customElement('lwc-modal-content')
-export class LwcModalContent extends withTwind(LwcElement) {
+export class LwcModalContent extends withTwind()(LwcElement) {
   override render() {
     return html`<div
       part="modal-content"
