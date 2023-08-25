@@ -8,6 +8,7 @@ import {loadingIcon} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
 import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
 import {color} from './utils/colors.js';
+import {innerBorder} from './templates/innerBorder.js';
 
 /**
  * A button that when clicked launches the LWC modal.
@@ -62,12 +63,7 @@ export class LwcButton extends withTwind(LwcElement) {
           : ''}"
         @click=${this._onClick}
       >
-        ${this._connected
-          ? html` <div
-              class="absolute top-0 left-0 w-full h-full rounded-lg border-2"
-              style="border-color: #fff2; pointer-events: none;"
-            ></div>`
-          : html``}
+        ${this._connected ? innerBorder() : null}
         <button
           part="button"
           class="${iconOnly ? 'w-8 h-8' : `h-10 px-4`} 
@@ -83,10 +79,7 @@ export class LwcButton extends withTwind(LwcElement) {
           `}"
           ?disabled=${this.disabled}
         >
-          <div
-            class="absolute top-0 left-0 w-full h-full rounded-lg border-2 opacity-10"
-            style="border-color: ${color('bg-primary')}"
-          ></div>
+          ${innerBorder()}
           ${isLoading
             ? loadingIcon
             : this._connected
@@ -110,11 +103,11 @@ export class LwcButton extends withTwind(LwcElement) {
               style="color: ${color('text-tertiary')}"
               >${satIcon}<span class="font-mono">${this._balance}</span></span
             >`
-          : html``}
+          : null}
       </div>
       ${this._modalOpen
         ? html`<lwc-modal .onClose=${this._closeModal} />`
-        : html``}
+        : null}
     </div>`;
   }
 

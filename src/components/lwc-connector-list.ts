@@ -20,7 +20,7 @@ export class LwcConnectorList extends withTwind(LwcElement) {
     >
       ${window.webln
         ? html`<lwc-extension-connector></lwc-extension-connector>`
-        : html``}
+        : null}
       <lwc-alby-nwc-connector></lwc-alby-nwc-connector>
       <lwc-nwc-connector></lwc-nwc-connector>
     </div>`;
