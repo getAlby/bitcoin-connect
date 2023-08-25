@@ -26,20 +26,72 @@
       body {
         font-family: Arial, Helvetica, sans-serif;
       }
+      .theme-default-dark {
+        --lwc-color-bg-primary: #222;
+        --lwc-color-bg-secondary: #000;
+        --lwc-color-text-secondary: #808080;
+      }
+      .theme-geyser-light {
+        --lwc-color-primary: #10caa8;
+        --lwc-color-secondary: #10caa8;
+        --lwc-color-tertiary: #21ecc7;
+        --lwc-color-bg-primary: white;
+        --lwc-color-bg-secondary: black;
+        --lwc-color-text-primary: black;
+        --lwc-color-text-secondary: #1a202c;
+        --lwc-color-text-tertiary: white;
+      }
+      .theme-geyser-dark {
+        --lwc-color-primary: #21ecc7;
+        --lwc-color-secondary: #21ecc7;
+        --lwc-color-bg-primary: black;
+        --lwc-color-bg-secondary: black;
+        --lwc-color-text-primary: black;
+        --lwc-color-text-secondary: #f4f4f4;
+        --lwc-color-text-tertiary: white;
+      }
+      .theme-orange-dark {
+        --lwc-color-primary: #ffc837;
+        --lwc-color-secondary: #ff8008;
+        --lwc-color-bg-primary: black;
+        --lwc-color-bg-secondary: black;
+        --lwc-color-text-primary: black;
+        --lwc-color-text-secondary: #ca9;
+      }
     </style>
   </head>
   <body>
     <h1>Components</h1>
-    <h2>Buttons</h2>
+    <h2>Button</h2>
+    <h3>Light</h3>
     <lwc-button></lwc-button><br /><br />
-    <lwc-button
-      color-gradient1="#FFC837"
-      color-gradient2="#FF8008"
-      color-primary="black"
-      color-secondary="yellow"
-    ></lwc-button>
+    <div class="theme-geyser-light">
+      <lwc-button></lwc-button>
+    </div>
     <br /><br />
+    <h3>Dark</h3>
+    <div style="background-color: #111; padding: 8px">
+      <div class="theme-default-dark">
+        <lwc-button></lwc-button>
+      </div>
+      <br /><br />
+
+      <div class="theme-geyser-dark">
+        <lwc-button></lwc-button>
+      </div>
+      <br /><br />
+
+      <div class="theme-orange-dark">
+        <lwc-button></lwc-button>
+      </div>
+    </div>
+    <h3>Icon only</h3>
     <lwc-button icon-only></lwc-button>
+
+    <h2>Modal Content</h2>
+    <div style="width: 448px">
+      <lwc-modal-content></lwc-modal-content>
+    </div>
 
     <h2>Connector List</h2>
     <lwc-connector-list></lwc-connector-list>

@@ -1,8 +1,8 @@
 import {createStore} from 'zustand/vanilla';
-import {Connector} from '../connectors/Connector';
 import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
 import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
+import {Connector} from '../connectors/Connector';
 
 interface PrivateStore {
   readonly connector: Connector | undefined;
@@ -49,11 +49,15 @@ const store = createStore<Store>((set) => ({
     try {
       const connector = new connectors[config.connectorType](config);
       await connector.init();
+      const balance = await connector.getBalance();
+      const alias = await connector.getAlias();
       privateStore.getState().setConfig(config);
       privateStore.getState().setConnector(connector);
       set({
         connected: true,
         connecting: false,
+        balance,
+        alias,
         connectorName: config.connectorName,
       });
       dispatchLwcEvent('lwc:connected');

@@ -2,7 +2,6 @@ import {customElement} from 'lit/decorators.js';
 import {LwcConnector} from './lwc-connector';
 import {albyIcon} from '../icons/albyIcon';
 import {webln} from '@getalby/sdk';
-import store from '../../state/store';
 
 @customElement('lwc-alby-nwc-connector')
 export class LwcAlbyNWCConnector extends LwcConnector {
@@ -23,9 +22,7 @@ export class LwcAlbyNWCConnector extends LwcConnector {
       name: 'Lightning Wallet Connect',
     });
 
-    store.getState().connect({
-      connectorName: this._title,
-      connectorType: this._connectorType,
+    this._connect({
       nwcUrl: nwc.getNostrWalletConnectUrl(true),
     });
   }

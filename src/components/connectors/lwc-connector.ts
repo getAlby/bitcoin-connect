@@ -2,8 +2,11 @@ import {TemplateResult, html} from 'lit';
 import {LwcElement} from '../lwc-element';
 import {withTwind} from '../twind/withTwind';
 import {ConnectorType} from '../../types/ConnectorType';
+import {color} from '../css/colors';
+import {ConnectorConfig} from '../../types/ConnectorConfig';
+import store from '../../state/store';
 
-export abstract class LwcConnector extends withTwind(LwcElement) {
+export abstract class LwcConnector extends withTwind()(LwcElement) {
   private _background: string;
   private _icon: TemplateResult<2>;
   protected _title: string;
@@ -33,7 +36,21 @@ export abstract class LwcConnector extends withTwind(LwcElement) {
       >
         ${this._icon}
       </div>
-      <span class="text-sm font-sans font-medium">${this._title}</span>
+      <span
+        class="text-sm font-sans font-medium"
+        style="color: ${color('text-secondary')}"
+        >${this._title}</span
+      >
     </div>`;
+  }
+
+  protected _connect(
+    config: Omit<ConnectorConfig, 'connectorName' | 'connectorType'>
+  ) {
+    store.getState().connect({
+      ...config,
+      connectorName: this._title,
+      connectorType: this._connectorType,
+    });
   }
 }

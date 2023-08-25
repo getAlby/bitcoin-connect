@@ -4,9 +4,11 @@ import './lwc-modal.js';
 import {LwcElement} from './lwc-element.js';
 import {lwcIcon} from './icons/lwcIcon.js';
 import {withTwind} from './twind/withTwind.js';
-import {loadingIcon} from './icons/loadingIcon.js';
+import {loadingIconPrimary} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
 import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
+import {color} from './css/colors';
+import {innerBorder} from './templates/innerBorder.js';
 
 /**
  * A button that when clicked launches the LWC modal.
@@ -14,7 +16,7 @@ import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
  * @csspart button - The button
  */
 @customElement('lwc-button')
-export class LwcButton extends withTwind(LwcElement) {
+export class LwcButton extends withTwind()(LwcElement) {
   @state()
   private _modalOpen = false;
 
@@ -55,56 +57,57 @@ export class LwcButton extends withTwind(LwcElement) {
           ? 'rounded-lg gap-2 justify-center items-center'
           : ''}"
         style="${this._connected && !iconOnly
-          ? `background: linear-gradient(180deg, #fff6 0%, #fff0 100%), linear-gradient(180deg, ${this.colorSecondary} 0%, ${this.colorSecondary} 100%);`
+          ? `background: linear-gradient(180deg, #fff6 0%, #fff0 100%), linear-gradient(180deg, ${color(
+              'bg-secondary'
+            )}, ${color('bg-secondary')} 100%)`
           : ''}"
         @click=${this._onClick}
       >
-        ${this._connected
-          ? html` <div
-              class="absolute top-0 left-0 w-full h-full rounded-lg border-2"
-              style="border-color: #fff2; pointer-events: none;"
-            ></div>`
-          : html``}
+        ${this._connected ? innerBorder() : null}
         <button
           part="button"
           class="${iconOnly ? 'w-8 h-8' : `h-10 px-4`} 
           relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
           ${this.disabled ? 'bg-gray-300 opacity-50' : ''}"
           style="${!this.disabled &&
-          `background: linear-gradient(180deg, ${this.colorGradient1} 0%, ${this.colorGradient2} 100%); color: ${this.colorPrimary};
+          `
+            background: linear-gradient(180deg, ${color(
+              'tertiary',
+              color('primary')
+            )} 0%, ${color('tertiary', color('secondary'))} 100%);
+            color: ${color('text-primary')};
           `}"
           ?disabled=${this.disabled}
         >
-          <div
-            class="absolute top-0 left-0 w-full h-full rounded-lg border-2"
-            style="border-color: #fff1;"
-          ></div>
+          ${innerBorder()}
           ${isLoading
-            ? loadingIcon
+            ? loadingIconPrimary
             : this._connected
             ? iconOnly
               ? lwcConnectedIcon
               : null
             : lwcIcon}
-          ${iconOnly
-            ? null
-            : isLoading
-            ? html`Connecting...`
-            : this._connected
-            ? html`${this._alias || 'Connected'}`
-            : html`Connect Wallet`}
+          ${!iconOnly
+            ? html`<span class="font-semibold">
+                ${isLoading
+                  ? html`Connecting...`
+                  : this._connected
+                  ? html`${this._alias || 'Connected'}`
+                  : html`Connect Wallet`}
+              </span>`
+            : null}
         </button>
         ${this._connected && !iconOnly && this._balance !== undefined
           ? html`<span
               class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5"
-              style="color: ${this.colorPrimary}"
+              style="color: ${color('text-tertiary')}"
               >${satIcon}<span class="font-mono">${this._balance}</span></span
             >`
-          : html``}
+          : null}
       </div>
       ${this._modalOpen
         ? html`<lwc-modal .onClose=${this._closeModal} />`
-        : html``}
+        : null}
     </div>`;
   }
 

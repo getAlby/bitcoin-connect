@@ -1,7 +1,6 @@
 import {customElement} from 'lit/decorators.js';
 import {LwcConnector} from './lwc-connector';
 import {puzzleIcon} from '../icons/puzzleIcon';
-import store from '../../state/store';
 
 @customElement('lwc-extension-connector')
 export class LwcExtensionConnector extends LwcConnector {
@@ -15,10 +14,7 @@ export class LwcExtensionConnector extends LwcConnector {
   }
 
   protected _onClick() {
-    store.getState().connect({
-      connectorName: this._title,
-      connectorType: this._connectorType,
-    });
+    this._connect({});
   }
 }
 

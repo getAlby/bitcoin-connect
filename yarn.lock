@@ -2376,10 +2376,10 @@
     portfinder "^1.0.32"
     source-map "^0.7.3"
 
-"@webbtc/webln-types@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@webbtc/webln-types/-/webln-types-1.0.12.tgz#ddb5f0dbaa0a853ef21a4f36a603199d43cc8682"
-  integrity sha512-uCsJt78RaW/UYDXwAjjs6aj7fiXyozwMknWvPROCaGMx+rXoPddtDjMIMbMFLvUJVQmnyzpqGkx/0jBIvVaVvA==
+"@webbtc/webln-types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@webbtc/webln-types/-/webln-types-2.0.0.tgz#d0fae5d2bf253a77dccbd37b2c9752292b798686"
+  integrity sha512-tLYbKHDHUugArcw1nyAOelpMhno4FrCAcHiNm6Fzt4c9EqVbGpP9HSE9v4tSiWP+5oExecZ9cdWCAarDL/qoLw==
 
 "@webcomponents/webcomponentsjs@^2.6.0":
   version "2.8.0"

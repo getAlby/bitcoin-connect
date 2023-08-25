@@ -12,7 +12,7 @@ import './connectors/lwc-nwc-connector.js';
  * @csspart connector-list
  */
 @customElement('lwc-connector-list')
-export class LwcConnectorList extends withTwind(LwcElement) {
+export class LwcConnectorList extends withTwind()(LwcElement) {
   override render() {
     return html` <div
       part="connector-list"
@@ -20,7 +20,7 @@ export class LwcConnectorList extends withTwind(LwcElement) {
     >
       ${window.webln
         ? html`<lwc-extension-connector></lwc-extension-connector>`
-        : html``}
+        : null}
       <lwc-alby-nwc-connector></lwc-alby-nwc-connector>
       <lwc-nwc-connector></lwc-nwc-connector>
     </div>`;

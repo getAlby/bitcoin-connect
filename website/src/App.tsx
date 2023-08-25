@@ -7,6 +7,7 @@ import phoneImageUrl from './assets/phone.png';
 import zappyBirdImageUrl from './assets/zappy-bird.png';
 import {ShowcaseCard} from './components/ShowcaseCard';
 import React from 'react';
+import {DarkModeToggle} from './components/DarkModeToggle';
 
 function App() {
   const isDarkMode = useAppStore((store) => store.isDarkMode);
@@ -124,7 +125,8 @@ function App() {
             <lwc-button />
           </div>
           <div className="flex gap-4 justify-center item theme p-2 rounded-lg shadow-xl bg-black bg-opacity-30">
-            {[0, 1].map((index) => (
+            <DarkModeToggle />
+            {[...new Array(4)].map((_, index) => (
               <div className={`theme-${index}`} key={index}>
                 <div
                   onClick={() => setThemeIndex(index)}
@@ -133,7 +135,7 @@ function App() {
                   }`}
                   style={{
                     background:
-                      'linear-gradient(180deg, var(--lwc-color-gradient-1) 0%, var(--lwc-color-gradient-2) 100%)',
+                      'linear-gradient(180deg, var(--lwc-color-primary) 0%, var(--lwc-color-secondary) 100%)',
                   }}
                 />
               </div>
@@ -159,6 +161,17 @@ function App() {
               'https://make-me-an-image-lwc-version.rolznz.repl.co/profile.png'
             }
           />
+        </div>
+
+        <h2 className="text-primary text-2xl mt-8 text-center">
+          Supported Wallets
+        </h2>
+        <div className="flex flex-wrap gap-4">
+          <p>Alby Extension</p>
+          <p>Alby NWC</p>
+          <p>Alby NWC (Umbrel)</p>
+          <p>NWC (Generic)</p>
+          <p>WebLN Browser Extension (Generic)</p>
         </div>
 
         <p>
