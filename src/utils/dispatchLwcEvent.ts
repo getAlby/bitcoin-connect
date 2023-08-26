@@ -1,11 +1,6 @@
-export function dispatchLwcEvent(
-  type:
-    | 'lwc:connected'
-    | 'lwc:connecting'
-    | 'lwc:disconnected'
-    | 'lwc:modalopened'
-    | 'lwc:modalclosed'
-) {
+import {LwcEventType} from '../types/LwcEventType';
+
+export function dispatchLwcEvent(type: LwcEventType) {
   const event = new Event(type, {bubbles: true, composed: true});
   window.dispatchEvent(event);
 }
