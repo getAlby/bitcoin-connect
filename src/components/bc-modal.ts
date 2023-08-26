@@ -1,16 +1,19 @@
 import {html} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
-import {LwcElement} from './lwc-element';
-import './lwc-modal-content.js';
+import {BitcoinConnectElement} from './BitcoinConnectElement';
+import './bc-modal-content.js';
 import store from '../state/store';
-import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
+import {dispatchEvent} from '../utils/dispatchEvent';
 import {color} from './css/colors';
 import {crossIcon} from './icons/crossIcon';
 import {bcLogo} from './icons/bcLogo';
 import {withTwind} from './twind/withTwind';
 
-@customElement('lwc-modal')
-export class LwcModal extends withTwind()(LwcElement) {
+/**
+ * The modal allows the user to view a list of connectors, connect and disconnect.
+ */
+@customElement('bc-modal')
+export class Modal extends withTwind()(BitcoinConnectElement) {
   /**
    * Called when modal is closed
    */
@@ -35,17 +38,16 @@ export class LwcModal extends withTwind()(LwcElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    dispatchLwcEvent('lwc:modalopened');
+    dispatchEvent('bc:modalopened');
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
-    dispatchLwcEvent('lwc:modalclosed');
+    dispatchEvent('bc:modalclosed');
   }
 
   override render() {
     return html` <div
-      part="modal"
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
     >
       <div
@@ -67,7 +69,7 @@ export class LwcModal extends withTwind()(LwcElement) {
           </div>
           ${bcLogo}
         </div>
-        <lwc-modal-content class="flex w-full"></lwc-modal-content>
+        <bc-modal-content class="flex w-full"></bc-modal-content>
       </div>
     </div>`;
   }
@@ -80,6 +82,6 @@ export class LwcModal extends withTwind()(LwcElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'lwc-modal': LwcModal;
+    'bc-modal': Modal;
   }
 }

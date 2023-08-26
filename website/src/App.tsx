@@ -1,7 +1,7 @@
 import {ChevronRightIcon} from '@heroicons/react/24/solid';
 import {useAppStore} from './AppStore';
 import {Header} from './components/Header';
-import '@getalby/lightning-wallet-connect';
+import '@getalby/bitcoin-connect';
 import desktopImageUrl from './assets/monitor.png';
 import phoneImageUrl from './assets/phone.png';
 import zappyBirdImageUrl from './assets/zappy-bird.png';
@@ -52,7 +52,7 @@ function App() {
               >
                 <source
                   type="video/mp4"
-                  src="/lightning-wallet-connect/demo-mobile.mp4"
+                  src="/bitcoin-connect/demo-mobile.mp4"
                 />
               </video>
             </div>
@@ -71,10 +71,7 @@ function App() {
                 className="absolute top-0 left-0 w-full h-full translate-y-[-7%]"
                 // onLoadedData={() => setVideoLoaded(true)}
               >
-                <source
-                  type="video/mp4"
-                  src="/lightning-wallet-connect/demo.mp4"
-                />
+                <source type="video/mp4" src="/bitcoin-connect/demo.mp4" />
               </video>
             </div>
           </div>
@@ -96,7 +93,7 @@ function App() {
         </p>
         <a
           className="self-start"
-          href="https://github.com/getAlby/lightning-wallet-connect"
+          href="https://github.com/getAlby/bitcoin-connect"
           target="_blank"
         >
           <button className="btn">
@@ -122,7 +119,7 @@ function App() {
             className={`flex-1 flex justify-center items-center theme-${themeIndex}`}
           >
             {/* @ts-ignore */}
-            <lwc-button />
+            <bc-button />
           </div>
           <div className="flex gap-4 justify-center item theme p-2 rounded-lg shadow-xl bg-black bg-opacity-30">
             <DarkModeToggle />
@@ -135,7 +132,7 @@ function App() {
                   }`}
                   style={{
                     background:
-                      'linear-gradient(180deg, var(--lwc-color-primary) 0%, var(--lwc-color-secondary) 100%)',
+                      'linear-gradient(180deg, var(--bc-color-primary) 0%, var(--bc-color-secondary) 100%)',
                   }}
                 />
               </div>
@@ -156,9 +153,9 @@ function App() {
           />
           <ShowcaseCard
             title="Make me an Image"
-            url="https://make-me-an-image-lwc-version.rolznz.repl.co/"
+            url="https://make-me-an-image-bc-version.rolznz.repl.co/"
             imageUrl={
-              'https://make-me-an-image-lwc-version.rolznz.repl.co/profile.png'
+              'https://make-me-an-image-bc-version.rolznz.repl.co/profile.png'
             }
           />
         </div>

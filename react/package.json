@@ -21,7 +21,7 @@
     "build": "microbundle --globals react=React --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react"
   },
   "dependencies": {
-    "@getalby/lightning-wallet-connect": "^1.0.14"
+    "@getalby/bitcoin-connect": "^1.0.14"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",

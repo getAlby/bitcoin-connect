@@ -1,10 +1,10 @@
 import {customElement} from 'lit/decorators.js';
-import {LwcConnector} from './lwc-connector';
 import {albyIcon} from '../icons/albyIcon';
 import {webln} from '@getalby/sdk';
+import {ConnectorElement} from './ConnectorElement';
 
-@customElement('lwc-alby-nwc-connector')
-export class LwcAlbyNWCConnector extends LwcConnector {
+@customElement('bc-alby-nwc-connector')
+export class AlbyNWCConnector extends ConnectorElement {
   constructor() {
     super(
       'nwc.alby',
@@ -19,7 +19,7 @@ export class LwcAlbyNWCConnector extends LwcConnector {
 
     await nwc.initNWC({
       // TODO: pass to component
-      name: 'Lightning Wallet Connect',
+      name: 'Bitcoin Connect',
     });
 
     this._connect({
@@ -30,6 +30,6 @@ export class LwcAlbyNWCConnector extends LwcConnector {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'lwc-alby-nwc-connector': LwcAlbyNWCConnector;
+    'bc-alby-nwc-connector': AlbyNWCConnector;
   }
 }

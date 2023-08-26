@@ -14,7 +14,7 @@ function App() {
         (
           await ln.requestInvoice({
             satoshi: 1,
-            comment: 'Paid with LWC',
+            comment: 'Paid with Bitcoin Connect',
           })
         ).paymentRequest
       );
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-      <h1>LWC React</h1>
+      <h1>Bitcoin Connect React</h1>
       <Button onConnect={() => alert('Connected!')} />
       <div style={{marginTop: '16px'}}>
         {preimage ? (
