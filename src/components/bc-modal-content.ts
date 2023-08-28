@@ -1,7 +1,7 @@
 import {html} from 'lit';
 import {customElement} from 'lit/decorators.js';
-import {LwcElement} from './lwc-element';
-import './lwc-connector-list.js';
+import {BitcoinConnectElement} from './BitcoinConnectElement';
+import './bc-connector-list.js';
 import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {loadingIconSecondary} from './icons/loadingIcon';
@@ -10,13 +10,10 @@ import {color} from './css/colors';
 import {gradientText} from './css/gradientText';
 
 // TODO: split up this component into disconnected and connected
-@customElement('lwc-modal-content')
-export class LwcModalContent extends withTwind()(LwcElement) {
+@customElement('bc-modal-content')
+export class ModalContent extends withTwind()(BitcoinConnectElement) {
   override render() {
-    return html`<div
-      part="modal-content"
-      class="flex flex-col justify-center items-center w-full"
-    >
+    return html`<div class="flex flex-col justify-center items-center w-full">
       ${this._connecting
         ? html`<div class="py-32">${loadingIconSecondary}</div>`
         : this._connected
@@ -77,7 +74,7 @@ export class LwcModalContent extends withTwind()(LwcElement) {
               How would you like to connect?
             </h1>
 
-            <lwc-connector-list />
+            <bc-connector-list />
           `}
     </div>`;
   }
@@ -89,6 +86,6 @@ export class LwcModalContent extends withTwind()(LwcElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'lwc-modal-content': LwcModalContent;
+    'bc-modal-content': ModalContent;
   }
 }

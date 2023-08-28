@@ -1,22 +1,20 @@
 import {html} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
-import './lwc-modal.js';
-import {LwcElement} from './lwc-element.js';
-import {lwcIcon} from './icons/lwcIcon.js';
+import './bc-modal.js';
+import {BitcoinConnectElement} from './BitcoinConnectElement.js';
+import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
 import {loadingIconPrimary} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
-import {lwcConnectedIcon} from './icons/lwcConnectedIcon.js';
-import {color} from './css/colors';
+import {bcConnectedIcon} from './icons/bcConnectedIcon.js';
+import {color} from './css/colors.js';
 import {innerBorder} from './templates/innerBorder.js';
 
 /**
- * A button that when clicked launches the LWC modal.
- *
- * @csspart button - The button
+ * A button that when clicked launches the modal.
  */
-@customElement('lwc-button')
-export class LwcButton extends withTwind()(LwcElement) {
+@customElement('bc-button')
+export class Button extends withTwind()(BitcoinConnectElement) {
   @state()
   private _modalOpen = false;
 
@@ -65,7 +63,6 @@ export class LwcButton extends withTwind()(LwcElement) {
       >
         ${this._connected ? innerBorder() : null}
         <button
-          part="button"
           class="${iconOnly ? 'w-8 h-8' : `h-10 px-4`} 
           relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
           ${this.disabled ? 'bg-gray-300 opacity-50' : ''}"
@@ -84,9 +81,9 @@ export class LwcButton extends withTwind()(LwcElement) {
             ? loadingIconPrimary
             : this._connected
             ? iconOnly
-              ? lwcConnectedIcon
+              ? bcConnectedIcon
               : null
-            : lwcIcon}
+            : bcIcon}
           ${!iconOnly
             ? html`<span class="font-semibold">
                 ${isLoading
@@ -106,7 +103,7 @@ export class LwcButton extends withTwind()(LwcElement) {
           : null}
       </div>
       ${this._modalOpen
-        ? html`<lwc-modal .onClose=${this._closeModal} />`
+        ? html`<bc-modal .onClose=${this._closeModal} />`
         : null}
     </div>`;
   }
@@ -122,6 +119,6 @@ export class LwcButton extends withTwind()(LwcElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'lwc-button': LwcButton;
+    'bc-button': Button;
   }
 }

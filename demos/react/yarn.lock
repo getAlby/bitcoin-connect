@@ -149,13 +149,29 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.46.0.tgz#3f7802972e8b6fe3f88ed1aabc74ec596c456db6"
   integrity sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==
 
-"@getalby/lightning-wallet-connect@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@getalby/lightning-wallet-connect/-/lightning-wallet-connect-1.0.0.tgz#14a9dcfc10fdd78584096beaca69657fa1a9f3b9"
-  integrity sha512-4YXf/08WoB8cqjiXTXRKItsHo3P0MUTgq1eqUM2ECZHqI/t3htVvmOBdeSd41cDk3XbBObGxLuBlgF35j8j45g==
+"@getalby/bitcoin-connect-react@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-1.0.1.tgz#f45f0f6f3e6a971b630df8e748a9fc12c1e47988"
+  integrity sha512-XNl1/ts62fvzCxKnMcETlCif861CP2kc2+w74GTGHpZDLIqSJmWO9WtGAzEi5C0s14//gGEzeuJc7Uvks2fsNw==
   dependencies:
-    alby-js-sdk "^2.1.0"
+    "@getalby/bitcoin-connect" "^1.0.0"
+
+"@getalby/bitcoin-connect@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-1.0.0.tgz#295471a408854cc8186225739d0637df19fca2d6"
+  integrity sha512-O40SvuQpf8cD5MblYwO8DcyC2P5ynMGhRksRB/wyhd4qemQQaiaFczfxwOOlvmUcEJKSdGJ8bYY1HaTOU54O5A==
+  dependencies:
+    "@getalby/sdk" "^2.2.3"
     lit "^2.2.4"
+    zustand "^4.4.1"
+
+"@getalby/sdk@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.2.3.tgz#fda6de0bc241b59e7ed813204067c4d14b794668"
+  integrity sha512-8NvzGtpyne8EmRlCcg/sF3kUZWeHRXqZwS1HNuP1ytNNfmKFUZpo3GOauwzEpFFmaD+Fht5bjT3Y/XLk0QtFSw==
+  dependencies:
+    crypto-js "^4.1.1"
+    nostr-tools "1.13.1"
 
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
@@ -195,10 +211,15 @@
   dependencies:
     "@noble/hashes" "1.3.1"
 
-"@noble/hashes@1.3.1", "@noble/hashes@~1.3.0", "@noble/hashes@~1.3.1":
+"@noble/hashes@1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.1.tgz#8831ef002114670c603c458ab8b11328406953a9"
   integrity sha512-EbqwksQwz9xDRGfDST86whPBgM65E0OH/pCgqW0GBVzO22bNE+NuIbeTb714+IfSjU3aRk47EUvXIb5bTsenKA==
+
+"@noble/hashes@~1.3.0", "@noble/hashes@~1.3.1":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.2.tgz#6f26dbc8fbc7205873ce3cee2f690eba0d421b39"
+  integrity sha512-MVC8EAQp7MvEcm30KWENFjgR+Mkmf+D189XJTkFIlwohU5hcBbn1ZkKq7KVTi2Hme3PMGF390DaL52beVrIihQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -221,10 +242,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@scure/base@1.1.1", "@scure/base@~1.1.0":
+"@scure/base@1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.1.tgz#ebb651ee52ff84f420097055f4bf46cfba403938"
   integrity sha512-ZxOhsSyxYwLJj3pLZCefNitxsj093tb2vq90mp2txoYeBqbcjDjqFhyM8eUjq/uFm6zJ+mUuqxlS2FkuSY1MTA==
+
+"@scure/base@~1.1.0":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.2.tgz#ff0cf51874aaf176490c9cb46e4df807a2e581d2"
+  integrity sha512-sSCrnIdaUZQHhBxZThMuk7Wm1TWzMD3uJNdGgx3JS23xSqevu0tAOsg8k66nL3R2NwQe65AI9GgqpPOgZys/eA==
 
 "@scure/bip32@1.3.1":
   version "1.3.1"
@@ -467,14 +493,6 @@ ajv@^6.12.4:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
-
-alby-js-sdk@^2.1.0:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/alby-js-sdk/-/alby-js-sdk-2.1.3.tgz#588f16da20911cc8328110bfea0d0305c316afee"
-  integrity sha512-FO5ng7C+VQqYyxZ9D89HNbQg0w4yAxLeG6zHQNwPwOawTM0wGMMxWlIeUB/su0WtLNyygO00mwIqlfBtFcvEMg==
-  dependencies:
-    crypto-js "^4.1.1"
-    nostr-tools "1.13.1"
 
 alby-tools@^3.2.1:
   version "3.2.1"
@@ -1299,6 +1317,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-sync-external-store@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
 vite@^4.4.5:
   version "4.4.8"
   resolved "https://registry.yarnpkg.com/vite/-/vite-4.4.8.tgz#31e4a438f8748695c68bd57ffd262ba93540fdf7"
@@ -1331,3 +1354,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zustand@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.1.tgz#0cd3a3e4756f21811bd956418fdc686877e8b3b0"
+  integrity sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==
+  dependencies:
+    use-sync-external-store "1.2.0"

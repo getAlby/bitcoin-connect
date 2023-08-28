@@ -3,23 +3,23 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>LWC Development</title>
-    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-wallet-connect@1.0.5/dist/index.browser.js"></script>
+    <title>Bitcoin Connect</title>
+    <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.0.0/dist/index.browser.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div style="display: flex; flex-direction: column; gap: 1rem">
-      <code> &lt;lwc-button /&gt; </code>
-      <lwc-button></lwc-button>
-      <code> &lt;lwc-button disabled /&gt; </code>
-      <lwc-button disabled></lwc-button>
-      <code> &lt;lwc-button icon-only/&gt; </code>
-      <lwc-button icon-only></lwc-button>
-      <code> &lt;lwc-connector-list/&gt; </code>
-      <lwc-connector-list></lwc-connector-list>
+      <code> &lt;bc-button /&gt; </code>
+      <bc-button></bc-button>
+      <code> &lt;bc-button disabled /&gt; </code>
+      <bc-button disabled></bc-button>
+      <code> &lt;bc-button icon-only/&gt; </code>
+      <bc-button icon-only></bc-button>
+      <code> &lt;bc-connector-list/&gt; </code>
+      <bc-connector-list></bc-connector-list>
     </div>
     <script>
-      window.addEventListener('lwc:connected', async () => {
+      window.addEventListener('bc:connected', async () => {
         alert('connected');
       });
     </script>

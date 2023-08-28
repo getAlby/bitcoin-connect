@@ -4,9 +4,9 @@ import {state} from 'lit/decorators.js';
 import store from '../state/store';
 
 /**
- * @fires lwc:connected - Indicates a wallet has been connected and window.webln is now available and enabled
+ * @fires bc:connected - Indicates a wallet has been connected and window.webln is now available and enabled
  */
-export class LwcElement extends LitElement {
+export class BitcoinConnectElement extends LitElement {
   @state()
   protected _connected = false;
   @state()

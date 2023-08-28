@@ -6,19 +6,19 @@
     <title>Vite + Lit + TS</title>
     <script type="module" src="../../src/index.ts"></script>
     <script>
-      window.addEventListener('lwc:connected', () =>
+      window.addEventListener('bc:connected', () =>
         console.info('Received connected event from html')
       );
-      window.addEventListener('lwc:connecting', () =>
+      window.addEventListener('bc:connecting', () =>
         console.info('Received connecting event from html')
       );
-      window.addEventListener('lwc:disconnected', () =>
+      window.addEventListener('bc:disconnected', () =>
         console.info('Received disconnected event from html')
       );
-      window.addEventListener('lwc:modalopened', () =>
+      window.addEventListener('bc:modalopened', () =>
         console.info('Received modalopened event from html')
       );
-      window.addEventListener('lwc:modalclosed', () =>
+      window.addEventListener('bc:modalclosed', () =>
         console.info('Received modalclosed event from html')
       );
     </script>
@@ -27,36 +27,36 @@
         font-family: Arial, Helvetica, sans-serif;
       }
       .theme-default-dark {
-        --lwc-color-bg-primary: #222;
-        --lwc-color-bg-secondary: #000;
-        --lwc-color-text-secondary: #808080;
+        --bc-color-bg-primary: #222;
+        --bc-color-bg-secondary: #000;
+        --bc-color-text-secondary: #808080;
       }
       .theme-geyser-light {
-        --lwc-color-primary: #10caa8;
-        --lwc-color-secondary: #10caa8;
-        --lwc-color-tertiary: #21ecc7;
-        --lwc-color-bg-primary: white;
-        --lwc-color-bg-secondary: black;
-        --lwc-color-text-primary: black;
-        --lwc-color-text-secondary: #1a202c;
-        --lwc-color-text-tertiary: white;
+        --bc-color-primary: #10caa8;
+        --bc-color-secondary: #10caa8;
+        --bc-color-tertiary: #21ecc7;
+        --bc-color-bg-primary: white;
+        --bc-color-bg-secondary: black;
+        --bc-color-text-primary: black;
+        --bc-color-text-secondary: #1a202c;
+        --bc-color-text-tertiary: white;
       }
       .theme-geyser-dark {
-        --lwc-color-primary: #21ecc7;
-        --lwc-color-secondary: #21ecc7;
-        --lwc-color-bg-primary: black;
-        --lwc-color-bg-secondary: black;
-        --lwc-color-text-primary: black;
-        --lwc-color-text-secondary: #f4f4f4;
-        --lwc-color-text-tertiary: white;
+        --bc-color-primary: #21ecc7;
+        --bc-color-secondary: #21ecc7;
+        --bc-color-bg-primary: black;
+        --bc-color-bg-secondary: black;
+        --bc-color-text-primary: black;
+        --bc-color-text-secondary: #f4f4f4;
+        --bc-color-text-tertiary: white;
       }
       .theme-orange-dark {
-        --lwc-color-primary: #ffc837;
-        --lwc-color-secondary: #ff8008;
-        --lwc-color-bg-primary: black;
-        --lwc-color-bg-secondary: black;
-        --lwc-color-text-primary: black;
-        --lwc-color-text-secondary: #ca9;
+        --bc-color-primary: #ffc837;
+        --bc-color-secondary: #ff8008;
+        --bc-color-bg-primary: black;
+        --bc-color-bg-secondary: black;
+        --bc-color-text-primary: black;
+        --bc-color-text-secondary: #ca9;
       }
     </style>
   </head>
@@ -64,36 +64,36 @@
     <h1>Components</h1>
     <h2>Button</h2>
     <h3>Light</h3>
-    <lwc-button></lwc-button><br /><br />
+    <bc-button></bc-button><br /><br />
     <div class="theme-geyser-light">
-      <lwc-button></lwc-button>
+      <bc-button></bc-button>
     </div>
     <br /><br />
     <h3>Dark</h3>
     <div style="background-color: #111; padding: 8px">
       <div class="theme-default-dark">
-        <lwc-button></lwc-button>
+        <bc-button></bc-button>
       </div>
       <br /><br />
 
       <div class="theme-geyser-dark">
-        <lwc-button></lwc-button>
+        <bc-button></bc-button>
       </div>
       <br /><br />
 
       <div class="theme-orange-dark">
-        <lwc-button></lwc-button>
+        <bc-button></bc-button>
       </div>
     </div>
     <h3>Icon only</h3>
-    <lwc-button icon-only></lwc-button>
+    <bc-button icon-only></bc-button>
 
     <h2>Modal Content</h2>
     <div style="width: 448px">
-      <lwc-modal-content></lwc-modal-content>
+      <bc-modal-content></bc-modal-content>
     </div>
 
     <h2>Connector List</h2>
-    <lwc-connector-list></lwc-connector-list>
+    <bc-connector-list></bc-connector-list>
   </body>
 </html>

@@ -1,6 +1,6 @@
 # demos/react
 
-A simple example of how to add Lightning Wallet Connect to your react app
+A simple example of how to add Bitcoin Connect to your react app
 
 ## Install
 

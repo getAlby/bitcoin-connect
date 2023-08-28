@@ -1,4 +1,4 @@
-const prefix = 'lwc-color-';
+const prefix = 'bc-color-';
 
 const colors = {
   primary: '#2EA7FF',
