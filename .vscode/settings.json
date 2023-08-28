@@ -1,6 +1,7 @@
 {
   "files.exclude": {
-    "dist": true
+    "dist": true,
+    "react/dist": true
   },
   "editor.formatOnSave": true,
   "tailwindCSS.experimental.configFile": {

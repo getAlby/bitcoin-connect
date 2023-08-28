@@ -1,4 +1,4 @@
-import '@getalby/lightning-wallet-connect';
+import '@getalby/bitcoin-connect';
 import {BCLogo} from '../icons/BCLogo';
 import {DarkModeToggle} from './DarkModeToggle';
 
@@ -11,7 +11,7 @@ export function Header() {
       </div>
       <div className="flex justify-end items-center gap-4">
         {/* @ts-ignore */}
-        <lwc-button />
+        <bc-button />
         <DarkModeToggle />
       </div>
     </div>

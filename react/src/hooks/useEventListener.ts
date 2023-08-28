@@ -1,8 +1,8 @@
-import {LwcEventType} from '@getalby/lightning-wallet-connect';
+import {EventType} from '@getalby/bitcoin-connect';
 import React from 'react';
 
 export function useEventListener(
-  event: LwcEventType,
+  event: EventType,
   func: (() => void) | undefined
 ) {
   React.useEffect(() => {

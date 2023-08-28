@@ -2,9 +2,9 @@ import {ComponentProps} from '../types/ComponentProps';
 import {useEventListener} from './useEventListener';
 
 export function useCoreEvents(props: ComponentProps) {
-  useEventListener('lwc:connected', props.onConnect);
-  useEventListener('lwc:disconnected', props.onDisconnect);
-  useEventListener('lwc:connecting', props.onConnecting);
-  useEventListener('lwc:modalopened', props.onModalOpened);
-  useEventListener('lwc:modalclosed', props.onModalClosed);
+  useEventListener('bc:connected', props.onConnect);
+  useEventListener('bc:disconnected', props.onDisconnect);
+  useEventListener('bc:connecting', props.onConnecting);
+  useEventListener('bc:modalopened', props.onModalOpened);
+  useEventListener('bc:modalclosed', props.onModalClosed);
 }

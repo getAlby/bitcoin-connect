@@ -1,5 +1,5 @@
 import React from 'react';
-import '@getalby/lightning-wallet-connect';
+import '@getalby/bitcoin-connect';
 import {ComponentProps} from '../types/ComponentProps';
 import {useCoreEvents} from '../hooks/useCoreEvents';
 
@@ -10,5 +10,5 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <lwc-modal />;
+  return <bc-modal />;
 };

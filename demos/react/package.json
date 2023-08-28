@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@getalby/bitcoin-connect-react": "^1.0.0",
+    "@getalby/bitcoin-connect-react": "^1.0.1",
     "alby-tools": "^3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

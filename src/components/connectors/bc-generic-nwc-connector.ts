@@ -1,9 +1,9 @@
 import {customElement} from 'lit/decorators.js';
-import {LwcConnector} from './lwc-connector';
 import {nwcIcon} from '../icons/nwcIcon';
+import {ConnectorElement} from './ConnectorElement';
 
-@customElement('lwc-nwc-connector')
-export class LwcGenericNWCConnector extends LwcConnector {
+@customElement('bc-nwc-connector')
+export class GenericNWCConnector extends ConnectorElement {
   constructor() {
     super('nwc.generic', 'NWC Generic', '#7E22CD', nwcIcon);
   }
@@ -23,6 +23,6 @@ export class LwcGenericNWCConnector extends LwcConnector {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'lwc-nwc-connector': LwcGenericNWCConnector;
+    'bc-nwc-connector': GenericNWCConnector;
   }
 }

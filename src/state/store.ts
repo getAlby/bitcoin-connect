@@ -1,7 +1,7 @@
 import {createStore} from 'zustand/vanilla';
 import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
-import {dispatchLwcEvent} from '../utils/dispatchLwcEvent';
+import {dispatchEvent} from '../utils/dispatchEvent';
 import {Connector} from '../connectors/Connector';
 
 interface PrivateStore {
@@ -42,7 +42,7 @@ const store = createStore<Store>((set) => ({
   balance: undefined,
   connectorName: undefined,
   connect: async (config: ConnectorConfig) => {
-    dispatchLwcEvent('lwc:connecting');
+    dispatchEvent('bc:connecting');
     set({
       connecting: true,
     });
@@ -60,7 +60,7 @@ const store = createStore<Store>((set) => ({
         alias,
         connectorName: config.connectorName,
       });
-      dispatchLwcEvent('lwc:connected');
+      dispatchEvent('bc:connected');
     } catch (error) {
       console.error(error);
       set({
@@ -79,7 +79,7 @@ const store = createStore<Store>((set) => ({
       connectorName: undefined,
     });
     deleteConfig();
-    dispatchLwcEvent('lwc:disconnected');
+    dispatchEvent('bc:disconnected');
   },
   setAlias: (alias) => {
     set({alias});
@@ -93,15 +93,15 @@ const store = createStore<Store>((set) => ({
 export default store;
 
 function deleteConfig() {
-  window.localStorage.removeItem('lwc:config');
+  window.localStorage.removeItem('bc:config');
 }
 
 function saveConfig(config: ConnectorConfig) {
-  window.localStorage.setItem('lwc:config', JSON.stringify(config));
+  window.localStorage.setItem('bc:config', JSON.stringify(config));
 }
 
 function loadConfig() {
-  const configJson = window.localStorage.getItem('lwc:config');
+  const configJson = window.localStorage.getItem('bc:config');
   if (configJson) {
     const config = JSON.parse(configJson) as ConnectorConfig;
     store.getState().connect(config);

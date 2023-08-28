@@ -1,9 +1,9 @@
 import {customElement} from 'lit/decorators.js';
-import {LwcConnector} from './lwc-connector';
 import {puzzleIcon} from '../icons/puzzleIcon';
+import {ConnectorElement} from './ConnectorElement';
 
-@customElement('lwc-extension-connector')
-export class LwcExtensionConnector extends LwcConnector {
+@customElement('bc-extension-connector')
+export class ExtensionConnector extends ConnectorElement {
   constructor() {
     super(
       'extension.generic',
@@ -20,6 +20,6 @@ export class LwcExtensionConnector extends LwcConnector {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'lwc-extension-connector': LwcExtensionConnector;
+    'bc-extension-connector': ExtensionConnector;
   }
 }
