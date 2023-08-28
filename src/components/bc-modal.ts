@@ -8,6 +8,7 @@ import {color} from './css/colors';
 import {crossIcon} from './icons/crossIcon';
 import {bcLogo} from './icons/bcLogo';
 import {withTwind} from './twind/withTwind';
+import {helpIcon} from './icons/helpIcon';
 
 /**
  * The modal allows the user to view a list of connectors, connect and disconnect.
@@ -63,6 +64,12 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       >
         <div class="flex justify-center items-center gap-2 w-full relative">
           <div class="absolute right-0 h-full flex items-center justify-center">
+            <div
+              class="cursor-pointer"
+              @click=${() => store.getState().setPath('/help')}
+            >
+              ${helpIcon}
+            </div>
             <div class="cursor-pointer" @click=${this._handleClose}>
               ${crossIcon}
             </div>
@@ -77,6 +84,8 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   private _handleClose() {
     this._closing = true;
     setTimeout(() => this.onClose?.(), 750);
+    // Reset after close
+    store.getState().setPath('/start');
   }
 }
 
