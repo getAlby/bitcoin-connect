@@ -1,20 +1,10 @@
-import '@getalby/lightning-wallet-connect';
 import React from 'react';
 import {LightningAddress} from 'alby-tools';
+import {Button} from '@getalby/bitcoin-connect-react';
 
 function App() {
   const [invoice, setInvoice] = React.useState<string | undefined>(undefined);
   const [preimage, setPreimage] = React.useState<string | undefined>(undefined);
-  const [lwcConnected, setLwcConnected] = React.useState(false);
-
-  React.useEffect(() => {
-    const onConnected = () => setLwcConnected(true);
-    window.addEventListener('lwc:connected', onConnected);
-
-    return () => {
-      window.removeEventListener('lwc:connected', onConnected);
-    };
-  }, []);
 
   React.useEffect(() => {
     (async () => {
@@ -32,39 +22,39 @@ function App() {
   }, []);
 
   async function payInvoice() {
-    if (!invoice) {
-      throw new Error('No invoice available');
-    }
-    const result = await window.webln?.sendPayment(invoice);
-    setPreimage(result?.preimage);
-    if (!result?.preimage) {
-      alert('Payment failed. Please try again');
+    try {
+      if (!window.webln || !window.webln) {
+        throw new Error('Please connect your wallet');
+      }
+      if (!invoice) {
+        throw new Error('No invoice available');
+      }
+      const result = await window.webln.sendPayment(invoice);
+      setPreimage(result?.preimage);
+      if (!result?.preimage) {
+        throw new Error('Payment failed. Please try again');
+      }
+    } catch (error) {
+      alert(error);
     }
   }
 
   return (
     <>
-      <h1>Vite + React</h1>
-      {lwcConnected ? (
-        <>
-          {preimage ? (
-            <p>
-              Paid! ✅<br />
-              <span style={{fontSize: '10px'}}>Preimage: {preimage}</span>
-            </p>
-          ) : invoice ? (
-            <button onClick={payInvoice}>Pay 1 sat to hello@getalby.com</button>
-          ) : (
-            <p>Loading invoice...</p>
-          )}
-        </>
-      ) : (
-        <>
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-ignore */}
-          <lwc-button />
-        </>
-      )}
+      <h1>LWC React</h1>
+      <Button onConnect={() => alert('Connected!')} />
+      <div style={{marginTop: '16px'}}>
+        {preimage ? (
+          <p>
+            Paid! ✅<br />
+            <span style={{fontSize: '10px'}}>Preimage: {preimage}</span>
+          </p>
+        ) : invoice ? (
+          <button onClick={payInvoice}>Pay 1 sat to hello@getalby.com</button>
+        ) : (
+          <p>Loading invoice...</p>
+        )}
+      </div>
     </>
   );
 }
