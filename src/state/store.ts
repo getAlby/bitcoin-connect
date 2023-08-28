@@ -24,7 +24,7 @@ const privateStore = createStore<PrivateStore>((set) => ({
 }));
 
 interface Store {
-  readonly path: Route;
+  readonly route: Route;
   readonly connected: boolean;
   readonly connecting: boolean;
   readonly alias: string | undefined;
@@ -35,11 +35,11 @@ interface Store {
   disconnect(): void;
   setAlias(alias: string | undefined): void;
   setBalance(balance: number | undefined): void;
-  setRoute(path: Route): void;
+  setRoute(route: Route): void;
 }
 
 const store = createStore<Store>((set) => ({
-  path: '/start',
+  route: '/start',
   connected: false,
   connecting: false,
   alias: undefined,
@@ -92,8 +92,8 @@ const store = createStore<Store>((set) => ({
     set({balance});
   },
   getConnectorName: () => privateStore.getState().config?.connectorName,
-  setRoute: (path: Route) => {
-    set({path});
+  setRoute: (route: Route) => {
+    set({route: route});
   },
 }));
 

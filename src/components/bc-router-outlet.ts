@@ -10,20 +10,20 @@ import {Route, routes} from './routes';
 @customElement('bc-router-outlet')
 export class RouterOutlet extends withTwind()(BitcoinConnectElement) {
   @state()
-  protected _path: Route;
+  protected _route: Route;
 
   constructor() {
     super();
-    this._path = store.getState().path;
+    this._route = store.getState().route;
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
-      this._path = store.path;
+      this._route = store.route;
     });
   }
 
   override render() {
-    return html`${routes[this._path]}`;
+    return html`${routes[this._route]}`;
   }
 }
 
