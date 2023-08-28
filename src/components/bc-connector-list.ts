@@ -2,9 +2,7 @@ import {html} from 'lit';
 import {withTwind} from './twind/withTwind.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {customElement} from 'lit/decorators.js';
-import './connectors/bc-extension-connector.js';
-import './connectors/bc-alby-nwc-connector.js';
-import './connectors/bc-nwc-connector.js';
+import './connectors/index.js';
 
 /**
  * A list of available connectors
