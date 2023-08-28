@@ -45,7 +45,7 @@ export class LwcModalContent extends withTwind()(LwcElement) {
             >${this._balance || 0}</span>&nbsp;sats
           </h2>
 
-          <hr class="border border-neutral-200 w-full mb-4"></div>
+          <hr class="border-t border-neutral-200 w-full mb-4"></div>
 
           <span class="font-sans text-xs mb-4" style="color: ${color(
             'text-secondary'
