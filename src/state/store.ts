@@ -3,7 +3,7 @@ import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
 import {dispatchEvent} from '../utils/dispatchEvent';
 import {Connector} from '../connectors/Connector';
-import {Path as Path} from '../components/paths';
+import {Route as Route} from '../components/routes';
 
 interface PrivateStore {
   readonly connector: Connector | undefined;
@@ -24,7 +24,7 @@ const privateStore = createStore<PrivateStore>((set) => ({
 }));
 
 interface Store {
-  readonly path: Path;
+  readonly path: Route;
   readonly connected: boolean;
   readonly connecting: boolean;
   readonly alias: string | undefined;
@@ -35,7 +35,7 @@ interface Store {
   disconnect(): void;
   setAlias(alias: string | undefined): void;
   setBalance(balance: number | undefined): void;
-  setPath(path: Path): void;
+  setRoute(path: Route): void;
 }
 
 const store = createStore<Store>((set) => ({
@@ -92,7 +92,7 @@ const store = createStore<Store>((set) => ({
     set({balance});
   },
   getConnectorName: () => privateStore.getState().config?.connectorName,
-  setPath: (path: Path) => {
+  setRoute: (path: Route) => {
     set({path});
   },
 }));

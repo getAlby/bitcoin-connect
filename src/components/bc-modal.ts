@@ -66,7 +66,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
           <div class="absolute right-0 h-full flex items-center justify-center">
             <div
               class="cursor-pointer"
-              @click=${() => store.getState().setPath('/help')}
+              @click=${() => store.getState().setRoute('/help')}
             >
               ${helpIcon}
             </div>
@@ -83,9 +83,11 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
 
   private _handleClose() {
     this._closing = true;
-    setTimeout(() => this.onClose?.(), 750);
-    // Reset after close
-    store.getState().setPath('/start');
+    setTimeout(() => {
+      // Reset after close
+      store.getState().setRoute('/start');
+      this.onClose?.();
+    }, 200);
   }
 }
 

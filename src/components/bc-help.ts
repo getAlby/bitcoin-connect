@@ -33,7 +33,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
       <div class="text-center">
         <button
           @click=${() => {
-            store.getState().setPath('/start');
+            store.getState().setRoute('/start');
           }}
           class="relative mt-4 h-8 px-3 font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center"
         >

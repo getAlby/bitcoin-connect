@@ -5,12 +5,12 @@ import './bc-connector-list.js';
 import './bc-help.js';
 import {withTwind} from './twind/withTwind';
 import store from '../state/store';
-import {Path, paths} from './paths';
+import {Route, routes} from './routes';
 
 @customElement('bc-router-outlet')
 export class RouterOutlet extends withTwind()(BitcoinConnectElement) {
   @state()
-  protected _path: Path;
+  protected _path: Route;
 
   constructor() {
     super();
@@ -23,7 +23,7 @@ export class RouterOutlet extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
-    return html`${paths[this._path]}`;
+    return html`${routes[this._path]}`;
   }
 }
 
