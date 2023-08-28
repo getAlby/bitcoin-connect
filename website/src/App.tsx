@@ -153,9 +153,9 @@ function App() {
           />
           <ShowcaseCard
             title="Make me an Image"
-            url="https://make-me-an-image-bc-version.rolznz.repl.co/"
+            url="https://make-me-an-image-lwc-version.rolznz.repl.co/"
             imageUrl={
-              'https://make-me-an-image-bc-version.rolznz.repl.co/profile.png'
+              'https://make-me-an-image-lwc-version.rolznz.repl.co/profile.png'
             }
           />
         </div>
