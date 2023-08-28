@@ -7,9 +7,8 @@ import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {Path, paths} from './paths';
 
-// TODO: split up this component into disconnected and connected
-@customElement('bc-modal-content')
-export class ModalContent extends withTwind()(BitcoinConnectElement) {
+@customElement('bc-router-outlet')
+export class RouterOutlet extends withTwind()(BitcoinConnectElement) {
   @state()
   protected _path: Path;
 
@@ -30,6 +29,6 @@ export class ModalContent extends withTwind()(BitcoinConnectElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-modal-content': ModalContent;
+    'bc-router-outlet': RouterOutlet;
   }
 }

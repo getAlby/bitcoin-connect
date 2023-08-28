@@ -8,6 +8,7 @@ import {gradientText} from './css/gradientText';
 import {exitIcon} from './icons/exitIcon';
 import {loadingIconSecondary} from './icons/loadingIcon';
 
+// TODO: split up this component into disconnected and connected
 @customElement('bc-start')
 export class Start extends withTwind()(BitcoinConnectElement) {
   override render() {

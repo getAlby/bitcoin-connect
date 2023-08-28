@@ -1,7 +1,7 @@
 import {html} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
-import './bc-modal-content.js';
+import './bc-router-outlet.js';
 import store from '../state/store';
 import {dispatchEvent} from '../utils/dispatchEvent';
 import {color} from './css/colors';
@@ -76,7 +76,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
           </div>
           ${bcLogo}
         </div>
-        <bc-modal-content class="flex w-full"></bc-modal-content>
+        <bc-router-outlet class="flex w-full"></bc-router-outlet>
       </div>
     </div>`;
   }
