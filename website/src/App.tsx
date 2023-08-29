@@ -147,6 +147,11 @@ function App() {
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <ShowcaseCard
+            title="Nostrudel"
+            url="https://nostrudel.ninja"
+            imageUrl="https://nostrudel.ninja/icon-512.png"
+          />
+          <ShowcaseCard
             title="Zappy Bird"
             url="https://rolznz.github.io/zappy-bird/"
             imageUrl={zappyBirdImageUrl}
