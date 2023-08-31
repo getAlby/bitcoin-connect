@@ -8,6 +8,7 @@ import {gradientText} from './css/gradientText';
 import {exitIcon} from './icons/exitIcon';
 import {loadingIconSecondary} from './icons/loadingIcon';
 import {hr} from './templates/hr';
+import './internal/bci-button';
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
@@ -28,7 +29,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
             </h1>
 
             <span
-              class="font-sans text-xs mb-2"
+              class="font-sans text-xs font-medium mb-2 mt-8"
               style="color: ${color('text-secondary')}"
               >Balance</span
             >
@@ -49,27 +50,14 @@ export class Start extends withTwind()(BitcoinConnectElement) {
             <span
               class="font-sans text-xs my-4"
               style="color: ${color('text-secondary')}"
-              >Connected through ${this._connectorName}</span
+              >Connected through
+              <span class="font-medium">${this._connectorName}</span></span
             >
 
-            <button
-              @click=${this._handleDisconnect}
-              class="relative mt-4 h-8 px-3 font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center"
-            >
-              <div
-                class="absolute -z-10 top-0 left-0 w-full h-full border-2 border-solid border-transparent rounded-lg"
-                style="
-              background-image: linear-gradient(${color('bg-primary')}, ${color(
-                  'bg-primary'
-                )}), linear-gradient(to bottom, ${color('primary')}, ${color(
-                  'secondary'
-                )});
-              background-origin: border-box;
-              background-clip: content-box, border-box;"
-              ></div>
+            <bci-button @click=${this._handleDisconnect}>
               ${exitIcon}
               <span style="${gradientText()}">Disconnect</span>
-            </button>`
+            </bci-button>`
         : html`
             <h1
               class="font-sans my-8"

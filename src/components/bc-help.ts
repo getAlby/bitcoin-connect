@@ -3,11 +3,11 @@ import {BitcoinConnectElement} from './BitcoinConnectElement';
 import {withTwind} from './twind/withTwind';
 import {color} from './css/colors';
 import {gradientText} from './css/gradientText';
-import store from '../state/store';
 import {html} from 'lit';
 import {linkIcon} from './icons/linkIcon';
 import {hr} from './templates/hr';
 import {albyLogo} from './icons/albyLogo';
+import './internal/bci-button';
 
 @customElement('bc-help')
 export class Help extends withTwind()(BitcoinConnectElement) {
@@ -42,46 +42,20 @@ export class Help extends withTwind()(BitcoinConnectElement) {
           target="_blank"
           class="flex-1"
         >
-          <button
-            class="relative h-10 px-3 font-semibold font-sans shadow rounded-lg flex gap-2 justify-center items-center w-full"
-          >
-            <div
-              class="absolute -z-10 top-0 left-0 w-full h-full border-2 border-solid border-transparent rounded-lg"
-              style="
-                background-image: linear-gradient(${color(
-                'bg-primary'
-              )}, ${color('bg-primary')}), linear-gradient(to bottom, ${color(
-                'primary'
-              )}, ${color('secondary')});
-                background-origin: border-box;
-                background-clip: content-box, border-box;"
-            ></div>
+          <bci-button>
             <span style="${gradientText()}">Learn more</span>
             ${linkIcon}
-          </button>
+          </bci-button>
         </a>
         <a
           href="https://github.com/getAlby/bitcoin-connect"
           target="_blank"
           class="flex-1"
         >
-          <button
-            class="flex-1 relative h-10 px-3 font-semibold font-sans shadow rounded-lg flex gap-2 justify-center items-center w-full"
-          >
-            <div
-              class="absolute -z-10 top-0 left-0 w-full h-full border-2 border-solid border-transparent rounded-lg"
-              style="
-                background-image: linear-gradient(${color(
-                'bg-primary'
-              )}, ${color('bg-primary')}), linear-gradient(to bottom, ${color(
-                'primary'
-              )}, ${color('secondary')});
-                background-origin: border-box;
-                background-clip: content-box, border-box;"
-            ></div>
+          <bci-button>
             <span style="${gradientText()}">Add to your site</span>
             ${linkIcon}
-          </button>
+          </bci-button>
         </a>
       </div>
       ${hr()}

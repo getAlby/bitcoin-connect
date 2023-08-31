@@ -1,7 +1,8 @@
 import {svg} from 'lit';
 import {color} from '../css/colors';
+import {hoverClasses} from '../css/hoverClasses';
 
-export const helpIcon = svg`<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" class="w-5 h-5">
+export const helpIcon = svg`<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" class="w-5 h-5 ${hoverClasses}">
         <path fill=${color(
           'text-secondary'
         )} fill-rule="evenodd" d="M7 1.333a5.667 5.667 0 1 0 0 11.334A5.667 5.667 0 0 0 7 1.334ZM.333 7a6.667 6.667 0 1 1 13.334 0A6.667 6.667 0 0 1 .333 7Z" clip-rule="evenodd"/><path fill=${color(
