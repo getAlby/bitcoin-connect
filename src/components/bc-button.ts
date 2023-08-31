@@ -9,6 +9,7 @@ import {satIcon} from './icons/satIcon.js';
 import {bcConnectedIcon} from './icons/bcConnectedIcon.js';
 import {color} from './css/colors.js';
 import {innerBorder} from './templates/innerBorder.js';
+import {hoverClasses} from './css/hoverClasses.js';
 
 /**
  * A button that when clicked launches the modal.
@@ -50,7 +51,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
       this.iconOnly || (this.connectedIconOnly && this._connected);
     return html`<div>
       <div
-        class="relative inline-flex transition-all hover:brightness-110 active:scale-95 cursor-pointer ${this
+        class="relative inline-flex ${hoverClasses} cursor-pointer ${this
           ._connected && !iconOnly
           ? 'rounded-lg gap-2 justify-center items-center'
           : ''}"
@@ -103,7 +104,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
           : null}
       </div>
       ${this._modalOpen
-        ? html`<bc-modal .onClose=${this._closeModal} />`
+        ? html`<bc-modal .onClose=${this._closeModal}></bc-modal>`
         : null}
     </div>`;
   }
