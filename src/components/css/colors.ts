@@ -9,6 +9,8 @@ const colors = {
   'text-primary': '#FFFFFF',
   'text-secondary': '#404040',
   'text-tertiary': '#FFFFFF',
+  'neutral-primary': '#6B7280',
+  'neutral-secondary': '#E4E4E4',
 };
 
 export function color(key: keyof typeof colors, fallback = colors[key]) {
