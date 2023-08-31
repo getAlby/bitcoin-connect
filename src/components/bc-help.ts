@@ -38,7 +38,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
           </div>
         </div>
 
-        <div class="flex gap-4 w-full my-6">
+        <div class="flex gap-4 w-full my-6 px-8">
           <a
             href="https://getalby.github.io/bitcoin-connect"
             target="_blank"
@@ -55,7 +55,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
             class="flex-1"
           >
             <bci-button>
-              <span style="${gradientText()}">Add to your site</span>
+              <span style="${gradientText()}">Use it</span>
               ${linkIcon}
             </bci-button>
           </a>
