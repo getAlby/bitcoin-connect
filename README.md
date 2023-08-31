@@ -1,6 +1,6 @@
 # Bitcoin Connect
 
-This project includes web components for connecting to Lightning Wallets and enabling [WebLN](https://webln.guide). Websites only need to implement a single interface to connect with multiple wallets (WebLN), and users can connect from both desktop and mobile devices. These components work with pure HTML and all Javascript libraries frameworks such as React, Angular, Vue, Solid.js, etc.
+This project includes web components for connecting to Lightning wallets and enabling [WebLN](https://webln.guide). Websites only need to implement a single interface to connect with multiple wallets (WebLN), and users can connect from both desktop and mobile devices. These components work with pure HTML and all Javascript libraries or frameworks, such as React, Angular, Vue, Solid.js, etc.
 
 ## 🛝 Try it out here
 
@@ -26,7 +26,7 @@ You can use Bitcoin Connect without any build tools:
 
 ## 🤙 Usage
 
-Bitcoin Connect exposes the following web components for allowing user to connect their desired Lightning wallet:
+Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
   - Optional Arguments:
@@ -52,7 +52,7 @@ Current wallets supported:
 
 ### Styling
 
-- the following css variables can be configured as hex or rgb:
+- the following CSS variables can be configured:
 
 ```css
 html {
