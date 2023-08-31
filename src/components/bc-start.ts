@@ -16,7 +16,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
       ${this._connecting
         ? html`<div class="py-32">${loadingIconSecondary}</div>`
         : this._connected
-        ? html` <h1 class="font-sans text-lg my-8" style="color: ${color(
+        ? html` <h1 class="font-sans text-lg" style="color: ${color(
             'text-secondary'
           )}">
             Hello,

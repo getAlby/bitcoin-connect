@@ -9,26 +9,28 @@ import {html} from 'lit';
 @customElement('bc-help')
 export class Help extends withTwind()(BitcoinConnectElement) {
   override render() {
-    return html`<div class="font-sans m-5">
-      <div class="text-primary font-bold" style="${gradientText()}">
-        How does it work?
-      </div>
-      <div
-        style="color: ${color('text-secondary')}"
-        class="flex flex-col gap-3"
-      >
-        <p>
+    return html`<div class="font-sans text-sm">
+      <div class="px-8">
+        <div class="font-bold mb-1" style="${gradientText()}">
+          How does it work?
+        </div>
+        <p class="mb-2" style="color: ${color('text-secondary')}">
           Lightning Connect is a way to connect to your lightning wallet from
           any browser.
         </p>
-        <p>
-          💾 Your connection is saved in local storage, so next time you visit
-          the site will connect automatically.
-        </p>
-        <p>
-          💸 Make sure to set budgets and permissions for sites you do not
-          trust.
-        </p>
+        <div
+          style="color: ${color('text-secondary')}"
+          class="flex flex-col gap-3"
+        >
+          <p>
+            💾 Your connection is saved in local storage, so next time you visit
+            the site will connect automatically.
+          </p>
+          <p>
+            💸 Make sure to set budgets and permissions for sites you do not
+            trust.
+          </p>
+        </div>
       </div>
       <div class="text-center">
         <button

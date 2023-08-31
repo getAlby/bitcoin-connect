@@ -103,7 +103,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
           : null}
       </div>
       ${this._modalOpen
-        ? html`<bc-modal .onClose=${this._closeModal} />`
+        ? html`<bc-modal .onClose=${this._closeModal}></bc-modal>`
         : null}
     </div>`;
   }

@@ -5,10 +5,8 @@ import './bc-router-outlet.js';
 import store from '../state/store';
 import {dispatchEvent} from '../utils/dispatchEvent';
 import {color} from './css/colors';
-import {crossIcon} from './icons/crossIcon';
-import {bcLogo} from './icons/bcLogo';
 import {withTwind} from './twind/withTwind';
-import {helpIcon} from './icons/helpIcon';
+import './bc-modal-header';
 
 /**
  * The modal allows the user to view a list of connectors, connect and disconnect.
@@ -62,33 +60,23 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
     ${this._closing ? 'animate-fade-out' : 'animate-fade-in'}"
         style="background: ${color('bg-primary')}"
       >
-        <div class="flex justify-center items-center gap-2 w-full relative">
-          <div class="absolute right-0 h-full flex items-center justify-center">
-            <div
-              class="cursor-pointer"
-              @click=${() => store.getState().setRoute('/help')}
-            >
-              ${helpIcon}
-            </div>
-            <div class="cursor-pointer" @click=${this._handleClose}>
-              ${crossIcon}
-            </div>
-          </div>
-          ${bcLogo}
-        </div>
+        <bc-modal-header
+          class="flex w-full"
+          .onClose=${this._handleClose}
+        ></bc-modal-header>
         <bc-router-outlet class="flex w-full"></bc-router-outlet>
       </div>
     </div>`;
   }
 
-  private _handleClose() {
+  private _handleClose = () => {
     this._closing = true;
     setTimeout(() => {
       // Reset after close
       store.getState().setRoute('/start');
       this.onClose?.();
     }, 200);
-  }
+  };
 }
 
 declare global {
