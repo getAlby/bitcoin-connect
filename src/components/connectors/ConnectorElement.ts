@@ -5,6 +5,7 @@ import {ConnectorType} from '../../types/ConnectorType';
 import {color} from '../css/colors';
 import {ConnectorConfig} from '../../types/ConnectorConfig';
 import store from '../../state/store';
+import {hoverClasses} from '../css/hoverClasses';
 
 export abstract class ConnectorElement extends withTwind()(
   BitcoinConnectElement
@@ -29,7 +30,7 @@ export abstract class ConnectorElement extends withTwind()(
 
   override render() {
     return html`<div
-      class="flex flex-col justify-between items-center w-32 h-24 cursor-pointer"
+      class="flex flex-col justify-between items-center w-32 h-24 cursor-pointer ${hoverClasses}"
       @click=${this._onClick}
     >
       <div
