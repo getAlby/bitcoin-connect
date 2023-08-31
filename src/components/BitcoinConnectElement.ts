@@ -1,4 +1,3 @@
-import {css} from 'lit';
 import {loadFonts} from './utils/loadFonts';
 import {state} from 'lit/decorators.js';
 import store from '../state/store';
