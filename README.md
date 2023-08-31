@@ -21,7 +21,7 @@ https://getalby.github.io/bitcoin-connect
 You can use Bitcoin Connect without any build tools:
 
 ```
-<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.0.0/dist/index.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.1.0/dist/index.browser.js"></script>
 ```
 
 ## 🤙 Usage
@@ -127,18 +127,23 @@ We are happy to help, please contact us or create an issue.
 ## FAQ
 
 ### Does this work on mobile browsers and mobile PWAs, or desktop browsers without a WebLN extension?
+
 Yes! that's the main benefit.
 
 ### Does it work with a desktop extension enabled?
+
 Yes. It will use the desktop extension as the default connector if it exists.
 
 ### Can I connect it to my mobile wallet?
+
 That depends. The connection to your lightning node / wallet needs to be asynchronous so that you can use Bitcoin Connect natively on mobile websites or PWAs.
 
 ### Can a user connect any lightning wallet?
+
 It will only work for the connectors that are shown in the modal. Some of these connectors (e.g. the Alby Browser Extension) allow to connect multiple wallets themselves. Feel free to contribute to add a new connector.
 
 ### Does it "remember" the user if they leave the page or close the browser?
+
 Yes. Your connection is saved to localStorage
 
 ### Is this safe?
@@ -146,6 +151,7 @@ Yes. Your connection is saved to localStorage
 You should have a certain level of trust on the website you decide to connect your wallet with, and that they ensure there is no malicious third-party scripts which would intend to read the wallet connection configuration, either from memory or storage. Connectors with budget controls or confirmation dialogs (Alby extension or NWC) are recommend so you have full control over your connection.
 
 ### What are the high level things I need to do to add this to my site?
+
 1. add the "Connect Wallet" button
 2. wait for a connection event (using window.addEventListener) and then request to pay the invoice with window.webln
 

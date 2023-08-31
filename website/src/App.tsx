@@ -8,6 +8,7 @@ import zappyBirdImageUrl from './assets/zappy-bird.png';
 import {ShowcaseCard} from './components/ShowcaseCard';
 import React from 'react';
 import {DarkModeToggle} from './components/DarkModeToggle';
+import {Button} from '@getalby/bitcoin-connect-react';
 
 function App() {
   const isDarkMode = useAppStore((store) => store.isDarkMode);
@@ -118,8 +119,7 @@ function App() {
           <div
             className={`flex-1 flex justify-center items-center theme-${themeIndex}`}
           >
-            {/* @ts-ignore */}
-            <bc-button />
+            <Button />
           </div>
           <div className="flex gap-4 justify-center item theme p-2 rounded-lg shadow-xl bg-black bg-opacity-30">
             <DarkModeToggle />

@@ -1,6 +1,7 @@
 import '@getalby/bitcoin-connect';
 import {BCLogo} from '../icons/BCLogo';
 import {DarkModeToggle} from './DarkModeToggle';
+import {Button} from '@getalby/bitcoin-connect-react';
 
 export function Header() {
   return (
@@ -10,8 +11,7 @@ export function Header() {
         <div className="badge badge-outline badge-sm mt-1">1.0.0</div>
       </div>
       <div className="flex justify-end items-center gap-4">
-        {/* @ts-ignore */}
-        <bc-button />
+        <Button />
         <DarkModeToggle />
       </div>
     </div>
