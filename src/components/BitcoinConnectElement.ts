@@ -1,12 +1,13 @@
-import {LitElement, css} from 'lit';
+import {css} from 'lit';
 import {loadFonts} from './utils/loadFonts';
 import {state} from 'lit/decorators.js';
 import store from '../state/store';
+import {InternalElement} from './internal/InternalElement';
 
 /**
  * @fires bc:connected - Indicates a wallet has been connected and window.webln is now available and enabled
  */
-export class BitcoinConnectElement extends LitElement {
+export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _connected = false;
   @state()
@@ -43,12 +44,4 @@ export class BitcoinConnectElement extends LitElement {
   override connectedCallback() {
     super.connectedCallback();
   }
-
-  // global css reset in shadow DOM
-  static override styles = css`
-    :host {
-      all: initial;
-      font-variant-numeric: slashed-zero;
-    }
-  `;
 }

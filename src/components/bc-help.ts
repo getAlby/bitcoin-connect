@@ -61,7 +61,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
       ${hr()}
       <div
         class="flex w-full justify-center items-center mt-4 gap-1 font-sans"
-        style="color: ${color('neutral-primary')}"
+        style="color: ${color('text-secondary')}"
       >
         <span class="block">Made with love by</span>
         ${albyLogo}
