@@ -12,6 +12,8 @@ import {Route} from './routes';
 @customElement('bc-navbar')
 export class Navbar extends withTwind()(BitcoinConnectElement) {
   @property()
+  heading?: string;
+  @property()
   to: Route = '/start';
 
   override render() {
@@ -30,7 +32,7 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
         class="font-sans font-medium"
         style="color: ${color('text-secondary')}"
       >
-        ${this.title}
+        ${this.heading}
       </div>
     </div>`;
   }

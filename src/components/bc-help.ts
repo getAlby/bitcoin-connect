@@ -13,7 +13,7 @@ import './internal/bci-button';
 export class Help extends withTwind()(BitcoinConnectElement) {
   override render() {
     return html`<div>
-      <bc-navbar class="flex w-full" title="About"></bc-navbar>
+      <bc-navbar class="flex w-full" heading="About"></bc-navbar>
       <div class="font-sans text-sm w-full">
         <div class="px-8">
           <div class="font-bold mb-1" style="${gradientText()}">
