@@ -8,6 +8,8 @@ https://getalby.github.io/bitcoin-connect
 
 ## 🚀 Quick Start
 
+> 🚧WARNING🚧: this package is currently in Alpha. It's got awesome features, but is using new features of protocols such as WebLN and NWC which have not been finalized, and there may be breaking changes or bugs.
+
 ### React Package
 
 `npm install @getalby/bitcoin-connect-react` or `yarn add @getalby/bitcoin-connect-react`
