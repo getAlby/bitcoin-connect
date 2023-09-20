@@ -23,7 +23,7 @@ https://getalby.github.io/bitcoin-connect
 You can use Bitcoin Connect without any build tools:
 
 ```
-<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.1.0/dist/index.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.1.2/dist/index.browser.js"></script>
 ```
 
 ## 🤙 Usage
