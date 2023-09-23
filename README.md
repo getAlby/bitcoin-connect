@@ -128,6 +128,10 @@ We are happy to help, please contact us or create an issue.
 
 ## FAQ
 
+### How does it work?
+
+Bitcoin Connect provides multiple options to the user to connect to a lightning wallet, each compatible with WebLN. Any already-existing providers of WebLN (such as an installed WebLN extension like Alby) are detected and offered, as well as options to create a new WebLN provider through protocols such as NWC. No matter which option you choose, window.webln will become available for the website to use to interact with your lightning wallet. Similar to the Alby extension, new options (called Connectors) can be easily added as they all follow a common, simple interface. As long as there is a way to connect to a lightning wallet through Javascript, a connector can be created for it in Bitcoin Connect. We welcome any and all contributions for new connectors!
+
 ### Does this work on mobile browsers and mobile PWAs, or desktop browsers without a WebLN extension?
 
 Yes! that's the main benefit.
