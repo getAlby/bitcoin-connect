@@ -115,4 +115,18 @@ function loadConfig() {
   }
 }
 
+function addEventListeners() {
+  window.addEventListener('webln:enabled', async () => {
+    if (!store.getState().connecting) {
+      // webln was enabled from outside
+      // TODO: use the same name and logic for figuring out what extension as the extension connector
+      await store.getState().connect({
+        connectorName: 'Extension',
+        connectorType: 'extension.generic',
+      });
+    }
+  });
+}
+
 loadConfig();
+addEventListeners();
