@@ -165,6 +165,14 @@
     lit "^2.2.4"
     zustand "^4.4.1"
 
+"@getalby/lightning-tools@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-4.0.2.tgz#a6f5127ca768de28e87cff101508cd2d90590b60"
+  integrity sha512-6EOo4iqjc4BB37KPtzkTR2Fn/Bf5W7Zqb7sYW4pdPRHKTwbtPSgCFqsankAqn6pXxvnvy/kn0ueFz6af7zYijg==
+  dependencies:
+    crypto-js "^4.1.1"
+    light-bolt11-decoder "^3.0.0"
+
 "@getalby/sdk@^2.2.3":
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.2.3.tgz#fda6de0bc241b59e7ed813204067c4d14b794668"
@@ -493,14 +501,6 @@ ajv@^6.12.4:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
-
-alby-tools@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/alby-tools/-/alby-tools-3.2.1.tgz#60f15983454b6635cd90da40f097d32fd0875308"
-  integrity sha512-dSQ6dBD/qXeBfF40g3PtzLo6yvN5w9zaQ9qeGFkez6feQ4qVMFq+iuxurCDTaR2KFxAf5fboWNZechl7DuH5Sw==
-  dependencies:
-    crypto-js "^4.1.1"
-    light-bolt11-decoder "^3.0.0"
 
 ansi-regex@^5.0.1:
   version "5.0.1"
@@ -874,6 +874,11 @@ globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
+goober@^2.1.10:
+  version "2.1.13"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.1.13.tgz#e3c06d5578486212a76c9eba860cbc3232ff6d7c"
+  integrity sha512-jFj3BQeleOoy7t93E9rZ2de+ScC4lQICLwiAQmKMg9F6roKGaLSHoCDYKkWlSafg138jejvq/mTdvmnwDQgqoQ==
+
 graphemer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/graphemer/-/graphemer-1.4.0.tgz#fb2f1d55e0e3a1849aeffc90c4fa0dd53a0e66c6"
@@ -1182,6 +1187,13 @@ react-dom@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-hot-toast@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.4.1.tgz#df04295eda8a7b12c4f968e54a61c8d36f4c0994"
+  integrity sha512-j8z+cQbWIM5LY37pR6uZR6D4LfseplqnuAO4co4u8917hBUvXlEqyP1ZzqVLcqoyUesZZv/ImreoCeHVDpE5pQ==
+  dependencies:
+    goober "^2.1.10"
 
 react@^18.2.0:
   version "18.2.0"
