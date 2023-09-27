@@ -1018,21 +1018,22 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@getalby/bitcoin-connect@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-1.1.0.tgz#324c54c48db42ee7f6579e571cbe4ba13f0fb982"
-  integrity sha512-u/60L9hzJz1dRoGVCjJsMxK4dzKGzVMcpe+XmiKuj8wIW3VpKpPsIFHgEblbl0aCXn0XY+V2HCMCe5v8YXAkVg==
+"@getalby/bitcoin-connect@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-1.2.0.tgz#d626495a94b5e568bff7c661339bb2b69cd5e8cb"
+  integrity sha512-hIkslzG/SMKFV2NPh9IR/8TyiLsDPWlmtdH6t3MER5+37R/evnLfe3odglBNYb5EVnIPsMprOHR8IqBFyvM1ag==
   dependencies:
-    "@getalby/sdk" "^2.2.3"
+    "@getalby/sdk" "^2.4.0"
     lit "^2.2.4"
     zustand "^4.4.1"
 
-"@getalby/sdk@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.2.3.tgz#fda6de0bc241b59e7ed813204067c4d14b794668"
-  integrity sha512-8NvzGtpyne8EmRlCcg/sF3kUZWeHRXqZwS1HNuP1ytNNfmKFUZpo3GOauwzEpFFmaD+Fht5bjT3Y/XLk0QtFSw==
+"@getalby/sdk@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.4.0.tgz#fd3a6b24585e3dc32462da97c4b13a70294c7dee"
+  integrity sha512-aIGNwLRF9coj6koxfq7P4GtFZbFjQbnIheix39x9176PwFw4dXOdGXHPXnqioJTmeq80y+vX1yd+u/f03YGoeg==
   dependencies:
     crypto-js "^4.1.1"
+    events "^3.3.0"
     nostr-tools "1.13.1"
 
 "@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
@@ -1879,6 +1880,11 @@ eventemitter3@^4.0.4:
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
   integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
+
+events@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
 figures@^1.0.1:
   version "1.7.0"

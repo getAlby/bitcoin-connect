@@ -23,7 +23,7 @@ This project includes web components for connecting to Lightning wallets and ena
 You can use Bitcoin Connect without any build tools:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.1.2/dist/index.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.2.0/dist/index.browser.js"></script>
 ```
 
 ## 🤙 Usage
