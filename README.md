@@ -43,6 +43,8 @@ import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
   Programmatically launch modal
 </button>
 ```
+### Other Frameworks
+*Use another popular framework? please let us know or feel free to create a PR for a wrapper. See the React package for an example implementation.*
 
 ### Pure HTML
 
