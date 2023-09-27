@@ -4,7 +4,7 @@ This project includes web components for connecting to Lightning wallets and ena
 
 ## 🛝 Try it out here
 
-https://getalby.github.io/bitcoin-connect
+[Bitcoin Connect Landing](https://getalby.github.io/bitcoin-connect)
 
 ## 🚀 Quick Start
 
@@ -22,11 +22,31 @@ https://getalby.github.io/bitcoin-connect
 
 You can use Bitcoin Connect without any build tools:
 
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.1.2/dist/index.browser.js"></script>
 ```
 
 ## 🤙 Usage
+
+### React
+
+```jsx
+import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
+
+// render a button
+<Button onConnect={() => alert('Connected!')} />
+// include the modal on the page (will not be rendered unless launchModal is called)
+<Modal onConnect={() => alert('Connected!')} />
+
+// open modal programmatically
+<button onClick={launchModal}>
+  Programmatically launch modal
+</button>
+```
+
+### Pure HTML
+
+#### Components
 
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
@@ -34,9 +54,13 @@ Bitcoin Connect exposes the following web components for allowing users to conne
   - Optional Arguments:
     - `icon-only` - display the button as an icon without "Connect wallet"
     - `disabled` - mark the button as disabled
-- `<bc-modal/>` - render the modal on its own
+- `<bc-modal/>` - render the modal on its own.
+  - Optional Arguments:
+    - `open` - make the modal appear
 - `<bc-connector-list/>` - render the list of connectors on their own
 - _more components coming soon_
+
+#### Window Events
 
 Bitcoin Connect exposes the following events:
 
@@ -46,15 +70,15 @@ Bitcoin Connect exposes the following events:
 - `bc:modalopened` window event which fires when Bitcoin Connect modal is opened
 - `bc:modalclosed` window event which fires when Bitcoin Connect modal is closed
 
-Current wallets supported:
+#### Programmatically launching the modal
 
-- [Alby Browser extension](https://getalby.com)
-- [Alby NWC](https://nwc.getalby.com)
-- [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
+`<bc-modal/>` needs to be rendered somewhere on the page. The modal can then be launched with:
+
+`document.querySelector('bc-modal').setAttribute('open', true)`
 
 ### Styling
 
-- the following CSS variables can be configured:
+The following CSS variables can be configured:
 
 ```css
 html {
@@ -68,39 +92,39 @@ html {
 }
 ```
 
-# Demos
+## Demos
 
-### Pure HTML
+### Pure HTML Demo
 
 See [Pure HTML](./demos/html/README.md)
 
-> Example codepen: https://codepen.io/rolznz/pen/ZEmXGLd
+> [Example codepen](https://codepen.io/rolznz/pen/ZEmXGLd)
 
-### React
+### React Demo
 
 See [React](./demos/react/README.md)
 
-> Example replit: https://replit.com/@rolznz/make-me-an-image-nwc-version
+> [Example replit](https://replit.com/@rolznz/make-me-an-image-nwc-version)
 
 ### More demos
 
 Open [demos](demos/README.md)
 
-# 🛠️ Development
+## 🛠️ Development
 
-## Install
+### Install
 
 Run `yarn install && (cd dev/vite && yarn install)`
 
-## Run Vite
+### Run Vite
 
 Run `yarn dev`
 
-## Other dev options
+### Other dev options
 
 Open [dev](dev/README.md)
 
-## Production Build
+### Production Build
 
 `yarn build`
 
@@ -112,11 +136,11 @@ Open [dev](dev/README.md)
 
 `yarn dev:build:browser`
 
-## Testing
+### Testing
 
 `yarn test`
 
-# Need help?
+## Need help?
 
 We are happy to help, please contact us or create an issue.
 
@@ -161,7 +185,13 @@ You should have a certain level of trust on the website you decide to connect yo
 1. add the "Connect Wallet" button
 2. wait for a connection event (using window.addEventListener) and then request to pay the invoice with window.webln
 
-# 🔥 Lit
+### What connectors are supported?
+
+- [Alby Browser extension](https://getalby.com)
+- [Alby NWC](https://nwc.getalby.com)
+- [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
+
+## 🔥 Lit
 
 This project is powered by Lit.
 

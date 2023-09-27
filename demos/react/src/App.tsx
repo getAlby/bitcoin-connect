@@ -1,6 +1,7 @@
 import React from 'react';
-import {LightningAddress} from 'alby-tools';
-import {Button} from '@getalby/bitcoin-connect-react';
+import {LightningAddress} from '@getalby/lightning-tools';
+import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
+import toast, {Toaster} from 'react-hot-toast';
 
 function App() {
   const [invoice, setInvoice] = React.useState<string | undefined>(undefined);
@@ -41,8 +42,10 @@ function App() {
 
   return (
     <>
+      <Toaster />
       <h1>Bitcoin Connect React</h1>
-      <Button onConnect={() => alert('Connected!')} />
+      <Modal onConnect={() => toast('Modal Connected!')} />
+      <Button onConnect={() => toast('Connected!')} />
       <div style={{marginTop: '16px'}}>
         {preimage ? (
           <p>
@@ -55,6 +58,9 @@ function App() {
           <p>Loading invoice...</p>
         )}
       </div>
+      <button style={{marginTop: '16px'}} onClick={launchModal}>
+        Programmatically launch modal
+      </button>
     </>
   );
 }

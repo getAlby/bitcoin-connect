@@ -11,9 +11,10 @@
   },
   "dependencies": {
     "@getalby/bitcoin-connect-react": "^1.0.1",
-    "alby-tools": "^3.2.1",
+    "@getalby/lightning-tools": "^4.0.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

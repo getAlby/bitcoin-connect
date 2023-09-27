@@ -12,3 +12,13 @@ export const Modal: React.FC<ModalProps> = (props) => {
   // @ts-ignore
   return <bc-modal />;
 };
+
+export function launchModal() {
+  const modal = document.querySelector('bc-modal');
+  if (!modal) {
+    throw new Error(
+      'bc-modal does not exist in the dom. Did you render the Modal somewhere on this page?'
+    );
+  }
+  modal.setAttribute('open', 'true');
+}

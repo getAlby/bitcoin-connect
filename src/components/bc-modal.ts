@@ -24,6 +24,9 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   @state()
   protected _closing = false;
 
+  @property()
+  open?: boolean = false;
+
   constructor() {
     super();
 
@@ -46,6 +49,10 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
+    if (!this.open) {
+      return null;
+    }
+
     return html` <div
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
     >
@@ -72,6 +79,8 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   private _handleClose = () => {
     this._closing = true;
     setTimeout(() => {
+      this.open = false;
+      this._closing = false;
       // Reset after close
       // TODO: is there a better way to reset state when the modal is closed?
       store.getState().setRoute('/start');
