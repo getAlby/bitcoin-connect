@@ -1,13 +1,12 @@
 import {customElement} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
 import {withTwind} from './twind/withTwind';
-import {color} from './css/colors';
-import {gradientText} from './css/gradientText';
 import {html} from 'lit';
 import {linkIcon} from './icons/linkIcon';
 import {hr} from './templates/hr';
 import {albyLogo} from './icons/albyLogo';
 import './internal/bci-button';
+import {classes} from './css/classes';
 
 @customElement('bc-help')
 export class Help extends withTwind()(BitcoinConnectElement) {
@@ -16,17 +15,14 @@ export class Help extends withTwind()(BitcoinConnectElement) {
       <bc-navbar class="flex w-full" heading="About"></bc-navbar>
       <div class="font-sans text-sm w-full">
         <div class="px-8">
-          <div class="font-bold mb-1" style="${gradientText()}">
+          <div class="font-bold mb-1 ${classes['text-brand']}">
             How does it work?
           </div>
-          <p class="mb-2" style="color: ${color('text-secondary')}">
+          <p class="mb-2 ${classes['text-neutral-secondary']}">
             Bitcoin Connect is a way to connect to your lightning wallet from
             any browser.
           </p>
-          <div
-            style="color: ${color('text-secondary')}"
-            class="flex flex-col gap-3"
-          >
+          <div class="flex flex-col gap-3 ${classes['text-neutral-secondary']}">
             <p>
               💾 Your connection is saved in local storage, so next time you
               visit the site will connect automatically.
@@ -45,7 +41,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
             class="flex-1"
           >
             <bci-button>
-              <span style="${gradientText()}">Learn more</span>
+              <span class="${classes['text-brand']}">Learn more</span>
               ${linkIcon}
             </bci-button>
           </a>
@@ -55,7 +51,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
             class="flex-1"
           >
             <bci-button>
-              <span style="${gradientText()}">Use it</span>
+              <span class="${classes['text-brand']}">Use it</span>
               ${linkIcon}
             </bci-button>
           </a>
@@ -63,10 +59,11 @@ export class Help extends withTwind()(BitcoinConnectElement) {
         ${hr()}
         <div
           class="flex w-full justify-center items-center mt-4 gap-1 font-sans"
-          style="color: ${color('text-secondary')}"
         >
-          <span class="block">Made with love by</span>
-          ${albyLogo}
+          <span class="block ${classes['text-neutral-tertiary']}"
+            >Made with love by</span
+          >
+          <span class="${classes['text-foreground']}"> ${albyLogo} </span>
         </div>
       </div>
     </div>`;

@@ -8,6 +8,8 @@ import store from '../state/store';
 import {bcLogo} from './icons/bcLogo';
 import {crossIcon} from './icons/crossIcon';
 import {helpIcon} from './icons/helpIcon';
+import {classes} from './css/classes';
+import {bcCircleIcon} from './icons/bcCircleIcon';
 
 @customElement('bc-modal-header')
 export class ModalHeader extends withTwind()(BitcoinConnectElement) {
@@ -19,19 +21,27 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
       class="flex justify-center items-center gap-2 w-full relative"
     >
       <div
-        class="absolute right-0 h-full flex items-center justify-center gap-2"
+        class="absolute right-0 h-full flex items-center justify-center gap-2 ${classes[
+          'text-foreground'
+        ]}"
       >
         <div
-          class="cursor-pointer"
+          class="${classes.interactive} ${classes['text-neutral-tertiary']}"
           @click=${() => store.getState().setRoute('/help')}
         >
           ${helpIcon}
         </div>
-        <div class="cursor-pointer" @click=${this._handleClose}>
+        <div
+          class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+          @click=${this._handleClose}
+        >
           ${crossIcon}
         </div>
       </div>
-      ${bcLogo}
+      <div class="flex items-center justify-center">
+        <div class="${classes['text-brand']}">${bcCircleIcon}</div>
+        <div class="${classes['text-foreground']}">${bcLogo}</div>
+      </div>
     </div>`;
   }
 
