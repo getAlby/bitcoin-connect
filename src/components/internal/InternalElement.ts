@@ -34,7 +34,6 @@ export class InternalElement extends LitElement {
         '--bc-color-brand'
       ) || '#196CE7';
     function calculateLuminance(color: string) {
-      console.log('CALCULATING LUMINANCE', color);
       if (color.startsWith('#')) {
         color = color.slice(1); // Remove the '#' character
         const r = parseInt(color.slice(0, 2), 16);
