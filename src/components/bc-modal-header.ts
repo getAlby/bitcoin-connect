@@ -39,7 +39,7 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
         </div>
       </div>
       <div class="flex items-center justify-center">
-        <div class="${classes['text-brand']}">${bcCircleIcon}</div>
+        <div class="${classes['text-brand-mixed']}">${bcCircleIcon}</div>
         <div class="${classes['text-foreground']}">${bcLogo}</div>
       </div>
     </div>`;

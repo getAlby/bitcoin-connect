@@ -88,7 +88,7 @@ Optional CSS variables for further customization:
 ```css
 html {
   --bc-color-brand-dark: #3994ff; /* use a different brand color in dark mode */
-  --bc-brand-mix: 100%; /* how much to mix the brand color  */
+  --bc-brand-mix: 100%; /* how much to mix the brand color with default foreground color */
 }
 ```
 

@@ -15,7 +15,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
       <bc-navbar class="flex w-full" heading="About"></bc-navbar>
       <div class="font-sans text-sm w-full">
         <div class="px-8">
-          <div class="font-bold mb-1 ${classes['text-brand']}">
+          <div class="font-bold mb-1 ${classes['text-brand-mixed']}">
             How does it work?
           </div>
           <p class="mb-2 ${classes['text-neutral-secondary']}">
@@ -41,7 +41,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
             class="flex-1"
           >
             <bci-button>
-              <span class="${classes['text-brand']}">Learn more</span>
+              <span class="${classes['text-brand-mixed']}">Learn more</span>
               ${linkIcon}
             </bci-button>
           </a>
@@ -51,7 +51,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
             class="flex-1"
           >
             <bci-button>
-              <span class="${classes['text-brand']}">Use it</span>
+              <span class="${classes['text-brand-mixed']}">Use it</span>
               ${linkIcon}
             </bci-button>
           </a>
