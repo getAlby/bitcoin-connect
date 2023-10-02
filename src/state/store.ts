@@ -128,5 +128,7 @@ function addEventListeners() {
   });
 }
 
-loadConfig();
-addEventListeners();
+if (globalThis.window) {
+  loadConfig();
+  addEventListeners();
+}

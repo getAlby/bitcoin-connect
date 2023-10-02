@@ -43,8 +43,14 @@ import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
   Programmatically launch modal
 </button>
 ```
+
+#### React SSR / NextJS
+
+Make sure to only render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory) or by using next/dynamic.
+
 ### Other Frameworks
-*Use another popular framework? please let us know or feel free to create a PR for a wrapper. See the React package for an example implementation.*
+
+_Use another popular framework? please let us know or feel free to create a PR for a wrapper. See the React package for an example implementation._
 
 ### Pure HTML
 
@@ -209,6 +215,10 @@ You should have a certain level of trust on the website you decide to connect yo
 - [Alby Browser extension](https://getalby.com)
 - [Alby NWC](https://nwc.getalby.com)
 - [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
+
+## Known Issues
+
+- NWC connectors do not work on iOS in non-secure contexts because window.crypto.subtle is unavailable. If testing on your phone, please run an https server or use an https tunnel.
 
 ## 🔥 Lit
 

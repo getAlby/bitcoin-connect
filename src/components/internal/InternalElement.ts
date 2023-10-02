@@ -29,10 +29,13 @@ export class InternalElement extends LitElement {
   }
 
   protected _getBrandColorLuminance() {
+    if (!globalThis.window) {
+      return 0;
+    }
     const brandColor =
-      getComputedStyle(this as HTMLElement).getPropertyValue(
-        '--bc-color-brand'
-      ) || '#196CE7';
+      window
+        .getComputedStyle(this as HTMLElement)
+        .getPropertyValue('--bc-color-brand') || '#196CE7';
     function calculateLuminance(color: string) {
       if (color.startsWith('#')) {
         color = color.slice(1); // Remove the '#' character

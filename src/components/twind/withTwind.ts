@@ -1,6 +1,7 @@
 import {defineConfig} from '@twind/core';
 import presetTailwind from '@twind/preset-tailwind';
 import install from '@twind/with-web-components';
+import {LitElement} from 'lit';
 
 const colors = {
   'brand-light': 'var(--bc-color-brand, #196CE7)',
@@ -74,4 +75,16 @@ export const withTwindExtended = () =>
     })
   );
 
-export const withTwind = () => withTwindExtended();
+export const withTwind = () => {
+  if (globalThis.window) {
+    return withTwindExtended();
+  } else {
+    // prevent SSR issues
+    return withNothing;
+  }
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function withNothing<T extends new (...args: any[]) => LitElement>(Base: T) {
+  return Base;
+}
