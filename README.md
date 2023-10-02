@@ -53,9 +53,6 @@ import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
-  - Optional Arguments:
-    - `icon-only` - display the button as an icon without "Connect wallet"
-    - `disabled` - mark the button as disabled
 - `<bc-modal/>` - render the modal on its own.
   - Optional Arguments:
     - `open` - make the modal appear
@@ -80,19 +77,39 @@ Bitcoin Connect exposes the following events:
 
 ### Styling
 
-The following CSS variables can be configured:
+These variables must be set at the root or on a container element wrapping any bitcoin connect components.
 
 ```css
 html {
-  --bc-color-primary: #21ecc7;
-  --bc-color-secondary: #21ecc7;
-  --bc-color-bg-primary: black;
-  --bc-color-bg-secondary: black;
-  --bc-color-text-primary: black;
-  --bc-color-text-secondary: #f4f4f4;
-  --bc-color-text-tertiary: white;
+  --bc-color-brand: #196ce7;
 }
 ```
+
+Optional CSS variables for further customization:
+
+```css
+html {
+  --bc-color-brand-dark: #3994ff; /* use a different brand color in dark mode */
+  --bc-brand-mix: 100%; /* how much to mix the brand color with default foreground color */
+}
+```
+
+> 💡 using near-white or black brand colors? either set a lower `bc-brand-mix` or make sure to use an off-white for `bc-color-brand` and off-black for `bc-color-brand-dark` to avoid conflicts with the modal background color.
+
+### Dark mode
+
+#### Automatic (Recommended)
+
+Bitcoin Connect uses `prefers-color-scheme` to automatically detect light/dark mode.
+
+#### Manual
+
+In case your site uses a manual theme switcher, you can force a theme by following these steps:
+
+> see an example [here](./dev/vite/index.html)
+
+1. set `globalThis.bcDarkMode = "class"` **before** any bitcoin connect components are rendered
+2. `"dark"` must be added as a classname to the document to enable dark mode (e.g. `<html class="dark">` or `document.documentElement.classList.add('dark')`) otherwise light mode will be forced.
 
 ## Demos
 

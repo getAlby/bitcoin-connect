@@ -4,9 +4,9 @@ import {BitcoinConnectElement} from './BitcoinConnectElement';
 import './bc-router-outlet.js';
 import store from '../state/store';
 import {dispatchEvent} from '../utils/dispatchEvent';
-import {color} from './css/colors';
 import {withTwind} from './twind/withTwind';
 import './bc-modal-header';
+import {classes} from './css/classes';
 
 /**
  * The modal allows the user to view a list of connectors, connect and disconnect.
@@ -27,6 +27,8 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   @property()
   open?: boolean = false;
 
+  _prevOpen?: boolean = false;
+
   constructor() {
     super();
 
@@ -38,17 +40,16 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
     });
   }
 
-  override connectedCallback() {
-    super.connectedCallback();
-    dispatchEvent('bc:modalopened');
-  }
-
-  override disconnectedCallback() {
-    super.disconnectedCallback();
-    dispatchEvent('bc:modalclosed');
-  }
-
   override render() {
+    if (this._prevOpen !== this.open) {
+      this._prevOpen = this.open;
+      if (this.open) {
+        dispatchEvent('bc:modalopened');
+      } else {
+        dispatchEvent('bc:modalclosed');
+      }
+    }
+
     if (!this.open) {
       return null;
     }
@@ -57,15 +58,13 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
     >
       <div
-        class="absolute top-0 left-0 w-full h-full ${this._closing
-          ? 'animate-lighten'
-          : 'animate-darken'}"
-        style="background: ${color('bg-secondary')}"
+        class="absolute top-0 left-0 w-full h-full ${classes[
+          'bg-foreground'
+        ]} ${this._closing ? 'animate-lighten' : 'animate-darken'}"
       ></div>
       <div
-        class="transition-all p-4 pt-6 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center w-full max-w-md max-sm:rounded-b-none
+        class="transition-all p-4 pt-6 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
     ${this._closing ? 'animate-fade-out' : 'animate-fade-in'}"
-        style="background: ${color('bg-primary')}"
       >
         <bc-modal-header
           class="flex w-full"

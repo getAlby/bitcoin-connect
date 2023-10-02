@@ -1,15 +1,13 @@
 import {html} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 import './bc-modal.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
-import {loadingIconPrimary} from './icons/loadingIcon.js';
+import {loadingIcon} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
-import {bcConnectedIcon} from './icons/bcConnectedIcon.js';
-import {color} from './css/colors.js';
 import {innerBorder} from './templates/innerBorder.js';
-import {hoverClasses} from './css/hoverClasses.js';
+import {classes} from './css/classes.js';
 
 /**
  * A button that when clicked launches the modal.
@@ -19,86 +17,48 @@ export class Button extends withTwind()(BitcoinConnectElement) {
   @state()
   private _modalOpen = false;
 
-  @property({
-    attribute: 'icon-only',
-    type: Boolean,
-  })
-  iconOnly?: boolean;
-  @property({
-    attribute: 'connected-icon-only',
-    type: Boolean,
-  })
-  connectedIconOnly?: boolean;
-
-  @property({
-    type: Boolean,
-  })
-  disabled = false;
-
   constructor() {
     super();
   }
 
-  // FIXME:
-  // - inner border icon should be a gradient
-  // - some hardcoded transparent whites should be transparent(primaryColor)
-  // TODO:
-  // - extract common button styles
-  // - extract common inner border styles
   override render() {
     const isLoading = this._connecting || (!this._connected && this._modalOpen);
-    const iconOnly =
-      this.iconOnly || (this.connectedIconOnly && this._connected);
+    const brandColorLuminance = this._getBrandColorLuminance();
+
     return html`<div>
       <div
-        class="relative inline-flex ${hoverClasses} cursor-pointer ${this
-          ._connected && !iconOnly
-          ? 'rounded-lg gap-2 justify-center items-center'
-          : ''}"
-        style="${this._connected && !iconOnly
-          ? `background: linear-gradient(180deg, #fff6 0%, #fff0 100%), linear-gradient(180deg, ${color(
-              'bg-secondary'
-            )}, ${color('bg-secondary')} 100%)`
-          : ''}"
+        class="relative inline-flex ${classes.interactive} cursor-pointer 
+          rounded-lg gap-2 justify-center items-center ${classes[
+          'bg-background'
+        ]}"
         @click=${this._onClick}
       >
-        ${this._connected ? innerBorder() : null}
+        <div
+          class="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none"
+          style="background: linear-gradient(180deg, #fff6 0%, #fff0 100%)"
+        ></div>
+        ${innerBorder()}
         <button
-          class="${iconOnly ? 'w-8 h-8' : `h-10 px-4`} 
+          class="h-10 px-4 ${classes['bg-brand']}
+          ${brandColorLuminance > 0.5 ? 'text-black' : 'text-white'}
           relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
-          ${this.disabled ? 'bg-gray-300 opacity-50' : ''}"
-          style="${!this.disabled &&
-          `
-            background: linear-gradient(180deg, ${color(
-              'tertiary',
-              color('primary')
-            )} 0%, ${color('tertiary', color('secondary'))} 100%);
-            color: ${color('text-primary')};
-          `}"
-          ?disabled=${this.disabled}
+          "
         >
           ${innerBorder()}
-          ${isLoading
-            ? loadingIconPrimary
-            : this._connected
-            ? iconOnly
-              ? bcConnectedIcon
-              : null
-            : bcIcon}
-          ${!iconOnly
-            ? html`<span class="font-semibold">
-                ${isLoading
-                  ? html`Connecting...`
-                  : this._connected
-                  ? html`${this._alias || 'Connected'}`
-                  : html`Connect Wallet`}
-              </span>`
-            : null}
+          ${isLoading ? html`${loadingIcon}` : this._connected ? null : bcIcon}
+          <span class="font-semibold">
+            ${isLoading
+              ? html`Connecting...`
+              : this._connected
+              ? html`${this._alias || 'Connected'}`
+              : html`Connect Wallet`}
+          </span>
         </button>
-        ${this._connected && !iconOnly && this._balance !== undefined
+        ${this._connected && this._balance !== undefined
           ? html`<span
-              class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5"
-              style="color: ${color('text-tertiary')}"
+              class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
+                'text-brand-mixed'
+              ]}"
               >${satIcon}<span class="font-mono">${this._balance}</span></span
             >`
           : null}
