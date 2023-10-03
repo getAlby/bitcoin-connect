@@ -21,6 +21,11 @@ export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _balance: number | undefined = undefined;
 
+  @state()
+  protected _appName: string | undefined = undefined;
+
+  protected appName = 'Bitcoin Connect';
+
   constructor() {
     super();
     loadFonts();
@@ -29,6 +34,7 @@ export class BitcoinConnectElement extends InternalElement {
     this._alias = store.getState().alias;
     this._balance = store.getState().balance;
     this._connectorName = store.getState().connectorName;
+    this._appName = store.getState().appName;
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
@@ -37,10 +43,12 @@ export class BitcoinConnectElement extends InternalElement {
       this._alias = store.alias;
       this._balance = store.balance;
       this._connectorName = store.connectorName;
+      this._appName = store.appName;
     });
   }
 
   override connectedCallback() {
     super.connectedCallback();
+    store.getState().appName = this.appName;
   }
 }

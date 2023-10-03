@@ -30,12 +30,14 @@ interface Store {
   readonly alias: string | undefined;
   readonly balance: number | undefined;
   readonly connectorName: string | undefined;
+  readonly appName: string | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
   setAlias(alias: string | undefined): void;
   setBalance(balance: number | undefined): void;
   setRoute(route: Route): void;
+  setAppName(appName: string | undefined): void;
 }
 
 const store = createStore<Store>((set) => ({
@@ -45,6 +47,7 @@ const store = createStore<Store>((set) => ({
   alias: undefined,
   balance: undefined,
   connectorName: undefined,
+  appName: undefined,
   connect: async (config: ConnectorConfig) => {
     dispatchEvent('bc:connecting');
     set({
@@ -94,6 +97,9 @@ const store = createStore<Store>((set) => ({
   getConnectorName: () => privateStore.getState().config?.connectorName,
   setRoute: (route: Route) => {
     set({route: route});
+  },
+  setAppName: (appName) => {
+    set({appName});
   },
 }));
 

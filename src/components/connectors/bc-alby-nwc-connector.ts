@@ -19,7 +19,7 @@ export class AlbyNWCConnector extends ConnectorElement {
 
     await nwc.initNWC({
       // TODO: pass to component
-      name: 'Bitcoin Connect',
+      name: this._appName,
     });
 
     this._connect({
