@@ -4,6 +4,7 @@ import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {html} from 'lit';
 import {exitIcon} from './icons/exitIcon';
+import {loadingIcon} from './icons/loadingIcon';
 import {hr} from './templates/hr';
 import './internal/bci-button';
 import {classes} from './css/classes';
@@ -16,25 +17,8 @@ export class Start extends withTwind()(BitcoinConnectElement) {
       class="flex flex-col justify-center items-center w-full font-sans"
     >
       ${this._connecting
-        ? html`<div
-            class="${classes['text-foreground']} w-full flex-1 animate-pulse"
-          >
-            <h1
-              class="w-1/2 h-7 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></h1>
-            <div
-              class="w-1/2 h-4 mt-8 mb-2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
-            <div
-              class="mb-12 h-10 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
-            ${hr()}
-            <div
-              class="my-4 h-4 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
-            <div
-              class="h-10 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
+        ? html`<div class="py-28 ${classes['text-foreground']}">
+            ${loadingIcon}
           </div>`
         : this._connected
         ? html` <h1 class="text-lg ${classes['text-neutral-secondary']}">
@@ -76,7 +60,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
               How would you like to connect?
             </h1>
 
-            <bc-connector-list></bc-connector-list>
+            <bc-connector-list />
           `}
     </div>`;
   }
