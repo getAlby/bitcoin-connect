@@ -1,3 +1,5 @@
+![image](https://github.com/getAlby/bitcoin-connect/assets/33993199/e99f0651-25a5-47cb-bd58-c75360517dfe)
+
 # Bitcoin Connect
 
 This project includes web components for connecting to Lightning wallets and enabling [WebLN](https://webln.guide). Websites only need to implement a single interface to connect with multiple wallets (WebLN), and users can connect from both desktop and mobile devices. These components work with pure HTML and all Javascript libraries or frameworks, such as React, Angular, Vue, Solid.js, etc.
