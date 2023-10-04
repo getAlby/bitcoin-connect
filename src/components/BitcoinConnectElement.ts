@@ -24,7 +24,7 @@ export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _appName: string | undefined = undefined;
 
-  protected appName = 'Bitcoin Connect';
+  protected appName = undefined;
 
   constructor() {
     super();
@@ -49,6 +49,8 @@ export class BitcoinConnectElement extends InternalElement {
 
   override connectedCallback() {
     super.connectedCallback();
-    store.getState().appName = this.appName;
+    if (this.appName != undefined) {
+      store.setAppName(this.appName);
+    }
   }
 }

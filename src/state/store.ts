@@ -37,7 +37,7 @@ interface Store {
   setAlias(alias: string | undefined): void;
   setBalance(balance: number | undefined): void;
   setRoute(route: Route): void;
-  setAppName(appName: string | undefined): void;
+  setAppName(appName: string): void;
 }
 
 const store = createStore<Store>((set) => ({
