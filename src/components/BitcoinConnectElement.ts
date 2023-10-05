@@ -26,6 +26,7 @@ export class BitcoinConnectElement extends InternalElement {
 
   @property({
     type: String,
+    attribute: 'app-name',
   })
   appName?: string;
 

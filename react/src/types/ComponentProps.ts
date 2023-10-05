@@ -4,4 +4,5 @@ export type ComponentProps = {
   onDisconnect?(): void;
   onModalOpened?(): void;
   onModalClosed?(): void;
+  appName?: string;
 };
