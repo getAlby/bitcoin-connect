@@ -24,7 +24,9 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   @state()
   protected _closing = false;
 
-  @property()
+  @property({
+    type: Boolean,
+  })
   open?: boolean = false;
 
   _prevOpen?: boolean = false;

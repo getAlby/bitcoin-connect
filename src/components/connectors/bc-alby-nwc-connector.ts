@@ -18,8 +18,7 @@ export class AlbyNWCConnector extends ConnectorElement {
     const nwc = webln.NostrWebLNProvider.withNewSecret();
 
     await nwc.initNWC({
-      // TODO: pass to component
-      name: 'Bitcoin Connect',
+      name: this._appName || 'Bitcoin Connect',
     });
 
     this._connect({

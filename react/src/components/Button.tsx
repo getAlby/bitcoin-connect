@@ -10,5 +10,5 @@ export const Button: React.FC<ButtonProps> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <bc-button />;
+  return <bc-button app-name={props.appName} />;
 };

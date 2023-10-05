@@ -9,16 +9,20 @@ function App() {
 
   React.useEffect(() => {
     (async () => {
-      const ln = new LightningAddress('hello@getalby.com');
-      await ln.fetch();
-      setInvoice(
-        (
-          await ln.requestInvoice({
-            satoshi: 1,
-            comment: 'Paid with Bitcoin Connect',
-          })
-        ).paymentRequest
-      );
+      try {
+        const ln = new LightningAddress('hello@getalby.com');
+        await ln.fetch();
+        setInvoice(
+          (
+            await ln.requestInvoice({
+              satoshi: 1,
+              comment: 'Paid with Bitcoin Connect',
+            })
+          ).paymentRequest
+        );
+      } catch (error) {
+        console.error(error);
+      }
     })();
   }, []);
 
@@ -45,7 +49,10 @@ function App() {
       <Toaster />
       <h1>Bitcoin Connect React</h1>
       <Modal onConnect={() => toast('Modal Connected!')} />
-      <Button onConnect={() => toast('Connected!')} />
+      <Button
+        appName="Bitcoin Connect (React Demo)"
+        onConnect={() => toast('Connected!')}
+      />
       <div style={{marginTop: '16px'}}>
         {preimage ? (
           <p>

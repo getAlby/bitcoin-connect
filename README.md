@@ -67,6 +67,10 @@ Bitcoin Connect exposes the following web components for allowing users to conne
 - `<bc-connector-list/>` - render the list of connectors on their own
 - _more components coming soon_
 
+##### Common Attributes (can be passed to any Bitcoin Connect component)
+
+- `app-name` (React: `appName`) - Name of the app requesting access to wallet. Currently used for NWC connections
+
 #### Window Events
 
 Bitcoin Connect exposes the following events:
