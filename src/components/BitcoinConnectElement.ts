@@ -1,5 +1,5 @@
 import {loadFonts} from './utils/loadFonts';
-import {state} from 'lit/decorators.js';
+import {property, state} from 'lit/decorators.js';
 import store from '../state/store';
 import {InternalElement} from './internal/InternalElement';
 
@@ -24,7 +24,10 @@ export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _appName: string | undefined = undefined;
 
-  protected appName = undefined;
+  @property({
+    type: String,
+  })
+  appName?: string;
 
   constructor() {
     super();
@@ -50,7 +53,7 @@ export class BitcoinConnectElement extends InternalElement {
   override connectedCallback() {
     super.connectedCallback();
     if (this.appName != undefined) {
-      store.setAppName(this.appName);
+      store.getState().setAppName(this.appName);
     }
   }
 }
