@@ -2,10 +2,9 @@ import {TemplateResult, html} from 'lit';
 import {BitcoinConnectElement} from '../BitcoinConnectElement';
 import {withTwind} from '../twind/withTwind';
 import {ConnectorType} from '../../types/ConnectorType';
-import {color} from '../css/colors';
 import {ConnectorConfig} from '../../types/ConnectorConfig';
 import store from '../../state/store';
-import {hoverClasses} from '../css/hoverClasses';
+import {classes} from '../css/classes';
 
 export abstract class ConnectorElement extends withTwind()(
   BitcoinConnectElement
@@ -30,7 +29,7 @@ export abstract class ConnectorElement extends withTwind()(
 
   override render() {
     return html`<div
-      class="flex flex-col justify-between items-center w-32 h-24 cursor-pointer ${hoverClasses}"
+      class="flex flex-col justify-between items-center w-32 h-24 cursor-pointer ${classes.interactive}"
       @click=${this._onClick}
     >
       <div
@@ -40,10 +39,12 @@ export abstract class ConnectorElement extends withTwind()(
         ${this._icon}
       </div>
       <span
-        class="text-sm font-sans font-medium"
-        style="color: ${color('text-secondary')}"
-        >${this._title}</span
+        class="text-sm font-sans font-medium ${classes[
+          'text-neutral-secondary'
+        ]}"
       >
+        ${this._title}
+      </span>
     </div>`;
   }
 

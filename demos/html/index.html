@@ -4,19 +4,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Bitcoin Connect</title>
-    <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@1.2.0/dist/index.browser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@2.0.0/dist/index.browser.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div style="display: flex; flex-direction: column; gap: 1rem">
       <code> &lt;bc-button /&gt; </code>
       <bc-button></bc-button>
-      <code> &lt;bc-button disabled /&gt; </code>
-      <bc-button disabled></bc-button>
-      <code> &lt;bc-button icon-only/&gt; </code>
-      <bc-button icon-only></bc-button>
-      <code> &lt;bc-connector-list/&gt; </code>
-      <bc-connector-list></bc-connector-list>
     </div>
     <script>
       window.addEventListener('bc:connected', async () => {

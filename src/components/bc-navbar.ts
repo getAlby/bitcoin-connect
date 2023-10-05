@@ -6,8 +6,8 @@ import './bc-help.js';
 import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {backIcon} from './icons/backIcon';
-import {color} from './css/colors';
 import {Route} from './routes';
+import {classes} from './css/classes';
 
 @customElement('bc-navbar')
 export class Navbar extends withTwind()(BitcoinConnectElement) {
@@ -22,16 +22,13 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
     >
       <div class="absolute left-0 h-full flex items-center justify-center">
         <div
-          class="cursor-pointer"
+          class="${classes.interactive} ${classes['text-neutral-secondary']}"
           @click=${() => store.getState().setRoute(this.to)}
         >
           ${backIcon}
         </div>
       </div>
-      <div
-        class="font-sans font-medium"
-        style="color: ${color('text-secondary')}"
-      >
+      <div class="font-sans font-medium ${classes['text-neutral-secondary']}">
         ${this.heading}
       </div>
     </div>`;

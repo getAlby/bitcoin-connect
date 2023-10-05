@@ -21,42 +21,58 @@
       window.addEventListener('bc:modalclosed', () =>
         console.info('Received modalclosed event from html')
       );
+      const bcTheme = window.localStorage.getItem('bcTheme');
+      if (bcTheme) {
+        window.bcDarkMode = 'class';
+        document.documentElement.classList.add(bcTheme);
+      } else {
+        document.documentElement.classList.add('system');
+      }
     </script>
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
+        @media (prefers-color-scheme: dark) {
+          background-color: black;
+          color: white;
+        }
       }
-      .theme-default-dark {
-        --bc-color-bg-primary: #222;
-        --bc-color-bg-secondary: #000;
-        --bc-color-text-secondary: #808080;
+      .dark body {
+        background-color: black;
+        color: white;
       }
-      .theme-geyser-light {
-        --bc-color-primary: #10caa8;
-        --bc-color-secondary: #10caa8;
-        --bc-color-tertiary: #21ecc7;
-        --bc-color-bg-primary: white;
-        --bc-color-bg-secondary: black;
-        --bc-color-text-primary: black;
-        --bc-color-text-secondary: #1a202c;
-        --bc-color-text-tertiary: white;
+      .light body {
+        background-color: white;
+        color: black;
       }
-      .theme-geyser-dark {
-        --bc-color-primary: #21ecc7;
-        --bc-color-secondary: #21ecc7;
-        --bc-color-bg-primary: black;
-        --bc-color-bg-secondary: black;
-        --bc-color-text-primary: black;
-        --bc-color-text-secondary: #f4f4f4;
-        --bc-color-text-tertiary: white;
+      .dark #button-theme-dark {
+        background-color: skyblue;
       }
-      .theme-orange-dark {
-        --bc-color-primary: #ffc837;
-        --bc-color-secondary: #ff8008;
-        --bc-color-bg-primary: black;
-        --bc-color-bg-secondary: black;
-        --bc-color-text-primary: black;
-        --bc-color-text-secondary: #ca9;
+      .light #button-theme-light {
+        background-color: skyblue;
+      }
+      .system #button-theme-system {
+        background-color: skyblue;
+      }
+
+      .theme-geyser {
+        --bc-color-brand: #21ecc7;
+        --bc-brand-mix: 75%;
+      }
+      .theme-orange {
+        --bc-color-brand: #ff8008;
+      }
+      .theme-stacker-news {
+        --bc-color-brand: #fada5e;
+        --bc-brand-mix: 75%;
+      }
+      .theme-white {
+        --bc-color-brand: #ffffff;
+        --bc-brand-mix: 50%;
+      }
+      .theme-black {
+        --bc-color-brand: #000000;
+        --bc-brand-mix: 50%;
       }
     </style>
   </head>
@@ -69,32 +85,51 @@
     </button>
     <bc-modal></bc-modal>
 
+    <h1>Light / Dark Mode</h1>
+
+    <button
+      id="button-theme-system"
+      onclick="window.localStorage.removeItem('bcTheme');window.location.reload();"
+    >
+      System
+    </button>
+    <button
+      id="button-theme-dark"
+      onclick="window.localStorage.setItem('bcTheme', 'dark');window.location.reload();"
+    >
+      Force Dark
+    </button>
+    <button
+      id="button-theme-light"
+      onclick="window.localStorage.setItem('bcTheme', 'light');window.location.reload();"
+    >
+      Force Light
+    </button>
+
     <h1>Components</h1>
+
     <h2>Button</h2>
-    <h3>Light</h3>
-    <bc-button></bc-button><br /><br />
-    <div class="theme-geyser-light">
+    <bc-button></bc-button>
+    <br /><br />
+    <div class="theme-geyser">
       <bc-button></bc-button>
     </div>
     <br /><br />
-    <h3>Dark</h3>
-    <div style="background-color: #111; padding: 8px">
-      <div class="theme-default-dark">
-        <bc-button></bc-button>
-      </div>
-      <br /><br />
-
-      <div class="theme-geyser-dark">
-        <bc-button></bc-button>
-      </div>
-      <br /><br />
-
-      <div class="theme-orange-dark">
-        <bc-button></bc-button>
-      </div>
+    <div class="theme-orange">
+      <bc-button></bc-button>
     </div>
-    <h3>Icon only</h3>
-    <bc-button icon-only></bc-button>
+    <br /><br />
+    <div class="theme-stacker-news">
+      <bc-button></bc-button>
+    </div>
+    <br /><br />
+    <div class="theme-white">
+      <bc-button></bc-button>
+    </div>
+    <br /><br />
+    <div class="theme-black">
+      <bc-button></bc-button>
+    </div>
 
     <h2>Modal header</h2>
     <div style="width: 448px">

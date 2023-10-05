@@ -1,6 +1,6 @@
 let appendedFonts = false;
 export function loadFonts() {
-  if (appendedFonts) {
+  if (!globalThis.document || appendedFonts) {
     return;
   }
   appendedFonts = true;
