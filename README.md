@@ -6,7 +6,9 @@ This project includes web components for connecting to Lightning wallets and ena
 
 ## 🛝 Try it out here
 
-[Bitcoin Connect Landing](https://getalby.github.io/bitcoin-connect)
+<h1>
+https://bitcoin-connect.com
+</h1>
 
 ## 🚀 Quick Start
 
