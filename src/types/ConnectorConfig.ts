@@ -4,4 +4,5 @@ export type ConnectorConfig = {
   connectorName: string;
   connectorType: ConnectorType;
   nwcUrl?: string;
+  pairingPhrase?: string;
 };

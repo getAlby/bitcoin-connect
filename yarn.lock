@@ -1482,6 +1482,19 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@lightninglabs/lnc-core@0.2.6-alpha":
+  version "0.2.6-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.6-alpha.tgz#1b93d5aeefb09bb3dedcb82988368b15e223f8fd"
+  integrity sha512-bw2EQG78pPKMZMFwV+TR99RUbYgPVUKQYMLGGKIOvhPds3dBWSDZpMoqOyW/WidWGXF/ugPHzud8lDbKKhNXgA==
+
+"@lightninglabs/lnc-web@^0.2.6-alpha":
+  version "0.2.6-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.6-alpha.tgz#34f54f65691ff8cdef6eb159321b70c94f198f9e"
+  integrity sha512-SrqR8xaDnFLgNzPe5om7REOAhSOP95jQNIHP0GY0Lv895eDjrI6CPkfCFcX97INoDWYHBvDT8DZeYkBvlznVNA==
+  dependencies:
+    "@lightninglabs/lnc-core" "0.2.6-alpha"
+    crypto-js "4.1.1"
+
 "@lit-labs/ssr-dom-shim@^1.0.0", "@lit-labs/ssr-dom-shim@^1.1.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.1.1.tgz#64df34e2f12e68e78ac57e571d25ec07fa460ca9"
@@ -3128,7 +3141,7 @@ cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crypto-js@^4.1.1:
+crypto-js@4.1.1, crypto-js@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
   integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
