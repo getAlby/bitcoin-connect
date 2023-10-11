@@ -14,7 +14,6 @@ export class NWCConnector extends Connector {
       nostrWalletConnectUrl: config.nwcUrl,
     });
 
-    // FIXME: typings
-    window.webln = nwc as unknown as WebLNProvider;
+    window.webln = nwc;
   }
 }
