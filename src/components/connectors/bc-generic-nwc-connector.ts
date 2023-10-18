@@ -1,5 +1,5 @@
 import {customElement} from 'lit/decorators.js';
-import {nwcIcon} from '../icons/nwcIcon';
+import {nwcIcon} from '../icons/connectors/nwcIcon';
 import {ConnectorElement} from './ConnectorElement';
 import store from '../../state/store';
 

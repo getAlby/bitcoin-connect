@@ -29,7 +29,7 @@ export abstract class ConnectorElement extends withTwind()(
 
   override render() {
     return html`<div
-      class="flex flex-col justify-between items-center w-32 h-24 cursor-pointer ${classes.interactive}"
+      class="flex flex-col justify-between items-center w-32 h-24 -mx-4 cursor-pointer ${classes.interactive}"
       @click=${this._onClick}
     >
       <div

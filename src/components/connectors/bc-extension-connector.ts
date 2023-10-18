@@ -1,5 +1,5 @@
 import {customElement} from 'lit/decorators.js';
-import {puzzleIcon} from '../icons/puzzleIcon';
+import {puzzleIcon} from '../icons/connectors/puzzleIcon';
 import {ConnectorElement} from './ConnectorElement';
 
 @customElement('bc-extension-connector')

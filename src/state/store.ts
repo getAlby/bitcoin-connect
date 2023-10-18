@@ -40,7 +40,7 @@ interface Store {
   setAppName(appName: string): void;
 }
 
-const store = createStore<Store>((set) => ({
+const store = createStore<Store>((set, get) => ({
   route: '/start',
   connected: false,
   connecting: false,
@@ -56,15 +56,25 @@ const store = createStore<Store>((set) => ({
     try {
       const connector = new connectors[config.connectorType](config);
       await connector.init();
-      const balance = await connector.getBalance();
-      const alias = await connector.getAlias();
+
+      (async () => {
+        const balance = await connector.getBalance();
+        if (balance !== undefined && get().connected) {
+          set({balance});
+        }
+      })();
+
+      (async () => {
+        const alias = await connector.getAlias();
+        if (alias !== undefined && get().connected) {
+          set({alias});
+        }
+      })();
       privateStore.getState().setConfig(config);
       privateStore.getState().setConnector(connector);
       set({
         connected: true,
         connecting: false,
-        balance,
-        alias,
         connectorName: config.connectorName,
       });
       dispatchEvent('bc:connected');
