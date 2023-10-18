@@ -1,4 +1,4 @@
-import {css, html} from 'lit';
+import {html} from 'lit';
 import {withTwind} from '../twind/withTwind';
 import {customElement} from 'lit/decorators.js';
 import {InternalElement} from './InternalElement';

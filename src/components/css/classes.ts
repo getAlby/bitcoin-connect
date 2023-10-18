@@ -21,4 +21,6 @@ export const classes = {
 
   // border colors
   'border-brand': 'border-brand-light dark:border-brand-dark',
+  'border-neutral-secondary':
+    'border-neutral-secondary-light dark:border-neutral-secondary-dark',
 };

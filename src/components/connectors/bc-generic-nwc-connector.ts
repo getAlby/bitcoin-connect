@@ -1,23 +1,18 @@
 import {customElement} from 'lit/decorators.js';
 import {nwcIcon} from '../icons/nwcIcon';
 import {ConnectorElement} from './ConnectorElement';
+import store from '../../state/store';
+
+export const genericConnectorTitle = 'NWC Generic';
 
 @customElement('bc-nwc-connector')
 export class GenericNWCConnector extends ConnectorElement {
   constructor() {
-    super('nwc.generic', 'NWC Generic', '#7E22CD', nwcIcon);
+    super('nwc.generic', genericConnectorTitle, '#7E22CD', nwcIcon);
   }
 
   protected async _onClick() {
-    // TODO: this should open a new page on the list component?
-    const nostrWalletConnectUrl = prompt('Enter your Nostr Wallet Connect URL');
-    if (!nostrWalletConnectUrl) {
-      return;
-    }
-
-    this._connect({
-      nwcUrl: nostrWalletConnectUrl,
-    });
+    store.getState().setRoute('/nwc');
   }
 }
 

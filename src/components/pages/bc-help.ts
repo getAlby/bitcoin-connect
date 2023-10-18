@@ -1,15 +1,15 @@
 import {customElement} from 'lit/decorators.js';
-import {BitcoinConnectElement} from './BitcoinConnectElement';
-import {withTwind} from './twind/withTwind';
+import {BitcoinConnectElement} from '../BitcoinConnectElement';
+import {withTwind} from '../twind/withTwind';
 import {html} from 'lit';
-import {linkIcon} from './icons/linkIcon';
-import {hr} from './templates/hr';
-import {albyLogo} from './icons/albyLogo';
-import './internal/bci-button';
-import {classes} from './css/classes';
+import {linkIcon} from '../icons/linkIcon';
+import {hr} from '../templates/hr';
+import {albyLogo} from '../icons/albyLogo';
+import '../internal/bci-button';
+import {classes} from '../css/classes';
 
 @customElement('bc-help')
-export class Help extends withTwind()(BitcoinConnectElement) {
+export class HelpPage extends withTwind()(BitcoinConnectElement) {
   override render() {
     return html`<div>
       <bc-navbar class="flex w-full" heading="About"></bc-navbar>
