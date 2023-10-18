@@ -1,6 +1,7 @@
 export const classes = {
   interactive:
     'transition-all hover:brightness-90 dark:hover:brightness-110 active:scale-95 cursor-pointer',
+  'hover-animation': 'hover-animation',
 
   // text colors
   'text-brand': 'text-brand-light dark:text-brand-dark',

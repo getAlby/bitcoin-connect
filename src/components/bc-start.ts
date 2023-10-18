@@ -3,7 +3,7 @@ import {BitcoinConnectElement} from './BitcoinConnectElement';
 import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {html} from 'lit';
-import {exitIcon} from './icons/exitIcon';
+import {disconnectIcon} from './icons/disconnectIcon';
 import {hr} from './templates/hr';
 import './internal/bci-button';
 import {classes} from './css/classes';
@@ -67,8 +67,11 @@ export class Start extends withTwind()(BitcoinConnectElement) {
               <span class="font-medium">${this._connectorName}</span></span
             >
 
-            <bci-button @click=${this._handleDisconnect}>
-              ${exitIcon}
+            <bci-button
+              @click=${this._handleDisconnect}
+              class=${classes['hover-animation']}
+            >
+              ${disconnectIcon}
               <span>Disconnect</span>
             </bci-button>`
         : html`

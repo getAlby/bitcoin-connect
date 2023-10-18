@@ -6,20 +6,6 @@ import {classes} from '../css/classes';
 
 @customElement('bci-button')
 export class Button extends withTwind()(InternalElement) {
-  static override styles = [
-    ...super.styles,
-    css`
-      :hover ::slotted(.hover-right) {
-        transform: translateX(4px);
-        transition: all 0.5s;
-      }
-      :hover ::slotted(.hover-right-up) {
-        transform: translateX(4px) translateY(-4px);
-        transition: all 0.5s;
-      }
-    `,
-  ];
-
   override render() {
     return html`<button
       class="relative h-10 px-3 font-semibold font-sans shadow rounded-lg w-full ${classes.interactive}"

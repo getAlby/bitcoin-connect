@@ -38,7 +38,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
           <a
             href="https://getalby.github.io/bitcoin-connect"
             target="_blank"
-            class="flex-1"
+            class="${classes['hover-animation']} flex-1"
           >
             <bci-button>
               <span class="${classes['text-brand-mixed']}">Learn more</span>
@@ -48,7 +48,7 @@ export class Help extends withTwind()(BitcoinConnectElement) {
           <a
             href="https://github.com/getAlby/bitcoin-connect"
             target="_blank"
-            class="flex-1"
+            class="${classes['hover-animation']} flex-1"
           >
             <bci-button>
               <span class="${classes['text-brand-mixed']}">Use it</span>

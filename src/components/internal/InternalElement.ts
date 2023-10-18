@@ -8,6 +8,14 @@ export class InternalElement extends LitElement {
         all: initial;
         font-variant-numeric: slashed-zero;
       }
+      .hover-animation:hover .hover-right-up {
+        transform: translateX(2px) translateY(-2px);
+        transition: all 0.3s;
+      }
+      .hover-animation:hover .hover-right {
+        transform: translateX(3px);
+        transition: all 0.3s;
+      }
     `,
   ];
 
