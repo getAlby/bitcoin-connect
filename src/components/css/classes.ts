@@ -23,4 +23,6 @@ export const classes = {
   'border-brand': 'border-brand-light dark:border-brand-dark',
   'border-neutral-secondary':
     'border-neutral-secondary-light dark:border-neutral-secondary-dark',
+  'border-neutral-tertiary':
+    'border-neutral-tertiary-light dark:border-neutral-tertiary-dark',
 };
