@@ -39,9 +39,9 @@ export class Button extends withTwind()(BitcoinConnectElement) {
         ></div>
         ${innerBorder()}
         <button
-          class="h-10 px-4 ${classes['bg-brand']}
+          class="h-10 pl-3 pr-4 ${classes['bg-brand']}
           ${brandColorLuminance > 0.5 ? 'text-black' : 'text-white'}
-          relative font-medium font-sans shadow rounded-lg flex gap-2 justify-center items-center
+          relative font-medium font-sans shadow rounded-lg flex justify-center items-center
           "
         >
           ${innerBorder()}

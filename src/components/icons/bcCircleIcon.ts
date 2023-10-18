@@ -2,6 +2,7 @@ import {svg} from 'lit';
 
 // WARNING: if replacing this icon make sure to:
 // - change primary color to "currentColor"
+// - this svg has a mask
 
 export const bcCircleIcon = svg`<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
 <mask id="myMask">
