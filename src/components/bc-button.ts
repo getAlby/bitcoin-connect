@@ -45,7 +45,11 @@ export class Button extends withTwind()(BitcoinConnectElement) {
           "
         >
           ${innerBorder()}
-          ${isLoading ? html`${loadingIcon}` : this._connected ? null : bcIcon}
+          ${isLoading
+            ? html`<span class="ml-1 mr-2">${loadingIcon}</span>`
+            : this._connected
+            ? null
+            : bcIcon}
           <span class="font-semibold">
             ${isLoading
               ? html`Connecting...`
