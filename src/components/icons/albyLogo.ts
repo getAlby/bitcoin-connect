@@ -1,5 +1,7 @@
 import {svg} from 'lit';
 
+// WARNING: this icon is colored to work OK on both light and dark modes
+
 export const albyLogo = svg`<svg width="49" height="24" viewBox="0 0 49 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 -my-4">
 <ellipse opacity="0.1" cx="7.70773" cy="21.5226" rx="3.4509" ry="0.637088" fill="black"/>
 <path d="M11.0342 18.4211C12.817 18.4211 13.6285 14.4735 13.6285 12.9767C13.6285 11.8101 12.8235 11.103 11.7652 11.103C10.7135 11.103 9.85965 11.5553 9.84905 12.1153C9.84902 13.5933 9.5889 18.4211 11.0342 18.4211Z" fill="white" stroke="currentColor" stroke-width="0.530907"/>

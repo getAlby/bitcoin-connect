@@ -1,5 +1,8 @@
 import {svg} from 'lit';
 
+// WARNING: if replacing this icon make sure to:
+// - change primary color to "currentColor"
+
 export const bcCircleIcon = svg`<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
 <mask id="myMask">
 <path d="M14.4998 8.69342C13.5647 12.4434 9.76614 14.7256 6.01526 13.7905C2.26591 12.8555 -0.0165632 9.0572 0.918915 5.30741C1.85352 1.55696 5.6521 -0.725459 9.40188 0.209473C13.1525 1.1444 15.4348 4.94319 14.4998 8.69342Z" fill="white"/>
