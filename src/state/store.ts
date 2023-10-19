@@ -75,6 +75,7 @@ const store = createStore<Store>((set, get) => ({
         connecting: false,
       });
       get().disconnect();
+      // TODO: throw new ConnectFailedError(error);
     }
   },
   disconnect: () => {

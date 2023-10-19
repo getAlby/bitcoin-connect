@@ -15,47 +15,56 @@ import {
 } from '@webbtc/webln-types';
 import LNC from '@lightninglabs/lnc-web';
 
-export class LNCConnector extends Connector {
-  private _lnc: LNC;
+// global instance of LNC
+export const lnc = new LNC();
+const lncPassword = 'ONLY CONNECT TO TRUSTED WEBSITES';
 
+export class LNCConnector extends Connector {
   constructor(config: ConnectorConfig) {
     super(config);
-
-    if (!config.pairingPhrase) {
-      throw new Error('no pairing phrase provided');
-    }
-    this._lnc = new LNC({
-      pairingPhrase: this._config.pairingPhrase,
-      // TODO: add encryption password?
-    });
   }
 
   override async init() {
-    window.webln = new LNCWebLNProvider(this._lnc);
+    window.webln = new LNCWebLNProvider();
 
     try {
-      await this._lnc.connect();
+      const hasPreviouslyConnected = !lnc.credentials.pairingPhrase;
+      if (hasPreviouslyConnected) {
+        console.log('Pairing phrase does not exist');
+        lnc.credentials.password = lncPassword;
+      } else {
+        console.log('Pairing phrase set');
+      }
+      await lnc.connect();
+
+      if (!hasPreviouslyConnected) {
+        lnc.credentials.password = lncPassword;
+      }
+
+      while (!lnc.isConnected) {
+        console.log('Waiting to connect...');
+        await new Promise((resolve) => {
+          setTimeout(resolve, 100);
+        });
+      }
     } catch (error) {
       console.error(error);
-      this._lnc.disconnect();
+      lnc.disconnect();
+      lnc.credentials.clear();
       throw error;
     }
 
-    super.init();
+    await super.init();
   }
 
   override async unload(): Promise<void> {
-    this._lnc.disconnect();
+    lnc.disconnect();
+    lnc.credentials.clear();
     await super.unload();
   }
 }
 
 class LNCWebLNProvider implements WebLNProvider {
-  private _lnc: LNC;
-
-  constructor(lnc: LNC) {
-    this._lnc = lnc;
-  }
   enable(): Promise<void> {
     return Promise.resolve();
   }
@@ -74,7 +83,7 @@ class LNCWebLNProvider implements WebLNProvider {
     throw new Error('Method not implemented.');
   }
   async getBalance(): Promise<GetBalanceResponse> {
-    const balance = await this._lnc.lnd.lightning.channelBalance();
+    const balance = await lnc.lnd.lightning.channelBalance();
     return {
       balance: parseInt(balance.localBalance?.sat || '0'),
     };

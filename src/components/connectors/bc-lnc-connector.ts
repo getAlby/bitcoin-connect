@@ -1,6 +1,7 @@
 import {customElement} from 'lit/decorators.js';
 import {puzzleIcon} from '../icons/puzzleIcon';
 import {ConnectorElement} from './ConnectorElement';
+import {lnc} from '../../connectors/LNCConnector';
 
 @customElement('bc-lnc-connector')
 export class LNCConnector extends ConnectorElement {
@@ -19,9 +20,10 @@ export class LNCConnector extends ConnectorElement {
     if (!pairingPhrase) {
       return;
     }
-    this._connect({
-      pairingPhrase,
-    });
+
+    lnc.credentials.pairingPhrase = pairingPhrase;
+
+    this._connect({});
   }
 }
 
