@@ -1,5 +1,5 @@
 import {customElement} from 'lit/decorators.js';
-import {albyIcon} from '../icons/albyIcon';
+import {albyIcon} from '../icons/connectors/albyIcon';
 import {webln} from '@getalby/sdk';
 import {ConnectorElement} from './ConnectorElement';
 

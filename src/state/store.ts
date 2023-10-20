@@ -54,17 +54,27 @@ const store = createStore<Store>((set, get) => ({
       connecting: true,
     });
     const connector = new connectors[config.connectorType](config);
-    privateStore.getState().setConnector(connector);
-    privateStore.getState().setConfig(config);
     try {
       await connector.init();
-      const balance = await connector.getBalance();
-      const alias = await connector.getAlias();
+
+      (async () => {
+        const balance = await connector.getBalance();
+        if (balance !== undefined && get().connected) {
+          set({balance});
+        }
+      })();
+
+      (async () => {
+        const alias = await connector.getAlias();
+        if (alias !== undefined && get().connected) {
+          set({alias});
+        }
+      })();
+      privateStore.getState().setConfig(config);
+      privateStore.getState().setConnector(connector);
       set({
         connected: true,
         connecting: false,
-        balance,
-        alias,
         connectorName: config.connectorName,
       });
       dispatchEvent('bc:connected');

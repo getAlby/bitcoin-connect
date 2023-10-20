@@ -6,5 +6,6 @@ export const connectors = {
   'extension.generic': ExtensionConnector,
   'nwc.alby': NWCConnector,
   'nwc.generic': NWCConnector,
+  'nwc.mutiny': NWCConnector,
   lnc: LNCConnector,
 };

@@ -10,11 +10,12 @@ import './connectors/index.js';
 @customElement('bc-connector-list')
 export class ConnectorList extends withTwind()(BitcoinConnectElement) {
   override render() {
-    return html` <div class="flex justify-center items-start flex-wrap">
+    return html` <div class="flex justify-center items-start flex-wrap gap-4">
       ${window.webln
         ? html`<bc-extension-connector></bc-extension-connector>`
         : null}
       <bc-alby-nwc-connector></bc-alby-nwc-connector>
+      <bc-mutiny-nwc-connector></bc-mutiny-nwc-connector>
       <bc-nwc-connector></bc-nwc-connector>
       <bc-lnc-connector></bc-lnc-connector>
     </div>`;

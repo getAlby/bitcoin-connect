@@ -1,5 +1,8 @@
 import {svg} from 'lit';
 
+// WARNING: if replacing this icon make sure to:
+// - set class="w-10 h-10"
+
 export const nwcIcon = svg`<svg
   width="25"
   height="24"

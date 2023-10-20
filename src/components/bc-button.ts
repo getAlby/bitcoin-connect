@@ -58,12 +58,14 @@ export class Button extends withTwind()(BitcoinConnectElement) {
               : html`Connect Wallet`}
           </span>
         </button>
-        ${this._connected && this._balance !== undefined
+        ${this._connected
           ? html`<span
               class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
                 'text-brand-mixed'
               ]}"
-              >${satIcon}<span class="font-mono">${this._balance}</span></span
+              >${satIcon}<span class="font-mono"
+                >${this._balance || 0}</span
+              ></span
             >`
           : null}
       </div>

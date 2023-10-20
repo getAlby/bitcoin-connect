@@ -1,7 +1,5 @@
 import {svg} from 'lit';
 
-// WARNING: this icon is colored to work OK on both light and dark modes
-
 export const albyIcon = svg`<svg width="45" height="64" viewBox="0 0 45 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M32.9716 52.1905C38.5774 52.1905 41.1289 39.7778 41.1289 35.0713C41.1289 31.4029 38.5976 29.1797 35.2699 29.1797C31.9629 29.1797 29.2782 30.6017 29.2449 32.3627C29.2448 37.01 28.4268 52.1905 32.9716 52.1905Z" fill="white" stroke="black" stroke-width="1.66938"/>
 <path d="M12.4972 52.1905C6.89139 52.1905 4.33989 39.7778 4.33989 35.0713C4.33989 31.4029 6.87114 29.1797 10.1989 29.1797C13.5058 29.1797 16.1906 30.6017 16.2239 32.3627C16.224 37.01 17.0419 52.1905 12.4972 52.1905Z" fill="white" stroke="black" stroke-width="1.66938"/>
