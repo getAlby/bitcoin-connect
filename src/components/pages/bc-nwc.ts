@@ -50,11 +50,13 @@ export class NWCPage extends withTwind()(BitcoinConnectElement) {
   }
   private async onConnect() {
     if (!this._nwcUrl) {
-      // TODO: support toasts?
+      // TODO: show an error message directly on this page
       alert('Please enter a URL');
       return;
     }
 
+    // FIXME: do not change route - extract skeleton loader and add loading state in this component
+    // and make connect throw an error on failure
     store.getState().setRoute('/start');
     await store.getState().connect({
       nwcUrl: this._nwcUrl,
@@ -63,7 +65,7 @@ export class NWCPage extends withTwind()(BitcoinConnectElement) {
     });
     if (!store.getState().connected) {
       store.getState().setRoute('/nwc');
-      // TODO: support toasts?
+      // TODO: show an error message directly on this page
       alert('Failed to connect. Please check your NWC URL');
     }
   }

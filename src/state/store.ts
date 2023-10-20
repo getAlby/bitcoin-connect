@@ -53,8 +53,8 @@ const store = createStore<Store>((set, get) => ({
     set({
       connecting: true,
     });
+    const connector = new connectors[config.connectorType](config);
     try {
-      const connector = new connectors[config.connectorType](config);
       await connector.init();
 
       (async () => {
@@ -78,15 +78,18 @@ const store = createStore<Store>((set, get) => ({
         connectorName: config.connectorName,
       });
       dispatchEvent('bc:connected');
+      saveConfig(config);
     } catch (error) {
       console.error(error);
       set({
         connecting: false,
       });
+      get().disconnect();
+      // TODO: throw new ConnectFailedError(error);
     }
-    saveConfig(config);
   },
   disconnect: () => {
+    privateStore.getState().connector?.unload();
     privateStore.getState().setConfig(undefined);
     privateStore.getState().setConnector(undefined);
     set({
