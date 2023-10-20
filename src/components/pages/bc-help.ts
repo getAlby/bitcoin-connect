@@ -72,6 +72,6 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-help': Help;
+    'bc-help': HelpPage;
   }
 }
