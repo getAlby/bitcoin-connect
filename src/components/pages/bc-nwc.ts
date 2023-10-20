@@ -55,6 +55,8 @@ export class NWCPage extends withTwind()(BitcoinConnectElement) {
       return;
     }
 
+    // FIXME: do not change route - extract skeleton loader and add loading state in this component
+    // and make connect throw an error on failure
     store.getState().setRoute('/start');
     await store.getState().connect({
       nwcUrl: this._nwcUrl,
