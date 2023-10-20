@@ -149,19 +149,20 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.46.0.tgz#3f7802972e8b6fe3f88ed1aabc74ec596c456db6"
   integrity sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==
 
-"@getalby/bitcoin-connect-react@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-2.0.0.tgz#f99f78754b1627619b511760274efb40f9723c92"
-  integrity sha512-PlpXDk/p3y+2zyWRlgkKc+t5XN6wbJr9xZSWYayYFs+i988lrE1BqcydGAoYI6SotoaYpt3FDyOKgGfB4dyzsw==
+"@getalby/bitcoin-connect-react@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-2.1.3.tgz#0a072964b5807f34b8c86cad5f40747887f9dade"
+  integrity sha512-uEJW4Y2p9YEYfxZgL7v/57C+GElV1IWv/6q5AQyPLi6udgJugeU8vU1pcYefV7CeLvobROA7E+jf2Kn/Hj9pkA==
   dependencies:
-    "@getalby/bitcoin-connect" "^2.0.0"
+    "@getalby/bitcoin-connect" "^2.1.3"
 
-"@getalby/bitcoin-connect@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.0.0.tgz#9ae7f139a616a65a55008d8b8d808ebd6fc316c6"
-  integrity sha512-cLtEHenPiF8n/gbC8jG81D8lgPgRhSsNM3TeIBHbMQComyciuB2/Yth6sh4CNUefAbAN5Br97guaNGur4umBZg==
+"@getalby/bitcoin-connect@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.1.3.tgz#7485ad3279f7800b0f924d63658adcef371ee6e0"
+  integrity sha512-kX93lJUemFWcwkgXbXJHi9mj3uyyXhlQLwt2/x3Pi29RKzU2rmXocdxZqP6SfwWxtFwuwAfmMRqmxusUbVurTQ==
   dependencies:
     "@getalby/sdk" "^2.4.0"
+    "@lightninglabs/lnc-web" "^0.2.6-alpha"
     lit "^2.2.4"
     zustand "^4.4.1"
 
@@ -200,6 +201,19 @@
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
+
+"@lightninglabs/lnc-core@0.2.6-alpha":
+  version "0.2.6-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.6-alpha.tgz#1b93d5aeefb09bb3dedcb82988368b15e223f8fd"
+  integrity sha512-bw2EQG78pPKMZMFwV+TR99RUbYgPVUKQYMLGGKIOvhPds3dBWSDZpMoqOyW/WidWGXF/ugPHzud8lDbKKhNXgA==
+
+"@lightninglabs/lnc-web@^0.2.6-alpha":
+  version "0.2.6-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.6-alpha.tgz#34f54f65691ff8cdef6eb159321b70c94f198f9e"
+  integrity sha512-SrqR8xaDnFLgNzPe5om7REOAhSOP95jQNIHP0GY0Lv895eDjrI6CPkfCFcX97INoDWYHBvDT8DZeYkBvlznVNA==
+  dependencies:
+    "@lightninglabs/lnc-core" "0.2.6-alpha"
+    crypto-js "4.1.1"
 
 "@lit-labs/ssr-dom-shim@^1.0.0", "@lit-labs/ssr-dom-shim@^1.1.0":
   version "1.1.1"
@@ -584,7 +598,7 @@ cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crypto-js@^4.1.1:
+crypto-js@4.1.1, crypto-js@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
   integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==

@@ -1,6 +1,6 @@
 {
   "name": "@getalby/bitcoin-connect",
-  "version": "2.0.0",
+  "version": "2.1.3",
   "description": "Web components to connect to a lightning wallet and power a website with WebLN",
   "type": "module",
   "source": "src/index.ts",
@@ -19,7 +19,7 @@
   "scripts": {
     "prebuild": "yarn run clean",
     "prepack": "yarn run build",
-    "build:browser": "esbuild dist/index.modern.js --bundle --outfile=dist/index.browser.js",
+    "build:browser": "esbuild dist/index.modern.js --bundle --external:@lightninglabs/lnc-web --outfile=dist/index.browser.js",
     "build": "microbundle && yarn build:browser",
     "clean": "rm -rf dist",
     "dev": "yarn --cwd dev/vite dev",

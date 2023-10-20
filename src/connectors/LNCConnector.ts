@@ -13,11 +13,27 @@ import {
   WebLNProvider,
   WebLNRequestMethod,
 } from '@webbtc/webln-types';
-import LNC from '@lightninglabs/lnc-web';
+import type LNC from '@lightninglabs/lnc-web';
 import {base64ToHex} from '../utils/base64ToHex';
 
 // global instance of LNC
-export const lnc = new LNC();
+let lnc: LNC;
+
+export async function getLNC() {
+  try {
+    if (lnc) {
+      return lnc;
+    }
+    const LNC = (await import('@lightninglabs/lnc-web')).default;
+    lnc = new LNC();
+    return lnc;
+  } catch (error) {
+    console.error(error);
+    throw new Error('LNC is not available');
+  }
+}
+
+export {lnc};
 // NOTE: as per NWC and other connectors - the user must put trust in the website to not use funds
 // without the user's permission.
 const lncPassword = 'ONLY CONNECT TO TRUSTED WEBSITES';
@@ -28,6 +44,7 @@ export class LNCConnector extends Connector {
   }
 
   override async init() {
+    await getLNC();
     window.webln = new LNCWebLNProvider();
 
     try {
