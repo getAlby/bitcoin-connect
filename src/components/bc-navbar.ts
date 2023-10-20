@@ -1,8 +1,6 @@
 import {html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
-import './bc-connector-list.js';
-import './bc-help.js';
 import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {backIcon} from './icons/backIcon';
