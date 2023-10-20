@@ -14,9 +14,12 @@ import {
   WebLNRequestMethod,
 } from '@webbtc/webln-types';
 import LNC from '@lightninglabs/lnc-web';
+import {base64ToHex} from '../utils/base64ToHex';
 
 // global instance of LNC
 export const lnc = new LNC();
+// NOTE: as per NWC and other connectors - the user must put trust in the website to not use funds
+// without the user's permission.
 const lncPassword = 'ONLY CONNECT TO TRUSTED WEBSITES';
 
 export class LNCConnector extends Connector {
@@ -68,20 +71,46 @@ class LNCWebLNProvider implements WebLNProvider {
   enable(): Promise<void> {
     return Promise.resolve();
   }
-  getInfo(): Promise<GetInfoResponse> {
-    throw new Error('Method not implemented.');
+  async getInfo(): Promise<GetInfoResponse> {
+    const data = await lnc.lnd.lightning.getInfo();
+    return {
+      // TODO: support makeInvoice and webln.request
+      methods: ['enable', 'getBalance', 'getInfo', 'sendPayment'],
+      version: '1.0',
+      node: {
+        alias: data.alias,
+        pubkey: data.identityPubkey,
+        color: data.color,
+      },
+      supports: ['lightning'],
+    };
   }
   makeInvoice(
     _args: string | number | RequestInvoiceArgs
   ): Promise<MakeInvoiceResponse> {
+    // TODO: implement (See Alby extension implementation)
     throw new Error('Method not implemented.');
   }
-  sendPayment(_paymentRequest: string): Promise<SendPaymentResponse> {
-    throw new Error('Method not implemented.');
+  async sendPayment(paymentRequest: string): Promise<SendPaymentResponse> {
+    const data = await lnc.lnd.lightning.sendPaymentSync({
+      paymentRequest,
+    });
+
+    if (data.paymentError) {
+      throw new Error(data.paymentError);
+    }
+    if (!data.paymentPreimage) {
+      throw new Error('No preimage in response');
+    }
+    if (typeof data.paymentPreimage !== 'string') {
+      throw new Error('expected preimage as string');
+    }
+
+    return {
+      preimage: base64ToHex(data.paymentPreimage),
+    };
   }
-  isEnabled(): boolean {
-    throw new Error('Method not implemented.');
-  }
+
   async getBalance(): Promise<GetBalanceResponse> {
     const balance = await lnc.lnd.lightning.channelBalance();
     return {

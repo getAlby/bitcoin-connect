@@ -1,17 +1,12 @@
 import {customElement} from 'lit/decorators.js';
-import {puzzleIcon} from '../icons/puzzleIcon';
 import {ConnectorElement} from './ConnectorElement';
 import {lnc} from '../../connectors/LNCConnector';
+import {lncIcon} from '../icons/lncIcon';
 
 @customElement('bc-lnc-connector')
 export class LNCConnector extends ConnectorElement {
   constructor() {
-    super(
-      'lnc',
-      'LNC',
-      'linear-gradient(180deg, #FF0000 63.72%, #00FFFF 95.24%)', // TODO: change
-      puzzleIcon // TODO: change
-    );
+    super('lnc', 'LNC', '#101727', lncIcon);
   }
 
   protected _onClick() {
