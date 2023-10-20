@@ -14,7 +14,10 @@ export class MutinyPage extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return html`<div class="w-full">
-      <bc-navbar class="flex w-full" heading="Mutiny"></bc-navbar>
+      <bc-navbar
+        class="flex w-full"
+        heading=${mutinyNWCConnectorTitle}
+      ></bc-navbar>
       <div class="font-sans text-sm w-full">
         <div class="px-8 pt-4 w-full">
           <div class="mb-2 ${classes['text-neutral-secondary']}">
