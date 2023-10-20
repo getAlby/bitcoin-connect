@@ -1,7 +1,7 @@
 import {customElement} from 'lit/decorators.js';
 import {ConnectorElement} from './ConnectorElement';
 import {lnc} from '../../connectors/LNCConnector';
-import {lncIcon} from '../icons/lncIcon';
+import {lncIcon} from '../icons/connectors/lncIcon';
 
 @customElement('bc-lnc-connector')
 export class LNCConnector extends ConnectorElement {
