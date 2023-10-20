@@ -14,6 +14,8 @@ export abstract class Connector {
     await window.webln.enable();
   }
 
+  async unload() {}
+
   async getBalance() {
     try {
       if (!window.webln) {

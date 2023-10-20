@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
     <script type="module" src="../../src/index.ts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-tools@latest/dist/index.browser.js"></script>
     <script>
       window.addEventListener('bc:connected', () =>
         console.info('Received connected event from html')
@@ -27,6 +28,20 @@
         document.documentElement.classList.add(bcTheme);
       } else {
         document.documentElement.classList.add('system');
+      }
+      async function payInvoice() {
+        try {
+          const ln = new window.lightningTools.LightningAddress(
+            'hello@getalby.com'
+          );
+          await ln.fetch();
+          const invoice = await ln.requestInvoice({satoshi: 1});
+          const result = await window.webln.sendPayment(invoice.paymentRequest);
+          alert('PAID! ' + JSON.stringify(result));
+        } catch (error) {
+          console.error(error);
+          alert('Failed to pay: ' + error);
+        }
       }
     </script>
     <style>
@@ -155,5 +170,8 @@
 
     <h2>Connector List</h2>
     <bc-connector-list></bc-connector-list>
+
+    <h2>Pay an invoice</h2>
+    <button onclick="payInvoice()">Pay</button>
   </body>
 </html>

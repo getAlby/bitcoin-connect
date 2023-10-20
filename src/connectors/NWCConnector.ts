@@ -1,7 +1,6 @@
 import {webln} from '@getalby/sdk';
 import {Connector} from './Connector';
 import {ConnectorConfig} from '../types/ConnectorConfig';
-import {WebLNProvider} from '@webbtc/webln-types';
 
 export class NWCConnector extends Connector {
   constructor(config: ConnectorConfig) {

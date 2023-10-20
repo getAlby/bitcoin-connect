@@ -40,7 +40,7 @@ interface Store {
   setAppName(appName: string): void;
 }
 
-const store = createStore<Store>((set) => ({
+const store = createStore<Store>((set, get) => ({
   route: '/start',
   connected: false,
   connecting: false,
@@ -53,13 +53,13 @@ const store = createStore<Store>((set) => ({
     set({
       connecting: true,
     });
+    const connector = new connectors[config.connectorType](config);
+    privateStore.getState().setConnector(connector);
+    privateStore.getState().setConfig(config);
     try {
-      const connector = new connectors[config.connectorType](config);
       await connector.init();
       const balance = await connector.getBalance();
       const alias = await connector.getAlias();
-      privateStore.getState().setConfig(config);
-      privateStore.getState().setConnector(connector);
       set({
         connected: true,
         connecting: false,
@@ -68,15 +68,18 @@ const store = createStore<Store>((set) => ({
         connectorName: config.connectorName,
       });
       dispatchEvent('bc:connected');
+      saveConfig(config);
     } catch (error) {
       console.error(error);
       set({
         connecting: false,
       });
+      get().disconnect();
+      // TODO: throw new ConnectFailedError(error);
     }
-    saveConfig(config);
   },
   disconnect: () => {
+    privateStore.getState().connector?.unload();
     privateStore.getState().setConfig(undefined);
     privateStore.getState().setConnector(undefined);
     set({

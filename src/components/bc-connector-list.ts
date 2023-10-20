@@ -16,6 +16,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
         : null}
       <bc-alby-nwc-connector></bc-alby-nwc-connector>
       <bc-nwc-connector></bc-nwc-connector>
+      <bc-lnc-connector></bc-lnc-connector>
     </div>`;
   }
 }
