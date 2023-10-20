@@ -224,6 +224,9 @@ You should have a certain level of trust on the website you decide to connect yo
 
 - [Alby Browser extension](https://getalby.com)
 - [Alby NWC](https://nwc.getalby.com)
+- [LNC](https://github.com/lightninglabs/lightning-node-connect)
+- [LNbits](https://lnbits.com/)
+- [Mutiny NWC URL](https://www.mutinywallet.com/)
 - [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
 
 ## Known Issues
