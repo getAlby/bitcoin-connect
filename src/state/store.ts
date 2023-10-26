@@ -4,6 +4,7 @@ import {connectors} from '../connectors';
 import {dispatchEvent} from '../utils/dispatchEvent';
 import {Connector} from '../connectors/Connector';
 import {Route as Route} from '../components/routes';
+import {ConnectorFilter} from '../types/ConnectorFilter';
 
 interface PrivateStore {
   readonly connector: Connector | undefined;
@@ -31,6 +32,7 @@ interface Store {
   readonly balance: number | undefined;
   readonly connectorName: string | undefined;
   readonly appName: string | undefined;
+  readonly filters: ConnectorFilter[] | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -38,6 +40,7 @@ interface Store {
   setBalance(balance: number | undefined): void;
   setRoute(route: Route): void;
   setAppName(appName: string): void;
+  setFilters(filters: ConnectorFilter[]): void;
 }
 
 const store = createStore<Store>((set, get) => ({
@@ -48,6 +51,7 @@ const store = createStore<Store>((set, get) => ({
   balance: undefined,
   connectorName: undefined,
   appName: undefined,
+  filters: undefined,
   connect: async (config: ConnectorConfig) => {
     dispatchEvent('bc:connecting');
     set({
@@ -113,6 +117,9 @@ const store = createStore<Store>((set, get) => ({
   },
   setAppName: (appName) => {
     set({appName});
+  },
+  setFilters: (filters) => {
+    set({filters});
   },
 }));
 

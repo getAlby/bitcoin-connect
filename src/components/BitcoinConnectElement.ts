@@ -2,6 +2,7 @@ import {loadFonts} from './utils/loadFonts';
 import {property, state} from 'lit/decorators.js';
 import store from '../state/store';
 import {InternalElement} from './internal/InternalElement';
+import {ConnectorFilter} from '../types/ConnectorFilter';
 
 /**
  * @fires bc:connected - Indicates a wallet has been connected and window.webln is now available and enabled
@@ -24,11 +25,23 @@ export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _appName: string | undefined = undefined;
 
+  @state()
+  protected _filters: ConnectorFilter[] | undefined = undefined;
+
   @property({
     type: String,
     attribute: 'app-name',
   })
   appName?: string;
+
+  @property({
+    type: String,
+    attribute: 'filters',
+    converter(value, _type) {
+      return value?.split(',');
+    },
+  })
+  filters?: ConnectorFilter[];
 
   constructor() {
     super();
@@ -39,6 +52,7 @@ export class BitcoinConnectElement extends InternalElement {
     this._balance = store.getState().balance;
     this._connectorName = store.getState().connectorName;
     this._appName = store.getState().appName;
+    this._filters = store.getState().filters;
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
@@ -48,6 +62,7 @@ export class BitcoinConnectElement extends InternalElement {
       this._balance = store.balance;
       this._connectorName = store.connectorName;
       this._appName = store.appName;
+      this._filters = store.filters;
     });
   }
 
@@ -55,6 +70,9 @@ export class BitcoinConnectElement extends InternalElement {
     super.connectedCallback();
     if (this.appName != undefined) {
       store.getState().setAppName(this.appName);
+    }
+    if (this.filters != undefined) {
+      store.getState().setFilters(this.filters);
     }
   }
 }

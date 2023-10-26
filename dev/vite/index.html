@@ -121,9 +121,22 @@
       Force Light
     </button>
 
+    <h1>Settings</h1>
+    <p>Name (e.g. Zap.Stream)</p>
+    <input
+      id="app-name"
+      onchange="localStorage.setItem('app-name', document.getElementById('app-name').value); window.location.reload()"
+    />
+    <p>Filters (e.g. nwc)</p>
+    <input
+      id="filters"
+      onchange="localStorage.setItem('filters', document.getElementById('filters').value); window.location.reload()"
+    />
+    <br />
+    <br />
     <h1>Components</h1>
     <h2>Button</h2>
-    <bc-button app-name="Bitcoin Connect Vite"></bc-button>
+    <bc-button id="first-button"></bc-button>
     <br /><br />
     <div class="theme-geyser">
       <bc-button></bc-button>
@@ -177,5 +190,14 @@
 
     <h2>Pay an invoice</h2>
     <button onclick="payInvoice()">Pay</button>
+    <script>
+      const appName = localStorage.getItem('app-name');
+      document.getElementById('app-name').value = appName;
+      document.getElementById('first-button').setAttribute('app-name', appName);
+
+      const filters = localStorage.getItem('filters');
+      document.getElementById('filters').value = filters;
+      document.getElementById('first-button').setAttribute('filters', filters);
+    </script>
   </body>
 </html>

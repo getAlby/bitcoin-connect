@@ -73,7 +73,8 @@ Bitcoin Connect exposes the following web components for allowing users to conne
 
 ##### Common Attributes (can be passed to any Bitcoin Connect component)
 
-- `app-name` (React: `appName`) - Name of the app requesting access to wallet. Currently used for NWC connections
+- `app-name` (React: `appName`) - Name of the app requesting access to wallet. Currently used for NWC connections (Alby and Mutiny)
+- `filters` - Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors). Multiple filters can be separated by a comma e.g. `nwc,second_filter`.
 
 #### Window Events
 
