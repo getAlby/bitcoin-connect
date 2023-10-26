@@ -47,7 +47,7 @@
   "dependencies": {
     "@getalby/sdk": "^2.4.0",
     "@lightninglabs/lnc-web": "^0.2.6-alpha",
-    "lit": "^2.2.4",
+    "lit": "^3.0.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
