@@ -1,6 +1,6 @@
 {
   "name": "@getalby/bitcoin-connect",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "Web components to connect to a lightning wallet and power a website with WebLN",
   "type": "module",
   "source": "src/index.ts",
@@ -47,7 +47,7 @@
   "dependencies": {
     "@getalby/sdk": "^2.4.0",
     "@lightninglabs/lnc-web": "^0.2.6-alpha",
-    "lit": "^2.2.4",
+    "lit": "^3.0.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
