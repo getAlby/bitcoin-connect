@@ -8,7 +8,7 @@ export class AlbyNWCConnector extends ConnectorElement {
   constructor() {
     super(
       'nwc.alby',
-      'Alby NWC',
+      'Alby',
       'linear-gradient(180deg, #FFDE6E 63.72%, #F8C455 95.24%)',
       albyIcon
     );
