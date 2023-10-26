@@ -23,7 +23,8 @@ export class MutinyPage extends withTwind()(BitcoinConnectElement) {
           <div class="mb-2 ${classes['text-neutral-secondary']}">
             1. Add a new
             <a
-              href="https://app.mutinywallet.com/settings/connections"
+              href="https://app.mutinywallet.com/settings/connections?name=${this
+                ._appName}"
               target="_blank"
               class="font-bold"
               >Wallet Connection
