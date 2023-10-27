@@ -28,6 +28,7 @@ interface Store {
   readonly route: Route;
   readonly connected: boolean;
   readonly connecting: boolean;
+  readonly fetchedConnectorInfo: boolean;
   readonly alias: string | undefined;
   readonly balance: number | undefined;
   readonly connectorName: string | undefined;
@@ -41,6 +42,7 @@ interface Store {
   setRoute(route: Route): void;
   setAppName(appName: string): void;
   setFilters(filters: ConnectorFilter[]): void;
+  fetchConnectorInfo(): void;
 }
 
 const store = createStore<Store>((set, get) => ({
@@ -51,6 +53,7 @@ const store = createStore<Store>((set, get) => ({
   balance: undefined,
   connectorName: undefined,
   appName: undefined,
+  fetchedConnectorInfo: false,
   filters: undefined,
   connect: async (config: ConnectorConfig) => {
     dispatchEvent('bc:connecting');
@@ -60,20 +63,6 @@ const store = createStore<Store>((set, get) => ({
     const connector = new connectors[config.connectorType](config);
     try {
       await connector.init();
-
-      (async () => {
-        const balance = await connector.getBalance();
-        if (balance !== undefined && get().connected) {
-          set({balance});
-        }
-      })();
-
-      (async () => {
-        const alias = await connector.getAlias();
-        if (alias !== undefined && get().connected) {
-          set({alias});
-        }
-      })();
       privateStore.getState().setConfig(config);
       privateStore.getState().setConnector(connector);
       set({
@@ -101,6 +90,7 @@ const store = createStore<Store>((set, get) => ({
       alias: undefined,
       balance: undefined,
       connectorName: undefined,
+      fetchedConnectorInfo: false,
     });
     deleteConfig();
     dispatchEvent('bc:disconnected');
@@ -120,6 +110,29 @@ const store = createStore<Store>((set, get) => ({
   },
   setFilters: (filters) => {
     set({filters});
+  },
+  fetchConnectorInfo: () => {
+    if (!get().connected || get().fetchedConnectorInfo) {
+      return;
+    }
+    set({fetchedConnectorInfo: true});
+    const connector = privateStore.getState().connector;
+    if (!connector) {
+      return;
+    }
+    (async () => {
+      const balance = await connector.getBalance();
+      if (balance !== undefined && get().connected) {
+        set({balance});
+      }
+    })();
+
+    (async () => {
+      const alias = await connector.getAlias();
+      if (alias !== undefined && get().connected) {
+        set({alias});
+      }
+    })();
   },
 }));
 
