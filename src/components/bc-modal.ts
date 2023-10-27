@@ -30,6 +30,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   open?: boolean = false;
 
   _prevOpen?: boolean = false;
+  _prevConnected?: boolean = false;
 
   constructor() {
     super();
@@ -43,6 +44,18 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
+    // fetch balance and info if modal is opened or connector is initialized while the model is open
+    if (
+      (this._prevConnected !== this._connected ||
+        this._prevOpen !== this.open) &&
+      this._connected &&
+      this.open
+    ) {
+      store.getState().fetchConnectorInfo();
+    }
+    if (this._prevConnected !== this._connected) {
+      this._prevConnected = this._connected;
+    }
     if (this._prevOpen !== this.open) {
       this._prevOpen = this.open;
       if (this.open) {

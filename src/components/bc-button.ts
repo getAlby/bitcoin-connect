@@ -8,6 +8,7 @@ import {loadingIcon} from './icons/loadingIcon.js';
 import {satIcon} from './icons/satIcon.js';
 import {innerBorder} from './templates/innerBorder.js';
 import {classes} from './css/classes.js';
+import store from '../state/store.js';
 
 /**
  * A button that when clicked launches the modal.
@@ -16,12 +17,21 @@ import {classes} from './css/classes.js';
 export class Button extends withTwind()(BitcoinConnectElement) {
   @state()
   private _modalOpen = false;
+  private _prevConnected = false;
 
   constructor() {
     super();
   }
 
   override render() {
+    // fetch connector info if button is visible and connector is initialized
+    if (this._prevConnected !== this._connected) {
+      this._prevConnected = this._connected;
+      if (this._connected) {
+        store.getState().fetchConnectorInfo();
+      }
+    }
+
     const isLoading = this._connecting || (!this._connected && this._modalOpen);
     const brandColorLuminance = this._getBrandColorLuminance();
 
