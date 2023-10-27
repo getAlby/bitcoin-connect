@@ -35,7 +35,7 @@ export class BitcoinConnectElement extends InternalElement {
   appName?: string;
 
   @property({
-    type: String,
+    type: Array,
     attribute: 'filters',
     converter(value, _type) {
       return value?.split(',');
