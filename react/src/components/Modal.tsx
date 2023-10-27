@@ -10,7 +10,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <bc-modal app-name={props.appName} />;
+  return <bc-modal app-name={props.appName} filters={props.filters} />;
 };
 
 // TODO: move to bitcoin connect package and just re-export it here

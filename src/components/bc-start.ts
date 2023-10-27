@@ -75,8 +75,13 @@ export class Start extends withTwind()(BitcoinConnectElement) {
               <span>Disconnect</span>
             </bci-button>`
         : html`
-            <h1 class="my-8 ${classes['text-neutral-primary']}">
-              How would you like to connect?
+            <h1
+              class="my-8 ${classes[
+                'text-neutral-primary'
+              ]} w-64 max-w-full text-center"
+            >
+              How would you like to
+              connect${this._appName ? `\nto ${this._appName}` : ''}?
             </h1>
 
             <bc-connector-list></bc-connector-list>
