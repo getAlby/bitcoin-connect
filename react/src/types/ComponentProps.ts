@@ -5,4 +5,5 @@ export type ComponentProps = {
   onModalOpened?(): void;
   onModalClosed?(): void;
   appName?: string;
+  filters?: string;
 };
