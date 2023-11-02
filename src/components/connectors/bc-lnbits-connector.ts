@@ -3,7 +3,7 @@ import {ConnectorElement} from './ConnectorElement';
 import store from '../../state/store';
 import {lnbitsIcon} from '../icons/connectors/lnbitsIcon';
 
-export const lnbitsConnectorTitle = 'Lnbits';
+export const lnbitsConnectorTitle = 'LNbits';
 
 @customElement('bc-lnbits-connector')
 export class GenericNWCConnector extends ConnectorElement {

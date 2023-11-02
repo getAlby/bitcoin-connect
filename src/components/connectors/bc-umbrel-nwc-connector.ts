@@ -6,17 +6,13 @@ import {ConnectorElement} from './ConnectorElement';
 @customElement('bc-umbrel-nwc-connector')
 export class UmbrelNWCConnector extends ConnectorElement {
   constructor() {
-    super(
-      'nwc.umbrel',
-      'Umbrel',
-      'linear-gradient(180deg, #FFDE6E 63.72%, #F8C455 95.24%)',
-      umbrelIcon
-    );
+    super('nwc.umbrel', 'Umbrel', '#5250fb', umbrelIcon);
   }
 
   protected async _onClick() {
-    const nwc = webln.NostrWebLNProvider.withNewSecret();
-
+    const nwc = webln.NostrWebLNProvider.withNewSecret({
+      authorizationUrl: 'http://umbrel.local:58000/apps/new',
+    });
     await nwc.initNWC({
       name: this._appName || 'Bitcoin Connect',
     });

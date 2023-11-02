@@ -29,17 +29,17 @@ export abstract class ConnectorElement extends withTwind()(
 
   override render() {
     return html`<div
-      class="flex flex-col justify-between items-center w-32 h-24 -mx-4 cursor-pointer ${classes.interactive}"
+      class="flex flex-col justify-between items-center w-32 -mx-4 cursor-pointer ${classes.interactive}"
       @click=${this._onClick}
     >
       <div
-        class="w-16 h-16 drop-shadow-lg rounded-2xl flex justify-center items-center overflow-hidden"
+        class="w-16 h-16 drop-shadow rounded-2xl flex justify-center items-center overflow-hidden"
         style="background: ${this._background};"
       >
         ${this._icon}
       </div>
       <span
-        class="text-sm font-sans font-medium ${classes[
+        class="mt-2 text-sm font-sans font-medium ${classes[
           'text-neutral-secondary'
         ]}"
       >
