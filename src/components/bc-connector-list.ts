@@ -15,6 +15,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     const connectors: TemplateResult<1>[] = [];
     connectors.push(html`<bc-alby-nwc-connector></bc-alby-nwc-connector>`);
     connectors.push(html`<bc-mutiny-nwc-connector></bc-mutiny-nwc-connector>`);
+    connectors.push(html`<bc-umbrel-nwc-connector></bc-umbrel-nwc-connector>`);
     connectors.push(html`<bc-nwc-connector></bc-nwc-connector>`);
     if (!this._filters || this._filters.indexOf('nwc') === -1) {
       if (window.webln) {
@@ -26,7 +27,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
       connectors.push(html`<bc-lnc-connector></bc-lnc-connector>`);
     }
 
-    return html` <div class="flex justify-center items-start flex-wrap gap-4">
+    return html` <div class="flex justify-center items-start flex-wrap gap-5">
       ${connectors}
     </div>`;
   }
