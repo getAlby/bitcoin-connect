@@ -5,6 +5,7 @@ import './pages/bc-help.js';
 import './pages/bc-nwc.js';
 import './pages/bc-mutiny.js';
 import './pages/bc-lnbits.js';
+import './pages/bc-umbrel.js';
 
 export const routes = {
   '/start': html`<bc-start class="flex w-full"></bc-start>`,
@@ -12,6 +13,7 @@ export const routes = {
   '/nwc': html`<bc-nwc class="flex w-full"></bc-nwc>`,
   '/mutiny': html`<bc-mutiny class="flex w-full"></bc-mutiny>`,
   '/lnbits': html`<bc-lnbits class="flex w-full"></bc-lnbits>`,
+  '/umbrel': html`<bc-umbrel class="flex w-full"></bc-umbrel>`,
 };
 
 export type Route = keyof typeof routes;
