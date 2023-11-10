@@ -28,6 +28,9 @@ export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _filters: ConnectorFilter[] | undefined = undefined;
 
+  @state()
+  protected _error: string | undefined = undefined;
+
   @property({
     type: String,
     attribute: 'app-name',
@@ -53,6 +56,7 @@ export class BitcoinConnectElement extends InternalElement {
     this._connectorName = store.getState().connectorName;
     this._appName = store.getState().appName;
     this._filters = store.getState().filters;
+    this._error = store.getState().error;
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
@@ -63,6 +67,7 @@ export class BitcoinConnectElement extends InternalElement {
       this._connectorName = store.connectorName;
       this._appName = store.appName;
       this._filters = store.filters;
+      this._error = store.error;
     });
   }
 

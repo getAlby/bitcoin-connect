@@ -91,6 +91,9 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
             ? html`<bci-connecting class="flex w-full"></bci-connecting>`
             : html` <bc-router-outlet class="flex w-full"></bc-router-outlet>`}
         </div>
+        ${this._error
+          ? html`<p class="mt-4 text-red-500">${this._error}</p>`
+          : null}
       </div>
     </div>`;
   }
@@ -103,6 +106,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       // Reset after close
       // TODO: is there a better way to reset state when the modal is closed?
       store.getState().setRoute('/start');
+      store.getState().setError(undefined);
       this.onClose?.();
     }, 200);
   };

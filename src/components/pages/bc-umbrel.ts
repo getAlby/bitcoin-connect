@@ -41,10 +41,6 @@ export class UmbrelPage extends withTwind()(BitcoinConnectElement) {
       connectorName: 'Umbrel',
       connectorType: 'nwc.umbrel',
     });
-    if (!store.getState().connected) {
-      // TODO: show an error message directly on this page
-      alert('Failed to connect. Please check your NWC URL');
-    }
   }
 }
 

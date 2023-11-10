@@ -21,7 +21,7 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
       <div class="absolute left-0 h-full flex items-center justify-center">
         <div
           class="${classes.interactive} ${classes['text-neutral-secondary']}"
-          @click=${() => store.getState().setRoute(this.to)}
+          @click=${this._goBack}
         >
           ${backIcon}
         </div>
@@ -31,6 +31,11 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
       </div>
     </div>`;
   }
+
+  private _goBack = () => {
+    store.getState().setRoute(this.to);
+    store.getState().setError(undefined);
+  };
 }
 
 declare global {

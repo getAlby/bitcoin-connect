@@ -72,7 +72,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
                 'text-brand-mixed'
               ]}"
               ><span class="font-mono"
-                >${(this._balance || 0).toLocaleString('en', {
+                >${(this._balance || 0).toLocaleString(undefined, {
                   useGrouping: true,
                 })}
                 sats</span

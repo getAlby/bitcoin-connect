@@ -50,8 +50,7 @@ export class NWCPage extends withTwind()(BitcoinConnectElement) {
   }
   private async onConnect() {
     if (!this._nwcUrl) {
-      // TODO: show an error message directly on this page
-      alert('Please enter a URL');
+      store.getState().setError('Please enter a URL');
       return;
     }
 
@@ -60,10 +59,6 @@ export class NWCPage extends withTwind()(BitcoinConnectElement) {
       connectorName: genericConnectorTitle,
       connectorType: 'nwc.generic',
     });
-    if (!store.getState().connected) {
-      // TODO: show an error message directly on this page
-      alert('Failed to connect. Please check your NWC URL');
-    }
   }
 }
 
