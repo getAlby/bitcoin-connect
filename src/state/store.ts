@@ -92,7 +92,6 @@ const store = createStore<Store>((set, get) => ({
       balance: undefined,
       connectorName: undefined,
       fetchedConnectorInfo: false,
-      route: '/start',
     });
     deleteConfig();
     dispatchEvent('bc:disconnected');
