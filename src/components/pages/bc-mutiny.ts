@@ -66,16 +66,12 @@ export class MutinyPage extends withTwind()(BitcoinConnectElement) {
       return;
     }
 
-    // FIXME: do not change route - extract skeleton loader and add loading state in this component
-    // and make connect throw an error on failure
-    store.getState().setRoute('/start');
     await store.getState().connect({
       nwcUrl: this._nwcUrl,
       connectorName: mutinyNWCConnectorTitle,
       connectorType: 'nwc.mutiny',
     });
     if (!store.getState().connected) {
-      store.getState().setRoute('/mutiny');
       // TODO: show an error message directly on this page
       alert('Failed to connect. Please check your NWC URL');
     }

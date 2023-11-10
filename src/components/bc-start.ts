@@ -6,6 +6,7 @@ import {html} from 'lit';
 import {disconnectIcon} from './icons/disconnectIcon';
 import {hr} from './templates/hr';
 import './internal/bci-button';
+import './bc-connector-list';
 import {classes} from './css/classes';
 
 // TODO: split up this component into disconnected and connected
@@ -15,28 +16,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
     return html`<div
       class="flex flex-col justify-center items-center w-full font-sans"
     >
-      ${this._connecting
-        ? html`<div
-            class="${classes['text-foreground']} w-full flex-1 animate-pulse"
-          >
-            <h1
-              class="w-1/2 h-7 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></h1>
-            <div
-              class="w-1/2 h-4 mt-8 mb-2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
-            <div
-              class="mb-12 h-10 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
-            ${hr()}
-            <div
-              class="my-4 h-4 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
-            <div
-              class="h-10 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-            ></div>
-          </div>`
-        : this._connected
+      ${this._connected
         ? html` <h1 class="text-lg ${classes['text-neutral-secondary']}">
               Hello,
               <span class="font-bold ${classes['text-brand-mixed']}">

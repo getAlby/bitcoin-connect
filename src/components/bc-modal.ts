@@ -2,6 +2,7 @@ import {html} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
 import './bc-router-outlet.js';
+import './internal/bci-connecting';
 import store from '../state/store';
 import {dispatchEvent} from '../utils/dispatchEvent';
 import {withTwind} from './twind/withTwind';
@@ -85,7 +86,11 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
           class="flex w-full"
           .onClose=${this._handleClose}
         ></bc-modal-header>
-        <bc-router-outlet class="flex w-full"></bc-router-outlet>
+        <div class="flex w-full pt-8">
+          ${this._connecting
+            ? html`<bci-connecting class="flex w-full"></bci-connecting>`
+            : html` <bc-router-outlet class="flex w-full"></bc-router-outlet>`}
+        </div>
       </div>
     </div>`;
   }
