@@ -5,7 +5,6 @@ import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
 import {loadingIcon} from './icons/loadingIcon.js';
-import {satIcon} from './icons/satIcon.js';
 import {innerBorder} from './templates/innerBorder.js';
 import {classes} from './css/classes.js';
 import store from '../state/store.js';
@@ -72,8 +71,11 @@ export class Button extends withTwind()(BitcoinConnectElement) {
               class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
                 'text-brand-mixed'
               ]}"
-              >${satIcon}<span class="font-mono"
-                >${this._balance || 0}</span
+              ><span class="font-mono"
+                >${(this._balance || 0).toLocaleString('en', {
+                  useGrouping: true,
+                })}
+                sats</span
               ></span
             >`
           : null}
