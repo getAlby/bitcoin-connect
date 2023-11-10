@@ -24,8 +24,10 @@ const colors = {
 };
 
 const imageColors = {
-  'glass-light': 'linear-gradient(180deg, #D3D3D31A 0%, #FFFFFF1A 100%)',
-  'glass-dark': 'linear-gradient(180deg, #D3D3D31A 0%, #0000001A 100%)',
+  'glass-light':
+    'linear-gradient(180deg, rgba(211, 211, 211, 0.20) 0%, rgba(255, 255, 255, 0.20) 50%);',
+  'glass-dark':
+    'linear-gradient(180deg, rgba(211, 211, 211, 0.10) 0%, rgba(0, 0, 0, 0.20) 50%)',
 };
 
 export const withTwindExtended = () =>
@@ -41,7 +43,6 @@ export const withTwindExtended = () =>
         extend: {
           borderColor: {
             ...colors,
-            inner: '#0001', // TODO: border wrapping the button and button container should be a gradient
           },
           backgroundColor: {
             ...colors,
