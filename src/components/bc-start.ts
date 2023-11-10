@@ -56,7 +56,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                 class="font-bold font-mono text-4xl align-bottom ${classes[
                   'text-brand-mixed'
                 ]}"
-                >${(this._balance || 0).toLocaleString('en', {
+                >${(this._balance || 0).toLocaleString(undefined, {
                   useGrouping: true,
                 })}</span
               >&nbsp;sats
