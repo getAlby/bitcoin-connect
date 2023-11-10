@@ -38,14 +38,13 @@ export class Button extends withTwind()(BitcoinConnectElement) {
     return html`<div>
       <div
         class="relative inline-flex ${classes.interactive} cursor-pointer 
-          rounded-lg gap-2 justify-center items-center ${classes[
-          'bg-background'
-        ]}"
+          rounded-lg gap-2 justify-center items-center"
         @click=${this._onClick}
       >
         <div
-          class="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none"
-          style="background: linear-gradient(180deg, #fff6 0%, #fff0 100%)"
+          class="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none ${classes[
+            'bg-glass'
+          ]}"
         ></div>
         ${innerBorder()}
         <button

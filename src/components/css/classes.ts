@@ -18,9 +18,11 @@ export const classes = {
   'bg-brand': 'bg-brand-light dark:bg-brand-dark',
   'bg-background': 'bg-background-light dark:bg-background-dark',
   'bg-foreground': 'bg-foreground-light dark:bg-foreground-dark',
+  'bg-glass': 'bg-glass-light dark:bg-glass-dark',
 
   // border colors
   'border-brand': 'border-brand-light dark:border-brand-dark',
+  'border-brand-mixed': 'border-brand-mixed-light dark:border-brand-mixed-dark',
   'border-neutral-secondary':
     'border-neutral-secondary-light dark:border-neutral-secondary-dark',
   'border-neutral-tertiary':

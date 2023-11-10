@@ -12,7 +12,7 @@ export class Button extends withTwind()(InternalElement) {
     >
       <div
         class="absolute -z-10 top-0 left-0 w-full h-full border-2 rounded-lg
-        ${classes['border-brand']}"
+        ${classes['border-brand-mixed']}"
       ></div>
       <div
         class="flex gap-2 justify-center items-center ${classes[

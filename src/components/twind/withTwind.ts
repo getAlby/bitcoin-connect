@@ -23,6 +23,11 @@ const colors = {
   'neutral-tertiary-dark': '#525252',
 };
 
+const imageColors = {
+  'glass-light': 'linear-gradient(180deg, #D3D3D31A 0%, #FFFFFF1A 100%)',
+  'glass-dark': 'linear-gradient(180deg, #D3D3D31A 0%, #0000001A 100%)',
+};
+
 export const withTwindExtended = () =>
   install(
     defineConfig({
@@ -43,6 +48,9 @@ export const withTwindExtended = () =>
           },
           textColor: {
             ...colors,
+          },
+          backgroundImage: {
+            ...imageColors,
           },
           animation: {
             darken: 'darken 0.2s ease-out forwards',
