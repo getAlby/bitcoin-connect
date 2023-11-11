@@ -43,6 +43,21 @@
           alert('Failed to pay: ' + error);
         }
       }
+      // TODO: render the header normally and inject the payment component
+      // when the invoice has loaded
+      (async () => {
+        const ln = new window.lightningTools.LightningAddress(
+          'hello@getalby.com'
+        );
+        await ln.fetch();
+        const invoice = await ln.requestInvoice({satoshi: 1});
+        document.body.innerHTML += `
+        <h2>Payment Component</h2>
+        <div style="width: 448px; border: 1px solid black">
+          <bc-send-payment invoice="${invoice.paymentRequest}"></bc-send-payment>
+        </div>
+        `;
+      })();
     </script>
     <style>
       body {
