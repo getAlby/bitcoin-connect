@@ -76,9 +76,6 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
       return;
     }
 
-    // FIXME: do not change route - extract skeleton loader and add loading state in this component
-    // and make connect throw an error on failure
-    store.getState().setRoute('/start');
     await store.getState().connect({
       lnbitsAdminKey: this._lnbitsAdminKey,
       lnbitsInstanceUrl: this._lnbitsUrl,
@@ -86,7 +83,6 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
       connectorType: 'lnbits',
     });
     if (!store.getState().connected) {
-      store.getState().setRoute('/lnbits');
       // TODO: show an error message directly on this page
       alert('Failed to connect. Please check your LNbits admin key and URL');
     }

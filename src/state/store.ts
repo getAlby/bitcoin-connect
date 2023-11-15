@@ -69,6 +69,7 @@ const store = createStore<Store>((set, get) => ({
         connected: true,
         connecting: false,
         connectorName: config.connectorName,
+        route: '/start',
       });
       dispatchEvent('bc:connected');
       saveConfig(config);

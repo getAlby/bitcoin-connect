@@ -36,17 +36,12 @@ export class UmbrelPage extends withTwind()(BitcoinConnectElement) {
       name: this._appName || 'Bitcoin Connect',
     });
 
-    // FIXME: do not change route - extract skeleton loader and add loading state in this component
-    // and make connect throw an error on failure
-    store.getState().setRoute('/start');
-
     await store.getState().connect({
       nwcUrl: nwc.getNostrWalletConnectUrl(),
       connectorName: 'Umbrel',
       connectorType: 'nwc.umbrel',
     });
     if (!store.getState().connected) {
-      store.getState().setRoute('/nwc');
       // TODO: show an error message directly on this page
       alert('Failed to connect. Please check your NWC URL');
     }

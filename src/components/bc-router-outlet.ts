@@ -21,9 +21,7 @@ export class RouterOutlet extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
-    return html`<div class="flex flex-col w-full pt-8">
-      ${routes[this._route]}
-    </div>`;
+    return html`<div class="flex flex-col w-full">${routes[this._route]}</div>`;
   }
 }
 
