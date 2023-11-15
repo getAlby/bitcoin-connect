@@ -51,12 +51,9 @@
         );
         await ln.fetch();
         const invoice = await ln.requestInvoice({satoshi: 1});
-        document.body.innerHTML += `
-        <h2>Payment Component</h2>
-        <div style="width: 448px; border: 1px solid black">
-          <bc-send-payment invoice="${invoice.paymentRequest}"></bc-send-payment>
-        </div>
-        `;
+        document
+          .getElementsByTagName('bc-send-payment')[0]
+          .setAttribute('invoice', invoice.paymentRequest);
       })();
     </script>
     <style>
@@ -113,7 +110,7 @@
     >
       Open modal
     </button>
-    <bc-modal></bc-modal>
+    <bc-modal id="first-modal"></bc-modal>
 
     <br /><br />
     <a href="balance.html">Balance tester</a>
@@ -149,6 +146,11 @@
     <input
       id="filters"
       onchange="localStorage.setItem('filters', document.getElementById('filters').value); window.location.reload()"
+    />
+    <p>Invoice</p>
+    <input
+      id="invoice"
+      onchange="localStorage.setItem('invoice', document.getElementById('invoice').value); window.location.reload()"
     />
     <br />
     <br />
@@ -189,6 +191,13 @@
       <bc-router-outlet></bc-router-outlet>
     </div>
 
+    <h2>Request Payment Screen</h2>
+    <div style="width: 448px; border: 1px solid black">
+      <bc-send-payment
+        invoice="lnbc10n1pj4g7ugpp5h0lld9qzh06ngn8ur756rva0ntfdfg34h298337rljjyztxy8rfqhp50kncf9zk35xg4lxewt4974ry6mudygsztsz8qn3ar8pn3mtpe50scqzzsxqyz5vqsp5lwlnu7xjs7hj7vltx7rhzsjf60l5mwckuw93qngjrz7sdhdkw7gs9qyyssqzy543rxhkdtncjrmuzlz4lrh2eauldawa9np5yysh7dhqhv8kaahydurha2cfelr7t6wt33xse7fdykupnjv36na6x6crrhy53lyg6cqf2jhjj"
+      ></bc-send-payment>
+    </div>
+
     <h2>Start screen</h2>
     <div style="width: 448px">
       <bc-start></bc-start>
@@ -211,11 +220,25 @@
     <script>
       const appName = localStorage.getItem('app-name');
       document.getElementById('app-name').value = appName;
-      document.getElementById('first-button').setAttribute('app-name', appName);
+      if (appName) {
+        document
+          .getElementById('first-button')
+          .setAttribute('app-name', appName);
+      }
 
       const filters = localStorage.getItem('filters');
       document.getElementById('filters').value = filters;
-      document.getElementById('first-button').setAttribute('filters', filters);
+      if (filters) {
+        document
+          .getElementById('first-button')
+          .setAttribute('filters', filters);
+      }
+
+      const invoice = localStorage.getItem('invoice');
+      document.getElementById('invoice').value = invoice;
+      if (invoice) {
+        document.getElementById('first-modal').setAttribute('invoice', invoice);
+      }
     </script>
   </body>
 </html>

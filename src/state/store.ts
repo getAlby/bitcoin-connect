@@ -35,6 +35,7 @@ interface Store {
   readonly appName: string | undefined;
   readonly filters: ConnectorFilter[] | undefined;
   readonly error: string | undefined;
+  readonly invoice: string | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -45,6 +46,7 @@ interface Store {
   setFilters(filters: ConnectorFilter[]): void;
   fetchConnectorInfo(): void;
   setError(error: string | undefined): void;
+  setInvoice(invoice: string | undefined): void;
 }
 
 const store = createStore<Store>((set, get) => ({
@@ -58,6 +60,7 @@ const store = createStore<Store>((set, get) => ({
   appName: undefined,
   fetchedConnectorInfo: false,
   filters: undefined,
+  invoice: undefined,
   connect: async (config: ConnectorConfig) => {
     dispatchEvent('bc:connecting');
     set({
@@ -119,6 +122,9 @@ const store = createStore<Store>((set, get) => ({
   },
   setError: (error) => {
     set({error});
+  },
+  setInvoice: (invoice) => {
+    set({invoice});
   },
   fetchConnectorInfo: () => {
     if (!get().connected || get().fetchedConnectorInfo) {

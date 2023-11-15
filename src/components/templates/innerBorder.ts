@@ -8,3 +8,11 @@ export function innerBorder() {
     ]} opacity-5"
   ></div>`;
 }
+
+export function innerBorderBranded() {
+  return html`<div
+    class="absolute -z-10 top-0 left-0 w-full h-full border-2 rounded-lg ${classes[
+      'border-brand-mixed'
+    ]}"
+  ></div>`;
+}

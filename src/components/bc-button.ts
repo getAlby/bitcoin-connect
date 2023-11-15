@@ -1,5 +1,5 @@
 import {html} from 'lit';
-import {customElement, state} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 import './bc-modal.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
@@ -18,6 +18,9 @@ export class Button extends withTwind()(BitcoinConnectElement) {
   private _modalOpen = false;
   private _prevConnected = false;
 
+  @property()
+  override title = 'Connect Wallet';
+
   constructor() {
     super();
   }
@@ -32,7 +35,6 @@ export class Button extends withTwind()(BitcoinConnectElement) {
     }
 
     const isLoading = this._connecting || (!this._connected && this._modalOpen);
-    const brandColorLuminance = this._getBrandColorLuminance();
 
     return html`<div>
       <div
@@ -41,36 +43,31 @@ export class Button extends withTwind()(BitcoinConnectElement) {
         @click=${this._onClick}
       >
         <div
-          class="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none ${classes[
-            'bg-glass'
-          ]}"
+          class="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none ${this
+            ._connected
+            ? classes['bg-glass']
+            : ''}"
         ></div>
-        ${innerBorder()}
-        <button
-          class="h-10 px-4 ${classes['bg-brand']}
-          ${brandColorLuminance > 0.5 ? 'text-black' : 'text-white'}
-          relative font-medium font-sans shadow rounded-lg flex justify-center items-center
-          "
-        >
-          ${innerBorder()}
+        ${this._connected ? innerBorder() : ''}
+        <bci-button variant="primary">
           ${isLoading
-            ? html`<span class="ml-1 mr-3">${loadingIcon}</span>`
+            ? html`<span class="ml-1 mr-1">${loadingIcon}</span>`
             : this._connected
             ? null
-            : html`<span class="-ml-0.5 mr-2">${bcIcon}</span>`}
+            : html`<span class="-ml-0.5">${bcIcon}</span>`}
           <span class="font-semibold">
             ${isLoading
               ? html`Connecting...`
               : this._connected
               ? html`${this._alias || 'Connected'}`
-              : html`Connect Wallet`}
+              : html`${this.title}`}
           </span>
-        </button>
+        </bci-button>
         ${this._connected
           ? html`<span
               class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
                 'text-brand-mixed'
-              ]}"
+              ]} select-none"
               ><span class="font-mono"
                 >${(this._balance || 0).toLocaleString(undefined, {
                   useGrouping: true,

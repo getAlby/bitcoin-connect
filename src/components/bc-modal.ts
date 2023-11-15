@@ -30,6 +30,12 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   })
   open?: boolean = false;
 
+  @property({
+    type: String,
+    attribute: 'invoice',
+  })
+  invoice?: string;
+
   _prevOpen?: boolean = false;
   _prevConnected?: boolean = false;
 
@@ -37,9 +43,19 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
     super();
 
     // TODO: handle unsubscribe
-    store.subscribe((store, prevStore) => {
-      if (store.connected !== prevStore.connected && !store.connected) {
+    store.subscribe((currentStore, prevStore) => {
+      if (
+        currentStore.connected !== prevStore.connected &&
+        !currentStore.connected
+      ) {
         this._handleClose();
+      }
+      if (
+        currentStore.connected !== prevStore.connected &&
+        currentStore.connected &&
+        currentStore.invoice
+      ) {
+        store.getState().setRoute('/send-payment');
       }
     });
   }
@@ -61,6 +77,10 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       this._prevOpen = this.open;
       if (this.open) {
         dispatchEvent('bc:modalopened');
+        if (this.invoice != undefined) {
+          store.getState().setInvoice(this.invoice);
+          store.getState().setRoute('/send-payment');
+        }
       } else {
         dispatchEvent('bc:modalclosed');
       }

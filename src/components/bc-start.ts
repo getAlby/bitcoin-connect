@@ -54,7 +54,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
               class=${classes['hover-animation']}
             >
               ${disconnectIcon}
-              <span>Disconnect</span>
+              <span class="${classes['text-brand-mixed']}">Disconnect</span>
             </bci-button>`
         : html`
             <h1
