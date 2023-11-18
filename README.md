@@ -79,6 +79,9 @@ Bitcoin Connect exposes the following web components for allowing users to conne
   - Optional Arguments:
     - `open` - make the modal appear
 - `<bc-connector-list/>` - render the list of connectors on their own
+- `<bc-send-payment/>` - render a payment request UI
+  - Arguments:
+    - `invoice` - BOLT11 invoice
 - _more components coming soon_
 
 ##### Common Attributes (can be passed to any Bitcoin Connect component)
@@ -109,14 +112,22 @@ window.bitcoinConnect.launchModal();
 `launchModal` can also take an optional options object:
 
 ```js
-{
-  invoice: "lnbc...",  // bolt11 invoice
-}
+launchModal({
+  invoice: 'lnbc...', // bolt11 invoice
+});
 ```
 
 #### Programmatically closing the modal
 
 `window.bitcoinConnect.closeModal();`
+
+#### Disconnect from wallet
+
+`window.bitcoinConnect.disconnect();`
+
+#### Check connection status
+
+`window.bitcoinConnect.isConnected();`
 
 _More methods coming soon. Is something missing that you'd need? let us know!_
 
@@ -257,6 +268,10 @@ You should have a certain level of trust on the website you decide to connect yo
 - [LNbits](https://lnbits.com/)
 - [Mutiny NWC URL](https://www.mutinywallet.com/)
 - [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
+
+### If a user pays with another wallet why does the modal stay open?
+
+Bitcoin Connect cannot detect payments made externally. It's up to your app to detect the payment and then programmatically close the modal using the exposed `closeModal` function.
 
 ## Known Issues
 

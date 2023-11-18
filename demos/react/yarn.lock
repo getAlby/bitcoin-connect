@@ -149,17 +149,17 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.46.0.tgz#3f7802972e8b6fe3f88ed1aabc74ec596c456db6"
   integrity sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==
 
-"@getalby/bitcoin-connect-react@2.4.0-alpha.0":
-  version "2.4.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-2.4.0-alpha.0.tgz#fb0503dc0a13db10e8e27f33470482ebb2ddf660"
-  integrity sha512-ZX68LaE793MXY9ng9XJfWKct+l+M78RpoxPanU6HAaNFDBsDzDG1dDLlQyKaqE2j/WoHNykVmpGDk8mz6tJrpA==
+"@getalby/bitcoin-connect-react@2.4.0-alpha.3":
+  version "2.4.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-2.4.0-alpha.3.tgz#a1c2632fbbea1872f4026511a36c2e32d4afe7de"
+  integrity sha512-XFPcsyE8XeC7SJaQB6/TEVqRts3exa54CqYGnzHeZQZS0UGkGqDQjvX2GIxQpLCXwe85UOhSYrPCi2i2FKuwfw==
   dependencies:
-    "@getalby/bitcoin-connect" "2.4.0-alpha.0"
+    "@getalby/bitcoin-connect" "2.4.0-alpha.3"
 
-"@getalby/bitcoin-connect@2.4.0-alpha.0":
-  version "2.4.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.4.0-alpha.0.tgz#0abff0b2bba7a803cff2da75ce555abc085640ff"
-  integrity sha512-EWEQmJkFT4tnEPD3RFsPJfORl6WOO0Q52wZGsqGfblWOXpZjtt07xyedp+Ss1zkPO4YqIvyrF/lBRt/yp6QnrA==
+"@getalby/bitcoin-connect@2.4.0-alpha.3":
+  version "2.4.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.4.0-alpha.3.tgz#a7860e2ebb71f277c74ac23efef705b8d79593b5"
+  integrity sha512-FlOT6sVWJ/oSDssZFa/Vao4eLzgJOEXWODl2IJrlb76jqhaNvkqk4Iv7a4kY/1kWcYbU6MLeR+bargeKlZvxFw==
   dependencies:
     "@getalby/lightning-tools" "^4.2.0"
     "@getalby/sdk" "^2.6.0"

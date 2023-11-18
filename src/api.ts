@@ -1,3 +1,5 @@
+import store from './state/store';
+
 type LaunchModalArgs = {
   invoice?: string;
 };
@@ -9,12 +11,12 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
       'bc-modal does not exist in the dom. Did you render the Modal somewhere on this page?'
     );
   }
-  modal.setAttribute('open', 'true');
   if (invoice) {
     modal.setAttribute('invoice', invoice);
   } else {
     modal.removeAttribute('invoice');
   }
+  modal.setAttribute('open', 'true');
 }
 
 export function closeModal() {
@@ -27,9 +29,19 @@ export function closeModal() {
   modal.removeAttribute('open');
 }
 
+export function isConnected() {
+  return store.getState().connected;
+}
+
+export function disconnect() {
+  store.getState().disconnect();
+}
+
 export const bitcoinConnect = {
   launchModal,
   closeModal,
+  isConnected,
+  disconnect,
 };
 
 if (typeof window !== 'undefined') {

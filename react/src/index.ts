@@ -1,5 +1,10 @@
 export * from './components/Button';
 export * from './components/Modal';
-import {closeModal, launchModal} from '@getalby/bitcoin-connect';
+import {
+  closeModal,
+  disconnect,
+  isConnected,
+  launchModal,
+} from '@getalby/bitcoin-connect';
 
-export {launchModal, closeModal};
+export {launchModal, closeModal, disconnect, isConnected};
