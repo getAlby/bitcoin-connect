@@ -13,7 +13,6 @@ import {bcIcon} from '../icons/bcIcon.js';
 import {Invoice} from '@getalby/lightning-tools';
 import {successImage} from '../images/success.js';
 
-// TODO: move to /pages
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
   @state()
