@@ -8,15 +8,16 @@ import {hr} from './templates/hr.js';
 import './internal/bci-button';
 import './bc-button';
 import store from '../state/store.js';
-import {decodeInvoice} from '@getalby/sdk';
 import {waitingIcon} from './icons/waitingIcon.js';
 import {bcIcon} from './icons/bcIcon.js';
+import {Invoice} from '@getalby/lightning-tools';
+import {successImage} from './images/success.js';
 
 // TODO: move to /pages
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
   @state()
-  _hasPaid = false;
+  _hasPaid = true;
 
   @state()
   _isPaying = false;
@@ -33,16 +34,14 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       return null;
     }
 
-    // TODO: handle failed to decode invoice
-    const decodedInvoice = decodeInvoice(invoice);
-    const amountSection = decodedInvoice.sections.find(
-      (section) => section.name === 'amount'
-    );
-    if (!amountSection || amountSection.name !== 'amount') {
-      return null;
+    let decodedInvoice: Invoice;
+    try {
+      decodedInvoice = new Invoice({pr: invoice});
+    } catch (error) {
+      console.error(error);
+      store.getState().setError((error as Error).message);
+      return;
     }
-
-    const amount = parseInt(amountSection.value) / 1000;
 
     return html` <div
       class="flex flex-col justify-center items-center font-sans"
@@ -52,7 +51,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           class="font-bold font-mono text-4xl align-bottom ${classes[
             'text-brand-mixed'
           ]}"
-          >${amount.toLocaleString(undefined, {
+          >${decodedInvoice.satoshi.toLocaleString(undefined, {
             useGrouping: true,
           })}</span
         >&nbsp;sats
@@ -66,11 +65,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           : this._hasPaid
           ? html`<div class="flex flex-col justify-center items-center">
               <p class="font-bold ${classes['text-brand-mixed']}">Paid!</p>
-              <img
-                alt=""
-                class="w-32 h-32 mt-4"
-                src="https://user-images.githubusercontent.com/33993199/281990817-e0589f0d-eee3-40d0-a1de-c9a9b83695bb.gif"
-              />
+              <img alt="" class="w-32 h-32 mt-4" src=${successImage} />
             </div>`
           : html`<bci-button variant="primary" @click=${this._payInvoice}>
               <span class="-ml-0.5">${bcIcon}</span>
