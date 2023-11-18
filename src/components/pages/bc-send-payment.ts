@@ -12,6 +12,7 @@ import {waitingIcon} from '../icons/waitingIcon.js';
 import {bcIcon} from '../icons/bcIcon.js';
 import {Invoice} from '@getalby/lightning-tools';
 import {successImage} from '../images/success.js';
+import {closeModal} from '../../api.js';
 
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
@@ -123,10 +124,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       }
       await window.webln.sendPayment(invoice);
       this._hasPaid = true;
-      store.getState().setInvoice(undefined);
       setTimeout(() => {
-        // TODO:
-        //closeModal();
+        closeModal();
+        store.getState().setInvoice(undefined);
       }, 3000);
     } catch (error) {
       console.error(error);
