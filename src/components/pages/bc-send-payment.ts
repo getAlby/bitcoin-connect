@@ -1,17 +1,17 @@
 import {html} from 'lit';
-import {withTwind} from './twind/withTwind.js';
-import {BitcoinConnectElement} from './BitcoinConnectElement.js';
+import {withTwind} from '../twind/withTwind.js';
+import {BitcoinConnectElement} from '../BitcoinConnectElement.js';
 import {customElement, property, state} from 'lit/decorators.js';
-import './connectors/index.js';
-import {classes} from './css/classes.js';
-import {hr} from './templates/hr.js';
-import './internal/bci-button';
-import './bc-button';
-import store from '../state/store.js';
-import {waitingIcon} from './icons/waitingIcon.js';
-import {bcIcon} from './icons/bcIcon.js';
+import '../connectors/index.js';
+import {classes} from '../css/classes.js';
+import {hr} from '../templates/hr.js';
+import '../internal/bci-button.js';
+import '../bc-button.js';
+import store from '../../state/store.js';
+import {waitingIcon} from '../icons/waitingIcon.js';
+import {bcIcon} from '../icons/bcIcon.js';
 import {Invoice} from '@getalby/lightning-tools';
-import {successImage} from './images/success.js';
+import {successImage} from '../images/success.js';
 
 // TODO: move to /pages
 @customElement('bc-send-payment')

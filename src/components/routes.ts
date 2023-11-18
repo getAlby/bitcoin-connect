@@ -6,7 +6,7 @@ import './pages/bc-nwc.js';
 import './pages/bc-mutiny.js';
 import './pages/bc-lnbits.js';
 import './pages/bc-umbrel.js';
-import './bc-send-payment';
+import './pages/bc-send-payment.js';
 
 export const routes = {
   '/start': html`<bc-start class="flex w-full"></bc-start>`,
