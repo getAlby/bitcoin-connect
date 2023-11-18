@@ -105,10 +105,11 @@
   </head>
   <body>
     <h1>Programmatic Access</h1>
+    <button onclick="window.bitcoinConnect.launchModal()">Open modal</button>
     <button
-      onclick="document.querySelector('bc-modal').setAttribute('open', true)"
+      onclick="const invoiceToPay = window.prompt('paste invoice'); window.bitcoinConnect.launchModal({invoice: invoiceToPay})"
     >
-      Open modal
+      Open modal to pay invoice
     </button>
     <bc-modal id="first-modal"></bc-modal>
 

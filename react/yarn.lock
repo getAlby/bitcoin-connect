@@ -1018,20 +1018,29 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@getalby/bitcoin-connect@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.3.1.tgz#74c259b52f0ecc4bebe59c26171921006c3c62a1"
-  integrity sha512-fZXLFMAKBpYJHq0roh+KaB4vUIIqahK8KxV+nqJWJdGL/ge5CqYFb3LR685gj/4AquzDrqeWtRW53uKBFMgXXQ==
+"@getalby/bitcoin-connect@2.4.0-alpha.0":
+  version "2.4.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.4.0-alpha.0.tgz#0abff0b2bba7a803cff2da75ce555abc085640ff"
+  integrity sha512-EWEQmJkFT4tnEPD3RFsPJfORl6WOO0Q52wZGsqGfblWOXpZjtt07xyedp+Ss1zkPO4YqIvyrF/lBRt/yp6QnrA==
   dependencies:
-    "@getalby/sdk" "^2.4.0"
+    "@getalby/lightning-tools" "^4.2.0"
+    "@getalby/sdk" "^2.6.0"
     "@lightninglabs/lnc-web" "^0.2.6-alpha"
     lit "^3.0.0"
     zustand "^4.4.1"
 
-"@getalby/sdk@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.4.0.tgz#fd3a6b24585e3dc32462da97c4b13a70294c7dee"
-  integrity sha512-aIGNwLRF9coj6koxfq7P4GtFZbFjQbnIheix39x9176PwFw4dXOdGXHPXnqioJTmeq80y+vX1yd+u/f03YGoeg==
+"@getalby/lightning-tools@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-4.2.0.tgz#768025e7efb2e8c0271859ed7956615c83b73b76"
+  integrity sha512-o87OTIgKgzOjDPoepDATQVGc2WkrO0Mwt4w+QAorYJx1z5MaCTipJi2cTO0GESObH1sEWCorZikanhMoRUh+qA==
+  dependencies:
+    crypto-js "^4.1.1"
+    light-bolt11-decoder "^3.0.0"
+
+"@getalby/sdk@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.6.0.tgz#51508c7833b0580575055f15b8fe21567b76288a"
+  integrity sha512-klD1FrpGY39QldPf00KtzIveWj0dXtgGdZH6nLWdJ0Ness7FAqy2RkgSF7JQfKJeJSFek7Ip3AL/KCT5/lZgww==
   dependencies:
     crypto-js "^4.1.1"
     events "^3.3.0"
@@ -2384,6 +2393,13 @@ kleur@^4.1.3:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.5.tgz#95106101795f7050c6c650f350c683febddb1780"
   integrity sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==
+
+light-bolt11-decoder@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/light-bolt11-decoder/-/light-bolt11-decoder-3.0.0.tgz#f644576120426c9ef65621bde254f11016055044"
+  integrity sha512-AKvOigD2pmC8ktnn2TIqdJu0K0qk6ukUmTvHwF3JNkm8uWCqt18Ijn33A/a7gaRZ4PghJ59X+8+MXrzLKdBTmQ==
+  dependencies:
+    "@scure/base" "1.1.1"
 
 lilconfig@^2.0.3, lilconfig@^2.0.5:
   version "2.1.0"

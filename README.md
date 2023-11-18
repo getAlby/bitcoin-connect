@@ -4,6 +4,8 @@
 
 This project includes web components for connecting to Lightning wallets and enabling [WebLN](https://webln.guide). Websites only need to implement a single interface to connect with multiple wallets (WebLN), and users can connect from both desktop and mobile devices. These components work with pure HTML and all Javascript libraries or frameworks, such as React, Angular, Vue, Solid.js, etc.
 
+🆕 Bitcoin Connect also supports a nice invoice payment UI that gives a multitude of options to a user to pay an invoice. Accept payments with a single line of code.
+
 ## 🛝 Try it out here
 
 <h1>
@@ -37,7 +39,7 @@ You can use Bitcoin Connect without any build tools:
 ### React
 
 ```jsx
-import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
+import {Button, Modal, launchModal, closeModal} from '@getalby/bitcoin-connect-react';
 
 // render a button
 <Button onConnect={() => alert('Connected!')} />
@@ -48,6 +50,14 @@ import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
 <button onClick={launchModal}>
   Programmatically launch modal
 </button>
+
+// open modal programmatically to pay an invoice
+<button onClick={() => launchModal({invoice: "lnbc...."})}>
+  Programmatically launch modal
+</button>
+
+// close modal programmatically
+closeModal();
 ```
 
 #### React SSR / NextJS
@@ -86,11 +96,29 @@ Bitcoin Connect exposes the following events:
 - `bc:modalopened` window event which fires when Bitcoin Connect modal is opened
 - `bc:modalclosed` window event which fires when Bitcoin Connect modal is closed
 
+### Bitcoin Connect API
+
 #### Programmatically launching the modal
 
 `<bc-modal/>` needs to be rendered somewhere on the page. The modal can then be launched with:
 
-`document.querySelector('bc-modal').setAttribute('open', true)`
+```js
+window.bitcoinConnect.launchModal();
+```
+
+`launchModal` can also take an optional options object:
+
+```js
+{
+  invoice: "lnbc...",  // bolt11 invoice
+}
+```
+
+#### Programmatically closing the modal
+
+`window.bitcoinConnect.closeModal();`
+
+_More methods coming soon. Is something missing that you'd need? let us know!_
 
 ### Styling
 

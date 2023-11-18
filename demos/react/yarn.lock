@@ -149,19 +149,20 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.46.0.tgz#3f7802972e8b6fe3f88ed1aabc74ec596c456db6"
   integrity sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==
 
-"@getalby/bitcoin-connect-react@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-2.3.1.tgz#2bf4171a48e631ae79bd90465c38cb793b551fd5"
-  integrity sha512-SSWAtCpxvEbFIiHvJ6IFZOgUd4zW3HUz5AvbQ3B/L1PBLR8d7NZQ8vXNQKh99Ez5zuCwbPHQwEFzNbNUSOpZoQ==
+"@getalby/bitcoin-connect-react@2.4.0-alpha.0":
+  version "2.4.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-2.4.0-alpha.0.tgz#fb0503dc0a13db10e8e27f33470482ebb2ddf660"
+  integrity sha512-ZX68LaE793MXY9ng9XJfWKct+l+M78RpoxPanU6HAaNFDBsDzDG1dDLlQyKaqE2j/WoHNykVmpGDk8mz6tJrpA==
   dependencies:
-    "@getalby/bitcoin-connect" "^2.3.1"
+    "@getalby/bitcoin-connect" "2.4.0-alpha.0"
 
-"@getalby/bitcoin-connect@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.3.1.tgz#74c259b52f0ecc4bebe59c26171921006c3c62a1"
-  integrity sha512-fZXLFMAKBpYJHq0roh+KaB4vUIIqahK8KxV+nqJWJdGL/ge5CqYFb3LR685gj/4AquzDrqeWtRW53uKBFMgXXQ==
+"@getalby/bitcoin-connect@2.4.0-alpha.0":
+  version "2.4.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.4.0-alpha.0.tgz#0abff0b2bba7a803cff2da75ce555abc085640ff"
+  integrity sha512-EWEQmJkFT4tnEPD3RFsPJfORl6WOO0Q52wZGsqGfblWOXpZjtt07xyedp+Ss1zkPO4YqIvyrF/lBRt/yp6QnrA==
   dependencies:
-    "@getalby/sdk" "^2.4.0"
+    "@getalby/lightning-tools" "^4.2.0"
+    "@getalby/sdk" "^2.6.0"
     "@lightninglabs/lnc-web" "^0.2.6-alpha"
     lit "^3.0.0"
     zustand "^4.4.1"
@@ -174,10 +175,18 @@
     crypto-js "^4.1.1"
     light-bolt11-decoder "^3.0.0"
 
-"@getalby/sdk@^2.4.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.5.0.tgz#d1b0a22cbcf986755c4b684096d97f52ed0b469d"
-  integrity sha512-MRLgI6WxCCLgrar+qDqm/UhKs+V6yXzNm4y1bJRAuN72nkKT+TjTJHCmk9GjTngR3FrOfLbeMsPwBxCmbvfrLQ==
+"@getalby/lightning-tools@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-4.2.0.tgz#768025e7efb2e8c0271859ed7956615c83b73b76"
+  integrity sha512-o87OTIgKgzOjDPoepDATQVGc2WkrO0Mwt4w+QAorYJx1z5MaCTipJi2cTO0GESObH1sEWCorZikanhMoRUh+qA==
+  dependencies:
+    crypto-js "^4.1.1"
+    light-bolt11-decoder "^3.0.0"
+
+"@getalby/sdk@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.6.0.tgz#51508c7833b0580575055f15b8fe21567b76288a"
+  integrity sha512-klD1FrpGY39QldPf00KtzIveWj0dXtgGdZH6nLWdJ0Ness7FAqy2RkgSF7JQfKJeJSFek7Ip3AL/KCT5/lZgww==
   dependencies:
     crypto-js "^4.1.1"
     events "^3.3.0"

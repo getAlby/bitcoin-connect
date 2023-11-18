@@ -17,7 +17,7 @@ import {successImage} from './images/success.js';
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
   @state()
-  _hasPaid = true;
+  _hasPaid = false;
 
   @state()
   _isPaying = false;
