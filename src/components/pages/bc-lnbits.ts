@@ -66,13 +66,11 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
   }
   private async onConnect() {
     if (!this._lnbitsAdminKey) {
-      // TODO: show an error message directly on this page
-      alert('Please enter your admin key');
+      store.getState().setError('Please enter your admin key');
       return;
     }
     if (!this._lnbitsUrl) {
-      // TODO: show an error message directly on this page
-      alert('Please enter your LNbits instance URL');
+      store.getState().setError('Please enter your LNbits instance URL');
       return;
     }
 
@@ -82,10 +80,6 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
       connectorName: lnbitsConnectorTitle,
       connectorType: 'lnbits',
     });
-    if (!store.getState().connected) {
-      // TODO: show an error message directly on this page
-      alert('Failed to connect. Please check your LNbits admin key and URL');
-    }
   }
 }
 

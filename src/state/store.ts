@@ -34,6 +34,7 @@ interface Store {
   readonly connectorName: string | undefined;
   readonly appName: string | undefined;
   readonly filters: ConnectorFilter[] | undefined;
+  readonly error: string | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -43,12 +44,14 @@ interface Store {
   setAppName(appName: string): void;
   setFilters(filters: ConnectorFilter[]): void;
   fetchConnectorInfo(): void;
+  setError(error: string | undefined): void;
 }
 
 const store = createStore<Store>((set, get) => ({
   route: '/start',
   connected: false,
   connecting: false,
+  error: undefined,
   alias: undefined,
   balance: undefined,
   connectorName: undefined,
@@ -59,9 +62,10 @@ const store = createStore<Store>((set, get) => ({
     dispatchEvent('bc:connecting');
     set({
       connecting: true,
+      error: undefined,
     });
-    const connector = new connectors[config.connectorType](config);
     try {
+      const connector = new connectors[config.connectorType](config);
       await connector.init();
       privateStore.getState().setConfig(config);
       privateStore.getState().setConnector(connector);
@@ -76,6 +80,7 @@ const store = createStore<Store>((set, get) => ({
     } catch (error) {
       console.error(error);
       set({
+        error: (error as Error).toString(),
         connecting: false,
       });
       get().disconnect();
@@ -111,6 +116,9 @@ const store = createStore<Store>((set, get) => ({
   },
   setFilters: (filters) => {
     set({filters});
+  },
+  setError: (error) => {
+    set({error});
   },
   fetchConnectorInfo: () => {
     if (!get().connected || get().fetchedConnectorInfo) {
