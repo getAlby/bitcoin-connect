@@ -49,6 +49,7 @@ interface Store {
   fetchConnectorInfo(): void;
   setError(error: string | undefined): void;
   setInvoice(invoice: string | undefined): void;
+  clearRouteHistory(): void;
 }
 
 const store = createStore<Store>((set, get) => ({
@@ -126,6 +127,12 @@ const store = createStore<Store>((set, get) => ({
     set({
       route: newRoute,
       routeHistory,
+    });
+  },
+  clearRouteHistory() {
+    set({
+      route: '/start',
+      routeHistory: [],
     });
   },
   setAppName: (appName) => {

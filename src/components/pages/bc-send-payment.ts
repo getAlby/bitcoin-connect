@@ -13,9 +13,14 @@ import {bcIcon} from '../icons/bcIcon.js';
 import {Invoice} from '@getalby/lightning-tools';
 import {successImage} from '../images/success.js';
 import {closeModal} from '../../api.js';
+import {disconnectSection} from '../templates/disconnectSection.js';
+import {copyIcon} from '../icons/copyIcon.js';
 
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
+  @state()
+  _hasCopiedInvoice = false;
+
   @state()
   _hasPaid = false;
 
@@ -69,15 +74,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
             </div>`
           : html`<bci-button variant="primary" @click=${this._payInvoice}>
                 <span class="-ml-0.5">${bcIcon}</span>
-                Confirm Payment</bci-button
-              >
-              <a
-                @click=${this._disconnectWallet}
-                class="mt-8 text-xs ${classes.interactive} ${classes['text-neutral-secondary']}"
-                >Connected through
-                <span class="font-medium">${this._connectorName}</span></span
-              ></a>
-              `
+                Confirm Payment
+              </bci-button>
+              ${disconnectSection(this._connectorName)} `
         : html`
             <div class="flex justify-center items-center">
               ${waitingIcon()}
@@ -101,15 +100,19 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
               <!-- TODO: use a QR library -->
               <img src=${`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${invoice}`}></img>
             </div>
-            <a @click=${this._copyInvoice} class="mt-4 ${
+            <div class="mt-4 gap-1 flex justify-center items-center ${
+              classes['text-brand-mixed']
+            }">
+            ${this._hasCopiedInvoice ? null : copyIcon}
+            <a @click=${this._copyInvoice} class="${
             classes['text-brand-mixed']
-          } ${classes.interactive} font-semibold text-xs">Copy Invoice</a>
+          } ${classes.interactive} font-semibold text-xs">${
+            this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'
+          }</a>
+            
+            </div>
           `}
     </div>`;
-  }
-
-  private _disconnectWallet() {
-    store.getState().disconnect();
   }
 
   private _onClickConnectWallet() {
@@ -121,6 +124,10 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       return;
     }
     navigator.clipboard.writeText(this.invoice);
+    this._hasCopiedInvoice = true;
+    setTimeout(() => {
+      this._hasCopiedInvoice = false;
+    }, 2000);
   }
 
   private async _payInvoice() {

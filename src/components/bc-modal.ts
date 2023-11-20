@@ -128,7 +128,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       this._closing = false;
       // Reset after close
       // TODO: is there a better way to reset state when the modal is closed?
-      store.getState().pushRoute('/start');
+      store.getState().clearRouteHistory();
       store.getState().setError(undefined);
       this.onClose?.();
     }, 200);
