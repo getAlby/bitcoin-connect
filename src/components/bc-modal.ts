@@ -61,12 +61,15 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
+    const invoice = this._invoice || this.invoice;
+
     // fetch balance and info if modal is opened or connector is initialized while the model is open
     if (
       (this._prevConnected !== this._connected ||
         this._prevOpen !== this.open) &&
       this._connected &&
-      this.open
+      this.open &&
+      !invoice // currently invoice is not shown on send payment page
     ) {
       store.getState().fetchConnectorInfo();
     }
@@ -77,8 +80,8 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       this._prevOpen = this.open;
       if (this.open) {
         dispatchEvent('bc:modalopened');
-        if (this.invoice != undefined) {
-          store.getState().setInvoice(this.invoice);
+        if (invoice) {
+          store.getState().setInvoice(invoice);
           store.getState().setRoute('/send-payment');
         }
       } else {

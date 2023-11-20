@@ -13,8 +13,6 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
   }
   if (invoice) {
     modal.setAttribute('invoice', invoice);
-  } else {
-    modal.removeAttribute('invoice');
   }
   modal.setAttribute('open', 'true');
 }

@@ -26,8 +26,9 @@ export class Button extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
-    // fetch connector info if button is visible and connector is initialized
-    if (this._prevConnected !== this._connected) {
+    // fetch connector info if button is visible and connector is initialized and no invoice is set
+    // (currently invoice is not shown on send payment page)
+    if (this._prevConnected !== this._connected && !this._invoice) {
       this._prevConnected = this._connected;
       if (this._connected) {
         store.getState().fetchConnectorInfo();
