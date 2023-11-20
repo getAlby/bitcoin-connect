@@ -16,6 +16,8 @@ import {closeModal} from '../../api.js';
 import {disconnectSection} from '../templates/disconnectSection.js';
 import {copyIcon} from '../icons/copyIcon.js';
 import qrcode from 'qrcode-generator';
+import {walletIcon} from '../icons/walletIcon.js';
+import {qrIcon} from '../icons/qrIcon.js';
 
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
@@ -27,6 +29,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
   @state()
   _isPaying = false;
+
+  @state()
+  _showQR = false;
 
   @property({
     type: String,
@@ -52,6 +57,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     const qr = qrcode(0, errorCorrectionLevel);
     qr.addData(invoice);
     qr.make();
+
+    const isMobileView = window.innerWidth < 600;
 
     return html` <div
       class="flex flex-col justify-center items-center font-sans w-full"
@@ -89,37 +96,66 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
                 Waiting for payment
               </p>
             </div>
-            <div class="mt-8">
-              <bc-button
-                title="Connect Wallet to Pay"
-                @click=${this._onClickConnectWallet}
-              ></bc-button>
-            </div>
-            <div class="w-full py-4">${hr('or')}</div>
 
-            <p class="font-medium ${classes['text-neutral-secondary']}">
-              Pay the invoice directly
-            </p>
-            <div class="mt-4">
-              <a href="lightning:${invoice}">
-                <img src=${qr.createDataURL(3)}></img>
-              </a>
-            </div>
-            <div
-              class="mt-4 gap-1 flex justify-center items-center ${
-                classes['text-brand-mixed']
-              }"
-            >
-              ${this._hasCopiedInvoice ? null : copyIcon}
-              <a
-                @click=${this._copyInvoice}
-                class="
-                ${classes['text-brand-mixed']} ${
-            classes.interactive
-          } font-semibold text-xs"
-                >${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
-              </a>
-            </div>
+            ${!isMobileView
+              ? html`<div class="mt-8">
+                    <bc-button
+                      title="Connect Wallet to Pay"
+                      @click=${this._onClickConnectWallet}
+                    ></bc-button>
+                  </div>
+                  <div class="w-full py-4">${hr('or')}</div>
+
+                  <p class="font-medium ${classes['text-neutral-secondary']}">
+                    Pay the invoice directly
+                  </p>
+              </div>`
+              : html`
+                  <div class="mt-8 w-full flex flex-col gap-4">
+                    <a href="lightning:${invoice}">
+                      <bci-button variant="primary" block>
+                        ${walletIcon} Open in a Bitcoin Wallet
+                      </bci-button>
+                    </a>
+                    <div>
+                      <bci-button
+                        block
+                        @click=${this._onClickConnectWallet}
+                      >
+                        <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
+                      </bc-button>
+                    </div>
+                    ${
+                      this._showQR
+                        ? null
+                        : html`<bci-button
+                      block
+                      @click=${this._copyAndDisplayInvoice}
+                    >
+                      ${qrIcon}Copy & Display Invoice
+                    </bc-button>`
+                    }
+                  </div>
+                `}
+            ${!isMobileView || this._showQR
+              ? html`
+                <a href="lightning:${invoice}">
+                  <img src=${qr.createDataURL(4)}></img>
+                </a>
+                <a
+                  @click=${this._copyInvoice}
+                  class="
+                  flex gap-1
+                  mt-4
+                  ${classes['text-brand-mixed']} ${
+                  classes.interactive
+                } font-semibold text-xs"
+                  >
+                  ${this._hasCopiedInvoice ? null : copyIcon}
+                  ${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
+                </a>
+            `
+              : null}
           `}
     </div>`;
   }
@@ -128,11 +164,17 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     store.getState().pushRoute('/start');
   }
 
+  private _copyAndDisplayInvoice() {
+    this._copyInvoice();
+    this._showQR = true;
+  }
+
   private _copyInvoice() {
-    if (!this.invoice) {
+    const invoice = this._invoice || this.invoice;
+    if (!invoice) {
       return;
     }
-    navigator.clipboard.writeText(this.invoice);
+    navigator.clipboard.writeText(invoice);
     this._hasCopiedInvoice = true;
     setTimeout(() => {
       this._hasCopiedInvoice = false;

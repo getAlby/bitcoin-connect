@@ -15,16 +15,21 @@ export class Button extends withTwind()(InternalElement) {
   })
   ghost = false;
 
+  @property({
+    type: Boolean,
+  })
+  block = false;
+
   override render() {
     const brandColorLuminance = this._getBrandColorLuminance();
 
     return html`<button
-      class="relative h-10 px-4 font-sans font-medium rounded-lg flex justify-center items-center
+      class="relative h-10 px-4 font-sans font-semibold rounded-lg flex justify-center items-center
         ${this.ghost ? '' : 'shadow'} rounded-lg w-full ${classes.interactive}
         ${this.variant === 'primary' ? `${classes['bg-brand']}` : ''}
         ${this.variant === 'primary'
         ? `${brandColorLuminance > 0.5 ? 'text-black' : 'text-white'}`
-        : ''}
+        : `${classes['text-brand-mixed']}`}
         "
     >
       ${this.ghost
@@ -34,7 +39,11 @@ export class Button extends withTwind()(InternalElement) {
         : innerBorderBranded()}
       <!-- TODO: why can the inner border not be conditionally rendered? -->
 
-      <div class="flex gap-2 justify-center items-center">
+      <div
+        class="flex gap-2  ${this.block
+          ? 'w-full'
+          : ''} justify-center items-center"
+      >
         <slot></slot>
       </div>
     </button>`;

@@ -1018,14 +1018,15 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@getalby/bitcoin-connect@2.4.0-alpha.6":
-  version "2.4.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.4.0-alpha.6.tgz#19a3caf4caabc7aae5f27e1e8aa7f63561ab4412"
-  integrity sha512-kIrtzPT5MYo9JMbbTfvV7zDlyGbfvjUA9Ms1z6Fao3sSRpSqoCTeSANBWyQ4CO9Z22rU2oYc6lL34FEjooNmTA==
+"@getalby/bitcoin-connect@2.4.0-alpha.7":
+  version "2.4.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.4.0-alpha.7.tgz#ae9901f7e2e1796c61de1919a26dfa7baadabb89"
+  integrity sha512-ADWiiEtcdbgfKnzhQOfCr7CFGuBG0oNqL3rFBUtBAFyEvRq87GKg8S9q7+pIK4+XUL4WiiAGXb+EORPxJq9W4A==
   dependencies:
     "@getalby/lightning-tools" "^4.2.0"
     "@getalby/sdk" "^2.6.0"
     "@lightninglabs/lnc-web" "^0.2.6-alpha"
+    qrcode-generator "^1.4.4"
     zustand "^4.4.1"
 
 "@getalby/lightning-tools@^4.2.0":
@@ -3010,6 +3011,11 @@ promise.series@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/promise.series/-/promise.series-0.2.0.tgz#2cc7ebe959fc3a6619c04ab4dbdc9e452d864bbd"
   integrity sha512-VWQJyU2bcDTgZw8kpfBpB/ejZASlCrzwz5f2hjb/zlujOEB4oeiAhHygAWq8ubsX2GVkD4kCU5V2dwOTaCY5EQ==
+
+qrcode-generator@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/qrcode-generator/-/qrcode-generator-1.4.4.tgz#63f771224854759329a99048806a53ed278740e7"
+  integrity sha512-HM7yY8O2ilqhmULxGMpcHSF1EhJJ9yBj8gvDEuZ6M+KGJ0YY2hKpnXvRD+hZPLrDVck3ExIGhmPtSdcjC+guuw==
 
 randombytes@^2.1.0:
   version "2.1.0"
