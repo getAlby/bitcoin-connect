@@ -44,7 +44,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     }
 
     return html` <div
-      class="flex flex-col justify-center items-center font-sans"
+      class="flex flex-col justify-center items-center font-sans w-full"
     >
       <h2 class="text-2xl mb-6 ${classes['text-neutral-secondary']}">
         <span
@@ -68,9 +68,16 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
               <img alt="" class="w-32 h-32 mt-4" src=${successImage} />
             </div>`
           : html`<bci-button variant="primary" @click=${this._payInvoice}>
-              <span class="-ml-0.5">${bcIcon}</span>
-              Confirm Payment</bci-button
-            >`
+                <span class="-ml-0.5">${bcIcon}</span>
+                Confirm Payment</bci-button
+              >
+              <a
+                @click=${this._disconnectWallet}
+                class="mt-8 text-xs ${classes.interactive} ${classes['text-neutral-secondary']}"
+                >Connected through
+                <span class="font-medium">${this._connectorName}</span></span
+              ></a>
+              `
         : html`
             <div class="flex justify-center items-center">
               ${waitingIcon()}
@@ -101,8 +108,12 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     </div>`;
   }
 
+  private _disconnectWallet() {
+    store.getState().disconnect();
+  }
+
   private _onClickConnectWallet() {
-    store.getState().setRoute('/start');
+    store.getState().pushRoute('/start');
   }
 
   private _copyInvoice() {

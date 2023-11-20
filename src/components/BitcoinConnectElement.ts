@@ -3,6 +3,7 @@ import {property, state} from 'lit/decorators.js';
 import store from '../state/store';
 import {InternalElement} from './internal/InternalElement';
 import {ConnectorFilter} from '../types/ConnectorFilter';
+import {Route} from './routes';
 
 /**
  * @fires bc:connected - Indicates a wallet has been connected and window.webln is now available and enabled
@@ -34,6 +35,9 @@ export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _invoice: string | undefined = undefined;
 
+  @state()
+  protected _route: Route;
+
   @property({
     type: String,
     attribute: 'app-name',
@@ -61,6 +65,7 @@ export class BitcoinConnectElement extends InternalElement {
     this._filters = store.getState().filters;
     this._error = store.getState().error;
     this._invoice = store.getState().invoice;
+    this._route = store.getState().route;
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
@@ -73,6 +78,7 @@ export class BitcoinConnectElement extends InternalElement {
       this._filters = store.filters;
       this._error = store.error;
       this._invoice = store.invoice;
+      this._route = store.route;
     });
   }
 

@@ -3,7 +3,7 @@ import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
 import {dispatchEvent} from '../utils/dispatchEvent';
 import {Connector} from '../connectors/Connector';
-import {Route as Route} from '../components/routes';
+import {Route} from '../components/routes';
 import {ConnectorFilter} from '../types/ConnectorFilter';
 
 interface PrivateStore {
@@ -26,6 +26,7 @@ const privateStore = createStore<PrivateStore>((set) => ({
 
 interface Store {
   readonly route: Route;
+  readonly routeHistory: Route[];
   readonly connected: boolean;
   readonly connecting: boolean;
   readonly fetchedConnectorInfo: boolean;
@@ -41,7 +42,8 @@ interface Store {
   disconnect(): void;
   setAlias(alias: string | undefined): void;
   setBalance(balance: number | undefined): void;
-  setRoute(route: Route): void;
+  pushRoute(route: Route): void;
+  popRoute(): void;
   setAppName(appName: string): void;
   setFilters(filters: ConnectorFilter[]): void;
   fetchConnectorInfo(): void;
@@ -51,6 +53,7 @@ interface Store {
 
 const store = createStore<Store>((set, get) => ({
   route: '/start',
+  routeHistory: [],
   connected: false,
   connecting: false,
   error: undefined,
@@ -111,8 +114,19 @@ const store = createStore<Store>((set, get) => ({
     set({balance});
   },
   getConnectorName: () => privateStore.getState().config?.connectorName,
-  setRoute: (route: Route) => {
-    set({route: route});
+  pushRoute: (route: Route) => {
+    if (get().route === route) {
+      return;
+    }
+    set({route: route, routeHistory: [...get().routeHistory, get().route]});
+  },
+  popRoute() {
+    const routeHistory = get().routeHistory;
+    const newRoute = routeHistory.pop() || '/start';
+    set({
+      route: newRoute,
+      routeHistory,
+    });
   },
   setAppName: (appName) => {
     set({appName});

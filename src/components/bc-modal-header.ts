@@ -14,6 +14,7 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
   @property()
   onClose?: () => void;
 
+  // TODO: is there a better way to render a different header based on the route?
   override render() {
     return html`<div
       class="flex justify-center items-center gap-2 w-full relative"
@@ -23,12 +24,14 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
           'text-foreground'
         ]}"
       >
-        <div
-          class="${classes.interactive} ${classes['text-neutral-tertiary']}"
-          @click=${() => store.getState().setRoute('/help')}
-        >
-          ${helpIcon}
-        </div>
+        ${this._route !== '/send-payment'
+          ? html`<div
+              class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+              @click=${() => store.getState().pushRoute('/help')}
+            >
+              ${helpIcon}
+            </div>`
+          : null}
         <div
           class="${classes.interactive} ${classes['text-neutral-tertiary']}"
           @click=${this._handleClose}
@@ -37,8 +40,16 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
         </div>
       </div>
       <div class="flex items-center justify-center">
-        <div class="${classes['text-brand-mixed']}">${bcCircleIcon}</div>
-        <div class="${classes['text-foreground']}">${bcLogo}</div>
+        ${this._route !== '/send-payment'
+          ? html`<div class="${classes['text-brand-mixed']}">
+                ${bcCircleIcon}
+              </div>
+              <div class="${classes['text-foreground']}">${bcLogo}</div>`
+          : html`<p
+              class="font-sans font-medium ${classes['text-neutral-secondary']}"
+            >
+              Payment Request
+            </p>`}
       </div>
     </div>`;
   }

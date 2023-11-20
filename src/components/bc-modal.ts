@@ -55,7 +55,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
         currentStore.connected &&
         currentStore.invoice
       ) {
-        store.getState().setRoute('/send-payment');
+        store.getState().pushRoute('/send-payment');
       }
     });
   }
@@ -82,7 +82,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
         dispatchEvent('bc:modalopened');
         if (invoice) {
           store.getState().setInvoice(invoice);
-          store.getState().setRoute('/send-payment');
+          store.getState().pushRoute('/send-payment');
         }
       } else {
         dispatchEvent('bc:modalclosed');
@@ -128,7 +128,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       this._closing = false;
       // Reset after close
       // TODO: is there a better way to reset state when the modal is closed?
-      store.getState().setRoute('/start');
+      store.getState().pushRoute('/start');
       store.getState().setError(undefined);
       this.onClose?.();
     }, 200);

@@ -4,15 +4,12 @@ import {BitcoinConnectElement} from './BitcoinConnectElement';
 import {withTwind} from './twind/withTwind';
 import store from '../state/store';
 import {backIcon} from './icons/backIcon';
-import {Route} from './routes';
 import {classes} from './css/classes';
 
 @customElement('bc-navbar')
 export class Navbar extends withTwind()(BitcoinConnectElement) {
   @property()
   heading?: string;
-  @property()
-  to: Route = '/start';
 
   override render() {
     return html`<div
@@ -33,7 +30,7 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
   }
 
   private _goBack = () => {
-    store.getState().setRoute(this.to);
+    store.getState().popRoute();
     store.getState().setError(undefined);
   };
 }

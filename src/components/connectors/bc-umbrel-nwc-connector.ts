@@ -10,7 +10,7 @@ export class UmbrelNWCConnector extends ConnectorElement {
   }
 
   protected async _onClick() {
-    store.getState().setRoute('/umbrel');
+    store.getState().pushRoute('/umbrel');
   }
 }
 
