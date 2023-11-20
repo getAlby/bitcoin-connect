@@ -15,6 +15,7 @@ import {successImage} from '../images/success.js';
 import {closeModal} from '../../api.js';
 import {disconnectSection} from '../templates/disconnectSection.js';
 import {copyIcon} from '../icons/copyIcon.js';
+import qrcode from 'qrcode-generator';
 
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
@@ -47,6 +48,10 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       store.getState().setError((error as Error).message);
       return;
     }
+    const errorCorrectionLevel = 'L';
+    const qr = qrcode(0, errorCorrectionLevel);
+    qr.addData(invoice);
+    qr.make();
 
     return html` <div
       class="flex flex-col justify-center items-center font-sans w-full"
@@ -80,36 +85,40 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
         : html`
             <div class="flex justify-center items-center">
               ${waitingIcon()}
-              <p class="${
-                classes['text-neutral-secondary']
-              }">Waiting for payment</p>
+              <p class="${classes['text-neutral-secondary']}">
+                Waiting for payment
+              </p>
             </div>
             <div class="mt-8">
-              <bc-button title="Connect Wallet to Pay" @click=${
-                this._onClickConnectWallet
-              }></bc-button>
+              <bc-button
+                title="Connect Wallet to Pay"
+                @click=${this._onClickConnectWallet}
+              ></bc-button>
             </div>
-            <div class="w-full py-4">
-              ${hr('or')}
-            </div>
-            
-            <p class="font-medium ${
-              classes['text-neutral-secondary']
-            }">Pay the invoice directly</p>
+            <div class="w-full py-4">${hr('or')}</div>
+
+            <p class="font-medium ${classes['text-neutral-secondary']}">
+              Pay the invoice directly
+            </p>
             <div class="mt-4">
-              <!-- TODO: use a QR library -->
-              <img src=${`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${invoice}`}></img>
+              <a href="lightning:${invoice}">
+                <img src=${qr.createDataURL(3)}></img>
+              </a>
             </div>
-            <div class="mt-4 gap-1 flex justify-center items-center ${
-              classes['text-brand-mixed']
-            }">
-            ${this._hasCopiedInvoice ? null : copyIcon}
-            <a @click=${this._copyInvoice} class="${
-            classes['text-brand-mixed']
-          } ${classes.interactive} font-semibold text-xs">${
-            this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'
-          }</a>
-            
+            <div
+              class="mt-4 gap-1 flex justify-center items-center ${
+                classes['text-brand-mixed']
+              }"
+            >
+              ${this._hasCopiedInvoice ? null : copyIcon}
+              <a
+                @click=${this._copyInvoice}
+                class="
+                ${classes['text-brand-mixed']} ${
+            classes.interactive
+          } font-semibold text-xs"
+                >${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
+              </a>
             </div>
           `}
     </div>`;
