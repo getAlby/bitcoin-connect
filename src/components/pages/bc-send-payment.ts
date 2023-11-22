@@ -107,7 +107,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
                   <div class="w-full py-4">${hr('or')}</div>
 
                   <p class="font-medium ${classes['text-neutral-secondary']}">
-                    Pay the invoice directly
+                    Scan to Pay
                   </p>
               </div>`
               : html`
@@ -139,8 +139,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
                 `}
             ${!isMobileView || this._showQR
               ? html`
-                <a href="lightning:${invoice}">
-                  <img src=${qr.createDataURL(4)}></img>
+                <!-- add margin only on dark mode because on dark mode the qr has a white border -->
+                <a href="lightning:${invoice}" class="dark:mt-4">
+                  <img src=${qr.createDataURL(4)} class="rounded-lg"></img>
                 </a>
                 <a
                   @click=${this._copyInvoice}
