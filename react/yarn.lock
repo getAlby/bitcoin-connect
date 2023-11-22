@@ -1018,20 +1018,29 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@getalby/bitcoin-connect@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.3.1.tgz#74c259b52f0ecc4bebe59c26171921006c3c62a1"
-  integrity sha512-fZXLFMAKBpYJHq0roh+KaB4vUIIqahK8KxV+nqJWJdGL/ge5CqYFb3LR685gj/4AquzDrqeWtRW53uKBFMgXXQ==
+"@getalby/bitcoin-connect@2.4.0-alpha.7":
+  version "2.4.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-2.4.0-alpha.7.tgz#ae9901f7e2e1796c61de1919a26dfa7baadabb89"
+  integrity sha512-ADWiiEtcdbgfKnzhQOfCr7CFGuBG0oNqL3rFBUtBAFyEvRq87GKg8S9q7+pIK4+XUL4WiiAGXb+EORPxJq9W4A==
   dependencies:
-    "@getalby/sdk" "^2.4.0"
+    "@getalby/lightning-tools" "^4.2.0"
+    "@getalby/sdk" "^2.6.0"
     "@lightninglabs/lnc-web" "^0.2.6-alpha"
-    lit "^3.0.0"
+    qrcode-generator "^1.4.4"
     zustand "^4.4.1"
 
-"@getalby/sdk@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.4.0.tgz#fd3a6b24585e3dc32462da97c4b13a70294c7dee"
-  integrity sha512-aIGNwLRF9coj6koxfq7P4GtFZbFjQbnIheix39x9176PwFw4dXOdGXHPXnqioJTmeq80y+vX1yd+u/f03YGoeg==
+"@getalby/lightning-tools@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-4.2.0.tgz#768025e7efb2e8c0271859ed7956615c83b73b76"
+  integrity sha512-o87OTIgKgzOjDPoepDATQVGc2WkrO0Mwt4w+QAorYJx1z5MaCTipJi2cTO0GESObH1sEWCorZikanhMoRUh+qA==
+  dependencies:
+    crypto-js "^4.1.1"
+    light-bolt11-decoder "^3.0.0"
+
+"@getalby/sdk@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.6.0.tgz#51508c7833b0580575055f15b8fe21567b76288a"
+  integrity sha512-klD1FrpGY39QldPf00KtzIveWj0dXtgGdZH6nLWdJ0Ness7FAqy2RkgSF7JQfKJeJSFek7Ip3AL/KCT5/lZgww==
   dependencies:
     crypto-js "^4.1.1"
     events "^3.3.0"
@@ -1089,18 +1098,6 @@
   dependencies:
     "@lightninglabs/lnc-core" "0.2.6-alpha"
     crypto-js "4.1.1"
-
-"@lit-labs/ssr-dom-shim@^1.1.2-pre.0":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.1.2.tgz#d693d972974a354034454ec1317eb6afd0b00312"
-  integrity sha512-jnOD+/+dSrfTWYfSXBXlo5l5f0q1UuJo3tkbMDCYA2lKUYq79jaxqtGEvnRoh049nt1vdo1+45RinipU6FGY2g==
-
-"@lit/reactive-element@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-2.0.0.tgz#da14a256ac5533873b935840f306d572bac4a2ab"
-  integrity sha512-wn+2+uDcs62ROBmVAwssO4x5xue/uKD3MGGZOXL2sMxReTRIT0JXKyMXeu7gh0aJ4IJNEIG/3aOnUaQvM7BMzQ==
-  dependencies:
-    "@lit-labs/ssr-dom-shim" "^1.1.2-pre.0"
 
 "@noble/curves@1.1.0", "@noble/curves@~1.1.0":
   version "1.1.0"
@@ -1265,11 +1262,6 @@
   version "0.16.3"
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.3.tgz#cef09e3ec9af1d63d2a6cc5b383a737e24e6dcf5"
   integrity sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==
-
-"@types/trusted-types@^2.0.2":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.3.tgz#a136f83b0758698df454e328759dbd3d44555311"
-  integrity sha512-NfQ4gyz38SL8sDNrSixxU2Os1a5xcdFxipAFxYEuLUlvU2uDwS4NUpsImcf1//SlWItCVMMLiylsxbmNMToV/g==
 
 acorn@^8.8.2:
   version "8.10.0"
@@ -2385,6 +2377,13 @@ kleur@^4.1.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.5.tgz#95106101795f7050c6c650f350c683febddb1780"
   integrity sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==
 
+light-bolt11-decoder@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/light-bolt11-decoder/-/light-bolt11-decoder-3.0.0.tgz#f644576120426c9ef65621bde254f11016055044"
+  integrity sha512-AKvOigD2pmC8ktnn2TIqdJu0K0qk6ukUmTvHwF3JNkm8uWCqt18Ijn33A/a7gaRZ4PghJ59X+8+MXrzLKdBTmQ==
+  dependencies:
+    "@scure/base" "1.1.1"
+
 lilconfig@^2.0.3, lilconfig@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.1.0.tgz#78e23ac89ebb7e1bfbf25b18043de756548e7f52"
@@ -2394,31 +2393,6 @@ lines-and-columns@^1.1.6:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
-
-lit-element@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-4.0.0.tgz#8343891bc9159a5fcb7f534914b37f2c0161e036"
-  integrity sha512-N6+f7XgusURHl69DUZU6sTBGlIN+9Ixfs3ykkNDfgfTkDYGGOWwHAYBhDqVswnFGyWgQYR2KiSpu4J76Kccs/A==
-  dependencies:
-    "@lit-labs/ssr-dom-shim" "^1.1.2-pre.0"
-    "@lit/reactive-element" "^2.0.0"
-    lit-html "^3.0.0"
-
-lit-html@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-3.0.0.tgz#77d6776ee488642c74c5575315ef81aa09d24ea9"
-  integrity sha512-DNJIE8dNY0dQF2Gs0sdMNUppMQT2/CvV4OVnSdg7BXAsGqkVwsE5bqQ04POfkYH5dBIuGnJYdFz5fYYyNnOxiA==
-  dependencies:
-    "@types/trusted-types" "^2.0.2"
-
-lit@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-3.0.0.tgz#204bd65935892a73670471e893ee8ca55d2f9a3b"
-  integrity sha512-nQ0teRzU1Kdj++VdmttS2WvIen8M79wChJ6guRKIIym2M3Ansg3Adj9O6yuQh2IpjxiUXlNuS81WKlQ4iL3BmA==
-  dependencies:
-    "@lit/reactive-element" "^2.0.0"
-    lit-element "^4.0.0"
-    lit-html "^3.0.0"
 
 loader-utils@^3.2.0:
   version "3.2.1"
@@ -3037,6 +3011,11 @@ promise.series@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/promise.series/-/promise.series-0.2.0.tgz#2cc7ebe959fc3a6619c04ab4dbdc9e452d864bbd"
   integrity sha512-VWQJyU2bcDTgZw8kpfBpB/ejZASlCrzwz5f2hjb/zlujOEB4oeiAhHygAWq8ubsX2GVkD4kCU5V2dwOTaCY5EQ==
+
+qrcode-generator@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/qrcode-generator/-/qrcode-generator-1.4.4.tgz#63f771224854759329a99048806a53ed278740e7"
+  integrity sha512-HM7yY8O2ilqhmULxGMpcHSF1EhJJ9yBj8gvDEuZ6M+KGJ0YY2hKpnXvRD+hZPLrDVck3ExIGhmPtSdcjC+guuw==
 
 randombytes@^2.1.0:
   version "2.1.0"

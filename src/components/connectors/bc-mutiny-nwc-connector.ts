@@ -12,7 +12,7 @@ export class MutinyNWCConnector extends ConnectorElement {
   }
 
   protected async _onClick() {
-    store.getState().setRoute('/mutiny');
+    store.getState().pushRoute('/mutiny');
   }
 }
 

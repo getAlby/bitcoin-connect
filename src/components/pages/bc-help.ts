@@ -36,7 +36,7 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
 
         <div class="flex gap-4 w-full my-6 px-8">
           <a
-            href="https://getalby.github.io/bitcoin-connect"
+            href="https://bitcoin-connect.com"
             target="_blank"
             class="${classes['hover-animation']} flex-1"
           >

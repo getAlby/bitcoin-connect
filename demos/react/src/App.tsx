@@ -68,6 +68,13 @@ function App() {
       <button style={{marginTop: '16px'}} onClick={launchModal}>
         Programmatically launch modal
       </button>
+      <br />
+      <button
+        style={{marginTop: '16px'}}
+        onClick={() => launchModal({invoice})}
+      >
+        Programmatically launch modal to pay invoice
+      </button>
     </>
   );
 }

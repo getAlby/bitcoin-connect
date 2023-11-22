@@ -12,14 +12,3 @@ export const Modal: React.FC<ModalProps> = (props) => {
   // @ts-ignore
   return <bc-modal app-name={props.appName} filters={props.filters} />;
 };
-
-// TODO: move to bitcoin connect package and just re-export it here
-export function launchModal() {
-  const modal = document.querySelector('bc-modal');
-  if (!modal) {
-    throw new Error(
-      'bc-modal does not exist in the dom. Did you render the Modal somewhere on this page?'
-    );
-  }
-  modal.setAttribute('open', 'true');
-}

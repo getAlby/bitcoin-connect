@@ -12,7 +12,7 @@ export class GenericNWCConnector extends ConnectorElement {
   }
 
   protected async _onClick() {
-    store.getState().setRoute('/nwc');
+    store.getState().pushRoute('/nwc');
   }
 }
 

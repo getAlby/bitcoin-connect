@@ -30,6 +30,12 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   })
   open?: boolean = false;
 
+  @property({
+    type: String,
+    attribute: 'invoice',
+  })
+  invoice?: string;
+
   _prevOpen?: boolean = false;
   _prevConnected?: boolean = false;
 
@@ -37,20 +43,33 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
     super();
 
     // TODO: handle unsubscribe
-    store.subscribe((store, prevStore) => {
-      if (store.connected !== prevStore.connected && !store.connected) {
+    store.subscribe((currentStore, prevStore) => {
+      if (
+        currentStore.connected !== prevStore.connected &&
+        !currentStore.connected
+      ) {
         this._handleClose();
+      }
+      if (
+        currentStore.connected !== prevStore.connected &&
+        currentStore.connected &&
+        currentStore.invoice
+      ) {
+        store.getState().pushRoute('/send-payment');
       }
     });
   }
 
   override render() {
+    const invoice = this._invoice || this.invoice;
+
     // fetch balance and info if modal is opened or connector is initialized while the model is open
     if (
       (this._prevConnected !== this._connected ||
         this._prevOpen !== this.open) &&
       this._connected &&
-      this.open
+      this.open &&
+      !invoice // currently invoice is not shown on send payment page
     ) {
       store.getState().fetchConnectorInfo();
     }
@@ -61,6 +80,10 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       this._prevOpen = this.open;
       if (this.open) {
         dispatchEvent('bc:modalopened');
+        if (invoice) {
+          store.getState().setInvoice(invoice);
+          store.getState().pushRoute('/send-payment');
+        }
       } else {
         dispatchEvent('bc:modalclosed');
       }
@@ -92,7 +115,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
             : html` <bc-router-outlet class="flex w-full"></bc-router-outlet>`}
         </div>
         ${this._error
-          ? html`<p class="mt-4 text-red-500">${this._error}</p>`
+          ? html`<p class="mt-4 font-sans text-red-500">${this._error}</p>`
           : null}
       </div>
     </div>`;
@@ -105,7 +128,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       this._closing = false;
       // Reset after close
       // TODO: is there a better way to reset state when the modal is closed?
-      store.getState().setRoute('/start');
+      store.getState().clearRouteHistory();
       store.getState().setError(undefined);
       this.onClose?.();
     }, 200);

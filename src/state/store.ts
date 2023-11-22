@@ -3,7 +3,7 @@ import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
 import {dispatchEvent} from '../utils/dispatchEvent';
 import {Connector} from '../connectors/Connector';
-import {Route as Route} from '../components/routes';
+import {Route} from '../components/routes';
 import {ConnectorFilter} from '../types/ConnectorFilter';
 
 interface PrivateStore {
@@ -26,6 +26,7 @@ const privateStore = createStore<PrivateStore>((set) => ({
 
 interface Store {
   readonly route: Route;
+  readonly routeHistory: Route[];
   readonly connected: boolean;
   readonly connecting: boolean;
   readonly fetchedConnectorInfo: boolean;
@@ -35,20 +36,25 @@ interface Store {
   readonly appName: string | undefined;
   readonly filters: ConnectorFilter[] | undefined;
   readonly error: string | undefined;
+  readonly invoice: string | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
   setAlias(alias: string | undefined): void;
   setBalance(balance: number | undefined): void;
-  setRoute(route: Route): void;
+  pushRoute(route: Route): void;
+  popRoute(): void;
   setAppName(appName: string): void;
   setFilters(filters: ConnectorFilter[]): void;
   fetchConnectorInfo(): void;
   setError(error: string | undefined): void;
+  setInvoice(invoice: string | undefined): void;
+  clearRouteHistory(): void;
 }
 
 const store = createStore<Store>((set, get) => ({
   route: '/start',
+  routeHistory: [],
   connected: false,
   connecting: false,
   error: undefined,
@@ -58,6 +64,7 @@ const store = createStore<Store>((set, get) => ({
   appName: undefined,
   fetchedConnectorInfo: false,
   filters: undefined,
+  invoice: undefined,
   connect: async (config: ConnectorConfig) => {
     dispatchEvent('bc:connecting');
     set({
@@ -108,8 +115,25 @@ const store = createStore<Store>((set, get) => ({
     set({balance});
   },
   getConnectorName: () => privateStore.getState().config?.connectorName,
-  setRoute: (route: Route) => {
-    set({route: route});
+  pushRoute: (route: Route) => {
+    if (get().route === route) {
+      return;
+    }
+    set({route: route, routeHistory: [...get().routeHistory, get().route]});
+  },
+  popRoute() {
+    const routeHistory = get().routeHistory;
+    const newRoute = routeHistory.pop() || '/start';
+    set({
+      route: newRoute,
+      routeHistory,
+    });
+  },
+  clearRouteHistory() {
+    set({
+      route: '/start',
+      routeHistory: [],
+    });
   },
   setAppName: (appName) => {
     set({appName});
@@ -119,6 +143,9 @@ const store = createStore<Store>((set, get) => ({
   },
   setError: (error) => {
     set({error});
+  },
+  setInvoice: (invoice) => {
+    set({invoice});
   },
   fetchConnectorInfo: () => {
     if (!get().connected || get().fetchedConnectorInfo) {
