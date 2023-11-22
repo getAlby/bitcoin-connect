@@ -5,8 +5,7 @@ export const classes = {
 
   // text colors
   'text-brand': 'text-brand-light dark:text-brand-dark',
-  'text-brand-mixed':
-    'text-brand-mixed-light dark:text-brand-mixed-dark' as const,
+  'text-brand-mixed': 'text-brand-mixed-light dark:text-brand-mixed-dark',
   'text-foreground': 'text-foreground-light dark:text-foreground-dark',
   'text-neutral-primary':
     'text-neutral-primary-light dark:text-neutral-primary-dark',
