@@ -140,10 +140,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
             ${!isMobileView || this._showQR
               ? html`
                 <!-- add margin only on dark mode because on dark mode the qr has a white border -->
-                <a href="lightning:${invoice}" class="dark:mt-4">
-                  <img src=${qr.createDataURL(
-                    4
-                  )} class="rounded-lg" style="width: 232px"></img>
+                <a href="lightning:${invoice}" class="dark:mt-2">
+                  <img src=${qr.createDataURL(4)} class="rounded-lg"></img>
                 </a>
                 <a
                   @click=${this._copyInvoice}
