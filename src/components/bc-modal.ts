@@ -115,7 +115,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
             : html` <bc-router-outlet class="flex w-full"></bc-router-outlet>`}
         </div>
         ${this._error
-          ? html`<p class="mt-4 text-red-500">${this._error}</p>`
+          ? html`<p class="mt-4 font-sans text-red-500">${this._error}</p>`
           : null}
       </div>
     </div>`;
