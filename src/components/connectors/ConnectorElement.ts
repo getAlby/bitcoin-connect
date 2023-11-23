@@ -39,7 +39,7 @@ export abstract class ConnectorElement extends withTwind()(
         ${this._icon}
       </div>
       <span
-        class="mt-2 text-sm font-sans font-medium ${classes[
+        class="text-sm mt-3 font-sans font-medium text-center w-28 h-7 flex justify-center items-center ${classes[
           'text-neutral-secondary'
         ]}"
       >

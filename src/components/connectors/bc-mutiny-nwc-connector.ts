@@ -8,7 +8,12 @@ export const mutinyNWCConnectorTitle = 'Mutiny';
 @customElement('bc-mutiny-nwc-connector')
 export class MutinyNWCConnector extends ConnectorElement {
   constructor() {
-    super('nwc.mutiny', mutinyNWCConnectorTitle, '#000000', mutinyIcon);
+    super(
+      'nwc.mutiny',
+      mutinyNWCConnectorTitle,
+      'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(3,33,93,1) 100%)',
+      mutinyIcon
+    );
   }
 
   protected async _onClick() {
