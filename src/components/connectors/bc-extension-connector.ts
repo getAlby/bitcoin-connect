@@ -1,16 +1,11 @@
 import {customElement} from 'lit/decorators.js';
-import {puzzleIcon} from '../icons/connectors/puzzleIcon';
+import {extensionIcon} from '../icons/connectors/extensionIcon';
 import {ConnectorElement} from './ConnectorElement';
 
 @customElement('bc-extension-connector')
 export class ExtensionConnector extends ConnectorElement {
   constructor() {
-    super(
-      'extension.generic',
-      'Extension',
-      'linear-gradient(180deg, #E7E7E7 63.72%, #D1D1D1 95.24%)',
-      puzzleIcon
-    );
+    super('extension.generic', 'Extension Wallets', '#ffffff', extensionIcon);
   }
 
   protected _onClick() {
