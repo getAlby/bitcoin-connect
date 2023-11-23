@@ -31,7 +31,7 @@ You can use Bitcoin Connect without any build tools:
 > NOTE: LNC connector is not supported!
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@2.4.1/dist/index.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@2.4.2/dist/index.browser.js"></script>
 ```
 
 ## 🤙 Usage
