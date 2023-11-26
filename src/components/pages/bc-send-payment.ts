@@ -11,7 +11,7 @@ import store from '../../state/store.js';
 import {waitingIcon} from '../icons/waitingIcon.js';
 import {bcIcon} from '../icons/bcIcon.js';
 import {Invoice} from '@getalby/lightning-tools';
-import {successImage} from '../images/success.js';
+import {successAnimation} from '../images/success.js';
 import {closeModal} from '../../api.js';
 import {disconnectSection} from '../templates/disconnectSection.js';
 import {copyIcon} from '../icons/copyIcon.js';
@@ -82,7 +82,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           : this._hasPaid
           ? html`<div class="flex flex-col justify-center items-center">
               <p class="font-bold ${classes['text-brand-mixed']}">Paid!</p>
-              <img alt="" class="w-32 h-32 mt-4" src=${successImage} />
+              ${successAnimation}
             </div>`
           : html`<bci-button variant="primary" @click=${this._payInvoice}>
                 <span class="-ml-0.5">${bcIcon}</span>
