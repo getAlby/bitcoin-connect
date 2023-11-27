@@ -1,8 +1,8 @@
 import {customElement} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
 import {withTwind} from './twind/withTwind';
-import {html} from 'lit';
 import './internal/bci-button';
+import {html} from 'lit';
 import './bc-connector-list';
 import {classes} from './css/classes';
 import {disconnectSection} from './templates/disconnectSection';

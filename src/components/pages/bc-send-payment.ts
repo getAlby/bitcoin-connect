@@ -18,6 +18,7 @@ import {copyIcon} from '../icons/copyIcon.js';
 import qrcode from 'qrcode-generator';
 import {walletIcon} from '../icons/walletIcon.js';
 import {qrIcon} from '../icons/qrIcon.js';
+import '../internal/convert.js';
 
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
