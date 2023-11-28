@@ -7,6 +7,7 @@ import './pages/bc-mutiny.js';
 import './pages/bc-lnbits.js';
 import './pages/bc-umbrel.js';
 import './pages/bc-send-payment.js';
+import './pages/bc-new-wallet-link.js';
 
 export const routes = {
   '/start': html`<bc-start class="flex w-full"></bc-start>`,
@@ -18,6 +19,9 @@ export const routes = {
   '/send-payment': html`<bc-send-payment
     class="flex w-full justify-center"
   ></bc-send-payment>`,
+  '/new-wallet': html`<bc-new-wallet-link
+    class="flex w-full"
+  ></bc-new-wallet-link>`,
 };
 
 export type Route = keyof typeof routes;
