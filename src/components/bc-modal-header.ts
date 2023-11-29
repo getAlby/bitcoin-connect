@@ -41,7 +41,7 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
       </div>
       <div class="flex items-center justify-center">
         ${this._route !== '/send-payment'
-          ? html`<div class="${classes['text-brand-mixed']}">
+          ? html`<div class="${classes['text-brand-mixed']} mr-[2px]">
                 ${bcCircleIcon}
               </div>
               <div class="${classes['text-foreground']}">${bcLogo}</div>`

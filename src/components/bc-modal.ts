@@ -102,7 +102,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
         ]} ${this._closing ? 'animate-lighten' : 'animate-darken'}"
       ></div>
       <div
-        class="transition-all p-4 pt-6 pb-8 rounded-3xl shadow-2xl flex flex-col justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
+        class="transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex flex-col justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
     ${this._closing ? 'animate-fade-out' : 'animate-fade-in'}"
       >
         <bc-modal-header
