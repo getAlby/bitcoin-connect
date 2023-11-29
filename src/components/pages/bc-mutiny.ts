@@ -48,7 +48,7 @@ export class MutinyPage extends withTwind()(BitcoinConnectElement) {
               'border-neutral-secondary'
             ]}"
           />
-          <bci-button @click=${this.onConnect}>
+          <bci-button @click=${this.onClickConnect}>
             <span class="${classes['text-brand-mixed']}">Connect</span>
           </bci-button>
         </div>
@@ -59,12 +59,13 @@ export class MutinyPage extends withTwind()(BitcoinConnectElement) {
   private nwcUrlChanged(event: {target: HTMLInputElement}) {
     this._nwcUrl = event.target.value;
   }
-  private async onConnect() {
+  private async onClickConnect() {
     if (!this._nwcUrl) {
       store.getState().setError('Please enter a URL');
       return;
     }
 
+    // TODO: dispatch an event and listen in the Start component
     await store.getState().connect({
       nwcUrl: this._nwcUrl,
       connectorName: mutinyNWCConnectorTitle,

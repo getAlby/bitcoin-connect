@@ -1,20 +1,20 @@
 import store from './state/store';
+import {dispatchEvent} from './utils/dispatchEvent';
 
 type LaunchModalArgs = {
   invoice?: string;
 };
 
+export function init() {}
+
 export function launchModal({invoice}: LaunchModalArgs = {}) {
-  const modal = document.querySelector('bc-modal');
-  if (!modal) {
-    throw new Error(
-      'bc-modal does not exist in the dom. Did you render the Modal somewhere on this page?'
-    );
-  }
+  document.body.appendChild(document.createElement('bc-modal'));
+
   if (invoice) {
-    modal.setAttribute('invoice', invoice);
+    //store.getState().setInvoice(invoice);
+    store.getState().pushRoute(`/send-payment`, {invoice});
   }
-  modal.setAttribute('open', 'true');
+  dispatchEvent('bc:modalopened');
 }
 
 export function closeModal() {

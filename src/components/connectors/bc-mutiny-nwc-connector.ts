@@ -17,6 +17,7 @@ export class MutinyNWCConnector extends ConnectorElement {
   }
 
   protected async _onClick() {
+    // TODO: should this be an event?
     store.getState().pushRoute('/mutiny');
   }
 }

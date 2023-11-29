@@ -43,8 +43,6 @@ import {Button, Modal, launchModal, closeModal} from '@getalby/bitcoin-connect-r
 
 // render a button
 <Button onConnect={() => alert('Connected!')} />
-// include the modal on the page (will not be rendered unless launchModal is called)
-<Modal onConnect={() => alert('Connected!')} />
 
 // open modal programmatically
 <button onClick={launchModal}>
@@ -75,9 +73,6 @@ _Use another popular framework? please let us know or feel free to create a PR f
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
-- `<bc-modal/>` - render the modal on its own.
-  - Optional Arguments:
-    - `open` - make the modal appear
 - `<bc-connector-list/>` - render the list of connectors on their own
 - `<bc-send-payment/>` - render a payment request UI
   - Arguments:
@@ -103,10 +98,10 @@ Bitcoin Connect exposes the following events:
 
 #### Programmatically launching the modal
 
-`<bc-modal/>` needs to be rendered somewhere on the page. The modal can then be launched with:
+The modal can then be launched with:
 
 ```js
-window.bitcoinConnect.launchModal();
+window.bitcoinConnect.launchModal(); // A `<bc-modal/>` element will be injected into the DOM
 ```
 
 `launchModal` can also take an optional options object:

@@ -12,10 +12,11 @@ export function disconnectSection(connectorName: string | undefined) {
     <bci-button
       @click=${handleDisconnect}
       ghost
+      variant="neutral"
       class=${classes['hover-animation']}
     >
       ${disconnectIcon}
-      <span class="${classes['text-brand-mixed']}">Disconnect</span>
+      <span class="${classes['text-neutral-tertiary']}">Disconnect</span>
     </bci-button>
   </div>`;
 }

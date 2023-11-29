@@ -25,20 +25,6 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   @state()
   protected _closing = false;
 
-  @property({
-    type: Boolean,
-  })
-  open?: boolean = false;
-
-  @property({
-    type: String,
-    attribute: 'invoice',
-  })
-  invoice?: string;
-
-  _prevOpen?: boolean = false;
-  _prevConnected?: boolean = false;
-
   constructor() {
     super();
 
@@ -50,49 +36,19 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       ) {
         this._handleClose();
       }
-      if (
+      // TODO: should have some sort of "return to" logic
+      /*if (
         currentStore.connected !== prevStore.connected &&
         currentStore.connected &&
         currentStore.invoice
       ) {
         store.getState().pushRoute('/send-payment');
-      }
+      }*/
     });
   }
 
+  // TODO: move the internals of this modal into a separate component so it can be used elsewhere?
   override render() {
-    const invoice = this._invoice || this.invoice;
-
-    // fetch balance and info if modal is opened or connector is initialized while the model is open
-    if (
-      (this._prevConnected !== this._connected ||
-        this._prevOpen !== this.open) &&
-      this._connected &&
-      this.open &&
-      !invoice // currently invoice is not shown on send payment page
-    ) {
-      store.getState().fetchConnectorInfo();
-    }
-    if (this._prevConnected !== this._connected) {
-      this._prevConnected = this._connected;
-    }
-    if (this._prevOpen !== this.open) {
-      this._prevOpen = this.open;
-      if (this.open) {
-        dispatchEvent('bc:modalopened');
-        if (invoice) {
-          store.getState().setInvoice(invoice);
-          store.getState().pushRoute('/send-payment');
-        }
-      } else {
-        dispatchEvent('bc:modalclosed');
-      }
-    }
-
-    if (!this.open) {
-      return null;
-    }
-
     return html` <div
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
     >
@@ -124,13 +80,14 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   private _handleClose = () => {
     this._closing = true;
     setTimeout(() => {
-      this.open = false;
       this._closing = false;
       // Reset after close
       // TODO: is there a better way to reset state when the modal is closed?
       store.getState().clearRouteHistory();
       store.getState().setError(undefined);
+      dispatchEvent('bc:modalclosed');
       this.onClose?.();
+      document.body.removeChild(this);
     }, 200);
   };
 }

@@ -12,13 +12,14 @@ import {waitingIcon} from '../icons/waitingIcon.js';
 import {bcIcon} from '../icons/bcIcon.js';
 import {Invoice} from '@getalby/lightning-tools';
 import {successAnimation} from '../images/success.js';
-import {closeModal} from '../../api.js';
+import {closeModal, launchModal} from '../../api.js';
 import {disconnectSection} from '../templates/disconnectSection.js';
 import {copyIcon} from '../icons/copyIcon.js';
 import qrcode from 'qrcode-generator';
 import {walletIcon} from '../icons/walletIcon.js';
 import {qrIcon} from '../icons/qrIcon.js';
 
+// TODO: split this component up - children should not rely on global state.
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
   @state()
@@ -35,27 +36,28 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
   @property({
     type: String,
-    attribute: 'invoice',
   })
   invoice?: string;
 
   override render() {
-    const invoice = this._invoice || this.invoice;
-    if (!invoice) {
+    // TODO: there should be a page that use the state to render this component using the attribute.
+    // so then this component never requires state
+    if (!this.invoice) {
       return null;
     }
+    console.log('invoice: ', this.invoice);
 
     let decodedInvoice: Invoice;
     try {
-      decodedInvoice = new Invoice({pr: invoice});
+      decodedInvoice = new Invoice({pr: this.invoice});
     } catch (error) {
       console.error(error);
       store.getState().setError((error as Error).message);
-      return;
+      return null;
     }
     const errorCorrectionLevel = 'L';
     const qr = qrcode(0, errorCorrectionLevel);
-    qr.addData(invoice);
+    qr.addData(this.invoice);
     qr.make();
 
     const isMobileView = window.innerWidth < 600;
@@ -99,10 +101,12 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
             ${!isMobileView
               ? html`<div class="mt-8">
-                    <bc-button
-                      title="Connect Wallet to Pay"
-                      @click=${this._onClickConnectWallet}
-                    ></bc-button>
+                    <bci-button variant="primary" @click=${
+                      this._onClickConnectWallet
+                    }>
+                    <span class="-ml-0.5">${bcIcon}</span>
+                    Connect Wallet to Pay
+                  </bci-button>
                   </div>
                   <div class="w-full py-4">${hr('or')}</div>
 
@@ -112,7 +116,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
               </div>`
               : html`
                   <div class="mt-8 w-full flex flex-col gap-4">
-                    <a href="lightning:${invoice}">
+                    <a href="lightning:${this.invoice}">
                       <bci-button variant="primary" block>
                         ${walletIcon} Open in a Bitcoin Wallet
                       </bci-button>
@@ -132,7 +136,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
                       block
                       @click=${this._copyAndDisplayInvoice}
                     >
-                      ${qrIcon}Copy & Display Invoice
+                      ${qrIcon}Copy & Display this.invoice
                     </bc-button>`
                     }
                   </div>
@@ -140,7 +144,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
             ${!isMobileView || this._showQR
               ? html`
                 <!-- add margin only on dark mode because on dark mode the qr has a white border -->
-                <a href="lightning:${invoice}" class="dark:mt-2">
+                <a href="lightning:${this.invoice}" class="dark:mt-2">
                   <img src=${qr.createDataURL(4)} class="rounded-lg"></img>
                 </a>
                 <a
@@ -162,7 +166,13 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private _onClickConnectWallet() {
+    // TODO: instead of routing like this, have 2 separate applications that handle their own routing
+
     store.getState().pushRoute('/start');
+    // store.getState().setReturnTo('/start'); // FIXME: what to do here?
+
+    // TODO: need to pass ?returnTo=...
+    //launchModal();
   }
 
   private _copyAndDisplayInvoice() {
@@ -171,11 +181,10 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private _copyInvoice() {
-    const invoice = this._invoice || this.invoice;
-    if (!invoice) {
+    if (!this.invoice) {
       return;
     }
-    navigator.clipboard.writeText(invoice);
+    navigator.clipboard.writeText(this.invoice);
     this._hasCopiedInvoice = true;
     setTimeout(() => {
       this._hasCopiedInvoice = false;
@@ -183,20 +192,18 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private async _payInvoice() {
-    const invoice = this._invoice || this.invoice;
     this._isPaying = true;
     try {
       if (!window.webln) {
         throw new Error('No WebLN provider');
       }
-      if (!invoice) {
-        throw new Error('No invoice to pay');
+      if (!this.invoice) {
+        throw new Error('No this.invoice to pay');
       }
-      await window.webln.sendPayment(invoice);
+      await window.webln.sendPayment(this.invoice);
       this._hasPaid = true;
       setTimeout(() => {
         closeModal();
-        store.getState().setInvoice(undefined);
       }, 3000);
     } catch (error) {
       console.error(error);

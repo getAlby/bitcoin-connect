@@ -1,6 +1,6 @@
 import React from 'react';
 import {LightningAddress} from '@getalby/lightning-tools';
-import {Button, Modal, launchModal} from '@getalby/bitcoin-connect-react';
+import {Button, launchModal} from '@getalby/bitcoin-connect-react';
 import toast, {Toaster} from 'react-hot-toast';
 
 function App() {
@@ -48,7 +48,6 @@ function App() {
     <>
       <Toaster />
       <h1>Bitcoin Connect React</h1>
-      <Modal onConnect={() => toast('Modal Connected!')} />
       <Button
         appName="Bitcoin Connect (React Demo)"
         onConnect={() => toast('Connected!')}

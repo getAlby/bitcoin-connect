@@ -15,9 +15,12 @@ export const routes = {
   '/mutiny': html`<bc-mutiny class="flex w-full"></bc-mutiny>`,
   '/lnbits': html`<bc-lnbits class="flex w-full"></bc-lnbits>`,
   '/umbrel': html`<bc-umbrel class="flex w-full"></bc-umbrel>`,
+  /*(params) => {*/
   '/send-payment': html`<bc-send-payment
+    invoice="{params.invoice}"
     class="flex w-full justify-center"
-  ></bc-send-payment>`,
+  ></bc-send-payment>` /*;
+  }*/,
 };
 
 export type Route = keyof typeof routes;

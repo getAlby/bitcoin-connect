@@ -1,23 +1,19 @@
 import {html} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
-import './bc-modal.js';
+import {customElement, property} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
 import {loadingIcon} from './icons/loadingIcon.js';
 import {innerBorder} from './templates/innerBorder.js';
 import {classes} from './css/classes.js';
-import store from '../state/store.js';
+import {launchModal} from '../api.js';
+import './bc-balance';
 
 /**
  * A button that when clicked launches the modal.
  */
 @customElement('bc-button')
 export class Button extends withTwind()(BitcoinConnectElement) {
-  @state()
-  private _modalOpen = false;
-  private _prevConnected = false;
-
   @property()
   override title = 'Connect Wallet';
 
@@ -26,15 +22,6 @@ export class Button extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
-    // fetch connector info if button is visible and connector is initialized and no invoice is set
-    // (currently invoice is not shown on send payment page)
-    if (this._prevConnected !== this._connected && !this._invoice) {
-      this._prevConnected = this._connected;
-      if (this._connected) {
-        store.getState().fetchConnectorInfo();
-      }
-    }
-
     const isLoading = this._connecting || (!this._connected && this._modalOpen);
 
     return html`<div>
@@ -60,38 +47,17 @@ export class Button extends withTwind()(BitcoinConnectElement) {
             ${isLoading
               ? html`Connecting...`
               : this._connected
-              ? html`${this._alias || 'Connected'}`
+              ? html`Connected`
               : html`${this.title}`}
           </span>
         </bci-button>
-        ${this._connected
-          ? html`<span
-              class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
-                'text-brand-mixed'
-              ]} select-none"
-              ><span class="font-mono"
-                >${(this._balance || 0).toLocaleString(undefined, {
-                  useGrouping: true,
-                })}
-                sats</span
-              ></span
-            >`
-          : null}
+        ${this._connected ? html`<bc-balance></bc-balance> ` : null}
       </div>
-
-      <bc-modal
-        .open=${this._modalOpen}
-        .onClose=${this._closeModal}
-      ></bc-modal>
     </div>`;
   }
 
-  private _closeModal = () => {
-    this._modalOpen = false;
-  };
-
   private _onClick() {
-    this._modalOpen = true;
+    launchModal();
   }
 }
 
