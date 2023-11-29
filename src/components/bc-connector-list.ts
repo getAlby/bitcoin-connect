@@ -41,8 +41,9 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
         >
           Don't have a bitcoin lightning wallet?
           <a
-            class="no-underline font-bold ${classes['text-brand-mixed']} "
-            style="cursor: pointer;"
+            class="no-underline font-bold ${classes.interactive} ${classes[
+              'text-brand-mixed'
+            ]} "
             @click=${() => store.getState().pushRoute('/new-wallet')}
             >Get one here</a
           >
