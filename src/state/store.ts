@@ -39,8 +39,8 @@ interface Store {
   disconnect(): void;
   pushRoute(route: Route): void;
   popRoute(): void;
-  setAppName(appName: string): void;
-  setFilters(filters: ConnectorFilter[]): void;
+  setAppName(appName: string | undefined): void;
+  setFilters(filters: ConnectorFilter[] | undefined): void;
   setError(error: string | undefined): void;
   clearRouteHistory(): void;
 }

@@ -1,11 +1,55 @@
+import {WebLNProvider} from '@webbtc/webln-types';
 import store from './state/store';
+import {ConnectorFilter} from './types/ConnectorFilter';
 import {dispatchEvent} from './utils/dispatchEvent';
+
+type BitcoinConnectConfig = {
+  appName?: string;
+  filters?: ConnectorFilter[];
+  showBalance?: boolean;
+};
 
 type LaunchModalArgs = {
   invoice?: string;
 };
 
-export function init() {}
+// const provider = await requestProvider();
+// provider.sendPayment();
+
+export async function onConnected(callback: (provider: WebLNProvider) => void) {
+  const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
+    if (state.connected && !prevState.connected) {
+      callback(state.provider);
+    }
+  });
+  return () => {
+    zustandUnsubscribe();
+  };
+}
+
+// TODO: add the following
+/*onConnecting?(): void;
+onDisconnect?(): void;
+onModalOpened?(): void;
+onModalClosed?(): void;*/
+
+export async function requestProvider(): Promise<WebLNProvider> {
+  // TODO: if provider is not available, launch the modal and wait for connect event
+
+  return store.getState().provider;
+}
+
+export function isConnected() {
+  return store.getState().connected;
+}
+
+export function init(config: BitcoinConnectConfig = {}) {
+  store.getState().setAppName(config.appName);
+  store.getState().setFilters(config.filters);
+  store.getState().setShowBalance(config.showBalance);
+}
+
+// onConnect?: (provider: WebLNProvider) => void;
 
 export function launchModal({invoice}: LaunchModalArgs = {}) {
   document.body.appendChild(document.createElement('bc-modal'));
@@ -27,22 +71,6 @@ export function closeModal() {
   modal.removeAttribute('open');
 }
 
-export function isConnected() {
-  return store.getState().connected;
-}
-
 export function disconnect() {
   store.getState().disconnect();
-}
-
-export const bitcoinConnect = {
-  launchModal,
-  closeModal,
-  isConnected,
-  disconnect,
-};
-
-if (typeof window !== 'undefined') {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any).bitcoinConnect = bitcoinConnect;
 }

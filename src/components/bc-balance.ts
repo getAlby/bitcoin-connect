@@ -3,6 +3,7 @@ import {customElement, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {withTwind} from './twind/withTwind.js';
 import {classes} from './css/classes.js';
+import store from '../state/store.js';
 
 /**
  * Displays the balance of the connected wallet (could be sats or fiat)
@@ -29,6 +30,8 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
           );
         }
         const balance = await window.webln.getBalance();
+        // TODO: do not rely on global window
+        //const balance = store.getState().provider.getBalance();
 
         this._balance = balance?.balance.toLocaleString(undefined, {
           useGrouping: true,

@@ -14,6 +14,10 @@ https://bitcoin-connect.com
 
 ## 🚀 Quick Start
 
+### Version 3
+
+There are multiple breaking changes. See our migration guide [here](doc/MIGRATION_v3.md). Click [here](https://github.com/getAlby/bitcoin-connect/tree/v2.4.2-alpha) for v2.
+
 > 🚧WARNING🚧: this package is currently in Alpha. It's got awesome features, but is using new features of protocols such as WebLN and NWC which have not been finalized, and there may be breaking changes or bugs.
 
 ### React Package
@@ -39,18 +43,36 @@ You can use Bitcoin Connect without any build tools:
 ### React
 
 ```jsx
-import {Button, Modal, launchModal, closeModal} from '@getalby/bitcoin-connect-react';
+import {Button, launchModal, closeModal, requestProvider} from '@getalby/bitcoin-connect-react';
 
-// render a button
-<Button onConnect={() => alert('Connected!')} />
+// render the Bitcoin Connect button
+<Button onConnect={(provider) => {
+  provider.sendPayment("lnbc...")
+}} />
 
-// open modal programmatically
-<button onClick={launchModal}>
+// render a payment dialog ()
+<SendPayment invoice="lnbc..."/>
+
+// launch a payment dialog
+<button onClick={() => {
+  // if no WebLN provider exists, it will launch the modal
+  const weblnProvider = await requestProvider();
+  weblnProvider.sendPayment("lnbc...")
+}}>
+  Programmatically launch modal
+</button>
+
+// request a provider
+<button onClick={() => {
+  // if no WebLN provider exists, it will launch the modal
+  const weblnProvider = await requestProvider();
+  weblnProvider.sendPayment("lnbc...")
+}}>
   Programmatically launch modal
 </button>
 
 // open modal programmatically to pay an invoice
-<button onClick={() => launchModal({invoice: "lnbc...."})}>
+<button onClick={() => launchModal({invoice: "lnbc..."})}>
   Programmatically launch modal
 </button>
 
@@ -64,6 +86,8 @@ Make sure to only render the components **client side**. This can be done either
 
 ### Other Frameworks
 
+> 💡 The core Bitcoin Connect package works on all frameworks because it is powered by web components. However, a wrapper can simplify usage of Bitcoin Connect.
+
 _Use another popular framework? please let us know or feel free to create a PR for a wrapper. See the React package for an example implementation._
 
 ### Pure HTML
@@ -73,40 +97,45 @@ _Use another popular framework? please let us know or feel free to create a PR f
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
-- `<bc-connector-list/>` - render the list of connectors on their own
 - `<bc-send-payment/>` - render a payment request UI
   - Arguments:
     - `invoice` - BOLT11 invoice
+    - `paid` - (optional) show the paid state e.g. if the payment was executed from a mobile device
 - _more components coming soon_
 
-##### Common Attributes (can be passed to any Bitcoin Connect component)
+### Bitcoin Connect API
+
+#### Initializing Bitcoin Connect
 
 - `app-name` (React: `appName`) - Name of the app requesting access to wallet. Currently used for NWC connections (Alby and Mutiny)
 - `filters` - **EXPERIMENTAL:** Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors). Multiple filters can be separated by a comma e.g. `nwc,second_filter`.
 
-#### Window Events
+#### Requesting a provider
 
-Bitcoin Connect exposes the following events:
+With one line of code you can ensure you have a WebLN provider available and ready to use. If one is not available, the Bitcoin connect modal will be launched.
 
-- `bc:connected` window event which fires when a wallet is connected and window.webln is ready to use
-- `bc:connecting` window event which fires when a user is connecting to their wallet
-- `bc:disconnected` window event which fires when user has disconnected from their wallet
-- `bc:modalopened` window event which fires when Bitcoin Connect modal is opened
-- `bc:modalclosed` window event which fires when Bitcoin Connect modal is closed
+```ts
+import {requestProvider} from '@getalby/bitcoin-connect';
 
-### Bitcoin Connect API
+const provider = await requestProvider();
+await provider.sendPayment('lnbc...');
+```
 
 #### Programmatically launching the modal
 
 The modal can then be launched with:
 
-```js
-window.bitcoinConnect.launchModal(); // A `<bc-modal/>` element will be injected into the DOM
+```ts
+import {launchModal} from '@getalby/bitcoin-connect';
+
+launchModal(); // A `<bc-modal/>` element will be injected into the DOM
 ```
 
 `launchModal` can also take an optional options object:
 
-```js
+```ts
+import {launchModal} from '@getalby/bitcoin-connect';
+
 launchModal({
   invoice: 'lnbc...', // bolt11 invoice
 });
@@ -114,15 +143,67 @@ launchModal({
 
 #### Programmatically closing the modal
 
-`window.bitcoinConnect.closeModal();`
+```ts
+import {closeModal} from '@getalby/bitcoin-connect';
+
+closeModal();
+```
 
 #### Disconnect from wallet
 
-`window.bitcoinConnect.disconnect();`
+```ts
+import {disconnect} from '@getalby/bitcoin-connect';
+
+disconnect();
+```
 
 #### Check connection status
 
 `window.bitcoinConnect.isConnected();`
+
+#### Events
+
+Bitcoin Connect exposes the following events:
+
+```ts
+import {onConnected} from '@getalby/bitcoin-connect';
+
+const unsub = onConnected((provider) => {
+  provider.
+});
+unsub();
+```
+
+TODO: replace the below:
+
+- `bc:connecting` window event which fires when a user is connecting to their wallet
+- `bc:disconnected` window event which fires when user has disconnected from their wallet
+- `bc:modalopened` window event which fires when Bitcoin Connect modal is opened
+- `bc:modalclosed` window event which fires when Bitcoin Connect modal is closed
+
+For example:
+
+```ts
+window.addEventListener('bc:connected', () =>
+  window.webln.sendPayment('lnbc...')
+);
+```
+
+### WebLN global object
+
+> WARNING: webln is no longer injected into the window object by default. If you need this, execute the following code:
+
+```ts
+import {onConnected} from '@getalby/bitcoin-connect';
+
+onConnected((provider) => {
+  window.webln = provider;
+});
+```
+
+#### WebLN events
+
+Providers also should fire a `webln:connected` event. See `webln.guide`.
 
 _More methods coming soon. Is something missing that you'd need? let us know!_
 
