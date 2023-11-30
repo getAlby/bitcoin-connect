@@ -162,6 +162,24 @@ In case your site uses a manual theme switcher, you can force a theme by followi
 1. set `globalThis.bcDarkMode = "class"` **before** any bitcoin connect components are rendered
 2. `"dark"` must be added as a classname to the document to enable dark mode (e.g. `<html class="dark">` or `document.documentElement.classList.add('dark')`) otherwise light mode will be forced.
 
+## Access to underlying providers (NWC, LNC etc.)
+
+```ts
+import { WebLNProviders } from "@getalby/bitcoin-connect";
+
+if (window.webln instanceof WebLNProviders.NostrWebLNProvider) {
+  window.webln.nostrWalletConnectUrl;
+}
+
+if (window.webln instanceof WebLNProviders.LNCWebLNProvider) {
+  window.webln.lnc.lnd.lightning.listInvoices(...);
+}
+
+if (window.webln instanceof WebLNProviders.LnbitsWebLNProvider) {
+  window.webln.requestLnbits('GET', '/api/v1/wallet');
+}
+```
+
 ## Demos
 
 ### Pure HTML Demo

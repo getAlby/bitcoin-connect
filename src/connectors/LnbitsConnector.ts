@@ -35,7 +35,7 @@ export class LnbitsConnector extends Connector {
   }
 }
 
-class LnbitsWebLNProvider implements WebLNProvider {
+export class LnbitsWebLNProvider implements WebLNProvider {
   private _instanceUrl: string;
   private _adminKey: string;
 
@@ -47,7 +47,7 @@ class LnbitsWebLNProvider implements WebLNProvider {
     return Promise.resolve();
   }
   async getInfo(): Promise<GetInfoResponse> {
-    const response = await this._request<{name: string}>(
+    const response = await this.requestLnbits<{name: string}>(
       'GET',
       '/api/v1/wallet'
     );
@@ -73,7 +73,7 @@ class LnbitsWebLNProvider implements WebLNProvider {
     throw new Error('Method not implemented.');
   }
   async sendPayment(paymentRequest: string): Promise<SendPaymentResponse> {
-    const response = await this._request<{payment_hash: string}>(
+    const response = await this.requestLnbits<{payment_hash: string}>(
       'POST',
       '/api/v1/payments',
       {
@@ -82,7 +82,7 @@ class LnbitsWebLNProvider implements WebLNProvider {
       }
     );
 
-    const checkResponse = await this._request<{preimage: string}>(
+    const checkResponse = await this.requestLnbits<{preimage: string}>(
       'GET',
       `/api/v1/payments/${response.payment_hash}`
     );
@@ -96,7 +96,7 @@ class LnbitsWebLNProvider implements WebLNProvider {
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const response = await this._request<{balance: number}>(
+    const response = await this.requestLnbits<{balance: number}>(
       'GET',
       '/api/v1/wallet'
     );
@@ -129,7 +129,7 @@ class LnbitsWebLNProvider implements WebLNProvider {
     throw new Error('Method not implemented.');
   }
 
-  async _request<T>(
+  async requestLnbits<T>(
     method: string,
     path: string,
     args?: Record<string, unknown>

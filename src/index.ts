@@ -1,3 +1,7 @@
+import {NostrWebLNProvider} from '@getalby/sdk/dist/webln';
+import {LNCWebLNProvider} from './connectors/LNCConnector';
+import {LnbitsWebLNProvider} from './connectors/LnbitsConnector';
+
 export * from './components/bc-button';
 export * from './components/bc-modal';
 export * from './components/bc-connector-list';
@@ -6,3 +10,9 @@ export * from './components/connectors/index';
 export * from './state/store';
 export * from './types/EventType';
 export * from './api';
+
+export const WebLNProviders = {
+  NostrWebLNProvider,
+  LNCWebLNProvider,
+  LnbitsWebLNProvider,
+};
