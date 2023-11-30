@@ -27,9 +27,11 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
       connectors.push(html`<bc-lnc-connector></bc-lnc-connector>`);
     }
 
-    return html` <div class="flex justify-center items-start flex-wrap gap-5">
-      ${connectors}
-    </div>`;
+    return html`
+      <div class="flex justify-center items-start flex-wrap gap-5">
+        ${connectors}
+      </div>
+    `;
   }
 }
 
