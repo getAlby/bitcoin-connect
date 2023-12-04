@@ -6,17 +6,15 @@ This project includes web components for connecting to Lightning wallets and ena
 
 🆕 Bitcoin Connect also supports a nice invoice payment UI that gives a multitude of options to a user to pay an invoice. Accept payments with a single line of code.
 
-## 🛝 Try it out here
+## 🛝 Try it out
 
-<h1>
-https://bitcoin-connect.com
-</h1>
+[Demo](https://bitcoin-connect.com)
+
+## 🧳 Migration Guide
+
+There are multiple breaking changes in **v3**. See our migration guide [here](doc/MIGRATION_v3.md). Click [here](https://github.com/getAlby/bitcoin-connect/tree/v2.4.2-alpha) for v2.
 
 ## 🚀 Quick Start
-
-### Version 3
-
-There are multiple breaking changes. See our migration guide [here](doc/MIGRATION_v3.md). Click [here](https://github.com/getAlby/bitcoin-connect/tree/v2.4.2-alpha) for v2.
 
 > 🚧WARNING🚧: this package is currently in Alpha. It's got awesome features, but is using new features of protocols such as WebLN and NWC which have not been finalized, and there may be breaking changes or bugs.
 
@@ -32,7 +30,7 @@ There are multiple breaking changes. See our migration guide [here](doc/MIGRATIO
 
 You can use Bitcoin Connect without any build tools:
 
-> NOTE: LNC connector is not supported!
+> NOTE: LNC connector is currently not supported! See [#85](https://github.com/getAlby/bitcoin-connect/issues/85)
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@2.4.2/dist/index.browser.js"></script>
@@ -40,36 +38,56 @@ You can use Bitcoin Connect without any build tools:
 
 ## 🤙 Usage
 
+### Pure JS
+
+```ts
+import {
+  init,
+  launchModal,
+  requestProvider,
+} from '@getalby/bitcoin-connect-react';
+
+// Initialize Bitcoin Connect
+init({
+  appName: 'My Lightning App', // your app name
+});
+
+// launch a payment flow
+await launchModal({invoice: 'lnbc...'});
+
+// or request a WebLN provider to use the full WebLN API
+const weblnProvider = await requestProvider();
+const {preimage} = await weblnProvider.sendPayment('lnbc...');
+```
+
+_Continue further down for the full Bitcoin Connect API._
+
 ### React
 
 ```jsx
-import {Button, launchModal, closeModal, requestProvider} from '@getalby/bitcoin-connect-react';
+import {Button, init, launchModal, closeModal, requestProvider} from '@getalby/bitcoin-connect-react';
+
+// Initialize Bitcoin Connect
+init({
+  appName: "My Lightning App", // your app name
+})
+
+// request a provider
+<button onClick={() => {
+  // if no WebLN provider exists, it will launch the modal
+  const weblnProvider = await requestProvider();
+  const { preimage } = await weblnProvider.sendPayment("lnbc...")
+}}>
+  Request WebLN provider
+</button>
 
 // render the Bitcoin Connect button
 <Button onConnect={(provider) => {
   provider.sendPayment("lnbc...")
 }} />
 
-// render a payment dialog ()
+// render a payment component on its own
 <SendPayment invoice="lnbc..."/>
-
-// launch a payment dialog
-<button onClick={() => {
-  // if no WebLN provider exists, it will launch the modal
-  const weblnProvider = await requestProvider();
-  weblnProvider.sendPayment("lnbc...")
-}}>
-  Programmatically launch modal
-</button>
-
-// request a provider
-<button onClick={() => {
-  // if no WebLN provider exists, it will launch the modal
-  const weblnProvider = await requestProvider();
-  weblnProvider.sendPayment("lnbc...")
-}}>
-  Programmatically launch modal
-</button>
 
 // open modal programmatically to pay an invoice
 <button onClick={() => launchModal({invoice: "lnbc..."})}>
@@ -106,6 +124,15 @@ Bitcoin Connect exposes the following web components for allowing users to conne
 ### Bitcoin Connect API
 
 #### Initializing Bitcoin Connect
+
+```ts
+import {init} from '@getalby/bitcoin-connect-react';
+
+// Initialize Bitcoin Connect
+init({
+  appName: 'My Lightning App', // your app name
+});
+```
 
 - `app-name` (React: `appName`) - Name of the app requesting access to wallet. Currently used for NWC connections (Alby and Mutiny)
 - `filters` - **EXPERIMENTAL:** Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors). Multiple filters can be separated by a comma e.g. `nwc,second_filter`.
@@ -366,6 +393,14 @@ You should have a certain level of trust on the website you decide to connect yo
 ### If a user pays with another wallet why does the modal stay open?
 
 Bitcoin Connect cannot detect payments made externally. It's up to your app to detect the payment and then programmatically close the modal using the exposed `closeModal` function.
+
+### Why is window.webln not set after connecting?
+
+The global `window.webln` object can be overridden if there are multiple providers, leading to unexpected behaviour. We recommend using the `requestProvider` function to obtain a WebLN provider instead of relying on the global window object.
+
+### Why does Bitcoin Connect not work on some pages?
+
+Bitcoin Connect must be imported at the root component or on every component that requires webln to ensure webln is available. If you only import the button in your settings page, you'll still need to import the library where you want to make a lightning payment. We recommend using the `requestProvider` function.
 
 ## Known Issues
 

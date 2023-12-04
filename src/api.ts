@@ -36,6 +36,12 @@ onModalClosed?(): void;*/
 export async function requestProvider(): Promise<WebLNProvider> {
   // TODO: if provider is not available, launch the modal and wait for connect event
 
+  const existingProvider = store.getState().provider || window.webln;
+
+  if (existingProvider) {
+    return existingProvider;
+  }
+
   return store.getState().provider;
 }
 
