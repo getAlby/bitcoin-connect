@@ -1409,10 +1409,10 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
-"@getalby/lightning-tools@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-4.2.0.tgz#768025e7efb2e8c0271859ed7956615c83b73b76"
-  integrity sha512-o87OTIgKgzOjDPoepDATQVGc2WkrO0Mwt4w+QAorYJx1z5MaCTipJi2cTO0GESObH1sEWCorZikanhMoRUh+qA==
+"@getalby/lightning-tools@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-4.2.1.tgz#fa6cd0ad6a8c9baf20e3e37ead242b5ad495abc1"
+  integrity sha512-QOLF5LwIw6cYuAG3LYkEvZoQi/o+pFJtrG3L0koDo0xI4PliFLU9Qw70wUYJwl5X80UQtlukCpJ3nN5gyUBpdw==
   dependencies:
     crypto-js "^4.1.1"
     light-bolt11-decoder "^3.0.0"

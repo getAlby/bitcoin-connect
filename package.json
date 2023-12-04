@@ -45,7 +45,7 @@
   "author": "Alby",
   "license": "MIT",
   "dependencies": {
-    "@getalby/lightning-tools": "^4.2.0",
+    "@getalby/lightning-tools": "^4.2.1",
     "@getalby/sdk": "^2.7.0",
     "@lightninglabs/lnc-web": "^0.2.6-alpha",
     "qrcode-generator": "^1.4.4",
