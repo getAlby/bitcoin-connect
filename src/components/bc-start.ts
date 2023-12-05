@@ -1,4 +1,4 @@
-import {customElement} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
 import {withTwind} from './twind/withTwind';
 import {html} from 'lit';
@@ -7,10 +7,25 @@ import './bc-connector-list';
 import {classes} from './css/classes';
 import {disconnectSection} from './templates/disconnectSection';
 import './bc-balance';
+import store from '../state/store';
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
 export class Start extends withTwind()(BitcoinConnectElement) {
+  @state()
+  protected _showBalance: boolean | undefined = undefined;
+
+  constructor() {
+    super();
+
+    this._showBalance = store.getState().showBalance;
+
+    // TODO: handle unsubscribe
+    store.subscribe((store) => {
+      this._showBalance = store.showBalance;
+    });
+  }
+
   override render() {
     return html`<div
       class="flex flex-col justify-center items-center w-full font-sans"
@@ -24,7 +39,9 @@ export class Start extends withTwind()(BitcoinConnectElement) {
               >Balance</span
             >
 
-            <bc-balance class="text-2xl"></bc-balance>
+            ${this._showBalance !== false
+              ? html`<bc-balance class="text-2xl"></bc-balance>`
+              : null}
             ${disconnectSection(this._connectorName)}
           `
         : html`

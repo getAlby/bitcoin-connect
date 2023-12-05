@@ -19,7 +19,7 @@ export class LnbitsConnector extends Connector {
     super(config);
   }
 
-  override async init(): Promise<void> {
+  async init(): Promise<WebLNProvider> {
     if (!this._config.lnbitsInstanceUrl) {
       throw new Error('no lnbits URL provided');
     }
@@ -27,11 +27,10 @@ export class LnbitsConnector extends Connector {
       throw new Error('no lnbits admin key provided');
     }
 
-    window.webln = new LnbitsWebLNProvider(
+    return new LnbitsWebLNProvider(
       this._config.lnbitsInstanceUrl,
       this._config.lnbitsAdminKey
     );
-    await super.init();
   }
 }
 

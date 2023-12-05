@@ -21,15 +21,16 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
     super.connectedCallback();
     (async () => {
       try {
-        if (!window.webln) {
+        const provider = store.getState().provider;
+        if (!provider) {
           throw new Error('WebLN not enabled');
         }
-        if (!window.webln.getBalance) {
+        if (!provider.getBalance) {
           throw new Error(
             'The current WebLN provider does not support getBalance'
           );
         }
-        const balance = await window.webln.getBalance();
+        const balance = await provider.getBalance();
         // TODO: do not rely on global window
         //const balance = store.getState().provider.getBalance();
 

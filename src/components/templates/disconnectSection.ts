@@ -16,7 +16,9 @@ export function disconnectSection(connectorName: string | undefined) {
       class=${classes['hover-animation']}
     >
       ${disconnectIcon}
-      <span class="${classes['text-neutral-tertiary']}">Disconnect</span>
+      <span class="text-sm ${classes['text-neutral-tertiary']}"
+        >Disconnect</span
+      >
     </bci-button>
   </div>`;
 }

@@ -1,7 +1,6 @@
 import {WebLNProvider} from '@webbtc/webln-types';
 import store from './state/store';
 import {ConnectorFilter} from './types/ConnectorFilter';
-import {dispatchEvent} from './utils/dispatchEvent';
 
 type BitcoinConnectConfig = {
   appName?: string;
@@ -19,6 +18,9 @@ type LaunchModalArgs = {
 export async function onConnected(callback: (provider: WebLNProvider) => void) {
   const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
     if (state.connected && !prevState.connected) {
+      if (!state.provider) {
+        throw new Error('No provider available');
+      }
       callback(state.provider);
     }
   });
@@ -27,11 +29,49 @@ export async function onConnected(callback: (provider: WebLNProvider) => void) {
   };
 }
 
-// TODO: add the following
-/*onConnecting?(): void;
-onDisconnect?(): void;
-onModalOpened?(): void;
-onModalClosed?(): void;*/
+export async function onConnecting(callback: () => void) {
+  const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
+    if (state.connecting && !prevState.connecting) {
+      callback();
+    }
+  });
+  return () => {
+    zustandUnsubscribe();
+  };
+}
+
+export async function onDisconnected(callback: () => void) {
+  const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
+    if (!state.connected && prevState.connected) {
+      callback();
+    }
+  });
+  return () => {
+    zustandUnsubscribe();
+  };
+}
+
+export async function onModalOpened(callback: () => void) {
+  const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
+    if (state.modalOpen && !prevState.modalOpen) {
+      callback();
+    }
+  });
+  return () => {
+    zustandUnsubscribe();
+  };
+}
+
+export async function onModalClosed(callback: () => void) {
+  const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
+    if (!state.modalOpen && prevState.modalOpen) {
+      callback();
+    }
+  });
+  return () => {
+    zustandUnsubscribe();
+  };
+}
 
 export async function requestProvider(): Promise<WebLNProvider> {
   // TODO: if provider is not available, launch the modal and wait for connect event
@@ -39,10 +79,16 @@ export async function requestProvider(): Promise<WebLNProvider> {
   const existingProvider = store.getState().provider || window.webln;
 
   if (existingProvider) {
+    await existingProvider.enable();
     return existingProvider;
   }
 
-  return store.getState().provider;
+  if (!existingProvider) {
+    throw new Error('TODO launch modal');
+  }
+  //store.getState().provider
+
+  return existingProvider;
 }
 
 export function isConnected() {
@@ -58,13 +104,19 @@ export function init(config: BitcoinConnectConfig = {}) {
 // onConnect?: (provider: WebLNProvider) => void;
 
 export function launchModal({invoice}: LaunchModalArgs = {}) {
+  const existingModal = document.querySelector('bc-modal');
+  if (existingModal) {
+    throw new Error('bc-modal already in DOM');
+  }
+
   document.body.appendChild(document.createElement('bc-modal'));
 
-  if (invoice) {
-    //store.getState().setInvoice(invoice);
-    store.getState().pushRoute(`/send-payment`, {invoice});
-  }
-  dispatchEvent('bc:modalopened');
+  // if (invoice) {
+  //   //store.getState().setInvoice(invoice);
+  //   store.getState().pushRoute(`/send-payment`, {invoice});
+  // }
+  // FIXME: invoice
+  store.getState().setModalOpen(true);
 }
 
 export function closeModal() {

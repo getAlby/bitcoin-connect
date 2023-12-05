@@ -1,8 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "wds -r ../.. -o ./demos/html/index.html --watch",
-    "minimal": "wds -r ../.. -o ./demos/html/minimal.html --watch"
+    "dev": "wds -r ../.. -o ./demos/html/index.html --watch"
   },
   "devDependencies": {
     "@web/dev-server": "^0.1.31"

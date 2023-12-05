@@ -194,13 +194,14 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   private async _payInvoice() {
     this._isPaying = true;
     try {
-      if (!window.webln) {
-        throw new Error('No WebLN provider');
+      const provider = store.getState().provider;
+      if (!provider) {
+        throw new Error('No WebLN provider available');
       }
       if (!this.invoice) {
         throw new Error('No this.invoice to pay');
       }
-      await window.webln.sendPayment(this.invoice);
+      await provider.sendPayment(this.invoice);
       this._hasPaid = true;
       setTimeout(() => {
         closeModal();

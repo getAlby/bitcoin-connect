@@ -4,24 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
-    <script type="module" src="../../src/index.ts"></script>
     <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-tools@latest/dist/index.browser.js"></script>
-    <script>
-      window.addEventListener('bc:connected', () =>
-        console.info('Received connected event from html')
-      );
-      window.addEventListener('bc:connecting', () =>
-        console.info('Received connecting event from html')
-      );
-      window.addEventListener('bc:disconnected', () =>
-        console.info('Received disconnected event from html')
-      );
-      window.addEventListener('bc:modalopened', () =>
-        console.info('Received modalopened event from html')
-      );
-      window.addEventListener('bc:modalclosed', () =>
-        console.info('Received modalclosed event from html')
-      );
+    <script type="module">
+      import {LightningAddress} from 'https://cdn.skypack.dev/@getalby/lightning-tools';
       const bcTheme = window.localStorage.getItem('bcTheme');
       if (bcTheme) {
         window.bcDarkMode = 'class';
@@ -53,6 +38,30 @@
           .getElementsByTagName('bc-send-payment')[0]
           .setAttribute('invoice', invoice.paymentRequest);
       })();
+    </script>
+    <script type="module">
+      import {
+        onConnected,
+        onConnecting,
+        onDisconnected,
+        onModalOpened,
+        onModalClosed,
+      } from '../../src/index.ts';
+      onConnected((provider) => {
+        console.info('onConnected callback', provider);
+      });
+      onConnecting(() => {
+        console.info('onConnecting callback');
+      });
+      onDisconnected(() => {
+        console.info('onDisconnected callback');
+      });
+      onModalOpened(() => {
+        console.info('onModalOpened callback');
+      });
+      onModalClosed(() => {
+        console.info('onModalClosed callback');
+      });
     </script>
     <style>
       body {
@@ -100,121 +109,126 @@
         --bc-color-brand: #000000;
         --bc-brand-mix: 50%;
       }
+      .container {
+        padding: 20px;
+      }
     </style>
   </head>
   <body>
-    <h1>Programmatic Access</h1>
-    <button onclick="window.bitcoinConnect.launchModal()">Open modal</button>
-    <button
-      onclick="const invoice = localStorage.getItem('invoice'); const invoiceToPay = invoice || window.prompt('paste invoice'); window.bitcoinConnect.launchModal({invoice: invoiceToPay})"
-    >
-      Open modal to pay invoice
-    </button>
+    <div class="container">
+      <h1>Programmatic Access</h1>
+      <button onclick="window.bitcoinConnect.launchModal()">Open modal</button>
+      <button
+        onclick="const invoice = localStorage.getItem('invoice'); const invoiceToPay = invoice || window.prompt('paste invoice'); window.bitcoinConnect.launchModal({invoice: invoiceToPay})"
+      >
+        Open modal to pay invoice
+      </button>
 
-    <br /><br />
+      <br /><br />
 
-    <h1>Light / Dark Mode</h1>
+      <h1>Light / Dark Mode</h1>
 
-    <button
-      id="button-theme-system"
-      onclick="window.localStorage.removeItem('bcTheme');window.location.reload();"
-    >
-      System
-    </button>
-    <button
-      id="button-theme-dark"
-      onclick="window.localStorage.setItem('bcTheme', 'dark');window.location.reload();"
-    >
-      Force Dark
-    </button>
-    <button
-      id="button-theme-light"
-      onclick="window.localStorage.setItem('bcTheme', 'light');window.location.reload();"
-    >
-      Force Light
-    </button>
+      <button
+        id="button-theme-system"
+        onclick="window.localStorage.removeItem('bcTheme');window.location.reload();"
+      >
+        System
+      </button>
+      <button
+        id="button-theme-dark"
+        onclick="window.localStorage.setItem('bcTheme', 'dark');window.location.reload();"
+      >
+        Force Dark
+      </button>
+      <button
+        id="button-theme-light"
+        onclick="window.localStorage.setItem('bcTheme', 'light');window.location.reload();"
+      >
+        Force Light
+      </button>
 
-    <h1>Settings</h1>
-    <p>Name (e.g. Zap.Stream)</p>
-    <input
-      id="app-name"
-      onchange="localStorage.setItem('app-name', document.getElementById('app-name').value); window.location.reload()"
-    />
-    <p>Filters (e.g. nwc)</p>
-    <input
-      id="filters"
-      onchange="localStorage.setItem('filters', document.getElementById('filters').value); window.location.reload()"
-    />
-    <p>Invoice</p>
-    <input
-      id="invoice"
-      onchange="localStorage.setItem('invoice', document.getElementById('invoice').value); window.location.reload()"
-    />
-    <br />
-    <br />
-    <h1>Components</h1>
-    <h2>Button</h2>
-    <bc-button id="first-button"></bc-button>
-    <br /><br />
-    <div class="theme-geyser">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-orange">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-stacker-news">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-white">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-black">
-      <bc-button></bc-button>
-    </div>
+      <h1>Settings</h1>
+      <p>Name (e.g. Zap.Stream)</p>
+      <input
+        id="app-name"
+        onchange="localStorage.setItem('app-name', document.getElementById('app-name').value); window.location.reload()"
+      />
+      <p>Filters (e.g. nwc)</p>
+      <input
+        id="filters"
+        onchange="localStorage.setItem('filters', document.getElementById('filters').value); window.location.reload()"
+      />
+      <p>Invoice</p>
+      <input
+        id="invoice"
+        onchange="localStorage.setItem('invoice', document.getElementById('invoice').value); window.location.reload()"
+      />
+      <br />
+      <br />
+      <h1>Components</h1>
+      <h2>Button</h2>
+      <bc-button id="first-button"></bc-button>
+      <br /><br />
+      <div class="theme-geyser">
+        <bc-button></bc-button>
+      </div>
+      <br /><br />
+      <div class="theme-orange">
+        <bc-button></bc-button>
+      </div>
+      <br /><br />
+      <div class="theme-stacker-news">
+        <bc-button></bc-button>
+      </div>
+      <br /><br />
+      <div class="theme-white">
+        <bc-button></bc-button>
+      </div>
+      <br /><br />
+      <div class="theme-black">
+        <bc-button></bc-button>
+      </div>
 
-    <h2>Modal header</h2>
-    <div style="width: 448px">
-      <bc-modal-header></bc-modal-header>
-    </div>
-    <h2>Navbar</h2>
-    <div style="width: 448px">
-      <bc-navbar heading="Custom Heading"></bc-navbar>
-    </div>
-    <h2>Router outlet</h2>
-    <div style="width: 448px">
-      <bc-router-outlet></bc-router-outlet>
-    </div>
+      <h2>Modal header</h2>
+      <div style="width: 448px">
+        <bc-modal-header></bc-modal-header>
+      </div>
+      <h2>Navbar</h2>
+      <div style="width: 448px">
+        <bc-navbar heading="Custom Heading"></bc-navbar>
+      </div>
+      <h2>Router outlet</h2>
+      <div style="width: 448px">
+        <bc-router-outlet></bc-router-outlet>
+      </div>
 
-    <h2>Request Payment Screen</h2>
-    <div style="width: 448px; border: 1px solid black">
-      <bc-send-payment
-        invoice="lnbc10n1pj4g7ugpp5h0lld9qzh06ngn8ur756rva0ntfdfg34h298337rljjyztxy8rfqhp50kncf9zk35xg4lxewt4974ry6mudygsztsz8qn3ar8pn3mtpe50scqzzsxqyz5vqsp5lwlnu7xjs7hj7vltx7rhzsjf60l5mwckuw93qngjrz7sdhdkw7gs9qyyssqzy543rxhkdtncjrmuzlz4lrh2eauldawa9np5yysh7dhqhv8kaahydurha2cfelr7t6wt33xse7fdykupnjv36na6x6crrhy53lyg6cqf2jhjj"
-      ></bc-send-payment>
-    </div>
+      <h2>Request Payment Screen</h2>
+      <div style="width: 448px; border: 1px solid black">
+        <bc-send-payment
+          invoice="lnbc10n1pj4g7ugpp5h0lld9qzh06ngn8ur756rva0ntfdfg34h298337rljjyztxy8rfqhp50kncf9zk35xg4lxewt4974ry6mudygsztsz8qn3ar8pn3mtpe50scqzzsxqyz5vqsp5lwlnu7xjs7hj7vltx7rhzsjf60l5mwckuw93qngjrz7sdhdkw7gs9qyyssqzy543rxhkdtncjrmuzlz4lrh2eauldawa9np5yysh7dhqhv8kaahydurha2cfelr7t6wt33xse7fdykupnjv36na6x6crrhy53lyg6cqf2jhjj"
+        ></bc-send-payment>
+      </div>
 
-    <h2>Start screen</h2>
-    <div style="width: 448px">
-      <bc-start></bc-start>
-    </div>
+      <h2>Start screen</h2>
+      <div style="width: 448px">
+        <bc-start></bc-start>
+      </div>
 
-    <h2>Help screen</h2>
-    <div style="width: 448px; border: 1px solid black">
-      <bc-help></bc-help>
-    </div>
-    <h2>NWC screen</h2>
-    <div style="width: 448px; border: 1px solid black">
-      <bc-nwc></bc-nwc>
-    </div>
+      <h2>Help screen</h2>
+      <div style="width: 448px; border: 1px solid black">
+        <bc-help></bc-help>
+      </div>
+      <h2>NWC screen</h2>
+      <div style="width: 448px; border: 1px solid black">
+        <bc-nwc></bc-nwc>
+      </div>
 
-    <h2>Connector List</h2>
-    <bc-connector-list></bc-connector-list>
+      <h2>Connector List</h2>
+      <bc-connector-list></bc-connector-list>
 
-    <h2>Pay an invoice</h2>
-    <button onclick="payInvoice()">Pay</button>
+      <h2>Pay an invoice</h2>
+      <button onclick="payInvoice()">Pay</button>
+    </div>
     <script>
       const appName = localStorage.getItem('app-name');
       document.getElementById('app-name').value = appName;

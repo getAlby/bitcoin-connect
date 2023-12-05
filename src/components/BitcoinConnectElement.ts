@@ -5,9 +5,6 @@ import {InternalElement} from './internal/InternalElement';
 import {ConnectorFilter} from '../types/ConnectorFilter';
 import {Route} from './routes';
 
-/**
- * @fires bc:connected - Indicates a wallet has been connected and window.webln is now available and enabled
- */
 export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _modalOpen = false;

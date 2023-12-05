@@ -28,13 +28,14 @@ function App() {
 
   async function payInvoice() {
     try {
-      if (!window.webln || !window.webln) {
-        throw new Error('Please connect your wallet');
-      }
       if (!invoice) {
         throw new Error('No invoice available');
       }
-      const result = await window.webln.sendPayment(invoice);
+      const provider = await requestProvider();
+      if (!provider) {
+        throw new Error('Please connect your wallet');
+      }
+      const result = await provider.sendPayment(invoice);
       setPreimage(result?.preimage);
       if (!result?.preimage) {
         throw new Error('Payment failed. Please try again');

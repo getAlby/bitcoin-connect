@@ -85,7 +85,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       // TODO: is there a better way to reset state when the modal is closed?
       store.getState().clearRouteHistory();
       store.getState().setError(undefined);
-      dispatchEvent('bc:modalclosed');
+      store.getState().setModalOpen(false);
       this.onClose?.();
       document.body.removeChild(this);
     }, 200);

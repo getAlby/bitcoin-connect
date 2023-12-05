@@ -43,9 +43,9 @@ export class LNCConnector extends Connector {
     super(config);
   }
 
-  override async init() {
+  override async init(): Promise<WebLNProvider> {
     await getLNC();
-    window.webln = new LNCWebLNProvider(lnc);
+    const webln = new LNCWebLNProvider(lnc);
 
     try {
       const hasPreviouslyConnected = !lnc.credentials.pairingPhrase;
@@ -74,7 +74,7 @@ export class LNCConnector extends Connector {
       throw error;
     }
 
-    await super.init();
+    return webln;
   }
 
   override async unload(): Promise<void> {

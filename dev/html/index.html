@@ -4,7 +4,8 @@
   <head>
     <meta charset="utf-8" />
     <title>Bitcoin Connect</title>
-    <script src="/dist/index.browser.js"></script>
+    <!-- FIXME: use a script type="module" -->
+    <!-- <script src="/dist/index.browser.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
@@ -19,9 +20,10 @@
       <bc-connector-list></bc-connector-list>
     </div>
     <script>
-      window.addEventListener('bc:connected', async () => {
-        alert('connected');
-      });
+      // FIXME: use new onConnected event
+      // window.addEventListener('bc:connected', async () => {
+      //   alert('connected');
+      // });
     </script>
   </body>
 </html>

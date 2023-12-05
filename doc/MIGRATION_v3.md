@@ -28,8 +28,12 @@ init({
 
 ## Modal
 
-<bc-modal> (or <Modal/>) no longer needs to be rendered manually. Please remove it.
+`<bc-modal>` (or `<Modal/>`) no longer needs to be rendered manually. Make sure to remove it so that the modal does not unexpectedly render on the page.
 
 ## Button
 
 Attributes have been moved from the button to the `init` function exposed by the API.
+
+## Events
+
+New subscription methods are exposed on the Bitcoin Connect API (`onConnected` etc) replacing window events such as `bc:connected`.

@@ -1,5 +1,5 @@
 import {html} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
@@ -8,6 +8,7 @@ import {innerBorder} from './templates/innerBorder.js';
 import {classes} from './css/classes.js';
 import {launchModal} from '../api.js';
 import './bc-balance';
+import store from '../state/store.js';
 
 /**
  * A button that when clicked launches the modal.
@@ -17,8 +18,18 @@ export class Button extends withTwind()(BitcoinConnectElement) {
   @property()
   override title = 'Connect Wallet';
 
+  @state()
+  protected _showBalance: boolean | undefined = undefined;
+
   constructor() {
     super();
+
+    this._showBalance = store.getState().showBalance;
+
+    // TODO: handle unsubscribe
+    store.subscribe((store) => {
+      this._showBalance = store.showBalance;
+    });
   }
 
   override render() {
@@ -51,7 +62,9 @@ export class Button extends withTwind()(BitcoinConnectElement) {
               : html`${this.title}`}
           </span>
         </bci-button>
-        ${this._connected ? html`<bc-balance></bc-balance> ` : null}
+        ${this._connected && this._showBalance !== false
+          ? html`<bc-balance></bc-balance> `
+          : null}
       </div>
     </div>`;
   }

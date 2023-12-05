@@ -131,11 +131,14 @@ import {init} from '@getalby/bitcoin-connect-react';
 // Initialize Bitcoin Connect
 init({
   appName: 'My Lightning App', // your app name
+  // filters: ["nwc"],
+  // showBalance: true,
 });
 ```
 
-- `app-name` (React: `appName`) - Name of the app requesting access to wallet. Currently used for NWC connections (Alby and Mutiny)
-- `filters` - **EXPERIMENTAL:** Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors). Multiple filters can be separated by a comma e.g. `nwc,second_filter`.
+- `appName` - Name of the app requesting access to wallet. Currently used for NWC connections (Alby and Mutiny)
+- `filters` - Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors).
+- `showBalance` - If false, do not request the connected wallet's balance
 
 #### Requesting a provider
 
@@ -190,30 +193,75 @@ disconnect();
 
 #### Events
 
-Bitcoin Connect exposes the following events:
+##### onConnected
+
+This event fires when a WebLN provider is made available.
+
+- When a user connects for the first time
+- On page reload when a user has previously connected
 
 ```ts
 import {onConnected} from '@getalby/bitcoin-connect';
 
-const unsub = onConnected((provider) => {
-  provider.
+const unsub = onConnected(async (provider) => {
+  const {preimage} = await provider.sendPayment('lnbc...');
 });
 unsub();
 ```
 
-TODO: replace the below:
+##### onConnecting
 
-- `bc:connecting` window event which fires when a user is connecting to their wallet
-- `bc:disconnected` window event which fires when user has disconnected from their wallet
-- `bc:modalopened` window event which fires when Bitcoin Connect modal is opened
-- `bc:modalclosed` window event which fires when Bitcoin Connect modal is closed
+This event fires when a WebLN provider is initializing.
 
-For example:
+- When a user connects for the first time
+- On page reload when a user has previously connected
 
 ```ts
-window.addEventListener('bc:connected', () =>
-  window.webln.sendPayment('lnbc...')
-);
+import {onConnecting} from '@getalby/bitcoin-connect';
+
+const unsub = onConnecting(async () => {
+  // do something...
+});
+unsub();
+```
+
+##### onDisconnected
+
+This event fires when the user manually disconnects from Bitcoin Connect.
+
+```ts
+import {onDisconnected} from '@getalby/bitcoin-connect';
+
+const unsub = onDisconnected(async () => {
+  // do something...
+});
+unsub();
+```
+
+##### onModalOpened
+
+This event fires when the Bitcoin Connect modal opens.
+
+```ts
+import {onModalOpened} from '@getalby/bitcoin-connect';
+
+const unsub = onModalOpened(async () => {
+  // do something...
+});
+unsub();
+```
+
+##### onModalClosed
+
+This event fires when the Bitcoin Connect modal closes.
+
+```ts
+import {onModalClosed} from '@getalby/bitcoin-connect';
+
+const unsub = onModalClosed(async () => {
+  // do something...
+});
+unsub();
 ```
 
 ### WebLN global object
@@ -273,18 +321,20 @@ In case your site uses a manual theme switcher, you can force a theme by followi
 ## Access to underlying providers (NWC, LNC etc.)
 
 ```ts
-import { WebLNProviders } from "@getalby/bitcoin-connect";
+import { WebLNProviders, requestProvider } from "@getalby/bitcoin-connect";
 
-if (window.webln instanceof WebLNProviders.NostrWebLNProvider) {
-  window.webln.nostrWalletConnectUrl;
+const provider = await requestProvider();
+
+if (provider instanceof WebLNProviders.NostrWebLNProvider) {
+  provider.nostrWalletConnectUrl;
 }
 
-if (window.webln instanceof WebLNProviders.LNCWebLNProvider) {
-  window.webln.lnc.lnd.lightning.listInvoices(...);
+if (provider instanceof WebLNProviders.LNCWebLNProvider) {
+  provider.lnc.lnd.lightning.listInvoices(...);
 }
 
-if (window.webln instanceof WebLNProviders.LnbitsWebLNProvider) {
-  window.webln.requestLnbits('GET', '/api/v1/wallet');
+if (provider instanceof WebLNProviders.LnbitsWebLNProvider) {
+  provider.requestLnbits('GET', '/api/v1/wallet');
 }
 ```
 
@@ -350,7 +400,7 @@ We are happy to help, please contact us or create an issue.
 
 ### How does it work?
 
-Bitcoin Connect provides multiple options to the user to connect to a lightning wallet, each compatible with WebLN. Any already-existing providers of WebLN (such as an installed WebLN extension like Alby) are detected and offered, as well as options to create a new WebLN provider through protocols such as NWC. No matter which option you choose, window.webln will become available for the website to use to interact with your lightning wallet. Similar to the Alby extension, new options (called Connectors) can be easily added as they all follow a common, simple interface. As long as there is a way to connect to a lightning wallet through Javascript, a connector can be created for it in Bitcoin Connect. We welcome any and all contributions for new connectors!
+Bitcoin Connect provides multiple options to the user to connect to a lightning wallet, each compatible with WebLN. Any already-existing providers of WebLN (such as an installed WebLN extension like Alby) are detected and offered, as well as options to create a new WebLN provider through protocols such as NWC. No matter which option you choose, a WebLN provider will become available for the website to use to interact with your lightning wallet. Similar to the Alby extension, new options (called Connectors) can be easily added as they all follow a common, simple interface. As long as there is a way to connect to a lightning wallet through Javascript, a connector can be created for it in Bitcoin Connect. We welcome any and all contributions for new connectors!
 
 ### Does this work on mobile browsers and mobile PWAs, or desktop browsers without a WebLN extension?
 
