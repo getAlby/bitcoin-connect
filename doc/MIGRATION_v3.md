@@ -37,3 +37,7 @@ Attributes have been moved from the button to the `init` function exposed by the
 ## Events
 
 New subscription methods are exposed on the Bitcoin Connect API (`onConnected` etc) replacing window events such as `bc:connected`.
+
+## Browser / Pure HTML build
+
+Use `<script type="module">` as per the instructions in the README.
