@@ -97,7 +97,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
     >
       <div
-        class="absolute top-0 left-0 w-full h-full ${classes[
+        class="absolute top-0 left-0 w-full h-full -z-10 ${classes[
           'bg-foreground'
         ]} ${this._closing ? 'animate-lighten' : 'animate-darken'}"
       ></div>
