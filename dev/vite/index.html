@@ -118,7 +118,7 @@
     <div class="container">
       <h1>Programmatic Access</h1>
       <button id="launch-modal">Open modal</button>
-      <button if="launch-modal-pay-invoice">Open modal to pay invoice</button>
+      <button id="launch-modal-pay-invoice">Open modal to pay invoice</button>
 
       <br /><br />
 
@@ -164,6 +164,7 @@
         id="show-balance"
         type="checkbox"
         onchange="localStorage.setItem('show-balance', document.getElementById('show-balance').checked.toString()); window.location.reload()"
+        style="width: 24px; height: 24px"
       />
       <br />
       <br />
