@@ -109,7 +109,14 @@ closeModal();
 
 #### React SSR / NextJS
 
-Make sure to only render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory) or by using next/dynamic.
+Make sure to only render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory), using next/dynamic, or a dynamic import e.g.
+
+```ts
+useEffect(() => {
+  // init bitcoin connect to provide webln
+  import('@getalby/bitcoin-connect-react');
+}, []);
+```
 
 ### Other Frameworks
 

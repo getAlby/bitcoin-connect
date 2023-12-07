@@ -59,6 +59,19 @@ export class Start extends withTwind()(BitcoinConnectElement) {
             </h1>
 
             <bc-connector-list></bc-connector-list>
+
+            <div class="flex flex-col items-center w-full font-sans text-sm">
+              <h1 class="mt-8 ${classes['text-neutral-primary']} text-center">
+                Don't have a bitcoin lightning wallet?
+                <a
+                  class="no-underline font-bold ${classes.interactive} ${classes[
+                    'text-brand-mixed'
+                  ]} "
+                  @click=${() => store.getState().pushRoute('/new-wallet')}
+                  >Get one here</a
+                >
+              </h1>
+            </div>
           `}
     </div>`;
   }
