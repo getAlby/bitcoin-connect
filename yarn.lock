@@ -1409,20 +1409,16 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
-"@getalby/lightning-tools@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-4.2.0.tgz#768025e7efb2e8c0271859ed7956615c83b73b76"
-  integrity sha512-o87OTIgKgzOjDPoepDATQVGc2WkrO0Mwt4w+QAorYJx1z5MaCTipJi2cTO0GESObH1sEWCorZikanhMoRUh+qA==
-  dependencies:
-    crypto-js "^4.1.1"
-    light-bolt11-decoder "^3.0.0"
+"@getalby/lightning-tools@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.0.0.tgz#eefe1fc1ecf28582d6c922c9e22dc28bf3af27c6"
+  integrity sha512-j3x90CGclpyZTHJRVWvA95jQniu5A+xqvmJNPSkXyzYCdJiFG5oZFWNwC0N+q7Oa8cTvp7wB7FdDqxH+Le0/Nw==
 
-"@getalby/sdk@^2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-2.7.0.tgz#20fdb5a39ffcbd9b9c9d7270bdacba97ac4d3f72"
-  integrity sha512-4NoEgdjx0R8SYDmJfCAsgvuBs0w3d8wsOMGI4m0h2MVsSeCcWW93lrzCl8bRmHTF5N7EfleHwnieYwn5j9KZTA==
+"@getalby/sdk@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.0.0.tgz#3d87b3d388dd14355b8b49f2fd3cd7ab63533b32"
+  integrity sha512-v4CaQf8HYIvN7Ccp+NU09pROrgugwyOkaouMRrat0DJnbRLpkV8zssPeKEqI29k53USnLn5P3SaHFngM4Se/1A==
   dependencies:
-    crypto-js "^4.1.1"
     events "^3.3.0"
     nostr-tools "^1.17.0"
 
@@ -3166,7 +3162,7 @@ cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crypto-js@4.1.1, crypto-js@^4.1.1:
+crypto-js@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
   integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
@@ -4979,13 +4975,6 @@ levn@^0.4.1:
   dependencies:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
-
-light-bolt11-decoder@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/light-bolt11-decoder/-/light-bolt11-decoder-3.0.0.tgz#f644576120426c9ef65621bde254f11016055044"
-  integrity sha512-AKvOigD2pmC8ktnn2TIqdJu0K0qk6ukUmTvHwF3JNkm8uWCqt18Ijn33A/a7gaRZ4PghJ59X+8+MXrzLKdBTmQ==
-  dependencies:
-    "@scure/base" "1.1.1"
 
 lighthouse-logger@^1.0.0:
   version "1.4.2"

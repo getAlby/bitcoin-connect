@@ -19,12 +19,10 @@
   "scripts": {
     "prebuild": "yarn run clean",
     "prepack": "yarn run build",
-    "build:browser": "esbuild dist/index.modern.js --bundle --external:@lightninglabs/lnc-web --outfile=dist/index.browser.js",
-    "build": "microbundle && yarn build:browser",
+    "build": "microbundle --no-sourcemap",
     "clean": "rm -rf dist",
     "dev": "yarn --cwd dev/vite dev",
     "dev:build": "microbundle watch",
-    "dev:build:browser": "concurrently \"yarn dev:build\" \"yarn build:browser --watch\"",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer",
@@ -45,8 +43,8 @@
   "author": "Alby",
   "license": "MIT",
   "dependencies": {
-    "@getalby/lightning-tools": "^4.2.0",
-    "@getalby/sdk": "^2.7.0",
+    "@getalby/lightning-tools": "^5.0.0",
+    "@getalby/sdk": "^3.0.0",
     "@lightninglabs/lnc-web": "^0.2.6-alpha",
     "qrcode-generator": "^1.4.4",
     "zustand": "^4.4.1"

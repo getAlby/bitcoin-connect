@@ -12,7 +12,7 @@ import {waitingIcon} from '../icons/waitingIcon.js';
 import {bcIcon} from '../icons/bcIcon.js';
 import {Invoice} from '@getalby/lightning-tools';
 import {successAnimation} from '../images/success.js';
-import {closeModal, launchModal} from '../../api.js';
+import {closeModal} from '../../api.js';
 import {disconnectSection} from '../templates/disconnectSection.js';
 import {copyIcon} from '../icons/copyIcon.js';
 import qrcode from 'qrcode-generator';

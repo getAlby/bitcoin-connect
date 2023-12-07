@@ -4,7 +4,6 @@ import {BitcoinConnectElement} from './BitcoinConnectElement';
 import './bc-router-outlet.js';
 import './internal/bci-connecting';
 import store from '../state/store';
-import {dispatchEvent} from '../utils/dispatchEvent';
 import {withTwind} from './twind/withTwind';
 import './bc-modal-header';
 import {classes} from './css/classes';

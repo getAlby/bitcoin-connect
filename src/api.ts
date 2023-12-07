@@ -111,6 +111,10 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
 
   document.body.appendChild(document.createElement('bc-modal'));
 
+  if (invoice) {
+    throw new Error('TODO');
+  }
+
   // if (invoice) {
   //   //store.getState().setInvoice(invoice);
   //   store.getState().pushRoute(`/send-payment`, {invoice});

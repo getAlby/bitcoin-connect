@@ -117,12 +117,8 @@
   <body>
     <div class="container">
       <h1>Programmatic Access</h1>
-      <button onclick="window.bitcoinConnect.launchModal()">Open modal</button>
-      <button
-        onclick="const invoice = localStorage.getItem('invoice'); const invoiceToPay = invoice || window.prompt('paste invoice'); window.bitcoinConnect.launchModal({invoice: invoiceToPay})"
-      >
-        Open modal to pay invoice
-      </button>
+      <button id="launch-modal">Open modal</button>
+      <button if="launch-modal-pay-invoice">Open modal to pay invoice</button>
 
       <br /><br />
 
@@ -167,7 +163,7 @@
       <br />
       <h1>Components</h1>
       <h2>Button</h2>
-      <bc-button id="first-button"></bc-button>
+      <bc-button></bc-button>
       <br /><br />
       <div class="theme-geyser">
         <bc-button></bc-button>
@@ -229,22 +225,34 @@
       <h2>Pay an invoice</h2>
       <button onclick="payInvoice()">Pay</button>
     </div>
-    <script>
+    <script></script>
+    <script type="module">
+      import {init, launchModal} from '../../src/index.ts';
+
       const appName = localStorage.getItem('app-name');
       document.getElementById('app-name').value = appName;
-      if (appName) {
-        document
-          .getElementById('first-button')
-          .setAttribute('app-name', appName);
-      }
 
       const filters = localStorage.getItem('filters');
       document.getElementById('filters').value = filters;
-      if (filters) {
-        document
-          .getElementById('first-button')
-          .setAttribute('filters', filters);
-      }
+
+      const invoice = localStorage.getItem('invoice');
+      document.getElementById('invoice').value = invoice;
+
+      init({
+        appName,
+        filters: filters?.split(','),
+      });
+
+      document.getElementById('launch-modal').addEventListener('click', () => {
+        launchModal();
+      });
+      document
+        .getElementById('launch-modal-pay-invoice')
+        .addEventListener('click', () => {
+          const invoice = localStorage.getItem('invoice');
+          const invoiceToPay = invoice || window.prompt('paste invoice');
+          launchModal({invoice: invoiceToPay});
+        });
     </script>
   </body>
 </html>

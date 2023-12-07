@@ -30,10 +30,19 @@ There are multiple breaking changes in **v3**. See our migration guide [here](do
 
 You can use Bitcoin Connect without any build tools:
 
-> NOTE: LNC connector is currently not supported! See [#85](https://github.com/getAlby/bitcoin-connect/issues/85)
-
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@2.4.2/dist/index.browser.js"></script>
+<script type="module">
+  import {launchModal} from 'https://esm.sh/@getalby/bitcoin-connect@3.0.0'; // jsdelivr.net, skypack.dev also work
+
+  // use Bitcoin connect API normally...
+  launchModal();
+
+  // or if you just want access to the web components:
+  import 'https://esm.sh/@getalby/bitcoin-connect@3.0.0';
+</script>
+
+<!-- Bitcoin Connect components are now available -->
+<bc-button></bc-button>
 ```
 
 ## 🤙 Usage
@@ -118,7 +127,6 @@ Bitcoin Connect exposes the following web components for allowing users to conne
 - `<bc-send-payment/>` - render a payment request UI
   - Arguments:
     - `invoice` - BOLT11 invoice
-    - `paid` - (optional) show the paid state e.g. if the payment was executed from a mobile device
 - _more components coming soon_
 
 ### Bitcoin Connect API
@@ -373,14 +381,6 @@ Open [dev](dev/README.md)
 ### Production Build
 
 `yarn build`
-
-### Build (Watch mode - no pure html support)
-
-`yarn dev:build`
-
-### Build (Watch mode - with pure html support)
-
-`yarn dev:build:browser`
 
 ### Testing
 
