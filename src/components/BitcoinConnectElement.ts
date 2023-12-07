@@ -6,6 +6,8 @@ import {ConnectorFilter} from '../types/ConnectorFilter';
 import {Route} from './routes';
 
 export class BitcoinConnectElement extends InternalElement {
+  // TODO: move state to individual components
+  // individual components should not have access to all of this!
   @state()
   protected _modalOpen = false;
   @state()
@@ -45,7 +47,6 @@ export class BitcoinConnectElement extends InternalElement {
 
   constructor() {
     super();
-    loadFonts();
     this._connected = store.getState().connected;
     this._connecting = store.getState().connecting;
     this._connectorName = store.getState().connectorName;

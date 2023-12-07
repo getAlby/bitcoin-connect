@@ -1,3 +1,4 @@
+import {loadFonts} from '../components/utils/loadFonts';
 import {ConnectorConfig} from '../types/ConnectorConfig';
 import store from './store';
 
@@ -25,4 +26,5 @@ function addEventListeners() {
 if (globalThis.window) {
   loadConfig();
   addEventListeners();
+  loadFonts();
 }

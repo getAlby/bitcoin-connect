@@ -63,7 +63,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
           </span>
         </bci-button>
         ${this._connected && this._showBalance !== false
-          ? html`<bc-balance></bc-balance> `
+          ? html`<bc-balance class="select-none cursor-pointer"></bc-balance> `
           : null}
       </div>
     </div>`;

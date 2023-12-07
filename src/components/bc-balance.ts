@@ -45,39 +45,12 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
     })();
   }
 
-  /* Button:
-  <span
-              class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
-                'text-brand-mixed'
-              ]} select-none"
-              >
-  <span class="font-mono"
-                >${(this._balance || 0).toLocaleString(undefined, {
-                  useGrouping: true,
-                })}
-                sats</span
-              ></span>
-              */
-  /* Modal:
-
-  <h2 class="text-2xl ${classes['text-neutral-secondary']}">
-              <span
-                class="font-bold font-mono text-4xl align-bottom ${classes[
-                  'text-brand-mixed'
-                ]}"
-                >${(this._balance || 0).toLocaleString(undefined, {
-                  useGrouping: true,
-                })}</span
-              >&nbsp;sats
-            </h2>
-            */
-
   override render() {
     // TODO: if balance is still loading, show skeleton loader
     return html` <span
       class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
         'text-brand-mixed'
-      ]} select-none"
+      ]}"
     >
       <span class="font-mono">${this._balance || 0} </span>&nbsp;sats</span
     >`;

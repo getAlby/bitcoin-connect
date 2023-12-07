@@ -109,17 +109,23 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
     throw new Error('bc-modal already in DOM');
   }
 
-  document.body.appendChild(document.createElement('bc-modal'));
+  // TODO: refactor to have higher level components that render these ones,
+  // so JS DOM events are not needed and tailwind can be used
+  // - but then how does the modal safely get removed?
+
+  const modalElement = document.createElement('bc-modal');
 
   if (invoice) {
-    throw new Error('TODO');
+    const sendPaymentModalContentElement = document.createElement(
+      'bc-send-payment-modal-content'
+    );
+    sendPaymentModalContentElement.setAttribute('invoice', invoice);
+    modalElement.appendChild(sendPaymentModalContentElement);
+  } else {
+    modalElement.appendChild(document.createElement('bc-main-modal-content'));
   }
 
-  // if (invoice) {
-  //   //store.getState().setInvoice(invoice);
-  //   store.getState().pushRoute(`/send-payment`, {invoice});
-  // }
-  // FIXME: invoice
+  document.body.appendChild(modalElement);
   store.getState().setModalOpen(true);
 }
 

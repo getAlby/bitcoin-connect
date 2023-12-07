@@ -35,14 +35,6 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       ) {
         this._handleClose();
       }
-      // TODO: should have some sort of "return to" logic
-      /*if (
-        currentStore.connected !== prevStore.connected &&
-        currentStore.connected &&
-        currentStore.invoice
-      ) {
-        store.getState().pushRoute('/send-payment');
-      }*/
     });
   }
 
@@ -57,21 +49,10 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
         ]} ${this._closing ? 'animate-lighten' : 'animate-darken'}"
       ></div>
       <div
-        class="transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex flex-col justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
+        class="transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
     ${this._closing ? 'animate-fade-out' : 'animate-fade-in'}"
       >
-        <bc-modal-header
-          class="flex w-full"
-          .onClose=${this._handleClose}
-        ></bc-modal-header>
-        <div class="flex w-full pt-8">
-          ${this._connecting
-            ? html`<bci-connecting class="flex w-full"></bci-connecting>`
-            : html` <bc-router-outlet class="flex w-full"></bc-router-outlet>`}
-        </div>
-        ${this._error
-          ? html`<p class="mt-4 font-sans text-red-500">${this._error}</p>`
-          : null}
+        <slot @onclose=${this._handleClose}></slot>
       </div>
     </div>`;
   }

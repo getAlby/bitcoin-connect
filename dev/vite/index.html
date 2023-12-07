@@ -117,6 +117,7 @@
   <body>
     <div class="container">
       <h1>Programmatic Access</h1>
+      <button id="request-provider">Request provider</button>
       <button id="launch-modal">Open modal</button>
       <button id="launch-modal-pay-invoice">Open modal to pay invoice</button>
 
@@ -238,7 +239,7 @@
     </div>
     <script></script>
     <script type="module">
-      import {init, launchModal} from '../../src/index.ts';
+      import {init, launchModal, requestProvider} from '../../src/index.ts';
 
       const appName = localStorage.getItem('app-name');
       document.getElementById('app-name').value = appName;
@@ -259,6 +260,12 @@
         showBalance,
       });
 
+      document
+        .getElementById('request-provider')
+        .addEventListener('click', async () => {
+          const provider = await requestProvider();
+          console.log('WebLN provider: ', provider);
+        });
       document.getElementById('launch-modal').addEventListener('click', () => {
         launchModal();
       });

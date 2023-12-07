@@ -1,13 +1,14 @@
 import {LitElement, css} from 'lit';
 
 export class InternalElement extends LitElement {
-  // global css reset in shadow DOM
   static override styles = [
     css`
       :host {
+        // global css reset in shadow DOM
         all: initial;
         font-variant-numeric: slashed-zero;
       }
+      // TODO: move to individual components - only needed by a couple of icons
       .hover-animation:hover .hover-right-up {
         transform: translateX(2px) translateY(-2px);
         transition: all 0.3s;
@@ -36,6 +37,7 @@ export class InternalElement extends LitElement {
     }
   }
 
+  // TODO: move, only needed by the button?
   protected _getBrandColorLuminance() {
     if (!globalThis.window) {
       return 0;

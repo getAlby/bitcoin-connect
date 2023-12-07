@@ -121,24 +121,17 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
                         ${walletIcon} Open in a Bitcoin Wallet
                       </bci-button>
                     </a>
-                    <div>
-                      <bci-button
-                        block
-                        @click=${this._onClickConnectWallet}
-                      >
-                        <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
-                      </bc-button>
-                    </div>
-                    ${
-                      this._showQR
-                        ? null
-                        : html`<bci-button
-                      block
-                      @click=${this._copyAndDisplayInvoice}
-                    >
-                      ${qrIcon}Copy & Display this.invoice
-                    </bc-button>`
-                    }
+                    <bci-button block @click=${this._onClickConnectWallet}>
+                      <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
+                    </bci-button>
+                    ${this._showQR
+                      ? null
+                      : html`<bci-button
+                          block
+                          @click=${this._copyAndDisplayInvoice}
+                        >
+                          ${qrIcon}Copy & Display this.invoice
+                        </bci-button>`}
                   </div>
                 `}
             ${!isMobileView || this._showQR
@@ -166,13 +159,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private _onClickConnectWallet() {
-    // TODO: instead of routing like this, have 2 separate applications that handle their own routing
-
-    store.getState().pushRoute('/start');
-    // store.getState().setReturnTo('/start'); // FIXME: what to do here?
-
-    // TODO: need to pass ?returnTo=...
-    //launchModal();
+    this.dispatchEvent(
+      new Event('connectwallet', {bubbles: true, composed: true})
+    );
   }
 
   private _copyAndDisplayInvoice() {
