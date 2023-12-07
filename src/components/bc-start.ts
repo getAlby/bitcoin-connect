@@ -32,16 +32,20 @@ export class Start extends withTwind()(BitcoinConnectElement) {
     >
       ${this._connected
         ? html`
-            <span
-              class="text-xs font-medium mb-2 ${classes[
-                'text-neutral-secondary'
-              ]}"
-              >Balance</span
-            >
-
             ${this._showBalance !== false
-              ? html`<bc-balance class="text-2xl"></bc-balance>`
-              : null}
+              ? html`<span
+                    class="text-xs font-medium mb-2 ${classes[
+                      'text-neutral-secondary'
+                    ]}"
+                    >Balance</span
+                  >
+                  <bc-balance class="text-2xl"></bc-balance>`
+              : html` <span
+                  class="text-lg font-medium mt-4 -mb-4 ${classes[
+                    'text-neutral-secondary'
+                  ]}"
+                  >Wallet Connected</span
+                >`}
             ${disconnectSection(this._connectorName)}
           `
         : html`

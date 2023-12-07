@@ -159,6 +159,12 @@
         id="invoice"
         onchange="localStorage.setItem('invoice', document.getElementById('invoice').value); window.location.reload()"
       />
+      <p>Show Balance</p>
+      <input
+        id="show-balance"
+        type="checkbox"
+        onchange="localStorage.setItem('show-balance', document.getElementById('show-balance').checked.toString()); window.location.reload()"
+      />
       <br />
       <br />
       <h1>Components</h1>
@@ -238,9 +244,14 @@
       const invoice = localStorage.getItem('invoice');
       document.getElementById('invoice').value = invoice;
 
+      const showBalance =
+        localStorage.getItem('show-balance') !== false.toString();
+      document.getElementById('show-balance').checked = showBalance;
+
       init({
         appName,
         filters: filters?.split(','),
+        showBalance,
       });
 
       document.getElementById('launch-modal').addEventListener('click', () => {
