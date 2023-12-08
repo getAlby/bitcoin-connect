@@ -26,7 +26,7 @@ export class MainModalContent extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return html`<div class="w-full flex-col justify-center items-center">
-      <bc-modal-header class="flex w-full" showHelp>
+      <bc-modal-header class="flex w-full" show-help>
         <div class="${classes['text-brand-mixed']} mr-[2px]">
           ${bcCircleIcon}
         </div>

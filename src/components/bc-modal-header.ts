@@ -11,6 +11,7 @@ import {classes} from './css/classes';
 export class ModalHeader extends withTwind()(BitcoinConnectElement) {
   @property({
     type: Boolean,
+    attribute: 'show-help',
   })
   showHelp?: boolean;
 
