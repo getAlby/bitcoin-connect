@@ -12,10 +12,7 @@ type LaunchModalArgs = {
   invoice?: string;
 };
 
-// const provider = await requestProvider();
-// provider.sendPayment();
-
-export async function onConnected(callback: (provider: WebLNProvider) => void) {
+export function onConnected(callback: (provider: WebLNProvider) => void) {
   const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
     if (state.connected && !prevState.connected) {
       if (!state.provider) {
@@ -29,7 +26,7 @@ export async function onConnected(callback: (provider: WebLNProvider) => void) {
   };
 }
 
-export async function onConnecting(callback: () => void) {
+export function onConnecting(callback: () => void) {
   const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
     if (state.connecting && !prevState.connecting) {
       callback();
@@ -40,7 +37,7 @@ export async function onConnecting(callback: () => void) {
   };
 }
 
-export async function onDisconnected(callback: () => void) {
+export function onDisconnected(callback: () => void) {
   const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
     if (!state.connected && prevState.connected) {
       callback();
@@ -51,7 +48,7 @@ export async function onDisconnected(callback: () => void) {
   };
 }
 
-export async function onModalOpened(callback: () => void) {
+export function onModalOpened(callback: () => void) {
   const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
     if (state.modalOpen && !prevState.modalOpen) {
       callback();
@@ -62,7 +59,7 @@ export async function onModalOpened(callback: () => void) {
   };
 }
 
-export async function onModalClosed(callback: () => void) {
+export function onModalClosed(callback: () => void) {
   const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
     if (!state.modalOpen && prevState.modalOpen) {
       callback();
@@ -74,21 +71,29 @@ export async function onModalClosed(callback: () => void) {
 }
 
 export async function requestProvider(): Promise<WebLNProvider> {
-  // TODO: if provider is not available, launch the modal and wait for connect event
+  let provider = store.getState().provider;
 
-  const existingProvider = store.getState().provider || window.webln;
+  if (!provider) {
+    launchModal();
 
-  if (existingProvider) {
-    await existingProvider.enable();
-    return existingProvider;
+    provider = await new Promise((resolve, reject) => {
+      const unsubOnModalClosed = onModalClosed(() => {
+        unsubOnModalClosed();
+        unsubOnConnected();
+        reject('Modal closed without connecting');
+      });
+      const unsubOnConnected = onConnected((newProvider) => {
+        unsubOnModalClosed();
+        unsubOnConnected();
+        resolve(newProvider);
+      });
+    });
+    if (!provider) {
+      throw new Error('No WebLN provider available');
+    }
   }
 
-  if (!existingProvider) {
-    throw new Error('TODO launch modal');
-  }
-  //store.getState().provider
-
-  return existingProvider;
+  return provider;
 }
 
 export function isConnected() {

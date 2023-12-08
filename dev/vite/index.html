@@ -263,8 +263,12 @@
       document
         .getElementById('request-provider')
         .addEventListener('click', async () => {
-          const provider = await requestProvider();
-          console.log('WebLN provider: ', provider);
+          try {
+            const provider = await requestProvider();
+            console.log('WebLN provider: ', provider);
+          } catch (error) {
+            console.error('Failed to request provider:', error);
+          }
         });
       document.getElementById('launch-modal').addEventListener('click', () => {
         launchModal();
