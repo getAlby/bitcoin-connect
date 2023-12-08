@@ -24,5 +24,10 @@ export function disconnectSection(connectorName: string | undefined) {
 }
 
 function handleDisconnect() {
-  store.getState().disconnect();
+  // disconnect after closing modal
+  // to avoid flash on modal screen
+  store.getState().setModalOpen(false);
+  setTimeout(() => {
+    store.getState().disconnect();
+  }, 200);
 }
