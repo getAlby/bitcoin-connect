@@ -1,4 +1,3 @@
-import {loadFonts} from './utils/loadFonts';
 import {property, state} from 'lit/decorators.js';
 import store from '../state/store';
 import {InternalElement} from './internal/InternalElement';
