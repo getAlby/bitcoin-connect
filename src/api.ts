@@ -124,10 +124,15 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
     const sendPaymentModalContentElement = document.createElement(
       'bc-send-payment-modal-content'
     );
+    sendPaymentModalContentElement.setAttribute('closable', 'true');
     sendPaymentModalContentElement.setAttribute('invoice', invoice);
     modalElement.appendChild(sendPaymentModalContentElement);
   } else {
-    modalElement.appendChild(document.createElement('bc-main-modal-content'));
+    const connectModalContentElement = document.createElement(
+      'bc-main-modal-content'
+    );
+    connectModalContentElement.setAttribute('closable', 'true');
+    modalElement.appendChild(connectModalContentElement);
   }
 
   document.body.appendChild(modalElement);

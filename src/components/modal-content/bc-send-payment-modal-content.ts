@@ -27,6 +27,11 @@ export class SendPaymentModalContent extends withTwind()(
   ];
 
   @property({
+    type: Boolean,
+  })
+  closable?: boolean;
+
+  @property({
     type: String,
   })
   invoice?: string;
@@ -52,7 +57,7 @@ export class SendPaymentModalContent extends withTwind()(
     return this._showConnect
       ? html` <bc-main-modal-content></bc-main-modal-content>`
       : html`<div class="w-full flex-col justify-center items-center">
-          <bc-modal-header class="flex w-full">
+          <bc-modal-header class="flex w-full" ?closable=${this.closable}>
             <p
               class="font-sans font-medium ${classes['text-neutral-secondary']}"
             >

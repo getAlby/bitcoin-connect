@@ -1,4 +1,4 @@
-import {customElement} from 'lit/decorators.js';
+import {customElement, property} from 'lit/decorators.js';
 import {BitcoinConnectElement} from '../BitcoinConnectElement';
 import {withTwind} from '../twind/withTwind';
 import {css, html} from 'lit';
@@ -24,9 +24,14 @@ export class MainModalContent extends withTwind()(BitcoinConnectElement) {
     `,
   ];
 
+  @property({
+    type: Boolean,
+  })
+  closable?: boolean;
+
   override render() {
     return html`<div class="w-full flex-col justify-center items-center">
-      <bc-modal-header class="flex w-full" show-help>
+      <bc-modal-header class="flex w-full" show-help ?closable=${this.closable}>
         <div class="${classes['text-brand-mixed']} mr-[2px]">
           ${bcCircleIcon}
         </div>

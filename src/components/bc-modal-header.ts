@@ -7,8 +7,14 @@ import {crossIcon} from './icons/crossIcon';
 import {helpIcon} from './icons/helpIcon';
 import {classes} from './css/classes';
 
+// TODO: rename bc-header
 @customElement('bc-modal-header')
 export class ModalHeader extends withTwind()(BitcoinConnectElement) {
+  @property({
+    type: Boolean,
+  })
+  closable?: boolean;
+
   @property({
     type: Boolean,
     attribute: 'show-help',
@@ -30,12 +36,14 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
               ${helpIcon}
             </div>`
           : null}
-        <div
-          class="${classes.interactive} ${classes['text-neutral-tertiary']}"
-          @click=${this._handleClose}
-        >
-          ${crossIcon}
-        </div>
+        ${this.closable
+          ? html`<div
+              class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+              @click=${this._handleClose}
+            >
+              ${crossIcon}
+            </div>`
+          : null}
       </div>
       <div class="flex items-center justify-center">
         <slot></slot>

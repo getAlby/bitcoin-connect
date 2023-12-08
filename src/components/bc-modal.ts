@@ -9,9 +9,6 @@ import './bc-modal-header';
 import {classes} from './css/classes';
 import {closeModal} from '../api';
 
-/**
- * The modal allows the user to view a list of connectors, connect and disconnect.
- */
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
   @state()
@@ -36,7 +33,6 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
     });
   }
 
-  // TODO: move the internals of this modal into a separate component so it can be used elsewhere?
   override render() {
     return html` <div
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"

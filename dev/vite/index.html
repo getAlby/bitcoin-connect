@@ -31,7 +31,10 @@
         await ln.fetch();
         const invoice = await ln.requestInvoice({satoshi: 1});
         document
-          .getElementsByTagName('bc-send-payment')[0]
+          .getElementById('send-payment')
+          .setAttribute('invoice', invoice.paymentRequest);
+        document
+          .getElementById('payment-flow')
           .setAttribute('invoice', invoice.paymentRequest);
       })();
     </script>
@@ -88,6 +91,7 @@
 
       .container {
         padding: 20px;
+        max-width: 448px;
       }
     </style>
   </head>
@@ -183,47 +187,40 @@
         Custom
       </button>
 
+      <h1>Flows</h1>
+      <h2>Connect Flow</h2>
+      <bc-main-modal-content></bc-main-modal-content>
+      <h2>Payment Flow</h2>
+      <bc-send-payment-modal-content
+        id="payment-flow"
+      ></bc-send-payment-modal-content>
+
       <h1>Components</h1>
       <h2>Button</h2>
       <bc-button></bc-button>
 
       <h2>Modal header</h2>
-      <div style="width: 448px">
-        <bc-modal-header show-help>Example Title</bc-modal-header>
-      </div>
+      <bc-modal-header show-help>Example Title</bc-modal-header>
       <h2>Navbar</h2>
-      <div style="width: 448px">
-        <bc-navbar heading="Custom Heading"></bc-navbar>
-      </div>
+      <bc-navbar heading="Custom Heading"></bc-navbar>
       <h2>Router outlet</h2>
-      <div style="width: 448px">
-        <bc-router-outlet></bc-router-outlet>
-      </div>
+      <bc-router-outlet></bc-router-outlet>
 
       <h2>Request Payment Screen</h2>
-      <div style="width: 448px; border: 1px solid black">
-        <bc-send-payment
-          invoice="lnbc10n1pj4g7ugpp5h0lld9qzh06ngn8ur756rva0ntfdfg34h298337rljjyztxy8rfqhp50kncf9zk35xg4lxewt4974ry6mudygsztsz8qn3ar8pn3mtpe50scqzzsxqyz5vqsp5lwlnu7xjs7hj7vltx7rhzsjf60l5mwckuw93qngjrz7sdhdkw7gs9qyyssqzy543rxhkdtncjrmuzlz4lrh2eauldawa9np5yysh7dhqhv8kaahydurha2cfelr7t6wt33xse7fdykupnjv36na6x6crrhy53lyg6cqf2jhjj"
-        ></bc-send-payment>
-      </div>
+      <bc-send-payment
+        id="send-payment"
+        invoice="lnbc10n1pj4g7ugpp5h0lld9qzh06ngn8ur756rva0ntfdfg34h298337rljjyztxy8rfqhp50kncf9zk35xg4lxewt4974ry6mudygsztsz8qn3ar8pn3mtpe50scqzzsxqyz5vqsp5lwlnu7xjs7hj7vltx7rhzsjf60l5mwckuw93qngjrz7sdhdkw7gs9qyyssqzy543rxhkdtncjrmuzlz4lrh2eauldawa9np5yysh7dhqhv8kaahydurha2cfelr7t6wt33xse7fdykupnjv36na6x6crrhy53lyg6cqf2jhjj"
+      ></bc-send-payment>
 
       <h2>Start screen</h2>
-      <div style="width: 448px">
-        <bc-start></bc-start>
-      </div>
+      <bc-start></bc-start>
 
       <h2>Help screen</h2>
-      <div style="width: 448px; border: 1px solid black">
-        <bc-help></bc-help>
-      </div>
+      <bc-help></bc-help>
       <h2>New Wallet</h2>
-      <div style="width: 448px; border: 1px solid black">
-        <bc-new-wallet></bc-new-wallet>
-      </div>
+      <bc-new-wallet></bc-new-wallet>
       <h2>NWC screen</h2>
-      <div style="width: 448px; border: 1px solid black">
-        <bc-nwc></bc-nwc>
-      </div>
+      <bc-nwc></bc-nwc>
 
       <h2>Connector List</h2>
       <bc-connector-list></bc-connector-list>
