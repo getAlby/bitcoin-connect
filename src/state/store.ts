@@ -105,6 +105,7 @@ const store = createStore<Store>((set, get) => ({
       connected: false,
       connectorName: undefined,
       provider: undefined,
+      modalOpen: false,
     });
     deleteConfig();
   },

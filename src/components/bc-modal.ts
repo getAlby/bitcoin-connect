@@ -1,5 +1,5 @@
 import {html} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
 import './bc-router-outlet.js';
 import './internal/bci-connecting';
@@ -7,33 +7,31 @@ import store from '../state/store';
 import {withTwind} from './twind/withTwind';
 import './bc-modal-header';
 import {classes} from './css/classes';
+import {closeModal} from '../api';
 
 /**
  * The modal allows the user to view a list of connectors, connect and disconnect.
  */
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
-  /**
-   * Called when modal is closed
-   */
-  @property({
-    attribute: 'on-close',
-  })
-  onClose?: () => void;
-
   @state()
   protected _closing = false;
 
   constructor() {
     super();
 
-    // TODO: handle unsubscribe
-    store.subscribe((currentStore, prevStore) => {
-      if (
-        currentStore.connected !== prevStore.connected &&
-        !currentStore.connected
-      ) {
-        this._handleClose();
+    const unsub = store.subscribe((currentStore, prevStore) => {
+      if (!currentStore.modalOpen && prevStore.modalOpen) {
+        this._closing = true;
+        setTimeout(() => {
+          this._closing = false;
+          // Reset after close
+          // TODO: is there a better way to reset state when the modal is closed?
+          store.getState().clearRouteHistory();
+          store.getState().setError(undefined);
+          document.body.removeChild(this);
+          unsub();
+        }, 200);
       }
     });
   }
@@ -58,17 +56,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   }
 
   private _handleClose = () => {
-    this._closing = true;
-    setTimeout(() => {
-      this._closing = false;
-      // Reset after close
-      // TODO: is there a better way to reset state when the modal is closed?
-      store.getState().clearRouteHistory();
-      store.getState().setError(undefined);
-      store.getState().setModalOpen(false);
-      this.onClose?.();
-      document.body.removeChild(this);
-    }, 200);
+    closeModal();
   };
 }
 

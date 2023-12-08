@@ -135,13 +135,7 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
 }
 
 export function closeModal() {
-  const modal = document.querySelector('bc-modal');
-  if (!modal) {
-    throw new Error(
-      'bc-modal does not exist in the dom. Did you render the Modal somewhere on this page?'
-    );
-  }
-  modal.removeAttribute('open');
+  store.getState().setModalOpen(false);
 }
 
 export function disconnect() {
