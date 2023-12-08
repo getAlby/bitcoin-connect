@@ -75,7 +75,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
         ? this._isPaying
           ? html`<div class="flex flex-col justify-center items-center">
               <p class="${classes['text-neutral-secondary']} mb-5">Paying...</p>
-              ${waitingIcon('w-48 h-48')}
+              ${waitingIcon(`w-48 h-48 ${classes['text-brand-mixed']}`)}
             </div>`
           : this._hasPaid
           ? html`<div class="flex flex-col justify-center items-center">
@@ -89,7 +89,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
               ${disconnectSection(this._connectorName)} `
         : html`
             <div class="flex justify-center items-center">
-              ${waitingIcon()}
+              ${waitingIcon(`w-7 h-7 ${classes['text-brand-mixed']}`)}
               <p class="${classes['text-neutral-secondary']}">
                 Waiting for payment
               </p>
