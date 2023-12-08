@@ -1,8 +1,9 @@
+import {WebLNProvider} from '@webbtc/webln-types';
+
 export type ComponentProps = {
-  // FIXME: update these to use api methods
-  // onConnect?(): void;
-  // onConnecting?(): void;
-  // onDisconnected?(): void;
-  // onModalOpened?(): void;
-  // onModalClosed?(): void;
+  onConnected?(provider: WebLNProvider): void;
+  onConnecting?(): void;
+  onDisconnected?(): void;
+  onModalOpened?(): void;
+  onModalClosed?(): void;
 };

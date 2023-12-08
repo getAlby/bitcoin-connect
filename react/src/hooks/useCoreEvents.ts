@@ -1,6 +1,12 @@
 import React from 'react';
 import {ComponentProps} from '../types/ComponentProps';
-import {onConnected} from '@getalby/bitcoin-connect';
+import {
+  onConnected,
+  onConnecting,
+  onDisconnected,
+  onModalClosed,
+  onModalOpened,
+} from '@getalby/bitcoin-connect';
 
 export function useCoreEvents(props: ComponentProps) {
   React.useEffect(() => {

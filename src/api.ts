@@ -106,8 +106,6 @@ export function init(config: BitcoinConnectConfig = {}) {
   store.getState().setShowBalance(config.showBalance);
 }
 
-// onConnect?: (provider: WebLNProvider) => void;
-
 export function launchModal({invoice}: LaunchModalArgs = {}) {
   const existingModal = document.querySelector('bc-modal');
   if (existingModal) {

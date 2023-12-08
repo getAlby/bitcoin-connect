@@ -1486,17 +1486,17 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@lightninglabs/lnc-core@0.2.6-alpha":
-  version "0.2.6-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.6-alpha.tgz#1b93d5aeefb09bb3dedcb82988368b15e223f8fd"
-  integrity sha512-bw2EQG78pPKMZMFwV+TR99RUbYgPVUKQYMLGGKIOvhPds3dBWSDZpMoqOyW/WidWGXF/ugPHzud8lDbKKhNXgA==
+"@lightninglabs/lnc-core@0.2.8-alpha":
+  version "0.2.8-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-core/-/lnc-core-0.2.8-alpha.tgz#78272c04a5ec95a9ccb830f75ab9b5ca227f0801"
+  integrity sha512-2tHzmklIiQhJiK1aabX0R2AbbWi0mizWgniCUOb573XToYQN7L61Phh+hWUCxIFfAhHCkp2mnSmX+7eT/ikxOg==
 
-"@lightninglabs/lnc-web@^0.2.6-alpha":
-  version "0.2.6-alpha"
-  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.6-alpha.tgz#34f54f65691ff8cdef6eb159321b70c94f198f9e"
-  integrity sha512-SrqR8xaDnFLgNzPe5om7REOAhSOP95jQNIHP0GY0Lv895eDjrI6CPkfCFcX97INoDWYHBvDT8DZeYkBvlznVNA==
+"@lightninglabs/lnc-web@^0.2.8-alpha":
+  version "0.2.8-alpha"
+  resolved "https://registry.yarnpkg.com/@lightninglabs/lnc-web/-/lnc-web-0.2.8-alpha.tgz#454f6d68bcd8d766761f326846467000fc9c251c"
+  integrity sha512-Pe0Moupd7mglbvbVZk7GqPNxa/4lFFWWsnYtiSahzjhNCmTaoQkk/gUY8kk1u5mHaqUmrL1YgLCLsmbGbWPV/g==
   dependencies:
-    "@lightninglabs/lnc-core" "0.2.6-alpha"
+    "@lightninglabs/lnc-core" "0.2.8-alpha"
     crypto-js "4.1.1"
 
 "@lit-labs/ssr-dom-shim@^1.0.0", "@lit-labs/ssr-dom-shim@^1.1.0":

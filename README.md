@@ -74,12 +74,23 @@ _Continue further down for the full Bitcoin Connect API._
 ### React
 
 ```jsx
-import {Button, init, launchModal, closeModal, requestProvider} from '@getalby/bitcoin-connect-react';
+import {Button, init, launchModal, closeModal, requestProvider, Connect, SendPayment} from '@getalby/bitcoin-connect-react';
 
 // Initialize Bitcoin Connect
 init({
   appName: "My Lightning App", // your app name
 })
+
+// render the Bitcoin Connect button
+<Button onConnect={(provider) => {
+  const {preimage} = await provider.sendPayment("lnbc...");
+}}/>
+
+// render the connect flow on its own without the modal
+<Connect/>
+
+// render the send payment flow on its own without the modal
+<SendPayment invoice="lnbc..."/>
 
 // request a provider
 <button onClick={() => {
@@ -90,15 +101,7 @@ init({
   Request WebLN provider
 </button>
 
-// render the Bitcoin Connect button
-<Button onConnect={(provider) => {
-  provider.sendPayment("lnbc...")
-}} />
-
-// render a payment component on its own
-<SendPayment invoice="lnbc..."/>
-
-// open modal programmatically to pay an invoice
+// open modal programmatically to pay an invoice (for one-off payments)
 <button onClick={() => launchModal({invoice: "lnbc..."})}>
   Programmatically launch modal
 </button>
@@ -109,12 +112,29 @@ closeModal();
 
 #### React SSR / NextJS
 
-Make sure to only render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory), using next/dynamic, or a dynamic import e.g.
+Make sure to only render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory), using `next/dynamic`, or a dynamic import e.g.
+
+```ts
+import dynamic from 'next/dynamic';
+
+const BitcoinConnectButton = dynamic(() =>
+  import('@getalby/bitcoin-connect-react').then((mod) => mod.Button)
+);
+```
+
+or
 
 ```ts
 useEffect(() => {
   // init bitcoin connect to provide webln
-  import('@getalby/bitcoin-connect-react');
+  const {onConnected} import('@getalby/bitcoin-connect-react');
+  const unsub = onConnected((provider) => {
+    window.webln = provider;
+  });
+
+  return () => {
+    unsub();
+  };
 }, []);
 ```
 
@@ -291,11 +311,11 @@ onConnected((provider) => {
 });
 ```
 
+_More methods coming soon. Is something missing that you'd need? let us know!_
+
 #### WebLN events
 
 Providers also should fire a `webln:connected` event. See `webln.guide`.
-
-_More methods coming soon. Is something missing that you'd need? let us know!_
 
 ### Styling
 
