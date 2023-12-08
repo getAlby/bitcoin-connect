@@ -303,7 +303,7 @@ These variables must be set at the root or on a container element wrapping any b
 
 ```css
 html {
-  --bc-color-brand: #196ce7;
+  --bc-color-brand: #196ce7; /* Only 6-digit hex and rgb formats are supported! */
 }
 ```
 
