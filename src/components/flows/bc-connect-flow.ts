@@ -10,9 +10,8 @@ import {bcLogo} from '../icons/bcLogo';
 import {bcCircleIcon} from '../icons/bcCircleIcon';
 import {classes} from '../css/classes';
 
-// TODO: rename: bc-connect-flow?
-@customElement('bc-main-modal-content')
-export class MainModalContent extends withTwind()(BitcoinConnectElement) {
+@customElement('bc-connect-flow')
+export class ConnectFlow extends withTwind()(BitcoinConnectElement) {
   static override styles = [
     ...super.styles,
     css`
@@ -43,7 +42,9 @@ export class MainModalContent extends withTwind()(BitcoinConnectElement) {
           : html` <bc-router-outlet class="flex w-full"></bc-router-outlet>`}
       </div>
       ${this._error
-        ? html`<p class="mt-4 font-sans text-red-500">${this._error}</p>`
+        ? html`<p class="mt-4 text-center font-sans text-red-500">
+            ${this._error}
+          </p>`
         : null}
     </div>`;
   }
@@ -51,6 +52,6 @@ export class MainModalContent extends withTwind()(BitcoinConnectElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-main-modal-content': MainModalContent;
+    'bc-connect-flow': ConnectFlow;
   }
 }

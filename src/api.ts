@@ -115,24 +115,21 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
   }
 
   // TODO: refactor to have higher level components that render these ones,
-  // so JS DOM events are not needed and tailwind can be used
-  // - but then how does the modal safely get removed?
+  // so JS DOM functions are not needed and tailwind can be used
 
   const modalElement = document.createElement('bc-modal');
 
   if (invoice) {
-    const sendPaymentModalContentElement = document.createElement(
-      'bc-send-payment-modal-content'
+    const sendPaymentFlowElement = document.createElement(
+      'bc-send-payment-flow'
     );
-    sendPaymentModalContentElement.setAttribute('closable', 'true');
-    sendPaymentModalContentElement.setAttribute('invoice', invoice);
-    modalElement.appendChild(sendPaymentModalContentElement);
+    sendPaymentFlowElement.setAttribute('closable', 'true');
+    sendPaymentFlowElement.setAttribute('invoice', invoice);
+    modalElement.appendChild(sendPaymentFlowElement);
   } else {
-    const connectModalContentElement = document.createElement(
-      'bc-main-modal-content'
-    );
-    connectModalContentElement.setAttribute('closable', 'true');
-    modalElement.appendChild(connectModalContentElement);
+    const connectFlowElement = document.createElement('bc-connect-flow');
+    connectFlowElement.setAttribute('closable', 'true');
+    modalElement.appendChild(connectFlowElement);
   }
 
   document.body.appendChild(modalElement);

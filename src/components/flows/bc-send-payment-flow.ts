@@ -9,11 +9,8 @@ import '../bc-router-outlet';
 import {classes} from '../css/classes';
 import store from '../../state/store';
 
-// TODO: rename: bc-send-payment-flow?
-@customElement('bc-send-payment-modal-content')
-export class SendPaymentModalContent extends withTwind()(
-  BitcoinConnectElement
-) {
+@customElement('bc-send-payment-flow')
+export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
   static override styles = [
     ...super.styles,
     css`
@@ -55,7 +52,7 @@ export class SendPaymentModalContent extends withTwind()(
 
   override render() {
     return this._showConnect
-      ? html` <bc-main-modal-content></bc-main-modal-content>`
+      ? html` <bc-connect-flow></bc-connect-flow>`
       : html`<div class="w-full flex-col justify-center items-center">
           <bc-modal-header class="flex w-full" ?closable=${this.closable}>
             <p
@@ -71,7 +68,9 @@ export class SendPaymentModalContent extends withTwind()(
             />
           </div>
           ${this._error
-            ? html`<p class="mt-4 font-sans text-red-500">${this._error}</p>`
+            ? html`<p class="mt-4 text-center font-sans text-red-500">
+                ${this._error}
+              </p>`
             : null}
         </div>`;
   }
@@ -83,6 +82,6 @@ export class SendPaymentModalContent extends withTwind()(
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-send-payment-modal-content': SendPaymentModalContent;
+    'bc-send-payment-flow': SendPaymentFlow;
   }
 }
