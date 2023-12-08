@@ -62,7 +62,7 @@ export class SendPaymentModalContent extends withTwind()(
           <div class="flex flex-col justify-center items-center w-full pt-8">
             <bc-send-payment
               .invoice=${this.invoice}
-              @connectwallet=${this._onClickConnectWallet}
+              @onclickconnectwallet=${this._onClickConnectWallet}
             />
           </div>
           ${this._error

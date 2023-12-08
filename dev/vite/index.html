@@ -294,6 +294,8 @@
             alert('Failed to pay: ' + error);
           }
         });
+
+      document.addEventListener('bc:onpaid', (e) => console.log('PAID!', e));
     </script>
   </body>
 </html>

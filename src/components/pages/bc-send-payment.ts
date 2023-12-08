@@ -19,7 +19,6 @@ import qrcode from 'qrcode-generator';
 import {walletIcon} from '../icons/walletIcon.js';
 import {qrIcon} from '../icons/qrIcon.js';
 
-// TODO: split this component up - children should not rely on global state.
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
   @state()
@@ -40,12 +39,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   invoice?: string;
 
   override render() {
-    // TODO: there should be a page that use the state to render this component using the attribute.
-    // so then this component never requires state
     if (!this.invoice) {
       return null;
     }
-    console.log('invoice: ', this.invoice);
 
     let decodedInvoice: Invoice;
     try {
@@ -160,7 +156,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
   private _onClickConnectWallet() {
     this.dispatchEvent(
-      new Event('connectwallet', {bubbles: true, composed: true})
+      new Event('onclickconnectwallet', {bubbles: true, composed: true})
     );
   }
 
@@ -188,9 +184,23 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
         throw new Error('No WebLN provider available');
       }
       if (!this.invoice) {
-        throw new Error('No this.invoice to pay');
+        throw new Error('No invoice to pay');
       }
-      await provider.sendPayment(this.invoice);
+      // TODO: allow setting a polling function for payment with external wallet
+      const result = await provider.sendPayment(this.invoice);
+      if (!result.preimage) {
+        throw new Error('No preimage in result');
+      }
+      // TODO: review
+      // it is not possible to pass as an attribute to this function
+      // app would need to add an event listener manually.
+      this.dispatchEvent(
+        new CustomEvent('bc:onpaid', {
+          bubbles: true,
+          composed: true,
+          detail: result,
+        })
+      );
       this._hasPaid = true;
       setTimeout(() => {
         closeModal();
