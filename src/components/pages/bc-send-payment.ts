@@ -78,8 +78,12 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
               ${waitingIcon(`w-48 h-48 ${classes['text-brand-mixed']}`)}
             </div>`
           : this._hasPaid
-          ? html`<div class="flex flex-col justify-center items-center">
-              <p class="font-bold ${classes['text-brand-mixed']}">Paid!</p>
+          ? html`<div
+              class="flex flex-col justify-center items-center ${classes[
+                'text-brand-mixed'
+              ]}"
+            >
+              <p class="font-bold">Paid!</p>
               ${successAnimation}
             </div>`
           : html`<bci-button variant="primary" @click=${this._payInvoice}>
