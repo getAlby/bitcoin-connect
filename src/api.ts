@@ -1,4 +1,4 @@
-import {WebLNProvider} from '@webbtc/webln-types';
+import {SendPaymentResponse, WebLNProvider} from '@webbtc/webln-types';
 import store from './state/store';
 import {ConnectorFilter} from './types/ConnectorFilter';
 
@@ -10,6 +10,7 @@ type BitcoinConnectConfig = {
 
 type LaunchModalArgs = {
   invoice?: string;
+  onPaid?: (response: SendPaymentResponse) => void;
 };
 
 export function onConnected(callback: (provider: WebLNProvider) => void) {
@@ -106,7 +107,7 @@ export function init(config: BitcoinConnectConfig = {}) {
   store.getState().setShowBalance(config.showBalance);
 }
 
-export function launchModal({invoice}: LaunchModalArgs = {}) {
+export function launchModal({invoice, onPaid}: LaunchModalArgs = {}) {
   const existingModal = document.querySelector('bc-modal');
   if (existingModal) {
     throw new Error('bc-modal already in DOM');
@@ -124,6 +125,17 @@ export function launchModal({invoice}: LaunchModalArgs = {}) {
     sendPaymentFlowElement.setAttribute('closable', 'true');
     sendPaymentFlowElement.setAttribute('invoice', invoice);
     modalElement.appendChild(sendPaymentFlowElement);
+    if (onPaid) {
+      const onPaidEventHandler = (event: Event) => {
+        onPaid((event as CustomEvent).detail);
+      };
+      window.addEventListener('bc:onpaid', onPaidEventHandler);
+
+      const unsubOnModalClosed = onModalClosed(() => {
+        unsubOnModalClosed();
+        window.removeEventListener('bc:onpaid', onPaidEventHandler);
+      });
+    }
   } else {
     const connectFlowElement = document.createElement('bc-connect-flow');
     connectFlowElement.setAttribute('closable', 'true');

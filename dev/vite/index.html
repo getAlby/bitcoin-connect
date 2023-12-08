@@ -270,7 +270,12 @@
         .addEventListener('click', () => {
           const invoice = localStorage.getItem('invoice');
           const invoiceToPay = invoice || window.prompt('paste invoice');
-          launchModal({invoice: invoiceToPay});
+          launchModal({
+            invoice: invoiceToPay,
+            onPaid: (response) => {
+              alert('Paid! ' + response.preimage);
+            },
+          });
         });
 
       document

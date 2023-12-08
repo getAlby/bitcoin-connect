@@ -87,7 +87,11 @@ function App() {
       <br />
       <button
         style={{marginTop: '16px'}}
-        onClick={() => launchModal({invoice})}
+        onClick={() =>
+          launchModal({
+            invoice,
+          })
+        }
       >
         Programmatically launch modal to pay invoice
       </button>
@@ -97,7 +101,12 @@ function App() {
         <Connect />
         <br />
         <h2>Send payment component</h2>
-        {invoice && <SendPayment invoice={invoice} />}
+        {invoice && (
+          <SendPayment
+            invoice={invoice}
+            onPaid={(response) => toast('Paid! preimage: ' + response.preimage)}
+          />
+        )}
       </div>
     </>
   );

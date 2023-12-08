@@ -62,7 +62,10 @@ init({
 });
 
 // launch a payment flow
-await launchModal({invoice: 'lnbc...'});
+await launchModal({
+  invoice: 'lnbc...',
+  onPaid: ({preimage}) => alert('Paid: ' + preimage), // NOTE: only fired if paid with WebLN
+});
 
 // or request a WebLN provider to use the full WebLN API
 const weblnProvider = await requestProvider();
@@ -102,7 +105,7 @@ init({
 </button>
 
 // open modal programmatically to pay an invoice (for one-off payments)
-<button onClick={() => launchModal({invoice: "lnbc..."})}>
+<button onClick={() => launchModal({invoice: "lnbc...", onPaid: ({preimage}) => alert("Paid: " + preimage)})}>
   Programmatically launch modal
 </button>
 
@@ -151,9 +154,12 @@ _Use another popular framework? please let us know or feel free to create a PR f
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
-- `<bc-send-payment/>` - render a payment request UI
+- `<bc-connect-flow/>` - render connect wallet UI without modal
+- `<bc-send-payment-flow/>` - render a payment request UI without modal
   - Arguments:
     - `invoice` - BOLT11 invoice
+  - Events:
+    - **WebLN only**: fires `bc:onpaid` event with WebLN payment response in `event.detail` (contains `preimage`)
 - _more components coming soon_
 
 ### Bitcoin Connect API
@@ -203,6 +209,7 @@ import {launchModal} from '@getalby/bitcoin-connect';
 
 launchModal({
   invoice: 'lnbc...', // bolt11 invoice
+  onPaid: ({preimage}) => alert('Paid: ' + preimage), // NOTE: only fired if paid with WebLN
 });
 ```
 
