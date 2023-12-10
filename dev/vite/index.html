@@ -225,8 +225,9 @@
 
       <h2>Misc Helpers</h2>
       <h3>Pay an invoice</h3>
-      <p>Note: make sure to connect wallet first</p>
-      <button id="pay-invoice">Pay</button>
+      <button id="pay-invoice">Pay 1 sat to Alby team</button>
+      <h3>Make an invoice</h3>
+      <button id="make-invoice">Make a 1 sat invoice</button>
     </div>
     <script></script>
     <script type="module">
@@ -285,13 +286,30 @@
             const ln = new LightningAddress('hello@getalby.com');
             await ln.fetch();
             const invoice = await ln.requestInvoice({satoshi: 1});
-            const result = await window.webln.sendPayment(
-              invoice.paymentRequest
-            );
+            const provider = await requestProvider();
+            const result = await provider.sendPayment(invoice.paymentRequest);
             alert('PAID! ' + JSON.stringify(result));
           } catch (error) {
             console.error(error);
-            alert('Failed to pay: ' + error);
+            alert('Failed to pay: ' + error.message || JSON.stringify(error));
+          }
+        });
+
+      document
+        .getElementById('make-invoice')
+        .addEventListener('click', async () => {
+          try {
+            const provider = await requestProvider();
+            const result = await provider.makeInvoice({
+              amount: 1,
+            });
+            alert('Invoice: ' + JSON.stringify(result));
+          } catch (error) {
+            console.error(error);
+            alert(
+              'Failed to make invoice: ' + error.message ||
+                JSON.stringify(error)
+            );
           }
         });
 
