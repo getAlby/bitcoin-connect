@@ -27,6 +27,12 @@ type LaunchModalArgs = {
    * @param response response of the WebLN send payment call
    */
   onPaid?: (response: SendPaymentResponse) => void;
+
+  /**
+   * Check if an external payment was made for the invoice. This function will be called once per second.
+   * @returns WebLN compatible payment response if paid, otherwise undefined
+   */
+  checkPayment?: () => Promise<SendPaymentResponse | undefined>;
 };
 
 /**
@@ -166,7 +172,11 @@ export function init(config: BitcoinConnectConfig = {}) {
  * Programmatically launch the Bitcoin Connect modal
  * @param args optionally configure the modal e.g. to launch a payment flow
  */
-export function launchModal({invoice, onPaid}: LaunchModalArgs = {}) {
+export function launchModal({
+  invoice,
+  onPaid,
+  checkPayment,
+}: LaunchModalArgs = {}) {
   const existingModal = document.querySelector('bc-modal');
   if (existingModal) {
     throw new Error('bc-modal already in DOM');
@@ -182,23 +192,42 @@ export function launchModal({invoice, onPaid}: LaunchModalArgs = {}) {
     const sendPaymentFlowElement = document.createElement(
       'bc-send-payment-flow'
     );
-    sendPaymentFlowElement.setAttribute('closable', 'true');
+    sendPaymentFlowElement.setAttribute('closable', 'closable');
     sendPaymentFlowElement.setAttribute('invoice', invoice);
     modalElement.appendChild(sendPaymentFlowElement);
-    if (onPaid) {
-      const onPaidEventHandler = (event: Event) => {
-        onPaid((event as CustomEvent).detail);
-      };
-      window.addEventListener('bc:onpaid', onPaidEventHandler);
+    const onPaidEventHandler = (event: Event) => {
+      onPaid?.((event as CustomEvent).detail);
+    };
+    window.addEventListener('bc:onpaid', onPaidEventHandler);
 
-      const unsubOnModalClosed = onModalClosed(() => {
-        unsubOnModalClosed();
-        window.removeEventListener('bc:onpaid', onPaidEventHandler);
-      });
-    }
+    const checkPaymentInterval = setInterval(async () => {
+      const sendPaymentResponse = await checkPayment?.();
+      if (sendPaymentResponse) {
+        clearInterval(checkPaymentInterval);
+
+        sendPaymentFlowElement.setAttribute('paid', 'paid');
+
+        // The app needs to add an event listener manually (or use the React wrapper).
+        // Inconsistency: bc:onpaid is fired by different components (bc-send-payment, bc-send-payment-flow, React wrapper)
+        // TODO: find a better way than firing bc:onpaid (also for React wrapper)
+        sendPaymentFlowElement.dispatchEvent(
+          new CustomEvent('bc:onpaid', {
+            bubbles: true,
+            composed: true,
+            detail: sendPaymentResponse,
+          })
+        );
+      }
+    }, 1000);
+
+    const unsubOnModalClosed = onModalClosed(() => {
+      unsubOnModalClosed();
+      window.removeEventListener('bc:onpaid', onPaidEventHandler);
+      clearInterval(checkPaymentInterval);
+    });
   } else {
     const connectFlowElement = document.createElement('bc-connect-flow');
-    connectFlowElement.setAttribute('closable', 'true');
+    connectFlowElement.setAttribute('closable', 'closable');
     modalElement.appendChild(connectFlowElement);
   }
 

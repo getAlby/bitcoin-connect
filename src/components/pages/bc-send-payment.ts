@@ -1,4 +1,4 @@
-import {html} from 'lit';
+import {PropertyValues, html} from 'lit';
 import {withTwind} from '../twind/withTwind.js';
 import {BitcoinConnectElement} from '../BitcoinConnectElement.js';
 import {customElement, property, state} from 'lit/decorators.js';
@@ -25,9 +25,6 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   _hasCopiedInvoice = false;
 
   @state()
-  _hasPaid = false;
-
-  @state()
   _isPaying = false;
 
   @state()
@@ -37,6 +34,21 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     type: String,
   })
   invoice?: string;
+
+  @property({
+    type: Boolean,
+  })
+  paid?: boolean;
+
+  protected override updated(changedProperties: PropertyValues): void {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('paid') && this.paid) {
+      setTimeout(() => {
+        closeModal();
+      }, 3000);
+    }
+  }
 
   override render() {
     if (!this.invoice) {
@@ -71,13 +83,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           })}</span
         >&nbsp;sats
       </h2>
-      ${this._connected
-        ? this._isPaying
-          ? html`<div class="flex flex-col justify-center items-center">
-              <p class="${classes['text-neutral-secondary']} mb-5">Paying...</p>
-              ${waitingIcon(`w-48 h-48 ${classes['text-brand-mixed']}`)}
-            </div>`
-          : this._hasPaid
+      ${this._connected || this.paid
+        ? this.paid
           ? html`<div
               class="flex flex-col justify-center items-center ${classes[
                 'text-brand-mixed'
@@ -85,6 +92,11 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
             >
               <p class="font-bold">Paid!</p>
               ${successAnimation}
+            </div>`
+          : this._isPaying
+          ? html`<div class="flex flex-col justify-center items-center">
+              <p class="${classes['text-neutral-secondary']} mb-5">Paying...</p>
+              ${waitingIcon(`w-48 h-48 ${classes['text-brand-mixed']}`)}
             </div>`
           : html`<bci-button variant="primary" @click=${this._payInvoice}>
                 <span class="-ml-0.5">${bcIcon}</span>
@@ -195,9 +207,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       if (!result.preimage) {
         throw new Error('No preimage in result');
       }
-      // TODO: review
-      // it is not possible to pass as an attribute to this function
-      // app would need to add an event listener manually.
+
+      // it is not possible to pass a callback as an attribute to this component
+      // The app needs to add an event listener manually (or use the React wrapper).
       this.dispatchEvent(
         new CustomEvent('bc:onpaid', {
           bubbles: true,
@@ -205,10 +217,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           detail: result,
         })
       );
-      this._hasPaid = true;
-      setTimeout(() => {
-        closeModal();
-      }, 3000);
+
+      this.paid = true;
     } catch (error) {
       console.error(error);
       store.getState().setError((error as Error).message);

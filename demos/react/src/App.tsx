@@ -1,5 +1,5 @@
 import React from 'react';
-import {LightningAddress} from '@getalby/lightning-tools';
+import {Invoice, LightningAddress} from '@getalby/lightning-tools';
 import {
   Button,
   init,
@@ -15,7 +15,7 @@ init({
 });
 
 function App() {
-  const [invoice, setInvoice] = React.useState<string | undefined>(undefined);
+  const [invoice, setInvoice] = React.useState<Invoice | undefined>(undefined);
   const [preimage, setPreimage] = React.useState<string | undefined>(undefined);
 
   React.useEffect(() => {
@@ -24,12 +24,10 @@ function App() {
         const ln = new LightningAddress('hello@getalby.com');
         await ln.fetch();
         setInvoice(
-          (
-            await ln.requestInvoice({
-              satoshi: 1,
-              comment: 'Paid with Bitcoin Connect',
-            })
-          ).paymentRequest
+          await ln.requestInvoice({
+            satoshi: 1,
+            comment: 'Paid with Bitcoin Connect',
+          })
         );
       } catch (error) {
         console.error(error);
@@ -43,7 +41,7 @@ function App() {
         throw new Error('No invoice available');
       }
       const provider = await requestProvider();
-      const result = await provider.sendPayment(invoice);
+      const result = await provider.sendPayment(invoice.paymentRequest);
       setPreimage(result?.preimage);
       if (!result?.preimage) {
         throw new Error('Payment failed. Please try again');
@@ -87,11 +85,15 @@ function App() {
       <br />
       <button
         style={{marginTop: '16px'}}
-        onClick={() =>
+        onClick={() => {
+          if (!invoice) {
+            alert('Invoice not ready yet');
+            return;
+          }
           launchModal({
-            invoice,
-          })
-        }
+            invoice: invoice.paymentRequest,
+          });
+        }}
       >
         Programmatically launch modal to pay invoice
       </button>
@@ -103,8 +105,18 @@ function App() {
         <h2>Send payment component</h2>
         {invoice && (
           <SendPayment
-            invoice={invoice}
+            invoice={invoice.paymentRequest}
             onPaid={(response) => toast('Paid! preimage: ' + response.preimage)}
+            checkPayment={async () => {
+              const paid = await invoice.verifyPayment();
+
+              if (paid && invoice.preimage) {
+                return {
+                  preimage: invoice.preimage,
+                };
+              }
+              return undefined;
+            }}
           />
         )}
       </div>

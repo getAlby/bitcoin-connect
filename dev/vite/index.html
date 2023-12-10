@@ -101,6 +101,10 @@
       <button id="request-provider">Request provider</button>
       <button id="launch-modal">Open modal</button>
       <button id="launch-modal-pay-invoice">Open modal to pay invoice</button>
+      <br /><br />
+      <button id="launch-modal-pay-invoice-lnurl-verify">
+        Open modal to pay invoice (LNURL-verify payment checker)
+      </button>
 
       <br /><br />
 
@@ -275,6 +279,30 @@
             invoice: invoiceToPay,
             onPaid: (response) => {
               alert('Paid! ' + response.preimage);
+            },
+          });
+        });
+
+      document
+        .getElementById('launch-modal-pay-invoice-lnurl-verify')
+        .addEventListener('click', async () => {
+          const ln = new LightningAddress('hello@getalby.com');
+          await ln.fetch();
+          const invoice = await ln.requestInvoice({satoshi: 1});
+          launchModal({
+            invoice: invoice.paymentRequest,
+            onPaid: (response) => {
+              console.log('Received payment! ' + response.preimage);
+            },
+            checkPayment: async () => {
+              const paid = await invoice.verifyPayment();
+
+              if (paid) {
+                return {
+                  preimage: invoice.preimage,
+                };
+              }
+              return undefined;
             },
           });
         });

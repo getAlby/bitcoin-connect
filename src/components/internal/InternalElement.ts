@@ -1,4 +1,4 @@
-import {LitElement, css} from 'lit';
+import {LitElement, PropertyValues, css} from 'lit';
 
 export class InternalElement extends LitElement {
   static override styles = [
@@ -20,7 +20,8 @@ export class InternalElement extends LitElement {
     `,
   ];
 
-  protected override updated(): void {
+  protected override updated(changedProperties: PropertyValues): void {
+    super.updated(changedProperties);
     // hack to enable manual dark mode:
     // if a dark class is set on the document, pass it to the direct children of this shadow root
     // also requires `darkMode: "class"` to be set in twind config

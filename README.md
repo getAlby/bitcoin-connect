@@ -65,6 +65,7 @@ init({
 await launchModal({
   invoice: 'lnbc...',
   onPaid: ({preimage}) => alert('Paid: ' + preimage), // NOTE: only fired if paid with WebLN
+  // checkPayment: customExternalWalletCheckPaymentFunc
 });
 
 // or request a WebLN provider to use the full WebLN API
@@ -159,7 +160,7 @@ Bitcoin Connect exposes the following web components for allowing users to conne
   - Arguments:
     - `invoice` - BOLT11 invoice
   - Events:
-    - **WebLN only**: fires `bc:onpaid` event with WebLN payment response in `event.detail` (contains `preimage`)
+    - `bc:onpaid` **Experimental** - fires event with WebLN payment response in `event.detail` (contains `preimage`)
 - _more components coming soon_
 
 ### Bitcoin Connect API
@@ -209,7 +210,18 @@ import {launchModal} from '@getalby/bitcoin-connect';
 
 launchModal({
   invoice: 'lnbc...', // bolt11 invoice
-  onPaid: ({preimage}) => alert('Paid: ' + preimage), // NOTE: only fired if paid with WebLN
+  onPaid: ({preimage}) => alert('Paid: ' + preimage),
+  // check payments made from external wallets
+  checkPayment: async () => {
+    // LNURL-verify https://github.com/getAlby/js-lightning-tools
+    const paid = await invoice.verifyPayment();
+    if (paid) {
+      return {
+        preimage: invoice.preimage,
+      };
+    }
+    return undefined;
+  },
 });
 ```
 

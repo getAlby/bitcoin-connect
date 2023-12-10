@@ -33,6 +33,11 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
   })
   invoice?: string;
 
+  @property({
+    type: Boolean,
+  })
+  paid?: boolean;
+
   @state()
   _showConnect = false;
 
@@ -51,7 +56,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
-    return this._showConnect
+    return this._showConnect && !this.paid
       ? html` <bc-connect-flow></bc-connect-flow>`
       : html`<div class="w-full flex-col justify-center items-center">
           <bc-modal-header class="flex w-full" ?closable=${this.closable}>
@@ -64,6 +69,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
           <div class="flex flex-col justify-center items-center w-full pt-8">
             <bc-send-payment
               .invoice=${this.invoice}
+              ?paid=${this.paid}
               @onclickconnectwallet=${this._onClickConnectWallet}
             ></bc-send-payment>
           </div>
