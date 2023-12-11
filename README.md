@@ -62,14 +62,36 @@ closeModal();
 
 #### React SSR / NextJS
 
-Make sure to only render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory), using next/dynamic, or a dynamic import e.g.
+Make sure to only import and render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory) and using next/dynamic, or a dynamic import e.g.
 
-```ts
-useEffect(() => {
-  // init bitcoin connect to provide webln
-  import('@getalby/bitcoin-connect-react');
-}, []);
+```tsx
+import dynamic from 'next/dynamic';
+const Button = dynamic(
+  () => import('@getalby/bitcoin-connect-react').then((mod) => mod.Button),
+  {
+    ssr: false,
+  }
+);
+
+// Render the Button normally
+
+<Button />
+
+// or to use the API:
+
+<button
+  onClick={async () => {
+    const launchModal = await import('@getalby/bitcoin-connect-react').then(
+      (mod) => mod.launchModal
+    );
+    launchModal();
+  }}
+>
+  Launch modal
+</button>
 ```
+
+See [NextJS](./demos/nextjs/) and [NextJS legacy](./demos/nextjs-legacy/) demos for full examples.
 
 ### Other Frameworks
 
@@ -187,6 +209,14 @@ See [Pure HTML](./demos/html/README.md)
 See [React](./demos/react/README.md)
 
 > [Example replit](https://replit.com/@rolznz/make-me-an-image-nwc-version)
+
+#### NextJS (App Router)
+
+See [NextJS](./demos/nextjs/README.md)
+
+#### NextJS Legacy (Pages Directory)
+
+See [NextJS Legacy](./demos/nextjs-legacy/README.md)
 
 ### More demos
 
