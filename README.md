@@ -60,11 +60,12 @@ import {Button, Modal, launchModal, closeModal} from '@getalby/bitcoin-connect-r
 closeModal();
 ```
 
-#### React SSR / NextJS
+#### NextJS / SSR
 
-Make sure to only import and render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory) and using next/dynamic, or a dynamic import e.g.
+Make sure to only import and render the components **client side**. This can be done either by creating a wrapper component with using next/dynamic with `ssr: false` (and add the 'use client' directive when using the NextJS app router), or a dynamic import e.g.
 
 ```tsx
+"use client"
 import dynamic from 'next/dynamic';
 const Button = dynamic(
   () => import('@getalby/bitcoin-connect-react').then((mod) => mod.Button),
