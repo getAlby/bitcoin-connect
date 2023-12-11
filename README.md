@@ -398,13 +398,15 @@ if (provider instanceof WebLNProviders.LnbitsWebLNProvider) {
 
 See [Pure HTML](./demos/html/README.md)
 
-> [Example codepen](https://codepen.io/rolznz/pen/ZEmXGLd)
+> [Example codepen](https://codepen.io/rolznz/pen/VwgNajr)
 
 ### React Demo
 
 See [React](./demos/react/README.md)
 
-> [Example replit](https://replit.com/@rolznz/make-me-an-image-nwc-version)
+#### Example Replits
+
+> [Request Payment Modal](https://bitcoin-connect-request-payment-modal.rolznz.repl.co/)
 
 ### More demos
 
