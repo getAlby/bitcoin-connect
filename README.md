@@ -114,24 +114,44 @@ init({
 closeModal();
 ```
 
-#### React SSR / NextJS
+#### NextJS / SSR
 
-Make sure to only render the components **client side**. This can be done either by creating a wrapper component with 'use client' directive (NextJS app directory), using `next/dynamic`, or a dynamic import e.g.
+Make sure to only import and render the components **client side**. This can be done either by creating a wrapper component with using next/dynamic with `ssr: false` (and add the 'use client' directive when using the NextJS app router), or a dynamic import e.g.
 
-```ts
+```tsx
+"use client"
 import dynamic from 'next/dynamic';
-
-const BitcoinConnectButton = dynamic(() =>
-  import('@getalby/bitcoin-connect-react').then((mod) => mod.Button)
+const Button = dynamic(
+  () => import('@getalby/bitcoin-connect-react').then((mod) => mod.Button),
+  {
+    ssr: false,
+  }
 );
-```
 
-or
+// Render the Button normally
 
-```ts
+<Button />
+
+// or to use the API:
+
+<button
+  onClick={async () => {
+    const launchModal = await import('@getalby/bitcoin-connect-react').then(
+      (mod) => mod.launchModal
+    );
+    launchModal();
+  }}
+>
+  Launch modal
+</button>
+
+// to set the global webln object:
+
 useEffect(() => {
   // init bitcoin connect to provide webln
-  const {onConnected} import('@getalby/bitcoin-connect-react');
+  const {onConnected} = await import('@getalby/bitcoin-connect-react').then(
+    (mod) => mod.onConnected
+  );
   const unsub = onConnected((provider) => {
     window.webln = provider;
   });
@@ -140,7 +160,10 @@ useEffect(() => {
     unsub();
   };
 }, []);
+
 ```
+
+See [NextJS](./demos/nextjs/) and [NextJS legacy](./demos/nextjs-legacy/) demos for full examples.
 
 ### Other Frameworks
 
@@ -407,6 +430,14 @@ See [React](./demos/react/README.md)
 #### Example Replits
 
 > [Request Payment Modal](https://bitcoin-connect-request-payment-modal.rolznz.repl.co/)
+
+#### NextJS (App Router)
+
+See [NextJS](./demos/nextjs/README.md)
+
+#### NextJS Legacy (Pages Directory)
+
+See [NextJS Legacy](./demos/nextjs-legacy/README.md)
 
 ### More demos
 
