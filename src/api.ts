@@ -18,21 +18,20 @@ type BitcoinConnectConfig = {
   showBalance?: boolean;
 };
 
-type LaunchModalArgs = {
+type LaunchPaymentModalArgs = {
   /**
    * Launch a payment flow to pay a BOLT11 invoice
    */
-  invoice?: string;
+  invoice: string;
   /**
+   * Called when a payment is made (either with WebLN or externally)
    * @param response response of the WebLN send payment call
    */
   onPaid?: (response: SendPaymentResponse) => void;
-
   /**
-   * Check if an external payment was made for the invoice. This function will be called once per second.
-   * @returns WebLN compatible payment response if paid, otherwise undefined
+   * Called when modal is closed without completing the payment
    */
-  checkPayment?: () => Promise<SendPaymentResponse | undefined>;
+  onCancelled?: () => void;
 };
 
 /**
@@ -131,16 +130,18 @@ export async function requestProvider(): Promise<WebLNProvider> {
   if (!provider) {
     launchModal();
 
-    provider = await new Promise((resolve, reject) => {
+    await new Promise<void>((resolve, reject) => {
       const unsubOnModalClosed = onModalClosed(() => {
         unsubOnModalClosed();
         unsubOnConnected();
+        if (provider) {
+          resolve();
+        }
+        // TODO: we should throw an Error object instead
         reject('Modal closed without connecting');
       });
       const unsubOnConnected = onConnected((newProvider) => {
-        unsubOnModalClosed();
-        unsubOnConnected();
-        resolve(newProvider);
+        provider = newProvider;
       });
     });
     if (!provider) {
@@ -170,13 +171,35 @@ export function init(config: BitcoinConnectConfig = {}) {
 
 /**
  * Programmatically launch the Bitcoin Connect modal
- * @param args optionally configure the modal e.g. to launch a payment flow
  */
-export function launchModal({
+
+export function launchModal() {
+  // TODO: refactor to have higher level components that render these ones,
+  // so JS DOM functions are not needed and tailwind can be used
+  // (also then CSS is not needed in the host css of bc-send-payment-flow and bc-connect-flow)
+
+  const modalElement = document.createElement('bc-modal');
+
+  const connectFlowElement = document.createElement('bc-connect-flow');
+  connectFlowElement.setAttribute('closable', 'closable');
+  modalElement.appendChild(connectFlowElement);
+
+  document.body.appendChild(modalElement);
+  store.getState().setModalOpen(true);
+}
+
+/**
+ * Programmatically launch the Bitcoin Connect modal to receive a payment
+ * @param args configure the payment modal
+ *
+ * @returns an object allowing you to mark the payment as made (for external payments)
+ */
+// TODO: add launchPaymentModal and update README and migration guide
+export function launchPaymentModal({
   invoice,
   onPaid,
-  checkPayment,
-}: LaunchModalArgs = {}) {
+  onCancelled,
+}: LaunchPaymentModalArgs) {
   const existingModal = document.querySelector('bc-modal');
   if (existingModal) {
     throw new Error('bc-modal already in DOM');
@@ -188,51 +211,47 @@ export function launchModal({
 
   const modalElement = document.createElement('bc-modal');
 
-  if (invoice) {
-    const sendPaymentFlowElement = document.createElement(
-      'bc-send-payment-flow'
-    );
-    sendPaymentFlowElement.setAttribute('closable', 'closable');
-    sendPaymentFlowElement.setAttribute('invoice', invoice);
-    modalElement.appendChild(sendPaymentFlowElement);
-    const onPaidEventHandler = (event: Event) => {
-      onPaid?.((event as CustomEvent).detail);
-    };
-    window.addEventListener('bc:onpaid', onPaidEventHandler);
+  const sendPaymentFlowElement = document.createElement('bc-send-payment-flow');
+  sendPaymentFlowElement.setAttribute('closable', 'closable');
+  sendPaymentFlowElement.setAttribute('invoice', invoice);
+  modalElement.appendChild(sendPaymentFlowElement);
 
-    const checkPaymentInterval = setInterval(async () => {
-      const sendPaymentResponse = await checkPayment?.();
-      if (sendPaymentResponse) {
-        clearInterval(checkPaymentInterval);
+  let paid = false;
 
-        sendPaymentFlowElement.setAttribute('paid', 'paid');
+  const onPaidEventHandler = (event: Event) => {
+    paid = true;
+    onPaid?.((event as CustomEvent).detail);
+  };
+  window.addEventListener('bc:onpaid', onPaidEventHandler);
 
-        // The app needs to add an event listener manually (or use the React wrapper).
-        // Inconsistency: bc:onpaid is fired by different components (bc-send-payment, bc-send-payment-flow, React wrapper)
-        // TODO: find a better way than firing bc:onpaid (also for React wrapper)
-        sendPaymentFlowElement.dispatchEvent(
-          new CustomEvent('bc:onpaid', {
-            bubbles: true,
-            composed: true,
-            detail: sendPaymentResponse,
-          })
-        );
-      }
-    }, 1000);
+  // TODO: the polling should be done by the user instead of by Bitcoin Connect
 
-    const unsubOnModalClosed = onModalClosed(() => {
-      unsubOnModalClosed();
-      window.removeEventListener('bc:onpaid', onPaidEventHandler);
-      clearInterval(checkPaymentInterval);
-    });
-  } else {
-    const connectFlowElement = document.createElement('bc-connect-flow');
-    connectFlowElement.setAttribute('closable', 'closable');
-    modalElement.appendChild(connectFlowElement);
-  }
+  const unsubOnModalClosed = onModalClosed(() => {
+    unsubOnModalClosed();
+    window.removeEventListener('bc:onpaid', onPaidEventHandler);
+    if (!paid) {
+      onCancelled?.();
+    }
+  });
 
   document.body.appendChild(modalElement);
   store.getState().setModalOpen(true);
+
+  return {
+    setPaidExternally: (sendPaymentResponse: SendPaymentResponse) => {
+      // The app needs to add an event listener manually (or use the React wrapper).
+      // Inconsistency: bc:onpaid is fired by different components (bc-send-payment, bc-send-payment-flow, React wrapper)
+      // TODO: find a better way than firing bc:onpaid (also for React wrapper)
+      sendPaymentFlowElement.setAttribute('paid', 'paid');
+      sendPaymentFlowElement.dispatchEvent(
+        new CustomEvent('bc:onpaid', {
+          bubbles: true,
+          composed: true,
+          detail: sendPaymentResponse,
+        })
+      );
+    },
+  };
 }
 
 /**

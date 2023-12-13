@@ -53,6 +53,7 @@ You can use Bitcoin Connect without any build tools:
 import {
   init,
   launchModal,
+  launchPaymentModal,
   requestProvider,
 } from '@getalby/bitcoin-connect-react';
 
@@ -61,11 +62,13 @@ init({
   appName: 'My Lightning App', // your app name
 });
 
-// launch a payment flow
-await launchModal({
+// launch modal programmatically
+await launchModal();
+
+// launch modal to receive a payment
+await launchPaymentModal({
   invoice: 'lnbc...',
-  onPaid: ({preimage}) => alert('Paid: ' + preimage), // NOTE: only fired if paid with WebLN
-  // checkPayment: customExternalWalletCheckPaymentFunc
+  onPaid: ({preimage}) => alert('Paid: ' + preimage), // NOTE: only fired if paid with WebLN - see full api documentation below
 });
 
 // or request a WebLN provider to use the full WebLN API
@@ -78,7 +81,7 @@ _Continue further down for the full Bitcoin Connect API._
 ### React
 
 ```jsx
-import {Button, init, launchModal, closeModal, requestProvider, Connect, SendPayment} from '@getalby/bitcoin-connect-react';
+import {Button, init, launchModal, launchPaymentModal, closeModal, requestProvider, Connect, SendPayment} from '@getalby/bitcoin-connect-react';
 
 // Initialize Bitcoin Connect
 init({
@@ -94,7 +97,9 @@ init({
 <Connect/>
 
 // render the send payment flow on its own without the modal
-<SendPayment invoice="lnbc..."/>
+// Note: for pure P2P payments made externally there is no way for Bitcoin Connect to know when the payment has happened
+// `<SendPayment />` is more for simplifying e-commerce usecases where you are able to check the invoice yourself.
+<SendPayment invoice="lnbc..." onPaid={(response) => alert("Paid! " + response.preimage)}/>
 
 // request a provider
 <button onClick={() => {
@@ -105,9 +110,14 @@ init({
   Request WebLN provider
 </button>
 
-// open modal programmatically to pay an invoice (for one-off payments)
-<button onClick={() => launchModal({invoice: "lnbc...", onPaid: ({preimage}) => alert("Paid: " + preimage)})}>
+// open modal programmatically to connect a wallet
+<button onClick={() => launchModal()}>
   Programmatically launch modal
+</button>
+
+// open modal programmatically to pay an invoice (for one-off payments)
+<button onClick={() => launchPaymentModal({invoice: "lnbc...", onPaid: ({preimage}) => alert("Paid: " + preimage)})}>
+  Programmatically launch payment modal
 </button>
 
 // close modal programmatically
@@ -226,27 +236,40 @@ import {launchModal} from '@getalby/bitcoin-connect';
 launchModal(); // A `<bc-modal/>` element will be injected into the DOM
 ```
 
-`launchModal` can also take an optional options object:
+#### Programmatically launching the modal to receive a payment
+
+To receive a payment the modal can be programmatically opened with:
 
 ```ts
-import {launchModal} from '@getalby/bitcoin-connect';
+import {launchPaymentModal} from '@getalby/bitcoin-connect';
 
-launchModal({
-  invoice: 'lnbc...', // bolt11 invoice
-  onPaid: ({preimage}) => alert('Paid: ' + preimage),
-  // check payments made from external wallets
-  checkPayment: async () => {
-    // LNURL-verify https://github.com/getAlby/js-lightning-tools
-    const paid = await invoice.verifyPayment();
-    if (paid) {
-      return {
-        preimage: invoice.preimage,
-      };
-    }
-    return undefined;
+const {setPaidExternally} = launchPaymentModal({
+  invoice: 'lnbc...',
+  onPaid: (response) => {
+    clearInterval(checkPaymentInterval);
+    alert('Received payment! ' + response.preimage);
+  },
+  onCancelled: () => {
+    clearInterval(checkPaymentInterval);
+    alert('Payment cancelled');
   },
 });
+
+// below is an example of LNURL-verify from https://github.com/getAlby/js-lightning-tools
+// you can write your own polling function to check if your invoice has been paid
+// and then call the `setPaidExternally` function.
+const checkPaymentInterval = setInterval(async () => {
+  const paid = await invoice.verifyPayment();
+
+  if (paid) {
+    setPaidExternally({
+      preimage: invoice.preimage,
+    });
+  }
+}, 1000);
 ```
+
+> Note: for pure P2P payments made externally there is no way for Bitcoin Connect to know when the payment has happened. `launchPaymentModal` is more for simplifying e-commerce usecases where you are able to check the invoice yourself.
 
 #### Programmatically closing the modal
 

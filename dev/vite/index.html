@@ -227,6 +227,9 @@
       <h2>Connector List</h2>
       <bc-connector-list></bc-connector-list>
 
+      <h2>Balance</h2>
+      <bc-balance></bc-balance>
+
       <h2>Misc Helpers</h2>
       <h3>Pay an invoice</h3>
       <button id="pay-invoice">Pay 1 sat to Alby team</button>
@@ -236,7 +239,12 @@
     <script></script>
     <script type="module">
       import {LightningAddress} from 'https://cdn.skypack.dev/@getalby/lightning-tools';
-      import {init, launchModal, requestProvider} from '../../src/index.ts';
+      import {
+        init,
+        launchModal,
+        launchPaymentModal,
+        requestProvider,
+      } from '../../src/index.ts';
 
       const appName = localStorage.getItem('app-name');
       document.getElementById('app-name').value = appName;
@@ -263,8 +271,10 @@
           try {
             const provider = await requestProvider();
             console.log('WebLN provider: ', provider);
+            alert('WebLN provider available');
           } catch (error) {
             console.error('Failed to request provider:', error);
+            alert('Failed to request provider');
           }
         });
       document.getElementById('launch-modal').addEventListener('click', () => {
@@ -275,10 +285,17 @@
         .addEventListener('click', () => {
           const invoice = localStorage.getItem('invoice');
           const invoiceToPay = invoice || window.prompt('paste invoice');
-          launchModal({
+          if (!invoiceToPay) {
+            alert('No invoice provided');
+            return;
+          }
+          launchPaymentModal({
             invoice: invoiceToPay,
             onPaid: (response) => {
               alert('Paid! ' + response.preimage);
+            },
+            onCancelled: () => {
+              alert('Payment cancelled');
             },
           });
         });
@@ -289,22 +306,28 @@
           const ln = new LightningAddress('hello@getalby.com');
           await ln.fetch();
           const invoice = await ln.requestInvoice({satoshi: 1});
-          launchModal({
+
+          const {setPaidExternally} = launchPaymentModal({
             invoice: invoice.paymentRequest,
             onPaid: (response) => {
-              console.log('Received payment! ' + response.preimage);
+              clearInterval(checkPaymentInterval);
+              alert('Received payment! ' + response.preimage);
             },
-            checkPayment: async () => {
-              const paid = await invoice.verifyPayment();
-
-              if (paid) {
-                return {
-                  preimage: invoice.preimage,
-                };
-              }
-              return undefined;
+            onCancelled: () => {
+              clearInterval(checkPaymentInterval);
+              alert('Payment cancelled');
             },
           });
+
+          const checkPaymentInterval = setInterval(async () => {
+            const paid = await invoice.verifyPayment();
+
+            if (paid) {
+              setPaidExternally({
+                preimage: invoice.preimage,
+              });
+            }
+          }, 1000);
         });
 
       document

@@ -10,6 +10,7 @@ import {bcLogo} from '../icons/bcLogo';
 import {bcCircleIcon} from '../icons/bcCircleIcon';
 import {classes} from '../css/classes';
 
+// TODO: rename bc-connect
 @customElement('bc-connect-flow')
 export class ConnectFlow extends withTwind()(BitcoinConnectElement) {
   static override styles = [

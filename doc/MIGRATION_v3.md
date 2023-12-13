@@ -26,6 +26,10 @@ init({
 });
 ```
 
+## `launchModal` for payments
+
+This has been moved to `launchPaymentModal`.
+
 ## Modal
 
 `<bc-modal>` (or `<Modal/>`) no longer needs to be rendered manually. Make sure to remove it so that the modal does not unexpectedly render on the page.

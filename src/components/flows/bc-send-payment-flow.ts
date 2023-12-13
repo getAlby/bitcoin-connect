@@ -9,6 +9,7 @@ import '../bc-router-outlet';
 import {classes} from '../css/classes';
 import store from '../../state/store';
 
+// TODO: rename bc-payment
 @customElement('bc-send-payment-flow')
 export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
   static override styles = [
