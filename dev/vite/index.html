@@ -307,7 +307,7 @@
           await ln.fetch();
           const invoice = await ln.requestInvoice({satoshi: 1});
 
-          const {setPaidExternally} = launchPaymentModal({
+          const {setPaid} = launchPaymentModal({
             invoice: invoice.paymentRequest,
             onPaid: (response) => {
               clearInterval(checkPaymentInterval);
@@ -323,7 +323,7 @@
             const paid = await invoice.verifyPayment();
 
             if (paid) {
-              setPaidExternally({
+              setPaid({
                 preimage: invoice.preimage,
               });
             }

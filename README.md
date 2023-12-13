@@ -243,7 +243,7 @@ To receive a payment the modal can be programmatically opened with:
 ```ts
 import {launchPaymentModal} from '@getalby/bitcoin-connect';
 
-const {setPaidExternally} = launchPaymentModal({
+const {setPaid} = launchPaymentModal({
   invoice: 'lnbc...',
   onPaid: (response) => {
     clearInterval(checkPaymentInterval);
@@ -257,12 +257,12 @@ const {setPaidExternally} = launchPaymentModal({
 
 // below is an example of LNURL-verify from https://github.com/getAlby/js-lightning-tools
 // you can write your own polling function to check if your invoice has been paid
-// and then call the `setPaidExternally` function.
+// and then call the `setPaid` function.
 const checkPaymentInterval = setInterval(async () => {
   const paid = await invoice.verifyPayment();
 
   if (paid) {
-    setPaidExternally({
+    setPaid({
       preimage: invoice.preimage,
     });
   }

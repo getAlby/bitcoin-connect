@@ -238,7 +238,7 @@ export function launchPaymentModal({
   store.getState().setModalOpen(true);
 
   return {
-    setPaidExternally: (sendPaymentResponse: SendPaymentResponse) => {
+    setPaid: (sendPaymentResponse: SendPaymentResponse) => {
       // The app needs to add an event listener manually (or use the React wrapper).
       // Inconsistency: bc:onpaid is fired by different components (bc-send-payment, bc-send-payment-flow, React wrapper)
       // TODO: find a better way than firing bc:onpaid (also for React wrapper)
