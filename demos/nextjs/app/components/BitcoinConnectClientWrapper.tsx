@@ -7,20 +7,12 @@ const Button = dynamic(
     ssr: false,
   }
 );
-
-const Modal = dynamic(
-  () => import('@getalby/bitcoin-connect-react').then((mod) => mod.Modal),
-  {
-    ssr: false,
-  }
-);
 import React from 'react';
 
 export function BitcoinConnectClientWrapper() {
   return (
     <>
       <Button />
-      <Modal />
       <button
         onClick={async () => {
           const launchModal = await import(

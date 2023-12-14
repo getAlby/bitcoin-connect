@@ -1,15 +1,6 @@
 import Image from 'next/image';
 import {Inter} from 'next/font/google';
 import {BitcoinConnectClientWrapper} from '../components/BitcoinConnectClientWrapper';
-import dynamic from 'next/dynamic';
-
-const Button = dynamic(
-  () => import('@getalby/bitcoin-connect-react').then((mod) => mod.Button),
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  }
-);
 
 const inter = Inter({subsets: ['latin']});
 
@@ -55,7 +46,6 @@ export default function Home() {
       </div>
 
       <BitcoinConnectClientWrapper />
-      <Button />
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
