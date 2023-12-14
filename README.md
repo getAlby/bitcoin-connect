@@ -563,10 +563,10 @@ Bitcoin Connect must be imported at the root component or on every component tha
 
 This project is powered by Lit.
 
+See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
+
 ## BOLT FUN
 Bitcoin Connect is a BOLT FUN Legends of Lightning vol.2 finalist. [Follow our project and journey](https://bolt.fun/project/bitcoin-connect).
-
-See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
 
 ## License
 
