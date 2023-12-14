@@ -3,7 +3,7 @@
 
 # Bitcoin Connect
 
-This project includes web components for connecting to Lightning wallets and enabling [WebLN](https://webln.guide). Websites only need to implement a single interface to connect with multiple wallets (WebLN), and users can connect from both desktop and mobile devices. These components work with pure HTML and all Javascript libraries or frameworks, such as React, Angular, Vue, Solid.js, etc.
+This project includes web components for connecting to Lightning wallets and enabling [WebLN](https://webln.guide). Websites only need to interface with WebLN to connect with multiple wallets, just like the Alby extension. However, no extension is needed to be installed - Bitcoin Connect is provided by the website. Users can connect from both desktop and mobile devices, using their favorite browser. PWAs _just work_. Bitcoin Connect's components work with pure HTML and all Javascript libraries or frameworks, such as React, Angular, Vue, Solid.js, etc.
 
 🆕 Bitcoin Connect also supports a nice invoice payment UI that gives a multitude of options to a user to pay an invoice. Accept payments with a single line of code.
 
