@@ -1,4 +1,4 @@
-import {html} from 'lit';
+import {PropertyValues, html} from 'lit';
 import {withTwind} from '../twind/withTwind.js';
 import {BitcoinConnectElement} from '../BitcoinConnectElement.js';
 import {customElement, property, state} from 'lit/decorators.js';
@@ -25,9 +25,6 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   _hasCopiedInvoice = false;
 
   @state()
-  _hasPaid = false;
-
-  @state()
   _isPaying = false;
 
   @state()
@@ -35,27 +32,40 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
   @property({
     type: String,
-    attribute: 'invoice',
   })
   invoice?: string;
 
+  @property({
+    type: Boolean,
+  })
+  paid?: boolean;
+
+  protected override updated(changedProperties: PropertyValues): void {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('paid') && this.paid) {
+      setTimeout(() => {
+        closeModal();
+      }, 3000);
+    }
+  }
+
   override render() {
-    const invoice = this._invoice || this.invoice;
-    if (!invoice) {
+    if (!this.invoice) {
       return null;
     }
 
     let decodedInvoice: Invoice;
     try {
-      decodedInvoice = new Invoice({pr: invoice});
+      decodedInvoice = new Invoice({pr: this.invoice});
     } catch (error) {
       console.error(error);
       store.getState().setError((error as Error).message);
-      return;
+      return null;
     }
     const errorCorrectionLevel = 'L';
     const qr = qrcode(0, errorCorrectionLevel);
-    qr.addData(invoice);
+    qr.addData(this.invoice);
     qr.make();
 
     const isMobileView = window.innerWidth < 600;
@@ -73,16 +83,20 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           })}</span
         >&nbsp;sats
       </h2>
-      ${this._connected
-        ? this._isPaying
+      ${this._connected || this.paid
+        ? this.paid
+          ? html`<div
+              class="flex flex-col justify-center items-center ${classes[
+                'text-brand-mixed'
+              ]}"
+            >
+              <p class="font-bold">Paid!</p>
+              ${successAnimation}
+            </div>`
+          : this._isPaying
           ? html`<div class="flex flex-col justify-center items-center">
               <p class="${classes['text-neutral-secondary']} mb-5">Paying...</p>
-              ${waitingIcon('w-48 h-48')}
-            </div>`
-          : this._hasPaid
-          ? html`<div class="flex flex-col justify-center items-center">
-              <p class="font-bold ${classes['text-brand-mixed']}">Paid!</p>
-              ${successAnimation}
+              ${waitingIcon(`w-48 h-48 ${classes['text-brand-mixed']}`)}
             </div>`
           : html`<bci-button variant="primary" @click=${this._payInvoice}>
                 <span class="-ml-0.5">${bcIcon}</span>
@@ -91,7 +105,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
               ${disconnectSection(this._connectorName)} `
         : html`
             <div class="flex justify-center items-center">
-              ${waitingIcon()}
+              ${waitingIcon(`w-7 h-7 ${classes['text-brand-mixed']}`)}
               <p class="${classes['text-neutral-secondary']}">
                 Waiting for payment
               </p>
@@ -99,10 +113,12 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
             ${!isMobileView
               ? html`<div class="mt-8">
-                    <bc-button
-                      title="Connect Wallet to Pay"
-                      @click=${this._onClickConnectWallet}
-                    ></bc-button>
+                    <bci-button variant="primary" @click=${
+                      this._onClickConnectWallet
+                    }>
+                    <span class="-ml-0.5">${bcIcon}</span>
+                    Connect Wallet to Pay
+                  </bci-button>
                   </div>
                   <div class="w-full py-4">${hr('or')}</div>
 
@@ -112,35 +128,28 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
               </div>`
               : html`
                   <div class="mt-8 w-full flex flex-col gap-4">
-                    <a href="lightning:${invoice}">
+                    <a href="lightning:${this.invoice}">
                       <bci-button variant="primary" block>
                         ${walletIcon} Open in a Bitcoin Wallet
                       </bci-button>
                     </a>
-                    <div>
-                      <bci-button
-                        block
-                        @click=${this._onClickConnectWallet}
-                      >
-                        <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
-                      </bc-button>
-                    </div>
-                    ${
-                      this._showQR
-                        ? null
-                        : html`<bci-button
-                      block
-                      @click=${this._copyAndDisplayInvoice}
-                    >
-                      ${qrIcon}Copy & Display Invoice
-                    </bc-button>`
-                    }
+                    <bci-button block @click=${this._onClickConnectWallet}>
+                      <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
+                    </bci-button>
+                    ${this._showQR
+                      ? null
+                      : html`<bci-button
+                          block
+                          @click=${this._copyAndDisplayInvoice}
+                        >
+                          ${qrIcon}Copy & Display this.invoice
+                        </bci-button>`}
                   </div>
                 `}
             ${!isMobileView || this._showQR
               ? html`
                 <!-- add margin only on dark mode because on dark mode the qr has a white border -->
-                <a href="lightning:${invoice}" class="dark:mt-2">
+                <a href="lightning:${this.invoice}" class="dark:mt-2">
                   <img src=${qr.createDataURL(4)} class="rounded-lg"></img>
                 </a>
                 <a
@@ -162,7 +171,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private _onClickConnectWallet() {
-    store.getState().pushRoute('/start');
+    this.dispatchEvent(
+      new Event('onclickconnectwallet', {bubbles: true, composed: true})
+    );
   }
 
   private _copyAndDisplayInvoice() {
@@ -171,11 +182,10 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private _copyInvoice() {
-    const invoice = this._invoice || this.invoice;
-    if (!invoice) {
+    if (!this.invoice) {
       return;
     }
-    navigator.clipboard.writeText(invoice);
+    navigator.clipboard.writeText(this.invoice);
     this._hasCopiedInvoice = true;
     setTimeout(() => {
       this._hasCopiedInvoice = false;
@@ -183,21 +193,32 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private async _payInvoice() {
-    const invoice = this._invoice || this.invoice;
     this._isPaying = true;
     try {
-      if (!window.webln) {
-        throw new Error('No WebLN provider');
+      const provider = store.getState().provider;
+      if (!provider) {
+        throw new Error('No WebLN provider available');
       }
-      if (!invoice) {
+      if (!this.invoice) {
         throw new Error('No invoice to pay');
       }
-      await window.webln.sendPayment(invoice);
-      this._hasPaid = true;
-      setTimeout(() => {
-        closeModal();
-        store.getState().setInvoice(undefined);
-      }, 3000);
+      // TODO: allow setting a polling function for payment with external wallet
+      const result = await provider.sendPayment(this.invoice);
+      if (!result.preimage) {
+        throw new Error('No preimage in result');
+      }
+
+      // it is not possible to pass a callback as an attribute to this component
+      // The app needs to add an event listener manually (or use the React wrapper).
+      this.dispatchEvent(
+        new CustomEvent('bc:onpaid', {
+          bubbles: true,
+          composed: true,
+          detail: result,
+        })
+      );
+
+      this.paid = true;
     } catch (error) {
       console.error(error);
       store.getState().setError((error as Error).message);

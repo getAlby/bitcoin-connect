@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@getalby/bitcoin-connect-react": "2.4.3",
-    "@getalby/lightning-tools": "^4.0.2",
+    "@getalby/bitcoin-connect-react": "^3.0.0",
+    "@getalby/lightning-tools": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1"

@@ -1,9 +1,9 @@
+import {WebLNProvider} from '@webbtc/webln-types';
+
 export type ComponentProps = {
-  onConnect?(): void;
+  onConnected?(provider: WebLNProvider): void;
   onConnecting?(): void;
-  onDisconnect?(): void;
+  onDisconnected?(): void;
   onModalOpened?(): void;
   onModalClosed?(): void;
-  appName?: string;
-  filters?: string;
 };

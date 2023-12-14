@@ -12,14 +12,22 @@ export function disconnectSection(connectorName: string | undefined) {
     <bci-button
       @click=${handleDisconnect}
       ghost
+      variant="neutral"
       class=${classes['hover-animation']}
     >
       ${disconnectIcon}
-      <span class="${classes['text-brand-mixed']}">Disconnect</span>
+      <span class="text-sm ${classes['text-neutral-tertiary']}"
+        >Disconnect</span
+      >
     </bci-button>
   </div>`;
 }
 
 function handleDisconnect() {
-  store.getState().disconnect();
+  // disconnect after closing modal
+  // to avoid flash on modal screen
+  store.getState().setModalOpen(false);
+  setTimeout(() => {
+    store.getState().disconnect();
+  }, 200);
 }

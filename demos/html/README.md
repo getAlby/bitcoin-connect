@@ -4,12 +4,12 @@ A simple example of how to add Bitcoin Connect to a simple HTML website
 
 Simply open [index.html](./index.html) in your browser
 
-# Watching for changes
+## Watching for changes
 
-## Install
+### Install
 
 Run `yarn install`
 
-## Development
+### Development
 
 Run `yarn dev`

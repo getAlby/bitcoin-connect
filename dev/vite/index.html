@@ -4,24 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
-    <script type="module" src="../../src/index.ts"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@getalby/lightning-tools@latest/dist/index.browser.js"></script>
-    <script>
-      window.addEventListener('bc:connected', () =>
-        console.info('Received connected event from html')
-      );
-      window.addEventListener('bc:connecting', () =>
-        console.info('Received connecting event from html')
-      );
-      window.addEventListener('bc:disconnected', () =>
-        console.info('Received disconnected event from html')
-      );
-      window.addEventListener('bc:modalopened', () =>
-        console.info('Received modalopened event from html')
-      );
-      window.addEventListener('bc:modalclosed', () =>
-        console.info('Received modalclosed event from html')
-      );
+    <script type="module">
+      import {LightningAddress} from 'https://cdn.skypack.dev/@getalby/lightning-tools';
       const bcTheme = window.localStorage.getItem('bcTheme');
       if (bcTheme) {
         window.bcDarkMode = 'class';
@@ -29,30 +13,54 @@
       } else {
         document.documentElement.classList.add('system');
       }
-      async function payInvoice() {
-        try {
-          const ln = new window.lightningTools.LightningAddress(
-            'hello@getalby.com'
-          );
-          await ln.fetch();
-          const invoice = await ln.requestInvoice({satoshi: 1});
-          const result = await window.webln.sendPayment(invoice.paymentRequest);
-          alert('PAID! ' + JSON.stringify(result));
-        } catch (error) {
-          console.error(error);
-          alert('Failed to pay: ' + error);
-        }
-      }
-      (async () => {
-        const ln = new window.lightningTools.LightningAddress(
-          'hello@getalby.com'
+
+      const colorBrand = window.localStorage.getItem('colorBrand');
+      if (colorBrand) {
+        document.documentElement.style.setProperty(
+          '--bc-color-brand',
+          colorBrand
         );
+      }
+      const brandMix = window.localStorage.getItem('brandMix');
+      if (brandMix) {
+        document.documentElement.style.setProperty('--bc-brand-mix', brandMix);
+      }
+
+      (async () => {
+        const ln = new LightningAddress('hello@getalby.com');
         await ln.fetch();
         const invoice = await ln.requestInvoice({satoshi: 1});
         document
-          .getElementsByTagName('bc-send-payment')[0]
+          .getElementById('send-payment')
+          .setAttribute('invoice', invoice.paymentRequest);
+        document
+          .getElementById('payment-flow')
           .setAttribute('invoice', invoice.paymentRequest);
       })();
+    </script>
+    <script type="module">
+      import {
+        onConnected,
+        onConnecting,
+        onDisconnected,
+        onModalOpened,
+        onModalClosed,
+      } from '../../src/index.ts';
+      onConnected((provider) => {
+        console.info('onConnected callback', provider);
+      });
+      onConnecting(() => {
+        console.info('onConnecting callback');
+      });
+      onDisconnected(() => {
+        console.info('onDisconnected callback');
+      });
+      onModalOpened(() => {
+        console.info('onModalOpened callback');
+      });
+      onModalClosed(() => {
+        console.info('onModalClosed callback');
+      });
     </script>
     <style>
       body {
@@ -81,168 +89,282 @@
         background-color: skyblue;
       }
 
-      .theme-geyser {
-        --bc-color-brand: #21ecc7;
-        --bc-brand-mix: 75%;
-      }
-      .theme-orange {
-        --bc-color-brand: #ff8008;
-      }
-      .theme-stacker-news {
-        --bc-color-brand: #fada5e;
-        --bc-brand-mix: 75%;
-      }
-      .theme-white {
-        --bc-color-brand: #ffffff;
-        --bc-brand-mix: 50%;
-      }
-      .theme-black {
-        --bc-color-brand: #000000;
-        --bc-brand-mix: 50%;
+      .container {
+        padding: 20px;
+        max-width: 448px;
       }
     </style>
   </head>
   <body>
-    <h1>Programmatic Access</h1>
-    <button onclick="window.bitcoinConnect.launchModal()">Open modal</button>
-    <button
-      onclick="const invoiceToPay = window.prompt('paste invoice'); window.bitcoinConnect.launchModal({invoice: invoiceToPay})"
-    >
-      Open modal to pay invoice
-    </button>
-    <bc-modal id="first-modal"></bc-modal>
+    <div class="container">
+      <h1>Programmatic Access</h1>
+      <button id="request-provider">Request provider</button>
+      <button id="launch-modal">Open modal</button>
+      <button id="launch-modal-pay-invoice">Open modal to pay invoice</button>
+      <br /><br />
+      <button id="launch-modal-pay-invoice-lnurl-verify">
+        Open modal to pay invoice (LNURL-verify payment checker)
+      </button>
 
-    <br /><br />
-    <a href="balance.html">Balance tester</a>
+      <br /><br />
 
-    <h1>Light / Dark Mode</h1>
+      <h1>Light / Dark Mode</h1>
 
-    <button
-      id="button-theme-system"
-      onclick="window.localStorage.removeItem('bcTheme');window.location.reload();"
-    >
-      System
-    </button>
-    <button
-      id="button-theme-dark"
-      onclick="window.localStorage.setItem('bcTheme', 'dark');window.location.reload();"
-    >
-      Force Dark
-    </button>
-    <button
-      id="button-theme-light"
-      onclick="window.localStorage.setItem('bcTheme', 'light');window.location.reload();"
-    >
-      Force Light
-    </button>
+      <button
+        id="button-theme-system"
+        onclick="window.localStorage.removeItem('bcTheme');window.location.reload();"
+      >
+        System
+      </button>
+      <button
+        id="button-theme-dark"
+        onclick="window.localStorage.setItem('bcTheme', 'dark');window.location.reload();"
+      >
+        Force Dark
+      </button>
+      <button
+        id="button-theme-light"
+        onclick="window.localStorage.setItem('bcTheme', 'light');window.location.reload();"
+      >
+        Force Light
+      </button>
 
-    <h1>Settings</h1>
-    <p>Name (e.g. Zap.Stream)</p>
-    <input
-      id="app-name"
-      onchange="localStorage.setItem('app-name', document.getElementById('app-name').value); window.location.reload()"
-    />
-    <p>Filters (e.g. nwc)</p>
-    <input
-      id="filters"
-      onchange="localStorage.setItem('filters', document.getElementById('filters').value); window.location.reload()"
-    />
-    <p>Invoice</p>
-    <input
-      id="invoice"
-      onchange="localStorage.setItem('invoice', document.getElementById('invoice').value); window.location.reload()"
-    />
-    <br />
-    <br />
-    <h1>Components</h1>
-    <h2>Button</h2>
-    <bc-button id="first-button"></bc-button>
-    <br /><br />
-    <div class="theme-geyser">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-orange">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-stacker-news">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-white">
-      <bc-button></bc-button>
-    </div>
-    <br /><br />
-    <div class="theme-black">
-      <bc-button></bc-button>
-    </div>
+      <h1>Settings</h1>
+      <p>Name (e.g. Zap.Stream)</p>
+      <input
+        id="app-name"
+        onchange="localStorage.setItem('app-name', document.getElementById('app-name').value); window.location.reload()"
+      />
+      <p>Filters (e.g. nwc)</p>
+      <input
+        id="filters"
+        onchange="localStorage.setItem('filters', document.getElementById('filters').value); window.location.reload()"
+      />
+      <p>Invoice</p>
+      <input
+        id="invoice"
+        onchange="localStorage.setItem('invoice', document.getElementById('invoice').value); window.location.reload()"
+      />
+      <p>Show Balance</p>
+      <input
+        id="show-balance"
+        type="checkbox"
+        onchange="localStorage.setItem('show-balance', document.getElementById('show-balance').checked.toString()); window.location.reload()"
+        style="width: 24px; height: 24px"
+      />
+      <br />
+      <br />
+      <h1>Colors</h1>
+      <button
+        onclick="window.localStorage.removeItem('colorBrand');window.localStorage.removeItem('brandMix');window.location.reload()"
+      >
+        Default
+      </button>
+      <button
+        onclick="window.localStorage.setItem('colorBrand', '#21ecc7');window.localStorage.setItem('brandMix', '75%');window.location.reload()"
+        style="background-color: #21ecc7"
+      >
+        Geyser
+      </button>
+      <button
+        onclick="window.localStorage.setItem('colorBrand', '#fada5e');window.localStorage.setItem('brandMix', '75%');window.location.reload()"
+        style="background-color: #fada5e"
+      >
+        Stacker News
+      </button>
+      <button
+        onclick="window.localStorage.setItem('colorBrand', '#000000');window.localStorage.setItem('brandMix', '50%');window.location.reload()"
+        style="background-color: #000000; color: #fff"
+      >
+        Black
+      </button>
+      <button
+        onclick="window.localStorage.setItem('colorBrand', '#ffffff');window.localStorage.setItem('brandMix', '50%');window.location.reload()"
+        style="background-color: #ffffff"
+      >
+        White
+      </button>
+      <button
+        onclick="window.localStorage.setItem('colorBrand', prompt('color','#ffffff'));window.localStorage.setItem('brandMix', prompt('brand mix', '100%'));window.location.reload()"
+        style="background-color: #ff00ff"
+      >
+        Custom
+      </button>
 
-    <h2>Modal header</h2>
-    <div style="width: 448px">
-      <bc-modal-header></bc-modal-header>
-    </div>
-    <h2>Navbar</h2>
-    <div style="width: 448px">
+      <h1>Flows</h1>
+      <h2>Connect Flow</h2>
+      <bc-connect></bc-connect>
+      <h2>Payment Flow</h2>
+      <bc-payment id="payment-flow"></bc-payment>
+
+      <h1>Components</h1>
+      <h2>Button</h2>
+      <bc-button></bc-button>
+
+      <h2>Modal header</h2>
+      <bc-modal-header show-help>Example Title</bc-modal-header>
+      <h2>Navbar</h2>
       <bc-navbar heading="Custom Heading"></bc-navbar>
-    </div>
-    <h2>Router outlet</h2>
-    <div style="width: 448px">
+      <h2>Router outlet</h2>
       <bc-router-outlet></bc-router-outlet>
-    </div>
 
-    <h2>Request Payment Screen</h2>
-    <div style="width: 448px; border: 1px solid black">
+      <h2>Request Payment Screen</h2>
       <bc-send-payment
+        id="send-payment"
         invoice="lnbc10n1pj4g7ugpp5h0lld9qzh06ngn8ur756rva0ntfdfg34h298337rljjyztxy8rfqhp50kncf9zk35xg4lxewt4974ry6mudygsztsz8qn3ar8pn3mtpe50scqzzsxqyz5vqsp5lwlnu7xjs7hj7vltx7rhzsjf60l5mwckuw93qngjrz7sdhdkw7gs9qyyssqzy543rxhkdtncjrmuzlz4lrh2eauldawa9np5yysh7dhqhv8kaahydurha2cfelr7t6wt33xse7fdykupnjv36na6x6crrhy53lyg6cqf2jhjj"
       ></bc-send-payment>
-    </div>
 
-    <h2>Start screen</h2>
-    <div style="width: 448px">
+      <h2>Start screen</h2>
       <bc-start></bc-start>
-    </div>
 
-    <h2>Help screen</h2>
-    <div style="width: 448px; border: 1px solid black">
+      <h2>Help screen</h2>
       <bc-help></bc-help>
-    </div>
-    <h2>New Wallet</h2>
-    <div style="width: 448px; border: 1px solid black">
+      <h2>New Wallet</h2>
       <bc-new-wallet></bc-new-wallet>
-    </div>
-    <h2>NWC screen</h2>
-    <div style="width: 448px; border: 1px solid black">
+      <h2>NWC screen</h2>
       <bc-nwc></bc-nwc>
+
+      <h2>Connector List</h2>
+      <bc-connector-list></bc-connector-list>
+
+      <h2>Balance</h2>
+      <bc-balance></bc-balance>
+
+      <h2>Misc Helpers</h2>
+      <h3>Pay an invoice</h3>
+      <button id="pay-invoice">Pay 1 sat to Alby team</button>
+      <h3>Make an invoice</h3>
+      <button id="make-invoice">Make a 1 sat invoice</button>
     </div>
+    <script></script>
+    <script type="module">
+      import {LightningAddress} from 'https://cdn.skypack.dev/@getalby/lightning-tools';
+      import {
+        init,
+        launchModal,
+        launchPaymentModal,
+        requestProvider,
+      } from '../../src/index.ts';
 
-    <h2>Connector List</h2>
-    <bc-connector-list></bc-connector-list>
-
-    <h2>Pay an invoice</h2>
-    <button onclick="payInvoice()">Pay</button>
-    <script>
       const appName = localStorage.getItem('app-name');
       document.getElementById('app-name').value = appName;
-      if (appName) {
-        document
-          .getElementById('first-button')
-          .setAttribute('app-name', appName);
-      }
 
       const filters = localStorage.getItem('filters');
       document.getElementById('filters').value = filters;
-      if (filters) {
-        document
-          .getElementById('first-button')
-          .setAttribute('filters', filters);
-      }
 
       const invoice = localStorage.getItem('invoice');
       document.getElementById('invoice').value = invoice;
-      if (invoice) {
-        document.getElementById('first-modal').setAttribute('invoice', invoice);
-      }
+
+      const showBalance =
+        localStorage.getItem('show-balance') !== false.toString();
+      document.getElementById('show-balance').checked = showBalance;
+
+      init({
+        appName,
+        filters: filters?.split(','),
+        showBalance,
+      });
+
+      document
+        .getElementById('request-provider')
+        .addEventListener('click', async () => {
+          try {
+            const provider = await requestProvider();
+            console.log('WebLN provider: ', provider);
+            alert('WebLN provider available');
+          } catch (error) {
+            console.error('Failed to request provider:', error);
+            alert('Failed to request provider');
+          }
+        });
+      document.getElementById('launch-modal').addEventListener('click', () => {
+        launchModal();
+      });
+      document
+        .getElementById('launch-modal-pay-invoice')
+        .addEventListener('click', () => {
+          const invoice = localStorage.getItem('invoice');
+          const invoiceToPay = invoice || window.prompt('paste invoice');
+          if (!invoiceToPay) {
+            alert('No invoice provided');
+            return;
+          }
+          launchPaymentModal({
+            invoice: invoiceToPay,
+            onPaid: (response) => {
+              alert('Paid! ' + response.preimage);
+            },
+            onCancelled: () => {
+              alert('Payment cancelled');
+            },
+          });
+        });
+
+      document
+        .getElementById('launch-modal-pay-invoice-lnurl-verify')
+        .addEventListener('click', async () => {
+          const ln = new LightningAddress('hello@getalby.com');
+          await ln.fetch();
+          const invoice = await ln.requestInvoice({satoshi: 1});
+
+          const {setPaid} = launchPaymentModal({
+            invoice: invoice.paymentRequest,
+            onPaid: (response) => {
+              clearInterval(checkPaymentInterval);
+              alert('Received payment! ' + response.preimage);
+            },
+            onCancelled: () => {
+              clearInterval(checkPaymentInterval);
+              alert('Payment cancelled');
+            },
+          });
+
+          const checkPaymentInterval = setInterval(async () => {
+            const paid = await invoice.verifyPayment();
+
+            if (paid) {
+              setPaid({
+                preimage: invoice.preimage,
+              });
+            }
+          }, 1000);
+        });
+
+      document
+        .getElementById('pay-invoice')
+        .addEventListener('click', async () => {
+          try {
+            const ln = new LightningAddress('hello@getalby.com');
+            await ln.fetch();
+            const invoice = await ln.requestInvoice({satoshi: 1});
+            const provider = await requestProvider();
+            const result = await provider.sendPayment(invoice.paymentRequest);
+            alert('PAID! ' + JSON.stringify(result));
+          } catch (error) {
+            console.error(error);
+            alert('Failed to pay: ' + error.message || JSON.stringify(error));
+          }
+        });
+
+      document
+        .getElementById('make-invoice')
+        .addEventListener('click', async () => {
+          try {
+            const provider = await requestProvider();
+            const result = await provider.makeInvoice({
+              amount: 1,
+            });
+            alert('Invoice: ' + JSON.stringify(result));
+          } catch (error) {
+            console.error(error);
+            alert(
+              'Failed to make invoice: ' + error.message ||
+                JSON.stringify(error)
+            );
+          }
+        });
+
+      document.addEventListener('bc:onpaid', (e) => console.log('PAID!', e));
     </script>
   </body>
 </html>

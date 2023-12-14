@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <title>Bitcoin Connect</title>
-    <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@2.4.3/dist/index.browser.js"></script>
+    <script type="module">
+      import {onConnected} from 'https://esm.sh/@getalby/bitcoin-connect@3.0.0';
+      onConnected((provider) => {
+        console.log('Connected with provider', provider);
+      });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
@@ -12,10 +17,5 @@
       <code> &lt;bc-button /&gt; </code>
       <bc-button></bc-button>
     </div>
-    <script>
-      window.addEventListener('bc:connected', async () => {
-        alert('connected');
-      });
-    </script>
   </body>
 </html>

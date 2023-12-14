@@ -16,3 +16,11 @@ export function innerBorderBranded() {
     ]}"
   ></div>`;
 }
+
+export function innerBorderTertiary() {
+  return html`<div
+    class="absolute -z-10 top-0 left-0 w-full h-full border-2 rounded-lg ${classes[
+      'border-neutral-tertiary'
+    ]}"
+  ></div>`;
+}

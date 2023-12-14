@@ -1,13 +1,14 @@
-import {LitElement, css} from 'lit';
+import {LitElement, PropertyValues, css} from 'lit';
 
 export class InternalElement extends LitElement {
-  // global css reset in shadow DOM
   static override styles = [
     css`
       :host {
+        // global css reset in shadow DOM
         all: initial;
         font-variant-numeric: slashed-zero;
       }
+      // TODO: move to individual components - only needed by a couple of icons
       .hover-animation:hover .hover-right-up {
         transform: translateX(2px) translateY(-2px);
         transition: all 0.3s;
@@ -19,7 +20,8 @@ export class InternalElement extends LitElement {
     `,
   ];
 
-  protected override updated(): void {
+  protected override updated(changedProperties: PropertyValues): void {
+    super.updated(changedProperties);
     // hack to enable manual dark mode:
     // if a dark class is set on the document, pass it to the direct children of this shadow root
     // also requires `darkMode: "class"` to be set in twind config
@@ -36,6 +38,7 @@ export class InternalElement extends LitElement {
     }
   }
 
+  // TODO: move, only needed by the button?
   protected _getBrandColorLuminance() {
     if (!globalThis.window) {
       return 0;

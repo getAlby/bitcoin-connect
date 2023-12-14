@@ -18,6 +18,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     connectors.push(html`<bc-umbrel-nwc-connector></bc-umbrel-nwc-connector>`);
     connectors.push(html`<bc-nwc-connector></bc-nwc-connector>`);
     if (!this._filters || this._filters.indexOf('nwc') === -1) {
+      // TODO: is there a better way to check if a desktop extension exists?
       if (window.webln) {
         connectors.push(
           html`<bc-extension-connector></bc-extension-connector>`

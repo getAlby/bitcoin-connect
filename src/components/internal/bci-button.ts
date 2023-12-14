@@ -3,12 +3,16 @@ import {withTwind} from '../twind/withTwind';
 import {customElement, property} from 'lit/decorators.js';
 import {InternalElement} from './InternalElement';
 import {classes} from '../css/classes';
-import {innerBorder, innerBorderBranded} from '../templates/innerBorder';
+import {
+  innerBorder,
+  innerBorderBranded,
+  innerBorderTertiary,
+} from '../templates/innerBorder';
 
 @customElement('bci-button')
 export class Button extends withTwind()(InternalElement) {
   @property()
-  variant: 'primary' | 'secondary' = 'secondary';
+  variant: 'primary' | 'secondary' | 'neutral' = 'secondary';
 
   @property({
     type: Boolean,
@@ -29,14 +33,18 @@ export class Button extends withTwind()(InternalElement) {
         ${this.variant === 'primary' ? `${classes['bg-brand']}` : ''}
         ${this.variant === 'primary'
         ? `${brandColorLuminance > 0.5 ? 'text-black' : 'text-white'}`
-        : `${classes['text-brand-mixed']}`}
+        : this.variant === 'secondary'
+        ? `${classes['text-brand-mixed']}`
+        : `${classes['text-neutral-tertiary']}`}
         "
     >
       ${this.ghost
         ? null
         : this.variant === 'primary'
         ? innerBorder()
-        : innerBorderBranded()}
+        : this.variant === 'secondary'
+        ? innerBorderBranded()
+        : innerBorderTertiary()}
       <!-- TODO: why can the inner border not be conditionally rendered? -->
 
       <div
