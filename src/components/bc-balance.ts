@@ -15,34 +15,17 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
 
   constructor() {
     super();
-  }
 
-  override connectedCallback(): void {
-    super.connectedCallback();
-    (async () => {
-      try {
-        const provider = store.getState().provider;
-        if (!provider) {
-          throw new Error('WebLN not enabled');
-        }
-        if (!provider.getBalance) {
-          throw new Error(
-            'The current WebLN provider does not support getBalance'
-          );
-        }
-        const balance = await provider.getBalance();
-        // TODO: do not rely on global window
-        //const balance = store.getState().provider.getBalance();
+    this._loadBalance();
 
-        this._balance = balance?.balance.toLocaleString(undefined, {
-          useGrouping: true,
-        });
-      } catch (error) {
-        this._balance = '⚠️';
-        // FIXME: better error handling
-        console.error(error);
+    store.subscribe((currentStore, prevStore) => {
+      if (
+        currentStore.connected !== prevStore.connected &&
+        currentStore.connected
+      ) {
+        this._loadBalance();
       }
-    })();
+    });
   }
 
   override render() {
@@ -54,6 +37,34 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
     >
       <span class="font-mono">${this._balance || 0} </span>&nbsp;sats</span
     >`;
+  }
+
+  private _loadBalance() {
+    (async () => {
+      try {
+        const provider = store.getState().provider;
+        if (!provider) {
+          return;
+        }
+        // TODO: consider using getInfo to check if balance is supported
+        // and do not show an error if it is not supported
+        // (do not display the balance - needs to be handled somewhere else)
+        if (!provider.getBalance) {
+          throw new Error(
+            'The current WebLN provider does not support getBalance'
+          );
+        }
+        const balance = await provider.getBalance();
+
+        this._balance = balance?.balance.toLocaleString(undefined, {
+          useGrouping: true,
+        });
+      } catch (error) {
+        this._balance = '⚠️';
+        // FIXME: better error handling
+        console.error(error);
+      }
+    })();
   }
 }
 
