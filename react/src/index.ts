@@ -1,12 +1,13 @@
 export * from './components/Button';
 export * from './components/Connect';
-export * from './components/SendPayment';
+export * from './components/Payment';
 export {
   init,
   closeModal,
   disconnect,
   isConnected,
   launchModal,
+  launchPaymentModal,
   requestProvider,
   onConnected,
   onConnecting,

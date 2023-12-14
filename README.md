@@ -96,10 +96,9 @@ init({
 // render the connect flow on its own without the modal
 <Connect/>
 
-// render the send payment flow on its own without the modal
-// Note: for pure P2P payments made externally there is no way for Bitcoin Connect to know when the payment has happened
-// `<SendPayment />` is more for simplifying e-commerce usecases where you are able to check the invoice yourself.
-<SendPayment invoice="lnbc..." onPaid={(response) => alert("Paid! " + response.preimage)}/>
+// render the send payment flow on its own without the modal (for E-Commerce flows)
+// set the `payment` prop to override the payment status if a payment was made externally
+<Payment invoice="lnbc..." onPaid={(response) => alert("Paid! " + response.preimage)} payment={{preimage: 'my-preimage'}}/>
 
 // request a provider
 <button onClick={() => {
@@ -261,7 +260,7 @@ const {setPaid} = launchPaymentModal({
 const checkPaymentInterval = setInterval(async () => {
   const paid = await invoice.verifyPayment();
 
-  if (paid) {
+  if (paid && invoice.preimage) {
     setPaid({
       preimage: invoice.preimage,
     });
@@ -269,7 +268,7 @@ const checkPaymentInterval = setInterval(async () => {
 }, 1000);
 ```
 
-> Note: for pure P2P payments made externally there is no way for Bitcoin Connect to know when the payment has happened. `launchPaymentModal` is more for simplifying e-commerce usecases where you are able to check the invoice yourself.
+> Note: for P2P payments made externally there is no way for Bitcoin Connect to know when the payment has happened. `launchPaymentModal` is more for simplifying e-commerce usecases where you are able to check the invoice yourself.
 
 #### Programmatically closing the modal
 

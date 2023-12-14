@@ -3,12 +3,14 @@ import {Invoice, LightningAddress} from '@getalby/lightning-tools';
 import {
   Button,
   init,
-  launchModal,
+  launchPaymentModal,
   requestProvider,
   Connect,
-  SendPayment,
+  Payment,
+  launchModal,
 } from '@getalby/bitcoin-connect-react';
 import toast, {Toaster} from 'react-hot-toast';
+import {SendPaymentResponse} from '@webbtc/webln-types';
 
 init({
   appName: 'Bitcoin Connect (React Demo)',
@@ -17,6 +19,10 @@ init({
 function App() {
   const [invoice, setInvoice] = React.useState<Invoice | undefined>(undefined);
   const [preimage, setPreimage] = React.useState<string | undefined>(undefined);
+  const [paymentModalSetPaidFunction, setPaymentModalSetPaidFunction] =
+    React.useState<((response: SendPaymentResponse) => void) | undefined>(
+      undefined
+    );
 
   React.useEffect(() => {
     (async () => {
@@ -26,7 +32,7 @@ function App() {
         setInvoice(
           await ln.requestInvoice({
             satoshi: 1,
-            comment: 'Paid with Bitcoin Connect',
+            comment: 'Paid with Bitcoin Connect (React Demo)',
           })
         );
       } catch (error) {
@@ -34,6 +40,30 @@ function App() {
       }
     })();
   }, []);
+
+  React.useEffect(() => {
+    if (invoice) {
+      const checkPaymentInterval = setInterval(async () => {
+        if (invoice.preimage) {
+          setPreimage(invoice.preimage);
+          clearInterval(checkPaymentInterval);
+          if (paymentModalSetPaidFunction) {
+            paymentModalSetPaidFunction({
+              preimage: invoice.preimage,
+            });
+          }
+        }
+        try {
+          await invoice.verifyPayment();
+        } catch (error) {
+          console.error(error);
+        }
+      }, 1000);
+      return () => {
+        clearInterval(checkPaymentInterval);
+      };
+    }
+  }, [invoice, paymentModalSetPaidFunction]);
 
   async function payInvoice() {
     try {
@@ -50,6 +80,11 @@ function App() {
       alert(error);
     }
   }
+
+  const paymentResponse = React.useMemo(
+    () => (preimage ? {preimage} : undefined),
+    [preimage]
+  );
 
   return (
     <>
@@ -90,12 +125,14 @@ function App() {
             alert('Invoice not ready yet');
             return;
           }
-          launchModal({
+          const {setPaid} = launchPaymentModal({
             invoice: invoice.paymentRequest,
+            onPaid: (result) => setPreimage(result.preimage),
           });
+          setPaymentModalSetPaidFunction(() => setPaid);
         }}
       >
-        Programmatically launch modal to pay invoice
+        Programmatically launch modal to pay invoice (LNURL-verify)
       </button>
       <br />
       <div style={{maxWidth: '448px'}}>
@@ -104,19 +141,16 @@ function App() {
         <br />
         <h2>Send payment component</h2>
         {invoice && (
-          <SendPayment
+          <Payment
             invoice={invoice.paymentRequest}
-            onPaid={(response) => toast('Paid! preimage: ' + response.preimage)}
-            checkPayment={async () => {
-              const paid = await invoice.verifyPayment();
-
-              if (paid && invoice.preimage) {
-                return {
-                  preimage: invoice.preimage,
-                };
-              }
-              return undefined;
-            }}
+            onPaid={(response) =>
+              toast('Paid! preimage: ' + response.preimage, {
+                style: {
+                  wordBreak: 'break-all',
+                },
+              })
+            }
+            payment={paymentResponse}
           />
         )}
       </div>
