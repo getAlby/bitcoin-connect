@@ -1,5 +1,4 @@
-![image](https://github.com/getAlby/bitcoin-connect/assets/33993199/08949e81-c68d-4c3a-8a78-5dd1b28d6122)
-
+![image](https://github.com/getAlby/bitcoin-connect/assets/33993199/a0eaf887-2ef1-4369-b6bf-7ef977ca2b67)
 
 # Bitcoin Connect
 
