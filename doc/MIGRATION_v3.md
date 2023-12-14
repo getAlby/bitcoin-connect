@@ -1,7 +1,7 @@
 # V2 to V3 migration guide
 
 ## WebLN global object
-window.webln is no longer set by default. If you rely on WebLN please add the following lines to a place in your application which will be called on every page:
+window.webln is no longer set by default. If you rely on WebLN being available in the global window object please add the following lines to a place in your application which will be called on every page:
 
 ```ts
 import {onConnected} from '@getalby/bitcoin-connect';
