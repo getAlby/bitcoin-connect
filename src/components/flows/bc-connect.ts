@@ -10,8 +10,7 @@ import {bcLogo} from '../icons/bcLogo';
 import {bcCircleIcon} from '../icons/bcCircleIcon';
 import {classes} from '../css/classes';
 
-// TODO: rename bc-connect
-@customElement('bc-connect-flow')
+@customElement('bc-connect')
 export class ConnectFlow extends withTwind()(BitcoinConnectElement) {
   static override styles = [
     ...super.styles,
@@ -53,6 +52,6 @@ export class ConnectFlow extends withTwind()(BitcoinConnectElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-connect-flow': ConnectFlow;
+    'bc-connect': ConnectFlow;
   }
 }

@@ -176,11 +176,11 @@ export function init(config: BitcoinConnectConfig = {}) {
 export function launchModal() {
   // TODO: refactor to have higher level components that render these ones,
   // so JS DOM functions are not needed and tailwind can be used
-  // (also then CSS is not needed in the host css of bc-send-payment-flow and bc-connect-flow)
+  // (also then CSS is not needed in the host css of bc-payment and bc-connect)
 
   const modalElement = document.createElement('bc-modal');
 
-  const connectFlowElement = document.createElement('bc-connect-flow');
+  const connectFlowElement = document.createElement('bc-connect');
   connectFlowElement.setAttribute('closable', 'closable');
   modalElement.appendChild(connectFlowElement);
 
@@ -207,11 +207,11 @@ export function launchPaymentModal({
 
   // TODO: refactor to have higher level components that render these ones,
   // so JS DOM functions are not needed and tailwind can be used
-  // (also then CSS is not needed in the host css of bc-send-payment-flow and bc-connect-flow)
+  // (also then CSS is not needed in the host css of bc-payment and bc-connect)
 
   const modalElement = document.createElement('bc-modal');
 
-  const sendPaymentFlowElement = document.createElement('bc-send-payment-flow');
+  const sendPaymentFlowElement = document.createElement('bc-payment');
   sendPaymentFlowElement.setAttribute('closable', 'closable');
   sendPaymentFlowElement.setAttribute('invoice', invoice);
   modalElement.appendChild(sendPaymentFlowElement);
@@ -240,7 +240,7 @@ export function launchPaymentModal({
   return {
     setPaid: (sendPaymentResponse: SendPaymentResponse) => {
       // The app needs to add an event listener manually (or use the React wrapper).
-      // Inconsistency: bc:onpaid is fired by different components (bc-send-payment, bc-send-payment-flow, React wrapper)
+      // Inconsistency: bc:onpaid is fired by different components (bc-send-payment, bc-payment, React wrapper)
       // TODO: find a better way than firing bc:onpaid (also for React wrapper)
       sendPaymentFlowElement.setAttribute('paid', 'paid');
       sendPaymentFlowElement.dispatchEvent(

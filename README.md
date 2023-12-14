@@ -187,10 +187,11 @@ _Use another popular framework? please let us know or feel free to create a PR f
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
-- `<bc-connect-flow/>` - render connect wallet UI without modal
-- `<bc-send-payment-flow/>` - render a payment request UI without modal
+- `<bc-connect/>` - render connect wallet UI without modal
+- `<bc-payment/>` - render a payment request UI without modal
   - Arguments:
     - `invoice` - BOLT11 invoice
+    - `paid` - set to true to mark payment was made externally
   - Events:
     - `bc:onpaid` **Experimental** - fires event with WebLN payment response in `event.detail` (contains `preimage`)
 - _more components coming soon_

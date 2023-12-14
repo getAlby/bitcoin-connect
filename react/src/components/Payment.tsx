@@ -11,8 +11,7 @@ type PaymentProps = ComponentProps & {
    */
   onPaid?: (response: SendPaymentResponse) => void;
   /**
-   * Mark that an external payment was made for the invoice.
-   * Must be WebLN-compatible.
+   * Mark that an external payment was made
    */
   payment?: SendPaymentResponse;
 };
@@ -43,9 +42,6 @@ export const Payment: React.FC<PaymentProps> = (props) => {
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    <bc-send-payment-flow
-      invoice={props.invoice}
-      {...(payment ? {paid: true} : {})}
-    />
+    <bc-payment invoice={props.invoice} {...(payment ? {paid: true} : {})} />
   );
 };

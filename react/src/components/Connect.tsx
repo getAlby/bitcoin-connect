@@ -10,5 +10,5 @@ export const Connect: React.FC<ConnectProps> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <bc-connect-flow />;
+  return <bc-connect />;
 };

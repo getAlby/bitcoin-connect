@@ -9,8 +9,7 @@ import '../bc-router-outlet';
 import {classes} from '../css/classes';
 import store from '../../state/store';
 
-// TODO: rename bc-payment
-@customElement('bc-send-payment-flow')
+@customElement('bc-payment')
 export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
   static override styles = [
     ...super.styles,
@@ -58,7 +57,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return this._showConnect && !this.paid
-      ? html` <bc-connect-flow></bc-connect-flow>`
+      ? html` <bc-connect></bc-connect>`
       : html`<div class="w-full flex-col justify-center items-center">
           <bc-modal-header class="flex w-full" ?closable=${this.closable}>
             <p
@@ -89,6 +88,6 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-send-payment-flow': SendPaymentFlow;
+    'bc-payment': SendPaymentFlow;
   }
 }
