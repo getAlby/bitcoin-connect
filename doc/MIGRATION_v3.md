@@ -1,8 +1,7 @@
 # V2 to V3 migration guide
 
 ## WebLN global object
-
-If you rely on WebLN please add the following lines to a place in your application which will be called on every page:
+window.webln is no longer set by default. If you rely on WebLN please add the following lines to a place in your application which will be called on every page:
 
 ```ts
 import {onConnected} from '@getalby/bitcoin-connect';
@@ -14,7 +13,7 @@ onConnected((provider) => {
 
 ## Init
 
-Attributes have been moved to the new `init` function exposed by the Bitcoin Connect api.
+Attributes (such as `filters` and `appName` that were originally passed to individual components) have been moved to the new `init` function exposed by the Bitcoin Connect api.
 
 ```ts
 import {init} from '@getalby/bitcoin-connect-react';
