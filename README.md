@@ -187,6 +187,15 @@ _Use another popular framework? please let us know or feel free to create a PR f
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
+  - Arguments:
+    - `title` - (optional) change the title of the button
+- `<bc-pay-button/>` - launches the Bitcoin Connect Payment Modal on click
+  - Arguments:
+    - `invoice` - BOLT11 invoice
+    - `title` - (optional) change the title of the button
+    - `preimage` - (optional) set this if you received an external payment
+- - Events:
+    - `bc:onpaid` **Experimental** - fires event with WebLN payment response in `event.detail` (contains `preimage`)
 - `<bc-connect/>` - render connect wallet UI without modal
 - `<bc-payment/>` - render a payment request UI without modal
   - Arguments:
@@ -565,6 +574,7 @@ This project is powered by Lit.
 See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
 
 ## BOLT FUN
+
 Bitcoin Connect is a BOLT FUN Legends of Lightning vol.2 finalist. [Follow our project and journey](https://bolt.fun/project/bitcoin-connect).
 
 ## License

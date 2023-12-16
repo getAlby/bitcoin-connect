@@ -4,6 +4,7 @@ import {LnbitsWebLNProvider} from './connectors/LnbitsConnector';
 import './state/boot';
 
 export * from './components/bc-button';
+export * from './components/bc-pay-button';
 export * from './components/bc-modal';
 export * from './components/bc-connector-list';
 export * from './components/pages/bc-send-payment';

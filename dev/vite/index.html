@@ -34,6 +34,9 @@
           .getElementById('send-payment')
           .setAttribute('invoice', invoice.paymentRequest);
         document
+          .getElementById('pay-button')
+          .setAttribute('invoice', invoice.paymentRequest);
+        document
           .getElementById('payment-flow')
           .setAttribute('invoice', invoice.paymentRequest);
       })();
@@ -200,6 +203,8 @@
       <h1>Components</h1>
       <h2>Button</h2>
       <bc-button></bc-button>
+      <h2>Pay Button</h2>
+      <bc-pay-button id="pay-button"></bc-pay-button>
 
       <h2>Modal header</h2>
       <bc-modal-header show-help>Example Title</bc-modal-header>

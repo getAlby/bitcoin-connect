@@ -33,6 +33,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
   })
   invoice?: string;
 
+  // TODO: change to preimage
   @property({
     type: Boolean,
   })
