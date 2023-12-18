@@ -6,6 +6,8 @@ This project includes web components for connecting to Lightning wallets and ena
 
 🆕 Bitcoin Connect also supports a nice invoice payment UI that gives a multitude of options to a user to pay an invoice. Accept payments with a single line of code.
 
+🥇 Bitcoin Connect won the [BOLT FUN Legends of Lightning vol.2](https://bolt.fun/story/legendsoflightning-2023-winners--1444) hackathon on 17 December, 2023.
+
 ## 🛝 Try it out
 
 [Demo](https://bitcoin-connect.com)
