@@ -39,7 +39,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                     ]}"
                     >Balance</span
                   >
-                  <bc-balance class="text-2xl"></bc-balance>`
+                  <bc-balance class="text-2xl"></bc-balance> `
               : html` <span
                   class="text-lg font-medium mt-4 -mb-4 ${classes[
                     'text-neutral-secondary'

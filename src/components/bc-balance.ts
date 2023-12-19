@@ -4,6 +4,7 @@ import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {withTwind} from './twind/withTwind.js';
 import {classes} from './css/classes.js';
 import store from '../state/store.js';
+import '../components/internal/convert.js';
 
 /**
  * Displays the balance of the connected wallet (could be sats or fiat)
@@ -30,13 +31,21 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     // TODO: if balance is still loading, show skeleton loader
-    return html` <span
-      class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
-        'text-brand-mixed'
-      ]}"
-    >
-      <span class="font-mono">${this._balance || 0} </span>&nbsp;sats</span
-    >`;
+    const numericBalance = parseFloat((this._balance || '0').replace(/,/g, ''));
+    return html`
+      <span
+        class="font-medium font-sans mr-2 flex justify-center items-center gap-0.5 ${classes[
+          'text-brand-mixed'
+        ]}"
+      >
+        <span class="font-mono text-center select-none cursor-pointer">
+          <satoshi-converter
+            .satoshi=${numericBalance || 0}
+            currency="usd"
+          ></satoshi-converter>
+        </span>
+      </span>
+    `;
   }
 
   private _loadBalance() {
