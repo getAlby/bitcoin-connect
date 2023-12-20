@@ -7,6 +7,7 @@ import {loadingIcon} from './icons/loadingIcon.js';
 import {launchPaymentModal} from '../api.js';
 import './bc-balance.js';
 import {SendPaymentResponse} from '@webbtc/webln-types';
+import {checkIcon} from './icons/checkIcon.js';
 
 /**
  * A button that when clicked launches a modal to pay an invoice.
@@ -24,6 +25,9 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
 
   @state()
   _waitingForInvoice = false;
+
+  @state()
+  _paid = false;
 
   private _setPaid?: (response: SendPaymentResponse) => void;
 
@@ -52,15 +56,22 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
       <bci-button variant="primary">
         ${isLoading
           ? html`<span class="ml-1 mr-1">${loadingIcon}</span>`
+          : this._paid
+          ? html`<span class="-ml-0.5">${checkIcon}</span>`
           : html`<span class="-ml-0.5">${bcIcon}</span>`}
         <span class="font-semibold">
-          ${isLoading ? html`Loading...` : html`${this.title}`}
+          ${isLoading
+            ? html`Loading...`
+            : html`${this._paid ? 'Paid' : this.title}`}
         </span>
       </bci-button>
     </div>`;
   }
 
   private _onClick() {
+    if (this._paid) {
+      return;
+    }
     this._waitingForInvoice = true;
     if (this.invoice) {
       this._launchModal();
@@ -73,6 +84,9 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
       throw new Error('No invoice available');
     }
     const {setPaid} = launchPaymentModal({
+      onPaid: () => {
+        this._paid = true;
+      },
       invoice: this.invoice,
     });
     this._setPaid = setPaid;
