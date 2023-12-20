@@ -1,5 +1,5 @@
 import {PropertyValues, html} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
@@ -22,10 +22,21 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
   @property({})
   preimage?: string;
 
+  @state()
+  _waitingForInvoice = false;
+
   private _setPaid?: (response: SendPaymentResponse) => void;
 
   protected override updated(changedProperties: PropertyValues): void {
     super.updated(changedProperties);
+
+    if (
+      changedProperties.has('invoice') &&
+      this.invoice &&
+      this._waitingForInvoice
+    ) {
+      this._launchModal();
+    }
 
     if (changedProperties.has('preimage') && this.preimage) {
       this._setPaid?.({
@@ -35,7 +46,7 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
-    const isLoading = this._connecting || (!this._connected && this._modalOpen);
+    const isLoading = this._waitingForInvoice || this._modalOpen;
 
     return html` <div class="inline-flex" @click=${this._onClick}>
       <bci-button variant="primary">
@@ -43,15 +54,23 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
           ? html`<span class="ml-1 mr-1">${loadingIcon}</span>`
           : html`<span class="-ml-0.5">${bcIcon}</span>`}
         <span class="font-semibold">
-          ${isLoading ? html`Waiting...` : html`${this.title}`}
+          ${isLoading ? html`Loading...` : html`${this.title}`}
         </span>
       </bci-button>
     </div>`;
   }
 
   private _onClick() {
+    this._waitingForInvoice = true;
+    if (this.invoice) {
+      this._launchModal();
+    }
+  }
+
+  private _launchModal() {
+    this._waitingForInvoice = false;
     if (!this.invoice) {
-      throw new Error('No invoice');
+      throw new Error('No invoice available');
     }
     const {setPaid} = launchPaymentModal({
       invoice: this.invoice,

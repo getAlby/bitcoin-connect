@@ -33,9 +33,14 @@
         document
           .getElementById('send-payment')
           .setAttribute('invoice', invoice.paymentRequest);
-        document
-          .getElementById('pay-button')
-          .setAttribute('invoice', invoice.paymentRequest);
+        document.getElementById('pay-button').addEventListener('click', () => {
+          setTimeout(() => {
+            // fake a delay fetching an invoice
+            document
+              .getElementById('pay-button')
+              .setAttribute('invoice', invoice.paymentRequest);
+          }, 1000);
+        });
         document
           .getElementById('payment-flow')
           .setAttribute('invoice', invoice.paymentRequest);
