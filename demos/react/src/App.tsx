@@ -8,6 +8,7 @@ import {
   Connect,
   Payment,
   launchModal,
+  PayButton,
 } from '@getalby/bitcoin-connect-react';
 import toast, {Toaster} from 'react-hot-toast';
 import {SendPaymentResponse} from '@webbtc/webln-types';
@@ -93,12 +94,19 @@ function App() {
       <Button
         onConnected={(provider) => {
           console.log('WebLN connected', provider);
-          toast('Connected!');
+          toast('<Button/>: Connected!');
         }}
-        onConnecting={() => toast('Connecting!')}
-        onDisconnected={() => toast('Disconnected!')}
-        onModalOpened={() => toast('Modal opened!')}
-        onModalClosed={() => toast('Modal closed!')}
+        onConnecting={() => toast('<Button/>: Connecting!')}
+        onDisconnected={() => toast('<Button/>: Disconnected!')}
+        onModalOpened={() => toast('<Button/>: Modal opened!')}
+        onModalClosed={() => toast('<Button/>: Modal closed!')}
+      />
+      <br />
+      <PayButton
+        invoice={invoice?.paymentRequest}
+        onPaid={(response) => toast('<PayButton/>: Paid! ' + response.preimage)}
+        onClick={() => toast('<PayButton/>: Clicked!')}
+        payment={paymentResponse}
       />
       <div style={{marginTop: '16px'}}>
         {preimage ? (
@@ -127,7 +135,11 @@ function App() {
           }
           const {setPaid} = launchPaymentModal({
             invoice: invoice.paymentRequest,
-            onPaid: (result) => setPreimage(result.preimage),
+            onPaid: (response) => {
+              toast('launchPaymentModal(): onPaid ' + response.preimage);
+              setPreimage(response.preimage);
+            },
+            onCancelled: () => toast(`launchPaymentModal(): cancelled`),
           });
           setPaymentModalSetPaidFunction(() => setPaid);
         }}
@@ -144,7 +156,7 @@ function App() {
           <Payment
             invoice={invoice.paymentRequest}
             onPaid={(response) =>
-              toast('Paid! preimage: ' + response.preimage, {
+              toast('<Payment/>: Paid! ' + response.preimage, {
                 style: {
                   wordBreak: 'break-all',
                 },

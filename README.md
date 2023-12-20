@@ -81,7 +81,7 @@ _Continue further down for the full Bitcoin Connect API._
 ### React
 
 ```jsx
-import {Button, init, launchModal, launchPaymentModal, closeModal, requestProvider, Connect, SendPayment} from '@getalby/bitcoin-connect-react';
+import {Button, PayButton, init, launchModal, launchPaymentModal, closeModal, requestProvider, Connect, SendPayment} from '@getalby/bitcoin-connect-react';
 
 // Initialize Bitcoin Connect
 init({
@@ -92,6 +92,14 @@ init({
 <Button onConnect={(provider) => {
   const {preimage} = await provider.sendPayment("lnbc...");
 }}/>
+
+// render a "Pay Now" button
+// invoice can be unset initially - using the onClick function is a good time to fetch the invoice
+// set the `payment` prop to override the payment status if a payment was made externally
+<Button invoice={invoice} onClick={() => {
+  invoice = fetchInvoice();
+  setInvoice(invoice)
+}} onPaid={(response) => alert("Paid! " + response.preimage)} payment={{preimage: 'my-preimage'}}/>
 
 // render the connect flow on its own without the modal
 <Connect/>
@@ -196,15 +204,14 @@ Bitcoin Connect exposes the following web components for allowing users to conne
     - `preimage` - (optional) set this if you received an external payment
   - Events:
     - `click` - fires when the button is clicked. You can load an invoice here and set it on the button using `setAttribute('invoice', 'lnbc...')` which will then automatically launch the modal
-    - `bc:onpaid` **Experimental** - fires event with WebLN payment response in `event.detail` (contains `preimage`)
+    - `bc:onpaid` - fires event with WebLN payment response in `event.detail` (contains `preimage`)
 - `<bc-connect/>` - render connect wallet UI without modal
 - `<bc-payment/>` - render a payment request UI without modal
   - Arguments:
     - `invoice` - BOLT11 invoice
-    - `paid` - set to true to mark payment was made externally
+    - `paid` - **Experimental** set to true to mark payment was made externally (This will change to `preimage` in v4)
   - Events:
-    - `bc:onpaid` **Experimental** - fires event with WebLN payment response in `event.detail` (contains `preimage`)
-- _more components coming soon_
+    - `bc:onpaid` - fires event with WebLN payment response in `event.detail` (contains `preimage`)
 
 ### Bitcoin Connect API
 

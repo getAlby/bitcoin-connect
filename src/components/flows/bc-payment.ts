@@ -33,7 +33,8 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
   })
   invoice?: string;
 
-  // TODO: change to preimage
+  // TODO: change to preimage and then bc:onpaid event only needs to be fired
+  // only from bc-send-payment
   @property({
     type: Boolean,
   })

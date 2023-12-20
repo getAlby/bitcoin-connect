@@ -1,4 +1,5 @@
 export * from './components/Button';
+export * from './components/PayButton';
 export * from './components/Connect';
 export * from './components/Payment';
 export {

@@ -5,11 +5,11 @@ import {useCoreEvents} from '../hooks/useCoreEvents';
 import {SendPaymentResponse} from '@webbtc/webln-types';
 import {useOnPaid} from '../hooks/useOnPaid';
 
-type PaymentProps = ComponentProps & {
+type PayButtonProps = ComponentProps & {
   /**
    * Bolt 11 invoice to pay
    */
-  invoice: string;
+  invoice?: string;
   /**
    * @param response response of the WebLN send payment call
    */
@@ -18,9 +18,15 @@ type PaymentProps = ComponentProps & {
    * Mark that an external payment was made
    */
   payment?: SendPaymentResponse;
+
+  /**
+   * Listen to when the pay button is clicked.
+   * This is a good time to fetch an invoice to pay.
+   */
+  onClick?: () => void;
 };
 
-export const Payment: React.FC<PaymentProps> = (props) => {
+export const PayButton: React.FC<PayButtonProps> = (props) => {
   useCoreEvents(props);
 
   const {onPaid, payment} = props;
@@ -29,6 +35,10 @@ export const Payment: React.FC<PaymentProps> = (props) => {
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    <bc-payment invoice={props.invoice} {...(payment ? {paid: true} : {})} />
+    <bc-pay-button
+      invoice={props.invoice}
+      preimage={payment?.preimage}
+      onClick={props.onClick}
+    />
   );
 };

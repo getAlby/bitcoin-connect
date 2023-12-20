@@ -241,7 +241,7 @@ export function launchPaymentModal({
     setPaid: (sendPaymentResponse: SendPaymentResponse) => {
       // The app needs to add an event listener manually (or use the React wrapper).
       // Inconsistency: bc:onpaid is fired by different components (bc-send-payment, bc-payment, React wrapper)
-      // TODO: find a better way than firing bc:onpaid (also for React wrapper)
+      // TODO: remove once bc-send-payment accepts preimage
       sendPaymentFlowElement.setAttribute('paid', 'paid');
       sendPaymentFlowElement.dispatchEvent(
         new CustomEvent('bc:onpaid', {
