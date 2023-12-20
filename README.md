@@ -96,7 +96,7 @@ init({
 // render a "Pay Now" button
 // invoice can be unset initially - using the onClick function is a good time to fetch the invoice
 // set the `payment` prop to override the payment status if a payment was made externally
-<Button invoice={invoice} onClick={() => {
+<PayButton invoice={invoice} onClick={() => {
   invoice = fetchInvoice();
   setInvoice(invoice)
 }} onPaid={(response) => alert("Paid! " + response.preimage)} payment={{preimage: 'my-preimage'}}/>

@@ -23,6 +23,11 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
   @property({})
   preimage?: string;
 
+  /**
+   * This will be set to true if the button was clicked
+   * when no invoice is set on the button. The loading
+   * state will show until an invoice is set.
+   */
   @state()
   _waitingForInvoice = false;
 
