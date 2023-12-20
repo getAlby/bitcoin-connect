@@ -83,7 +83,7 @@ _Continue further down for the full Bitcoin Connect API._
 ### React
 
 ```jsx
-import {Button, init, launchModal, launchPaymentModal, closeModal, requestProvider, Connect, SendPayment} from '@getalby/bitcoin-connect-react';
+import {Button, PayButton, init, launchModal, launchPaymentModal, closeModal, requestProvider, Connect, SendPayment} from '@getalby/bitcoin-connect-react';
 
 // Initialize Bitcoin Connect
 init({
@@ -94,6 +94,14 @@ init({
 <Button onConnect={(provider) => {
   const {preimage} = await provider.sendPayment("lnbc...");
 }}/>
+
+// render a "Pay Now" button
+// invoice can be unset initially - using the onClick function is a good time to fetch the invoice
+// set the `payment` prop to override the payment status if a payment was made externally
+<PayButton invoice={invoice} onClick={() => {
+  invoice = fetchInvoice();
+  setInvoice(invoice)
+}} onPaid={(response) => alert("Paid! " + response.preimage)} payment={{preimage: 'my-preimage'}}/>
 
 // render the connect flow on its own without the modal
 <Connect/>
@@ -189,14 +197,23 @@ _Use another popular framework? please let us know or feel free to create a PR f
 Bitcoin Connect exposes the following web components for allowing users to connect their desired Lightning wallet:
 
 - `<bc-button/>` - launches the Bitcoin Connect Modal on click
+  - Arguments:
+    - `title` - (optional) change the title of the button
+- `<bc-pay-button/>` - launches the Bitcoin Connect Payment Modal on click
+  - Arguments:
+    - `invoice` - BOLT11 invoice. Modal will only open if an invoice is set
+    - `title` - (optional) change the title of the button
+    - `preimage` - (optional) set this if you received an external payment
+  - Events:
+    - `click` - fires when the button is clicked. You can load an invoice here and set it on the button using `setAttribute('invoice', 'lnbc...')` which will then automatically launch the modal
+    - `bc:onpaid` - fires event with WebLN payment response in `event.detail` (contains `preimage`)
 - `<bc-connect/>` - render connect wallet UI without modal
 - `<bc-payment/>` - render a payment request UI without modal
   - Arguments:
     - `invoice` - BOLT11 invoice
-    - `paid` - set to true to mark payment was made externally
+    - `paid` - **Experimental** set to true to mark payment was made externally (This will change to `preimage` in v4)
   - Events:
-    - `bc:onpaid` **Experimental** - fires event with WebLN payment response in `event.detail` (contains `preimage`)
-- _more components coming soon_
+    - `bc:onpaid` - fires event with WebLN payment response in `event.detail` (contains `preimage`)
 
 ### Bitcoin Connect API
 
@@ -567,6 +584,7 @@ This project is powered by Lit.
 See [Get started](https://lit.dev/docs/getting-started/) on the Lit site for more information.
 
 ## BOLT FUN
+
 Bitcoin Connect is a BOLT FUN Legends of Lightning vol.2 finalist. [Follow our project and journey](https://bolt.fun/project/bitcoin-connect).
 
 ## License
