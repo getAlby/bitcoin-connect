@@ -8,6 +8,7 @@ import {classes} from './css/classes';
 import {disconnectSection} from './templates/disconnectSection';
 import './bc-balance';
 import store from '../state/store';
+import './bc-currency-switcher';
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
@@ -39,7 +40,9 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                     ]}"
                     >Balance</span
                   >
-                  <bc-balance class="text-2xl"></bc-balance>`
+                  <bc-currency-switcher>
+                    <bc-balance class="text-2xl"></bc-balance>
+                  </bc-currency-switcher>`
               : html` <span
                   class="text-lg font-medium mt-4 -mb-4 ${classes[
                     'text-neutral-secondary'

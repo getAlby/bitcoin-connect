@@ -4,6 +4,7 @@ import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {withTwind} from './twind/withTwind.js';
 import {classes} from './css/classes.js';
 import store from '../state/store.js';
+import {fiat} from '@getalby/lightning-tools';
 
 /**
  * Displays the balance of the connected wallet (could be sats or fiat)
@@ -13,15 +14,26 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
   @state()
   _balance: string | undefined;
 
+  @state()
+  _balanceSats: number | undefined;
+
+  @state() _selectedCurrency: string | undefined;
+
   constructor() {
     super();
 
     this._loadBalance();
 
-    store.subscribe((currentStore, prevStore) => {
+    this._selectedCurrency = store.getState().currency;
+    store.subscribe((currentState, prevState) => {
+      this._selectedCurrency = currentState.currency;
+      if (currentState.currency !== prevState.currency) {
+        this._convertBalance();
+      }
+
       if (
-        currentStore.connected !== prevStore.connected &&
-        currentStore.connected
+        currentState.connected !== prevState.connected &&
+        currentState.connected
       ) {
         this._loadBalance();
       }
@@ -35,8 +47,35 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
         'text-brand-mixed'
       ]}"
     >
-      <span class="font-mono">${this._balance || 0} </span>&nbsp;sats</span
+      <span class="font-mono">${this._balance || 'Loading...'} </span></span
     >`;
+  }
+
+  private async _convertBalance() {
+    if (!this._balanceSats) {
+      return;
+    }
+
+    if (this._selectedCurrency && this._selectedCurrency !== 'sats') {
+      try {
+        const fiatValue = await fiat.getFiatValue({
+          satoshi: this._balanceSats,
+          currency: this._selectedCurrency,
+        });
+        const convertedValue = parseFloat(fiatValue.toFixed(2));
+        this._balance = new Intl.NumberFormat(undefined, {
+          style: 'currency',
+          currency: this._selectedCurrency,
+        }).format(convertedValue);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      this._balance =
+        this._balanceSats.toLocaleString(undefined, {
+          useGrouping: true,
+        }) + ' sats';
+    }
   }
 
   private _loadBalance() {
@@ -54,11 +93,11 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
             'The current WebLN provider does not support getBalance'
           );
         }
-        const balance = await provider.getBalance();
-
-        this._balance = balance?.balance.toLocaleString(undefined, {
-          useGrouping: true,
-        });
+        const balanceResponse = await provider.getBalance();
+        if (balanceResponse) {
+          this._balanceSats = balanceResponse.balance;
+          this._convertBalance();
+        }
       } catch (error) {
         this._balance = '⚠️';
         // FIXME: better error handling
