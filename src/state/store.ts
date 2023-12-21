@@ -150,7 +150,11 @@ const store = createStore<Store>((set, get) => ({
     set({error});
   },
   setCurrency: (currency) => {
-    // TODO: set value in local storage
+    if (currency) {
+      window.localStorage.setItem('bc:currency', currency);
+    } else {
+      window.localStorage.removeItem('bc:currency');
+    }
     set({currency});
   },
 
