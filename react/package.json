@@ -13,6 +13,11 @@
     "default": "./dist/index.modern.js"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getAlby/bitcoin-connect.git",
+    "directory": "react"
+  },
   "files": [
     "dist/**/*"
   ],
