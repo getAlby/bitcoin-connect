@@ -227,12 +227,20 @@ init({
   appName: 'My Lightning App', // your app name
   // filters: ["nwc"],
   // showBalance: true,
+  // providerConfig: {
+  //   nwc: {
+  //     authorizationUrlOptions: {
+  //       requestMethods: ['get_balance', 'make_invoice', 'lookup_invoice'],
+  //     },
+  //   },
+  // }
 });
 ```
 
 - `appName` - Name of the app requesting access to wallet. Currently used for NWC connections (Alby and Mutiny)
 - `filters` - Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors).
 - `showBalance` - If false, do not request the connected wallet's balance
+- `providerConfig` - **Experimental**: add provider-specific configuration (for NWC, LNC, LNbits etc). Currently only `nwc.authorizationUrlOptions` is supported. `NWCAuthorizationUrlOptions` can be found in the [Alby JS SDK](https://github.com/getAlby/js-sdk).
 
 #### Requesting a provider
 

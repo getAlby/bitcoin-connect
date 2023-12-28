@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@getalby/lightning-tools": "^5.0.0",
-    "@getalby/sdk": "^3.2.2",
+    "@getalby/sdk": "^3.2.3",
     "@lightninglabs/lnc-web": "^0.2.8-alpha",
     "qrcode-generator": "^1.4.4",
     "zustand": "^4.4.7"
