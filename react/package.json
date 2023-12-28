@@ -1,6 +1,6 @@
 {
   "name": "@getalby/bitcoin-connect-react",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "type": "module",
   "source": "src/index.ts",
   "main": "./dist/index.cjs",
