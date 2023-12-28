@@ -549,7 +549,9 @@ Yes. Your connection is saved to localStorage
 
 ### Is this safe?
 
-You should have a certain level of trust on the website you decide to connect your wallet with, and that they ensure there is no malicious third-party scripts which would intend to read the wallet connection configuration, either from memory or storage. Connectors with budget controls or confirmation dialogs (Alby extension or NWC) are recommend so you have full control over your connection.
+You should have a certain level of trust on the website you decide to connect your wallet with, and that they ensure there is no malicious third-party scripts which would intend to read the wallet connection configuration, either from memory or storage. We heavily recommend to add [CSP rules](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html) to your site and follow [best practices](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) to prevent XSS.
+
+Connectors with budget controls or confirmation dialogs (Alby extension or NWC) are recommended so you have full control over your connection.
 
 ### What are the high level things I need to do to add this to my site?
 
