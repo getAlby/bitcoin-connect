@@ -8,6 +8,11 @@ function loadConfig() {
     const config = JSON.parse(configJson) as ConnectorConfig;
     store.getState().connect(config);
   }
+
+  const currency = window.localStorage.getItem('bc:currency');
+  if (currency) {
+    store.getState().setCurrency(currency);
+  }
 }
 
 function addEventListeners() {

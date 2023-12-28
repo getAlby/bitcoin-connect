@@ -56,15 +56,15 @@ export class BitcoinConnectElement extends InternalElement {
     this._modalOpen = store.getState().modalOpen;
 
     // TODO: handle unsubscribe
-    store.subscribe((store) => {
-      this._connected = store.connected;
-      this._connecting = store.connecting;
-      this._connectorName = store.connectorName;
-      this._appName = store.appName;
-      this._filters = store.filters;
-      this._error = store.error;
-      this._route = store.route;
-      this._modalOpen = store.modalOpen;
+    store.subscribe((currentState) => {
+      this._connected = currentState.connected;
+      this._connecting = currentState.connecting;
+      this._connectorName = currentState.connectorName;
+      this._appName = currentState.appName;
+      this._filters = currentState.filters;
+      this._error = currentState.error;
+      this._route = currentState.route;
+      this._modalOpen = currentState.modalOpen;
     });
   }
 

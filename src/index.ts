@@ -7,6 +7,8 @@ export * from './components/bc-button';
 export * from './components/bc-pay-button';
 export * from './components/bc-modal';
 export * from './components/bc-connector-list';
+export * from './components/bc-balance';
+export * from './components/bc-currency-switcher';
 export * from './components/pages/bc-send-payment';
 export * from './components/connectors/index';
 export * from './components/flows/bc-connect';

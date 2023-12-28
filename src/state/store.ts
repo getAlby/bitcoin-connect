@@ -36,6 +36,7 @@ interface Store {
   readonly error: string | undefined;
   readonly modalOpen: boolean;
   readonly provider: WebLNProvider | undefined;
+  readonly currency: string | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -47,6 +48,7 @@ interface Store {
   setError(error: string | undefined): void;
   clearRouteHistory(): void;
   setModalOpen(modalOpen: boolean): void;
+  setCurrency(currency: string | undefined): void;
 
   // provider functions
   // getBalance(): Promise<number | undefined>;
@@ -57,6 +59,7 @@ const store = createStore<Store>((set, get) => ({
   route: '/start',
   routeHistory: [],
   modalOpen: false,
+  currency: undefined,
   showBalance: undefined,
   connected: false,
   connecting: false,
@@ -146,6 +149,15 @@ const store = createStore<Store>((set, get) => ({
   setError: (error) => {
     set({error});
   },
+  setCurrency: (currency) => {
+    if (currency) {
+      window.localStorage.setItem('bc:currency', currency);
+    } else {
+      window.localStorage.removeItem('bc:currency');
+    }
+    set({currency});
+  },
+
   /*async getBalance() {
     try {
       if (!window.webln) {
