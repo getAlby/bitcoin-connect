@@ -308,7 +308,11 @@ disconnect();
 
 #### Check connection status
 
-`window.bitcoinConnect.isConnected();`
+```ts
+import {isConnected} from '@getalby/bitcoin-connect';
+
+const isConnected = isConnected();
+```
 
 #### Events
 
