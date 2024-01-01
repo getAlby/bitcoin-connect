@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@getalby/lightning-tools": "^5.0.0",
-    "@getalby/sdk": "^3.2.2",
+    "@getalby/sdk": "^3.2.3",
     "@lightninglabs/lnc-web": "^0.2.8-alpha",
     "qrcode-generator": "^1.4.4",
     "zustand": "^4.4.7"
@@ -67,7 +67,7 @@
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "concurrently": "^8.2.2",
     "esbuild": "^0.18.20",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "lit": "^3.1.0",
     "lit-analyzer": "^1.2.1",
     "microbundle": "^0.15.1",
