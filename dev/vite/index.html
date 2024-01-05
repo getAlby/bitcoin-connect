@@ -273,6 +273,14 @@
         appName,
         filters: filters?.split(','),
         showBalance,
+        // example of customizing WebLN provider
+        /*providerConfig: {
+          nwc: {
+            authorizationUrlOptions: {
+              requestMethods: ['get_balance', 'make_invoice', 'lookup_invoice'],
+            },
+          },
+        },*/
       });
 
       document

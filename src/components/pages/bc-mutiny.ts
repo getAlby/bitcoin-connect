@@ -12,6 +12,9 @@ export class MutinyPage extends withTwind()(BitcoinConnectElement) {
   @state()
   private _nwcUrl = '';
 
+  // TODO: subscribe to store.providerConfig and pass extra options to mutiny URL below
+  // (also consider whether this should be replaced with NWC Wallet Auth - https://github.com/nostr-protocol/nips/pull/851)
+
   override render() {
     return html`<div class="w-full">
       <bc-navbar

@@ -5,6 +5,7 @@ import {Connector} from '../connectors/Connector';
 import {Route} from '../components/routes';
 import {ConnectorFilter} from '../types/ConnectorFilter';
 import {WebLNProvider} from '@webbtc/webln-types';
+import {WebLNProviderConfig} from '../types/WebLNProviderConfig';
 
 interface PrivateStore {
   readonly connector: Connector | undefined;
@@ -37,6 +38,7 @@ interface Store {
   readonly modalOpen: boolean;
   readonly provider: WebLNProvider | undefined;
   readonly currency: string | undefined;
+  readonly providerConfig: WebLNProviderConfig | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -44,6 +46,7 @@ interface Store {
   popRoute(): void;
   setAppName(appName: string | undefined): void;
   setShowBalance(showBalance: boolean | undefined): void;
+  setProviderConfig(providerConfig: WebLNProviderConfig | undefined): void;
   setFilters(filters: ConnectorFilter[] | undefined): void;
   setError(error: string | undefined): void;
   clearRouteHistory(): void;
@@ -71,6 +74,7 @@ const store = createStore<Store>((set, get) => ({
   filters: undefined,
   invoice: undefined,
   provider: undefined,
+  providerConfig: undefined,
   connect: async (config: ConnectorConfig) => {
     set({
       connecting: true,
@@ -145,6 +149,9 @@ const store = createStore<Store>((set, get) => ({
   },
   setFilters: (filters) => {
     set({filters});
+  },
+  setProviderConfig: (providerConfig) => {
+    set({providerConfig});
   },
   setError: (error) => {
     set({error});

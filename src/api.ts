@@ -1,6 +1,7 @@
 import {SendPaymentResponse, WebLNProvider} from '@webbtc/webln-types';
 import store from './state/store';
 import {ConnectorFilter} from './types/ConnectorFilter';
+import {WebLNProviderConfig} from './types/WebLNProviderConfig';
 
 type BitcoinConnectConfig = {
   /**
@@ -16,6 +17,11 @@ type BitcoinConnectConfig = {
    * Set to false to not request or show the user's wallet balance
    */
   showBalance?: boolean;
+
+  /**
+   * Customize individual providers (NWC, LNC, LNbits etc)
+   */
+  providerConfig?: WebLNProviderConfig;
 };
 
 type LaunchPaymentModalArgs = {
@@ -167,6 +173,7 @@ export function init(config: BitcoinConnectConfig = {}) {
   store.getState().setAppName(config.appName);
   store.getState().setFilters(config.filters);
   store.getState().setShowBalance(config.showBalance);
+  store.getState().setProviderConfig(config.providerConfig);
 }
 
 /**
