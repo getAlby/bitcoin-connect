@@ -142,7 +142,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
                           block
                           @click=${this._copyAndDisplayInvoice}
                         >
-                          ${qrIcon}Copy & Display this.invoice
+                          ${qrIcon}Copy & Display Invoice
                         </bci-button>`}
                   </div>
                 `}
