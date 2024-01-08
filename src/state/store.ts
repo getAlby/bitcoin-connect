@@ -7,24 +7,6 @@ import {ConnectorFilter} from '../types/ConnectorFilter';
 import {WebLNProvider} from '@webbtc/webln-types';
 import {WebLNProviderConfig} from '../types/WebLNProviderConfig';
 
-interface PrivateStore {
-  readonly connector: Connector | undefined;
-  readonly config: ConnectorConfig | undefined;
-  setConfig(config: ConnectorConfig | undefined): void;
-  setConnector(connector: Connector | undefined): void;
-}
-
-const privateStore = createStore<PrivateStore>((set) => ({
-  connector: undefined,
-  config: undefined,
-  setConfig: (config) => {
-    set({config});
-  },
-  setConnector: (connector) => {
-    set({connector});
-  },
-}));
-
 interface Store {
   readonly route: Route;
   readonly routeHistory: Route[];
@@ -39,6 +21,8 @@ interface Store {
   readonly provider: WebLNProvider | undefined;
   readonly currency: string | undefined;
   readonly providerConfig: WebLNProviderConfig | undefined;
+  readonly connector: Connector | undefined;
+  readonly config: ConnectorConfig | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -75,6 +59,8 @@ const store = createStore<Store>((set, get) => ({
   invoice: undefined,
   provider: undefined,
   providerConfig: undefined,
+  connector: undefined,
+  config: undefined,
   connect: async (config: ConnectorConfig) => {
     set({
       connecting: true,
@@ -84,9 +70,9 @@ const store = createStore<Store>((set, get) => ({
       const connector = new connectors[config.connectorType](config);
       const provider = await connector.init();
       await provider.enable();
-      privateStore.getState().setConfig(config);
-      privateStore.getState().setConnector(connector);
       set({
+        config,
+        connector,
         connected: true,
         connecting: false,
         provider,
@@ -105,10 +91,10 @@ const store = createStore<Store>((set, get) => ({
     }
   },
   disconnect: () => {
-    privateStore.getState().connector?.unload();
-    privateStore.getState().setConfig(undefined);
-    privateStore.getState().setConnector(undefined);
+    get().connector?.unload();
     set({
+      config: undefined,
+      connector: undefined,
       connected: false,
       connectorName: undefined,
       provider: undefined,
@@ -116,7 +102,6 @@ const store = createStore<Store>((set, get) => ({
     });
     deleteConfig();
   },
-  getConnectorName: () => privateStore.getState().config?.connectorName,
   // TODO: support passing route parameters as a second argument
   pushRoute: (route: Route) => {
     if (get().route === route) {
@@ -164,31 +149,6 @@ const store = createStore<Store>((set, get) => ({
     }
     set({currency});
   },
-
-  /*async getBalance() {
-    try {
-      if (!window.webln) {
-        throw new Error('webln not found');
-      }
-      const balanceResponse = await window.webln.getBalance?.();
-      return balanceResponse?.balance;
-    } catch (error) {
-      console.error('Failed to get balance', error);
-    }
-    return undefined;
-  },
-  async getAlias() {
-    try {
-      if (!window.webln) {
-        throw new Error('webln not found');
-      }
-      const info = await window.webln.getInfo();
-      return info.node.alias;
-    } catch (error) {
-      console.error('Failed to get alias', error);
-      return undefined;
-    }
-  },*/
 }));
 
 export default store;

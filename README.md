@@ -322,6 +322,17 @@ import {isConnected} from '@getalby/bitcoin-connect';
 const isConnected = isConnected();
 ```
 
+#### Get connector config
+
+```ts
+import {getConnectorConfig} from '@getalby/bitcoin-connect';
+
+const connectorConfig = getConnectorConfig();
+if (connectorConfig) {
+  // can now access e.g. connectorConfig.connectorName
+}
+```
+
 #### Events
 
 ##### onConnected

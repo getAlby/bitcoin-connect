@@ -60,6 +60,13 @@ export function onConnected(callback: (provider: WebLNProvider) => void) {
 }
 
 /**
+ * @returns the configuration of the current connector (if connected)
+ */
+export function getConnectorConfig() {
+  return store.getState().config;
+}
+
+/**
  * Listen to onConnecting events which will fire when a user is connecting to their wallet
  * @param callback
  * @returns unsubscribe function
