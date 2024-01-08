@@ -41,7 +41,9 @@ type LaunchPaymentModalArgs = {
 };
 
 /**
- * Listen to onConnected events which will fire when a user connects to a wallet.
+ * Listen to onConnected events which will fire when a wallet is connected (either
+ * the user connects to a new wallet or when Bitcoin Connect boots and connects to a previously-connected wallet).
+ *
  * If a provider is already available, the callback will be immediately fired.
  * @param callback includes the webln provider that was (or is already) connected
  * @returns unsubscribe function
