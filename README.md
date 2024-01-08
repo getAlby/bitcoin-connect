@@ -314,14 +314,6 @@ import {disconnect} from '@getalby/bitcoin-connect';
 disconnect();
 ```
 
-#### Check connection status
-
-```ts
-import {isConnected} from '@getalby/bitcoin-connect';
-
-const isConnected = isConnected();
-```
-
 #### Events
 
 ##### onConnected
