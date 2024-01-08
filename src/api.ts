@@ -41,11 +41,16 @@ type LaunchPaymentModalArgs = {
 };
 
 /**
- * Listen to onConnected events which will fire when a user connects to a wallet
- * @param callback includes the webln provider that was connected
+ * Listen to onConnected events which will fire when a user connects to a wallet.
+ * If a provider is already available, the callback will be immediately fired.
+ * @param callback includes the webln provider that was (or is already) connected
  * @returns unsubscribe function
  */
 export function onConnected(callback: (provider: WebLNProvider) => void) {
+  if (store.getState().connected) {
+    callback(store.getState().provider!);
+  }
+
   const zustandUnsubscribe = store.subscribe(async (state, prevState) => {
     if (state.connected && !prevState.connected) {
       if (!state.provider) {
@@ -160,8 +165,12 @@ export async function requestProvider(): Promise<WebLNProvider> {
 
 /**
  * @returns true if user is connected to a wallet and WebLN is enabled
+ * @deprecated will be removed in v4.
  */
 export function isConnected() {
+  console.warn(
+    'Bitcoin Connect: isConnected is deprecated and will be removed in the next major version'
+  );
   return store.getState().connected;
 }
 
