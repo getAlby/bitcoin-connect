@@ -244,7 +244,7 @@ init({
 
 #### Requesting a provider
 
-With one line of code you can ensure you have a WebLN provider available and ready to use. If one is not available, the Bitcoin connect modal will be launched.
+With one line of code you can ensure you have a WebLN provider available and ready to use. If one is not available, the Bitcoin connect modal will be launched. This should be called on a user interaction to avoid the modal unexpectedly being shown to the user.
 
 ```ts
 import {requestProvider} from '@getalby/bitcoin-connect';
@@ -314,15 +314,9 @@ import {disconnect} from '@getalby/bitcoin-connect';
 disconnect();
 ```
 
-#### Check connection status
-
-```ts
-import {isConnected} from '@getalby/bitcoin-connect';
-
-const isConnected = isConnected();
-```
-
 #### Get connector config
+
+Returns the saved configuration of the currently-connected connector (if connected)
 
 ```ts
 import {getConnectorConfig} from '@getalby/bitcoin-connect';

@@ -247,8 +247,12 @@
       <button id="make-invoice">Make a 1 sat invoice</button>
       <h3>Connector config</h3>
       <button id="get-connector-config">Get connector config</button>
+      <h3>Try it yourself</h3>
+      <p>
+        Open devtools and use <b>window.bitcoinConnectSandbox</b> to access the
+        Bitcoin Connect API
+      </p>
     </div>
-    <script></script>
     <script type="module">
       import {LightningAddress} from 'https://cdn.skypack.dev/@getalby/lightning-tools';
       import {
@@ -392,6 +396,10 @@
         });
 
       document.addEventListener('bc:onpaid', (e) => console.log('PAID!', e));
+    </script>
+    <script type="module">
+      import * as bitcoinConnectSandbox from '../../src/index.ts';
+      window.bitcoinConnectSandbox = bitcoinConnectSandbox;
     </script>
   </body>
 </html>
