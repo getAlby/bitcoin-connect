@@ -55,9 +55,7 @@ export const withTwindExtended = () =>
           },
           animation: {
             darken: 'darken 0.2s ease-out forwards',
-            lighten: 'lighten 0.2s ease-out forwards',
             'fade-in': 'fade-in 0.2s ease-out forwards',
-            'fade-out': 'fade-out 0.2s ease-out forwards',
           },
           keyframes: {
             darken: {
