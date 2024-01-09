@@ -265,7 +265,13 @@ export function launchPaymentModal({
  * Programmatically close the modal
  */
 export function closeModal() {
+  const modal = document.querySelector('bc-modal');
+  if (modal) {
+    document.body.removeChild(modal);
+  }
   store.getState().setModalOpen(false);
+  store.getState().clearRouteHistory();
+  store.getState().setError(undefined);
 }
 
 /**
