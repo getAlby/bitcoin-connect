@@ -245,6 +245,8 @@
       <button id="pay-invoice">Pay 1 sat to Alby team</button>
       <h3>Make an invoice</h3>
       <button id="make-invoice">Make a 1 sat invoice</button>
+      <h3>Connector config</h3>
+      <button id="get-connector-config">Get connector config</button>
       <h3>Try it yourself</h3>
       <p>
         Open devtools and use <b>window.bitcoinConnectSandbox</b> to access the
@@ -258,6 +260,7 @@
         launchModal,
         launchPaymentModal,
         requestProvider,
+        getConnectorConfig,
       } from '../../src/index.ts';
 
       const appName = localStorage.getItem('app-name');
@@ -384,6 +387,12 @@
                 JSON.stringify(error)
             );
           }
+        });
+
+      document
+        .getElementById('get-connector-config')
+        .addEventListener('click', async () => {
+          alert(JSON.stringify(getConnectorConfig(), null, 2));
         });
 
       document.addEventListener('bc:onpaid', (e) => console.log('PAID!', e));

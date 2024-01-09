@@ -67,6 +67,7 @@ export function onConnected(callback: (provider: WebLNProvider) => void) {
 }
 
 /**
+ * Listen to onConnecting events which will fire when a user is connecting to their wallet
  * Subscribe to onConnecting events which will fire when a user is connecting to their wallet
  *
  * If a provider is already being connected to when the subscription is created, the callback will be immediately fired.
@@ -296,4 +297,11 @@ export function closeModal() {
  */
 export function disconnect() {
   store.getState().disconnect();
+}
+
+/**
+ * @returns the configuration of the current connector (if connected)
+ */
+export function getConnectorConfig() {
+  return store.getState().config;
 }
