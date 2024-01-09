@@ -15,5 +15,6 @@ export {
   onDisconnected,
   onModalOpened,
   onModalClosed,
+  getConnectorConfig,
   WebLNProviders,
 } from '@getalby/bitcoin-connect';
