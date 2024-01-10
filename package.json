@@ -1,6 +1,6 @@
 {
   "name": "@getalby/bitcoin-connect",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Web components to connect to a lightning wallet and power a website with WebLN",
   "type": "module",
   "source": "src/index.ts",
@@ -47,7 +47,7 @@
     "url": "https://github.com/getAlby/bitcoin-connect.git"
   },
   "dependencies": {
-    "@getalby/lightning-tools": "^5.0.0",
+    "@getalby/lightning-tools": "^5.0.1",
     "@getalby/sdk": "^3.2.3",
     "@lightninglabs/lnc-web": "^0.2.8-alpha",
     "qrcode-generator": "^1.4.4",
