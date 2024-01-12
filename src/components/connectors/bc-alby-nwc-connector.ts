@@ -16,18 +16,12 @@ export class AlbyNWCConnector extends ConnectorElement {
   }
 
   protected async _onClick() {
-    const nwc = webln.NostrWebLNProvider.withNewSecret({
-      authorizationUrl: 'http://localhost:5173/apps/new',
-      walletPubkey:
-        'edab2c95ff991d49060198224f7e085aa7d2632797816dfc5d6ea25fd2b0b886',
-    });
+    const nwc = webln.NostrWebLNProvider.withNewSecret();
     const providerConfig = store.getState().providerConfig;
     await nwc.initNWC({
       ...(providerConfig?.nwc?.authorizationUrlOptions || {}),
       name: this._appName || 'Bitcoin Connect',
     });
-
-    prompt('URL: ', nwc.getNostrWalletConnectUrl(true));
 
     this._connect({
       nwcUrl: nwc.getNostrWalletConnectUrl(true),
