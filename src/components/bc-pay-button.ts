@@ -3,11 +3,11 @@ import {customElement, property, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
-import {loadingIcon} from './icons/loadingIcon.js';
 import {launchPaymentModal} from '../api.js';
 import './bc-balance.js';
 import {SendPaymentResponse} from '@webbtc/webln-types';
 import {checkIcon} from './icons/checkIcon.js';
+import {waitingIcon} from './icons/waitingIcon.js';
 
 /**
  * A button that when clicked launches a modal to pay an invoice.
@@ -60,7 +60,7 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
     return html` <div class="inline-flex" @click=${this._onClick}>
       <bci-button variant="primary">
         ${isLoading
-          ? html`<span class="ml-1 mr-1">${loadingIcon}</span>`
+          ? html`${waitingIcon(`w-10 h-10`)}`
           : this._paid
           ? html`<span class="-ml-0.5">${checkIcon}</span>`
           : html`<span class="-ml-0.5">${bcIcon}</span>`}

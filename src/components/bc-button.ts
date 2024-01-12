@@ -3,12 +3,12 @@ import {customElement, property, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {bcIcon} from './icons/bcIcon.js';
 import {withTwind} from './twind/withTwind.js';
-import {loadingIcon} from './icons/loadingIcon.js';
 import {innerBorder} from './templates/innerBorder.js';
 import {classes} from './css/classes.js';
 import {launchModal} from '../api.js';
 import './bc-balance';
 import store from '../state/store.js';
+import {waitingIcon} from './icons/waitingIcon.js';
 
 /**
  * A button that when clicked launches the modal.
@@ -50,7 +50,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
         ${this._connected ? innerBorder() : ''}
         <bci-button variant="primary">
           ${isLoading
-            ? html`<span class="ml-1 mr-1">${loadingIcon}</span>`
+            ? html` ${waitingIcon(`w-10 h-10`)} `
             : this._connected
             ? null
             : html`<span class="-ml-0.5">${bcIcon}</span>`}
