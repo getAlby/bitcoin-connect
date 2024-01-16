@@ -60,7 +60,7 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
     return html` <div class="inline-flex" @click=${this._onClick}>
       <bci-button variant="primary">
         ${isLoading
-          ? html`${waitingIcon(`w-10 h-10 ml-1 mr-1`)}`
+          ? html`${waitingIcon(`w-11 h-11 -mr-2 -ml-2.5 `)}`
           : this._paid
           ? html`<span class="-ml-0.5">${checkIcon}</span>`
           : html`<span class="-ml-0.5">${bcIcon}</span>`}

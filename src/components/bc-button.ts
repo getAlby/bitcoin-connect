@@ -50,7 +50,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
         ${this._connected ? innerBorder() : ''}
         <bci-button variant="primary">
           ${isLoading
-            ? html` ${waitingIcon(`w-10 h-10 ml-1 mr-1`)} `
+            ? html` ${waitingIcon(`w-11 h-11 -mr-2 mr-1 -ml-2.5`)} `
             : this._connected
             ? null
             : html`<span class="-ml-0.5">${bcIcon}</span>`}
