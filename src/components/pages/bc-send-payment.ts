@@ -14,6 +14,7 @@ import {Invoice} from '@getalby/lightning-tools';
 import {successAnimation} from '../images/success.js';
 import {closeModal} from '../../api.js';
 import {disconnectSection} from '../templates/disconnectSection.js';
+import {copiedIcon} from '../icons/copiedIcon.js';
 import {copyIcon} from '../icons/copyIcon.js';
 import qrcode from 'qrcode-generator';
 import {walletIcon} from '../icons/walletIcon.js';
@@ -161,7 +162,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
                   classes.interactive
                 } font-semibold text-xs"
                   >
-                  ${this._hasCopiedInvoice ? null : copyIcon}
+                  ${this._hasCopiedInvoice ? copiedIcon : copyIcon}
                   ${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
                 </a>
             `
