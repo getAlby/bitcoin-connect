@@ -7,14 +7,12 @@ export function hr(text?: string) {
   }`;
 
   return html`<div
-    class="w-full px-8 flex gap-2 justify-center items-center opacity-60 dark:opacity-60"
+    class="w-full px-8 flex gap-4 justify-center items-center opacity-60 dark:opacity-60"
   >
     <hr class=${hrClasses} />
     ${text
       ? html`
-          <span class="mr-2 ml-2" ${classes['text-neutral-tertiary']}
-            >${text}</span
-          >
+          <span class=${classes['text-neutral-tertiary']}>${text}</span>
           <hr class=${hrClasses} />
         `
       : null}
