@@ -494,6 +494,8 @@ See [React](./demos/react/README.md)
 
 > [Pay on an E-Commerce](https://replit.com/@getalby/Bitcoin-Connect-ECommerce-Demo)
 
+> [Chatbot UI + Bitcoin Connect](https://chatbot-ui-bitcoin-connect.vercel.app)
+
 #### NextJS (App Router)
 
 See [NextJS](./demos/nextjs/README.md)
