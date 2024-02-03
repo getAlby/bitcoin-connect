@@ -27,4 +27,7 @@ export const classes = {
     'border-neutral-secondary-light dark:border-neutral-secondary-dark',
   'border-neutral-tertiary':
     'border-neutral-tertiary-light dark:border-neutral-tertiary-dark',
+
+  //width
+  'w-full': 'w-full',
 };

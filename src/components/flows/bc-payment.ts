@@ -68,7 +68,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
               Payment Request
             </p>
           </bc-modal-header>
-          <div class="flex flex-col justify-center items-center w-full pt-8">
+          <div>
             <bc-send-payment
               .invoice=${this.invoice}
               ?paid=${this.paid}
