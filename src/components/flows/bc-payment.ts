@@ -68,20 +68,18 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
               Payment Request
             </p>
           </bc-modal-header>
-          <div class="flex flex-col justify-center items-center w-full pt-8>
+          <div class="flex flex-col justify-center items-center w-full pt-8">
             <bc-send-payment
               .invoice=${this.invoice}
               ?paid=${this.paid}
               @onclickconnectwallet=${this._onClickConnectWallet}
             ></bc-send-payment>
           </div>
-          ${
-            this._error
-              ? html`<p class="mt-4 text-center font-sans text-red-500">
-                  ${this._error}
-                </p>`
-              : null
-          }
+          ${this._error
+            ? html`<p class="mt-4 text-center font-sans text-red-500">
+                ${this._error}
+              </p>`
+            : null}
         </div>`;
   }
 
