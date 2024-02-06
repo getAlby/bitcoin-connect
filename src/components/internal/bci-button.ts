@@ -28,7 +28,7 @@ export class Button extends withTwind()(InternalElement) {
     const brandColorLuminance = this._getBrandColorLuminance();
 
     return html`<button
-      class="relative h-10 px-4 font-sans font-semibold rounded-lg flex justify-center items-center
+      class="w-full relative h-10 px-4 font-sans font-semibold rounded-lg flex justify-center items-center
         ${this.ghost ? '' : 'shadow'} rounded-lg w-full ${classes.interactive}
         ${this.variant === 'primary' ? `${classes['bg-brand']}` : ''}
         ${this.variant === 'primary'
