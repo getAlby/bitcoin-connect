@@ -8,6 +8,8 @@ This project includes web components for connecting to Lightning wallets and ena
 
 🥇 Bitcoin Connect won the [BOLT FUN Legends of Lightning vol.2](https://bolt.fun/story/legendsoflightning-2023-winners--1444) hackathon on 17 December, 2023.
 
+🍯 Bitcoin Connect has some money for bounties. If you would like to contribute a new feature or add Bitcoin Connect to a popular webapp please contact hello@getalby.com.
+
 ## 🛝 Try it out
 
 [Demo](https://bitcoin-connect.com)
@@ -494,7 +496,7 @@ See [React](./demos/react/README.md)
 
 > [Pay on an E-Commerce](https://replit.com/@getalby/Bitcoin-Connect-ECommerce-Demo)
 
-> [Chatbot UI + Bitcoin Connect](https://chatbot-ui-bitcoin-connect.vercel.app) [source](https://github.com/Alan-AC7/chatbot-ui-bitcoin-connect)
+> [Chatbot UI + Bitcoin Connect](https://chatbot-ui-bitcoin-connect.vercel.app) - [source](https://github.com/Alan-AC7/chatbot-ui-bitcoin-connect)
 
 #### NextJS (App Router)
 
