@@ -59,7 +59,7 @@ import {
   launchModal,
   launchPaymentModal,
   requestProvider,
-} from '@getalby/bitcoin-connect-react';
+} from '@getalby/bitcoin-connect';
 
 // Initialize Bitcoin Connect
 init({
