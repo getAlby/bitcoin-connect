@@ -48,10 +48,10 @@
   },
   "dependencies": {
     "@getalby/lightning-tools": "^5.0.1",
-    "@getalby/sdk": "^3.2.3",
+    "@getalby/sdk": "^3.3.0",
     "@lightninglabs/lnc-web": "^0.3.1-alpha",
     "qrcode-generator": "^1.4.4",
-    "zustand": "^4.4.7"
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@open-wc/testing": "^3.2.2",
@@ -68,7 +68,7 @@
     "concurrently": "^8.2.2",
     "esbuild": "^0.18.20",
     "eslint": "^8.56.0",
-    "lit": "^3.1.1",
+    "lit": "^3.1.2",
     "lit-analyzer": "^1.2.1",
     "microbundle": "^0.15.1",
     "prettier": "^2.6.2",

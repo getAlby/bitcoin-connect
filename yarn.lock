@@ -1309,10 +1309,10 @@
   resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.0.1.tgz#08a974bcdf3d98a86ff9909df838360ee67174c8"
   integrity sha512-xoBfBYMQrJqwryU9fAYGIW6dzWRpdsAw8rroqTROba2bHdYT0ZvGnt4tjqXUhRswopR2X+wp1QeeWHZNL9A0Kg==
 
-"@getalby/sdk@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.2.3.tgz#3031d64e935feea879b969da0a17ee05800fba1d"
-  integrity sha512-8eIqg1vEH2CdkNoHsIlL5q2bKLvLR+XiSWK2RQnTAB+Z0CNlVW2jRM8JxxeubHnKBDTiBrBMkPqBIAhQqc8now==
+"@getalby/sdk@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.3.0.tgz#176982faecf994bf677944f31ecbb8e0f4032ee1"
+  integrity sha512-Y/RwxIo7iYTsKDaTbDmZME1AuB8v5bw9CmqBN3u6fkI8ibYYi8RgeRW78orwCNKRZFB//ZF4MEpAJBGZ3vNNzQ==
   dependencies:
     events "^3.3.0"
     nostr-tools "^1.17.0"
@@ -1399,6 +1399,11 @@
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.1.2.tgz#d693d972974a354034454ec1317eb6afd0b00312"
   integrity sha512-jnOD+/+dSrfTWYfSXBXlo5l5f0q1UuJo3tkbMDCYA2lKUYq79jaxqtGEvnRoh049nt1vdo1+45RinipU6FGY2g==
 
+"@lit-labs/ssr-dom-shim@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.2.0.tgz#353ce4a76c83fadec272ea5674ede767650762fd"
+  integrity sha512-yWJKmpGE6lUURKAaIltoPIE/wrbY3TEkqQt+X0m+7fQNnAv0keydnYvbiJFP1PnMhizmIWRWOG5KLhYyc/xl+g==
+
 "@lit/reactive-element@^1.0.0 || ^2.0.0":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-2.0.2.tgz#779ae9d265407daaf7737cb892df5ec2a86e22a0"
@@ -1412,6 +1417,13 @@
   integrity sha512-wn+2+uDcs62ROBmVAwssO4x5xue/uKD3MGGZOXL2sMxReTRIT0JXKyMXeu7gh0aJ4IJNEIG/3aOnUaQvM7BMzQ==
   dependencies:
     "@lit-labs/ssr-dom-shim" "^1.1.2-pre.0"
+
+"@lit/reactive-element@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-2.0.4.tgz#8f2ed950a848016383894a26180ff06c56ae001b"
+  integrity sha512-GFn91inaUa2oHLak8awSIigYz0cU0Payr1rcFsrkf5OJ5eSPxElyZfKh0f2p9FsTiZWXQdWGJeXZICEfXXYSXQ==
+  dependencies:
+    "@lit-labs/ssr-dom-shim" "^1.2.0"
 
 "@mdn/browser-compat-data@^4.0.0":
   version "4.2.1"
@@ -4914,6 +4926,15 @@ lit-element@^4.0.0:
     "@lit/reactive-element" "^2.0.0"
     lit-html "^3.0.0"
 
+lit-element@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-4.0.4.tgz#e0b37ebbe2394bcb9578d611a409f49475dff361"
+  integrity sha512-98CvgulX6eCPs6TyAIQoJZBCQPo80rgXR+dVBs61cstJXqtI+USQZAbA4gFHh6L/mxBx9MrgPLHLsUgDUHAcCQ==
+  dependencies:
+    "@lit-labs/ssr-dom-shim" "^1.2.0"
+    "@lit/reactive-element" "^2.0.4"
+    lit-html "^3.1.2"
+
 "lit-html@^2.0.0 || ^3.0.0", lit-html@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-3.1.0.tgz#a7b93dd682073f2e2029656f4e9cd91e8034c196"
@@ -4928,6 +4949,13 @@ lit-html@^3.0.0:
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
+lit-html@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-3.1.2.tgz#6655ce82367472de7680c62b1bcb0beb0e426fa1"
+  integrity sha512-3OBZSUrPnAHoKJ9AMjRL/m01YJxQMf+TMHanNtTHG68ubjnZxK0RFl102DPzsw4mWnHibfZIBJm3LWCZ/LmMvg==
+  dependencies:
+    "@types/trusted-types" "^2.0.2"
+
 "lit@^2.0.0 || ^3.0.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lit/-/lit-3.1.0.tgz#76429b85dc1f5169fed499a0f7e89e2e619010c9"
@@ -4937,14 +4965,14 @@ lit-html@^3.0.0:
     lit-element "^4.0.0"
     lit-html "^3.1.0"
 
-lit@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-3.1.1.tgz#49340c8875019a777cc83904f75a2bf7764617dc"
-  integrity sha512-hF1y4K58+Gqrz+aAPS0DNBwPqPrg6P04DuWK52eMkt/SM9Qe9keWLcFgRcEKOLuDlRZlDsDbNL37Vr7ew1VCuw==
+lit@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/lit/-/lit-3.1.2.tgz#f276258e8a56593f1d834a5fd00a7eb5e891ae73"
+  integrity sha512-VZx5iAyMtX7CV4K8iTLdCkMaYZ7ipjJZ0JcSdJ0zIdGxxyurjIn7yuuSxNBD7QmjvcNJwr0JS4cAdAtsy7gZ6w==
   dependencies:
-    "@lit/reactive-element" "^2.0.0"
-    lit-element "^4.0.0"
-    lit-html "^3.1.0"
+    "@lit/reactive-element" "^2.0.4"
+    lit-element "^4.0.4"
+    lit-html "^3.1.2"
 
 loader-utils@^3.2.0:
   version "3.2.1"
@@ -7255,9 +7283,9 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zustand@^4.4.7:
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.7.tgz#355406be6b11ab335f59a66d2cf9815e8f24038c"
-  integrity sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==
+zustand@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.5.1.tgz#2088956ee454759fb8b866ca335a2373e76736c5"
+  integrity sha512-XlauQmH64xXSC1qGYNv00ODaQ3B+tNPoy22jv2diYiP4eoDKr9LA+Bh5Bc3gplTrFdb6JVI+N4kc1DZ/tbtfPg==
   dependencies:
     use-sync-external-store "1.2.0"
