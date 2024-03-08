@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbitcoin_connect_docs=self.webpackChunkbitcoin_connect_docs||[]).push([[647],{7121:(e,c,s)=>{s.r(c),s.d(c,{default:()=>i});s(6540);var n=s(4164),r=s(1003),t=s(7559),o=s(2831),u=s(781),a=s(4848);function i(e){return(0,a.jsx)(r.e3,{className:(0,n.A)(t.G.wrapper.docsPages),children:(0,a.jsx)(u.A,{children:(0,o.v)(e.route.routes)})})}}}]);
