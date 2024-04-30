@@ -48,7 +48,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     type: String,
     attribute: 'payment-methods',
   })
-  paymentMethods: 'all' | 'internal' | "external" = 'all';
+  paymentMethods: 'all' | 'internal' | 'external' = 'all';
 
   protected override updated(changedProperties: PropertyValues): void {
     super.updated(changedProperties);
@@ -77,11 +77,15 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
   private renderPaidState() {
     return html`
-      <div class="flex flex-col justify-center items-center ${classes['text-brand-mixed']}">
+      <div
+        class="flex flex-col justify-center items-center ${classes[
+          'text-brand-mixed'
+        ]}"
+      >
         <p class="font-bold">Paid!</p>
         ${successAnimation}
       </div>
-    `
+    `;
   }
 
   private renderPayingState() {
@@ -107,25 +111,22 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     return html`
       <div class="flex justify-center items-center">
         ${waitingIcon(`w-7 h-7 ${classes['text-brand-mixed']}`)}
-        <p class="${classes['text-neutral-secondary']}">
-          Waiting for payment
-        </p>
+        <p class="${classes['text-neutral-secondary']}">Waiting for payment</p>
       </div>
     `;
   }
 
   private renderConnectWalletMobile() {
-    let internalMethods = null
-    let externalMethods = null
-    let qrSection = null
-
+    let internalMethods = null;
+    let externalMethods = null;
+    let qrSection = null;
 
     if (this.paymentMethods === 'all' || this.paymentMethods === 'internal') {
       internalMethods = html`
         <bci-button block @click=${this._onClickConnectWallet}>
           <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
         </bci-button>
-      `
+      `;
     }
 
     if (this.paymentMethods === 'all' || this.paymentMethods === 'external') {
@@ -147,8 +148,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
             ${walletIcon} Open in a Bitcoin Wallet
           </bci-button>
         </a>
-        ${internalMethods}
-        ${externalMethods}
+        ${internalMethods} ${externalMethods}
       </div>
       ${qrSection}
     `;
@@ -169,15 +169,17 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
     let separator = null;
     if (this.paymentMethods === 'all') {
-      separator = html`
-        <div class="w-full py-4">${hr('or')}</div>
-      `;
+      separator = html` <div class="w-full py-4">${hr('or')}</div> `;
     }
 
     let externalMethods = null;
     if (this.paymentMethods === 'all' || this.paymentMethods === 'external') {
       externalMethods = html`
-        <div class="flex flex-col items-center ${this.paymentMethods === 'external' ? 'mt-8' : ''}">
+        <div
+          class="flex flex-col items-center ${this.paymentMethods === 'external'
+            ? 'mt-8'
+            : ''}"
+        >
           <p class="font-medium ${classes['text-neutral-secondary']}">
             Scan to Pay
           </p>
@@ -186,11 +188,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       `;
     }
 
-    return html`
-      ${internalMethods}
-      ${separator}
-      ${externalMethods}
-    `;
+    return html` ${internalMethods} ${separator} ${externalMethods} `;
   }
 
   private renderQR() {
@@ -209,8 +207,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
         flex gap-1
         mt-4
         ${classes['text-brand-mixed']} ${
-        classes.interactive
-      } font-semibold text-xs"
+      classes.interactive
+    } font-semibold text-xs"
         >
         ${this._hasCopiedInvoice ? copiedIcon : copyIcon}
         ${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
@@ -253,19 +251,17 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     } else if (this._connected) {
       paymentStateElement = this.renderPaymentConfirmation();
     } else {
-        paymentStateElement = html`
-          ${this.renderWaitingForPayment()}
-          ${isMobileView ?
-            this.renderConnectWalletMobile()
-            : this.renderConnectWalletDesktop()
-          }
-        `;
+      paymentStateElement = html`
+        ${this.renderWaitingForPayment()}
+        ${isMobileView
+          ? this.renderConnectWalletMobile()
+          : this.renderConnectWalletDesktop()}
+      `;
     }
 
     return html`
       <div class="flex flex-col justify-center items-center font-sans w-full">
-        ${this.renderHeading(decodedInvoice)}
-        ${paymentStateElement}
+        ${this.renderHeading(decodedInvoice)} ${paymentStateElement}
       </div>
     `;
   }
