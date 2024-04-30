@@ -31,6 +31,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   @state()
   _showQR = false;
 
+  @state()
+  _qr = null as QRCode | null;
+
   @property({
     type: String,
   })
@@ -51,29 +54,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     }
   }
 
-  override render() {
-    if (!this.invoice) {
-      return null;
-    }
-
-    let decodedInvoice: Invoice;
-    try {
-      decodedInvoice = new Invoice({pr: this.invoice});
-    } catch (error) {
-      console.error(error);
-      store.getState().setError((error as Error).message);
-      return null;
-    }
-    const errorCorrectionLevel = 'L';
-    const qr = qrcode(0, errorCorrectionLevel);
-    qr.addData(this.invoice);
-    qr.make();
-
-    const isMobileView = window.innerWidth < 600;
-
-    return html` <div
-      class="flex flex-col justify-center items-center font-sans w-full"
-    >
+  private renderHeading(decodedInvoice: Invoice) {
+    return html`
       <h2 class="text-2xl mb-6 ${classes['text-neutral-secondary']}">
         <span
           class="font-bold font-mono text-4xl align-bottom ${classes[
@@ -84,91 +66,169 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           })}</span
         >&nbsp;sats
       </h2>
-      ${this._connected || this.paid
-        ? this.paid
-          ? html`<div
-              class="flex flex-col justify-center items-center ${classes[
-                'text-brand-mixed'
-              ]}"
-            >
-              <p class="font-bold">Paid!</p>
-              ${successAnimation}
-            </div>`
-          : this._isPaying
-          ? html`<div class="flex flex-col justify-center items-center">
-              <p class="${classes['text-neutral-secondary']} mb-5">Paying...</p>
-              ${waitingIcon(`w-48 h-48 ${classes['text-brand-mixed']}`)}
-            </div>`
-          : html`<bci-button variant="primary" @click=${this._payInvoice}>
-                <span class="-ml-0.5">${bcIcon}</span>
-                Confirm Payment
-              </bci-button>
-              ${disconnectSection(this._connectorName)} `
-        : html`
-            <div class="flex justify-center items-center">
-              ${waitingIcon(`w-7 h-7 ${classes['text-brand-mixed']}`)}
-              <p class="${classes['text-neutral-secondary']}">
-                Waiting for payment
-              </p>
-            </div>
+    `;
+  }
 
-            ${!isMobileView
-              ? html`<div class="mt-8">
-                    <bci-button variant="primary" @click=${
-                      this._onClickConnectWallet
-                    }>
-                    <span class="-ml-0.5">${bcIcon}</span>
-                    Connect Wallet to Pay
-                  </bci-button>
-                  </div>
-                  <div class="w-full py-4">${hr('or')}</div>
+  private renderPaidState() {
+    return html`
+      <div class="flex flex-col justify-center items-center ${classes['text-brand-mixed']}">
+        <p class="font-bold">Paid!</p>
+        ${successAnimation}
+      </div>
+    `
+  }
 
-                  <p class="font-medium ${classes['text-neutral-secondary']}">
-                    Scan to Pay
-                  </p>
-              </div>`
-              : html`
-                  <div class="mt-8 w-full flex flex-col gap-4">
-                    <a href="lightning:${this.invoice}">
-                      <bci-button variant="primary" block>
-                        ${walletIcon} Open in a Bitcoin Wallet
-                      </bci-button>
-                    </a>
-                    <bci-button block @click=${this._onClickConnectWallet}>
-                      <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
-                    </bci-button>
-                    ${this._showQR
-                      ? null
-                      : html`<bci-button
-                          block
-                          @click=${this._copyAndDisplayInvoice}
-                        >
-                          ${qrIcon}Copy & Display Invoice
-                        </bci-button>`}
-                  </div>
-                `}
-            ${!isMobileView || this._showQR
-              ? html`
-                <!-- add margin only on dark mode because on dark mode the qr has a white border -->
-                <a href="lightning:${this.invoice}" class="dark:mt-2">
-                  <img src=${qr.createDataURL(4)} class="rounded-lg"></img>
-                </a>
-                <a
-                  @click=${this._copyInvoice}
-                  class="
-                  flex gap-1
-                  mt-4
-                  ${classes['text-brand-mixed']} ${
-                  classes.interactive
-                } font-semibold text-xs"
-                  >
-                  ${this._hasCopiedInvoice ? copiedIcon : copyIcon}
-                  ${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
-                </a>
-            `
-              : null}
-          `}
-    </div>`;
+  private renderPayingState() {
+    return html`
+      <div class="flex flex-col justify-center items-center">
+        <p class="${classes['text-neutral-secondary']} mb-5">Paying...</p>
+        ${waitingIcon(`w-48 h-48 ${classes['text-brand-mixed']}`)}
+      </div>
+    `;
+  }
+
+  private renderPaymentConfirmation() {
+    return html`
+      <bci-button variant="primary" @click=${this._payInvoice}>
+        <span class="-ml-0.5">${bcIcon}</span>
+        Confirm Payment
+      </bci-button>
+      ${disconnectSection(this._connectorName)}
+    `;
+  }
+
+  private renderWaitingForPayment() {
+    return html`
+      <div class="flex justify-center items-center">
+        ${waitingIcon(`w-7 h-7 ${classes['text-brand-mixed']}`)}
+        <p class="${classes['text-neutral-secondary']}">
+          Waiting for payment
+        </p>
+      </div>
+    `;
+  }
+
+  private renderConnectWalletMobile() {
+    let displayInvoiceBtn = null
+    let qrSection = null
+    
+    if (this._showQR) {
+      qrSection = this.renderQR();
+    } else {
+      displayInvoiceBtn = html`
+        <bci-button block @click=${this._copyAndDisplayInvoice}>
+          ${qrIcon} Copy & Display Invoice
+        </bci-button>
+      `;
+    }
+
+    return html`
+      <div class="mt-8 w-full flex flex-col gap-4">
+        <a href="lightning:${this.invoice}">
+          <bci-button variant="primary" block>
+            ${walletIcon} Open in a Bitcoin Wallet
+          </bci-button>
+        </a>
+        <bci-button block @click=${this._onClickConnectWallet}>
+          <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
+        </bci-button>
+        ${displayInvoiceBtn}
+      </div>
+      ${qrSection}
+    `;
+  }
+
+  private renderConnectWalletDesktop() {
+    return html`
+      <div class="mt-8">
+        <bci-button variant="primary" @click=${this._onClickConnectWallet}>
+          <span class="-ml-0.5">${bcIcon}</span>
+          Connect Wallet to Pay
+        </bci-button>
+      </div>
+      <div class="w-full py-4">${hr('or')}</div>
+      <p class="font-medium ${classes['text-neutral-secondary']}">
+        Scan to Pay
+      </p>
+      ${this.renderQR()}
+    `;
+  }
+
+  private renderQR() {
+    if (!this._showQR || !this.invoice || !this._qr) {
+      return null;
+    }
+
+    return html`
+      <!-- add margin only on dark mode because on dark mode the qr has a white border -->
+      <a href="lightning:${this.invoice}" class="dark:mt-2">
+        <img src=${this._qr.createDataURL(4)} class="rounded-lg"></img>
+      </a>
+      <a
+        @click=${this._copyInvoice}
+        class="
+        flex gap-1
+        mt-4
+        ${classes['text-brand-mixed']} ${
+        classes.interactive
+      } font-semibold text-xs"
+        >
+        ${this._hasCopiedInvoice ? copiedIcon : copyIcon}
+        ${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
+      </a>
+    `;
+  }
+
+  override render() {
+    if (!this.invoice) {
+      return null;
+    }
+
+    const errorCorrectionLevel = 'L';
+    const qr = qrcode(0, errorCorrectionLevel);
+    qr.addData(this.invoice);
+    qr.make();
+
+    this._qr = qr;
+
+    let decodedInvoice: Invoice;
+    try {
+      decodedInvoice = new Invoice({pr: this.invoice});
+    } catch (error) {
+      console.error(error);
+      store.getState().setError((error as Error).message);
+      return null;
+    }
+
+    const isMobileView = window.innerWidth < 600;
+    if (!isMobileView) {
+      this._showQR = true;
+    }
+
+    let paymentStateElement;
+
+    if (this.paid) {
+      paymentStateElement = this.renderPaidState();
+    } else if (this._isPaying) {
+      paymentStateElement = this.renderPayingState();
+    } else if (this._connected) {
+      paymentStateElement = this.renderPaymentConfirmation();
+    } else {
+        paymentStateElement = html`
+          ${this.renderWaitingForPayment()}
+          ${isMobileView ?
+            this.renderConnectWalletMobile()
+            : this.renderConnectWalletDesktop()
+          }
+        `;
+    }
+
+    return html`
+      <div class="flex flex-col justify-center items-center font-sans w-full">
+        ${this.renderHeading(decodedInvoice)}
+        ${paymentStateElement}
+      </div>
+    `;
   }
 
   private _onClickConnectWallet() {
