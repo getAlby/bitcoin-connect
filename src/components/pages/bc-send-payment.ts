@@ -44,6 +44,12 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   })
   paid?: boolean;
 
+  @property({
+    type: String,
+    attribute: 'payment-methods',
+  })
+  paymentMethods: 'all' | 'internal' | "external" = 'all';
+
   protected override updated(changedProperties: PropertyValues): void {
     super.updated(changedProperties);
 
@@ -109,17 +115,29 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private renderConnectWalletMobile() {
-    let displayInvoiceBtn = null
+    let internalMethods = null
+    let externalMethods = null
     let qrSection = null
-    
-    if (this._showQR) {
-      qrSection = this.renderQR();
-    } else {
-      displayInvoiceBtn = html`
+
+
+    if (this.paymentMethods === 'all' || this.paymentMethods === 'internal') {
+      internalMethods = html`
+        <bci-button block @click=${this._onClickConnectWallet}>
+          <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
+        </bci-button>
+      `
+    }
+
+    if (this.paymentMethods === 'all' || this.paymentMethods === 'external') {
+      externalMethods = html`
         <bci-button block @click=${this._copyAndDisplayInvoice}>
           ${qrIcon} Copy & Display Invoice
         </bci-button>
       `;
+
+      if (this._showQR) {
+        qrSection = this.renderQR();
+      }
     }
 
     return html`
@@ -129,28 +147,49 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
             ${walletIcon} Open in a Bitcoin Wallet
           </bci-button>
         </a>
-        <bci-button block @click=${this._onClickConnectWallet}>
-          <span class="-ml-0.5">${bcIcon}</span>Connect Wallet
-        </bci-button>
-        ${displayInvoiceBtn}
+        ${internalMethods}
+        ${externalMethods}
       </div>
       ${qrSection}
     `;
   }
 
   private renderConnectWalletDesktop() {
+    let internalMethods = null;
+    if (this.paymentMethods === 'all' || this.paymentMethods === 'internal') {
+      internalMethods = html`
+        <div class="mt-8">
+          <bci-button variant="primary" @click=${this._onClickConnectWallet}>
+            <span class="-ml-0.5">${bcIcon}</span>
+            Connect Wallet to Pay
+          </bci-button>
+        </div>
+      `;
+    }
+
+    let separator = null;
+    if (this.paymentMethods === 'all') {
+      separator = html`
+        <div class="w-full py-4">${hr('or')}</div>
+      `;
+    }
+
+    let externalMethods = null;
+    if (this.paymentMethods === 'all' || this.paymentMethods === 'external') {
+      externalMethods = html`
+        <div class="flex flex-col items-center ${this.paymentMethods === 'external' ? 'mt-8' : ''}">
+          <p class="font-medium ${classes['text-neutral-secondary']}">
+            Scan to Pay
+          </p>
+          ${this.renderQR()}
+        </div>
+      `;
+    }
+
     return html`
-      <div class="mt-8">
-        <bci-button variant="primary" @click=${this._onClickConnectWallet}>
-          <span class="-ml-0.5">${bcIcon}</span>
-          Connect Wallet to Pay
-        </bci-button>
-      </div>
-      <div class="w-full py-4">${hr('or')}</div>
-      <p class="font-medium ${classes['text-neutral-secondary']}">
-        Scan to Pay
-      </p>
-      ${this.renderQR()}
+      ${internalMethods}
+      ${separator}
+      ${externalMethods}
     `;
   }
 
