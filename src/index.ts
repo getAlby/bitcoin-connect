@@ -21,3 +21,5 @@ export const WebLNProviders = {
   LNCWebLNProvider,
   LnbitsWebLNProvider,
 };
+
+export {PaymentMethods} from './types/PaymentMethods';

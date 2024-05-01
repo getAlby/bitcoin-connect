@@ -17,4 +17,5 @@ export {
   onModalClosed,
   getConnectorConfig,
   WebLNProviders,
+  PaymentMethods,
 } from '@getalby/bitcoin-connect';
