@@ -8,6 +8,7 @@ import './bc-balance.js';
 import {SendPaymentResponse} from '@webbtc/webln-types';
 import {checkIcon} from './icons/checkIcon.js';
 import {waitingIcon} from './icons/waitingIcon.js';
+import {PaymentMethods} from '../types/PaymentMethods.js';
 
 /**
  * A button that when clicked launches a modal to pay an invoice.
@@ -19,6 +20,12 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
 
   @property()
   invoice?: string;
+
+  @property({
+    type: String,
+    attribute: 'payment-methods',
+  })
+  paymentMethods: PaymentMethods = 'all';
 
   @property({})
   preimage?: string;
@@ -93,6 +100,7 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
         this._paid = true;
       },
       invoice: this.invoice,
+      paymentMethods: this.paymentMethods,
     });
     this._setPaid = setPaid;
   }

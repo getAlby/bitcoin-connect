@@ -2,6 +2,7 @@ import {SendPaymentResponse, WebLNProvider} from '@webbtc/webln-types';
 import store from './state/store';
 import {ConnectorFilter} from './types/ConnectorFilter';
 import {WebLNProviderConfig} from './types/WebLNProviderConfig';
+import {PaymentMethods} from './types/PaymentMethods';
 
 type BitcoinConnectConfig = {
   /**
@@ -29,6 +30,10 @@ type LaunchPaymentModalArgs = {
    * Launch a payment flow to pay a BOLT11 invoice
    */
   invoice: string;
+  /**
+   * Supported payment methods in payment flow
+   */
+  paymentMethods?: PaymentMethods;
   /**
    * Called when a payment is made (either with WebLN or externally)
    * @param response response of the WebLN send payment call
@@ -222,6 +227,7 @@ export function launchModal() {
 // TODO: add launchPaymentModal and update README and migration guide
 export function launchPaymentModal({
   invoice,
+  paymentMethods,
   onPaid,
   onCancelled,
 }: LaunchPaymentModalArgs) {
@@ -239,6 +245,9 @@ export function launchPaymentModal({
   const sendPaymentFlowElement = document.createElement('bc-payment');
   sendPaymentFlowElement.setAttribute('closable', 'closable');
   sendPaymentFlowElement.setAttribute('invoice', invoice);
+  if (paymentMethods) {
+    sendPaymentFlowElement.setAttribute('payment-methods', paymentMethods);
+  }
   modalElement.appendChild(sendPaymentFlowElement);
 
   let paid = false;

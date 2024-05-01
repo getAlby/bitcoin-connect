@@ -19,6 +19,7 @@ import {copyIcon} from '../icons/copyIcon.js';
 import qrcode from 'qrcode-generator';
 import {walletIcon} from '../icons/walletIcon.js';
 import {qrIcon} from '../icons/qrIcon.js';
+import {PaymentMethods} from '../../types/PaymentMethods.js';
 
 @customElement('bc-send-payment')
 export class SendPayment extends withTwind()(BitcoinConnectElement) {
@@ -48,7 +49,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     type: String,
     attribute: 'payment-methods',
   })
-  paymentMethods: 'all' | 'internal' | 'external' = 'all';
+  paymentMethods: PaymentMethods = 'all';
 
   protected override updated(changedProperties: PropertyValues): void {
     super.updated(changedProperties);
@@ -143,11 +144,13 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
     return html`
       <div class="mt-8 w-full flex flex-col gap-4">
-        <a href="lightning:${this.invoice}">
-          <bci-button variant="primary" block>
-            ${walletIcon} Open in a Bitcoin Wallet
-          </bci-button>
-        </a>
+        ${this.paymentMethods === 'all' || this.paymentMethods === 'external'
+          ? html`<a href="lightning:${this.invoice}">
+              <bci-button variant="primary" block>
+                ${walletIcon} Open in a Bitcoin Wallet
+              </bci-button>
+            </a>`
+          : null}
         ${internalMethods} ${externalMethods}
       </div>
       ${qrSection}
@@ -158,7 +161,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     let internalMethods = null;
     if (this.paymentMethods === 'all' || this.paymentMethods === 'internal') {
       internalMethods = html`
-        <div class="mt-8">
+        <div class="${this.paymentMethods !== 'internal' ? 'mt-8' : ''}">
           <bci-button variant="primary" @click=${this._onClickConnectWallet}>
             <span class="-ml-0.5">${bcIcon}</span>
             Connect Wallet to Pay
@@ -169,7 +172,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
     let separator = null;
     if (this.paymentMethods === 'all') {
-      separator = html` <div class="w-full py-4">${hr('or')}</div> `;
+      separator = html` <div class="w-full py-8">${hr('or')}</div> `;
     }
 
     let externalMethods = null;
@@ -192,14 +195,19 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   }
 
   private renderQR() {
-    if (!this._showQR || !this.invoice || !this._qr) {
+    if (!this._showQR || !this.invoice) {
       return null;
     }
+
+    const errorCorrectionLevel = 'L';
+    const qr = qrcode(0, errorCorrectionLevel);
+    qr.addData(this.invoice);
+    qr.make();
 
     return html`
       <!-- add margin only on dark mode because on dark mode the qr has a white border -->
       <a href="lightning:${this.invoice}" class="dark:mt-2">
-        <img src=${this._qr.createDataURL(4)} class="rounded-lg"></img>
+        <img src=${qr.createDataURL(4)} class="rounded-lg"></img>
       </a>
       <a
         @click=${this._copyInvoice}
@@ -220,13 +228,6 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     if (!this.invoice) {
       return null;
     }
-
-    const errorCorrectionLevel = 'L';
-    const qr = qrcode(0, errorCorrectionLevel);
-    qr.addData(this.invoice);
-    qr.make();
-
-    this._qr = qr;
 
     let decodedInvoice: Invoice;
     try {
@@ -252,7 +253,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       paymentStateElement = this.renderPaymentConfirmation();
     } else {
       paymentStateElement = html`
-        ${this.renderWaitingForPayment()}
+        ${this.paymentMethods !== 'internal'
+          ? this.renderWaitingForPayment()
+          : null}
         ${isMobileView
           ? this.renderConnectWalletMobile()
           : this.renderConnectWalletDesktop()}
