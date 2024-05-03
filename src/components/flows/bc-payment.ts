@@ -8,6 +8,7 @@ import '../bc-modal-header';
 import '../bc-router-outlet';
 import {classes} from '../css/classes';
 import store from '../../state/store';
+import {PaymentMethods} from '../../types/PaymentMethods';
 
 @customElement('bc-payment')
 export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
@@ -32,6 +33,12 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
     type: String,
   })
   invoice?: string;
+
+  @property({
+    type: String,
+    attribute: 'payment-methods',
+  })
+  paymentMethods: PaymentMethods = 'all';
 
   // TODO: change to preimage and then bc:onpaid event only needs to be fired
   // only from bc-send-payment
@@ -71,6 +78,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
           <div class="flex flex-col justify-center items-center w-full pt-8">
             <bc-send-payment
               .invoice=${this.invoice}
+              .paymentMethods=${this.paymentMethods}
               ?paid=${this.paid}
               @onclickconnectwallet=${this._onClickConnectWallet}
             ></bc-send-payment>

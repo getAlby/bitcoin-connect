@@ -36,13 +36,13 @@ You can use Bitcoin Connect without any build tools:
 
 ```html
 <script type="module">
-  import {launchModal} from 'https://esm.sh/@getalby/bitcoin-connect@3.2.2'; // jsdelivr.net, skypack.dev also work
+  import {launchModal} from 'https://esm.sh/@getalby/bitcoin-connect@3.3.0'; // jsdelivr.net, skypack.dev also work
 
   // use Bitcoin connect API normally...
   launchModal();
 
   // or if you just want access to the web components:
-  import 'https://esm.sh/@getalby/bitcoin-connect@3.2.2';
+  import 'https://esm.sh/@getalby/bitcoin-connect@3.3.0';
 </script>
 
 <!-- Bitcoin Connect components are now available -->
@@ -204,6 +204,7 @@ Bitcoin Connect exposes the following web components for allowing users to conne
 - `<bc-pay-button/>` - launches the Bitcoin Connect Payment Modal on click
   - Arguments:
     - `invoice` - BOLT11 invoice. Modal will only open if an invoice is set
+    - `payment-methods` (optional) "all" | "external" | "internal"
     - `title` - (optional) change the title of the button
     - `preimage` - (optional) set this if you received an external payment
   - Events:
@@ -213,6 +214,7 @@ Bitcoin Connect exposes the following web components for allowing users to conne
 - `<bc-payment/>` - render a payment request UI without modal
   - Arguments:
     - `invoice` - BOLT11 invoice
+    - `payment-methods` (optional) "all" | "external" | "internal"
     - `paid` - **Experimental** set to true to mark payment was made externally (This will change to `preimage` in v4)
   - Events:
     - `bc:onpaid` - fires event with WebLN payment response in `event.detail` (contains `preimage`)
@@ -274,6 +276,7 @@ import {launchPaymentModal} from '@getalby/bitcoin-connect';
 
 const {setPaid} = launchPaymentModal({
   invoice: 'lnbc...',
+  //paymentMethods: "all" // "all" | "external" | "internal"
   onPaid: (response) => {
     clearInterval(checkPaymentInterval);
     alert('Received payment! ' + response.preimage);

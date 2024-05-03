@@ -1304,10 +1304,10 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
-"@getalby/lightning-tools@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.0.1.tgz#08a974bcdf3d98a86ff9909df838360ee67174c8"
-  integrity sha512-xoBfBYMQrJqwryU9fAYGIW6dzWRpdsAw8rroqTROba2bHdYT0ZvGnt4tjqXUhRswopR2X+wp1QeeWHZNL9A0Kg==
+"@getalby/lightning-tools@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.0.3.tgz#4cc6ef1253a30fb4913af89b842645e0c04994bf"
+  integrity sha512-QG3/SBI5n2py5IgsjP3K+c8eq55eiI3PQB12yo9Pot0b5hcN7TNNoTKn0fgLJjO1iEVCUkF513kDOpjjXwK0hQ==
 
 "@getalby/sdk@^3.2.3":
   version "3.2.3"

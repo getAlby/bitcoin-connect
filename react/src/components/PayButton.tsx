@@ -1,5 +1,6 @@
 import React from 'react';
 import '@getalby/bitcoin-connect';
+import {PaymentMethods} from '@getalby/bitcoin-connect';
 import {ComponentProps} from '../types/ComponentProps';
 import {useCoreEvents} from '../hooks/useCoreEvents';
 import {SendPaymentResponse} from '@webbtc/webln-types';
@@ -10,6 +11,10 @@ type PayButtonProps = ComponentProps & {
    * Bolt 11 invoice to pay
    */
   invoice?: string;
+  /**
+   * Supported payment methods in payment flow
+   */
+  paymentMethods?: PaymentMethods;
   /**
    * @param response response of the WebLN send payment call
    */
@@ -37,6 +42,9 @@ export const PayButton: React.FC<PayButtonProps> = (props) => {
     // @ts-ignore
     <bc-pay-button
       invoice={props.invoice}
+      {...(props.paymentMethods
+        ? {'payment-methods': props.paymentMethods}
+        : {})}
       preimage={payment?.preimage}
       onClick={props.onClick}
     />

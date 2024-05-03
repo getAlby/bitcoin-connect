@@ -153,6 +153,11 @@
         id="invoice"
         onchange="localStorage.setItem('invoice', document.getElementById('invoice').value); window.location.reload()"
       />
+      <p>Payment methods (all, external, internal)</p>
+      <input
+        id="payment-methods"
+        onchange="localStorage.setItem('payment-methods', document.getElementById('payment-methods').value); window.location.reload()"
+      />
       <p>Show Balance</p>
       <input
         id="show-balance"
@@ -219,9 +224,14 @@
       <bc-router-outlet></bc-router-outlet>
 
       <h2>Request Payment Screen</h2>
+      <p>
+        Note: connect button will do nothing because requires higher component.
+        Use "Payment Flow" above instead.
+      </p>
       <bc-send-payment
         id="send-payment"
         invoice="lnbc10n1pj4g7ugpp5h0lld9qzh06ngn8ur756rva0ntfdfg34h298337rljjyztxy8rfqhp50kncf9zk35xg4lxewt4974ry6mudygsztsz8qn3ar8pn3mtpe50scqzzsxqyz5vqsp5lwlnu7xjs7hj7vltx7rhzsjf60l5mwckuw93qngjrz7sdhdkw7gs9qyyssqzy543rxhkdtncjrmuzlz4lrh2eauldawa9np5yysh7dhqhv8kaahydurha2cfelr7t6wt33xse7fdykupnjv36na6x6crrhy53lyg6cqf2jhjj"
+        payment-methods="all"
       ></bc-send-payment>
 
       <h2>Start screen</h2>
@@ -272,6 +282,9 @@
       const invoice = localStorage.getItem('invoice');
       document.getElementById('invoice').value = invoice;
 
+      const paymentMethods = localStorage.getItem('payment-methods');
+      document.getElementById('payment-methods').value = paymentMethods;
+
       const showBalance =
         localStorage.getItem('show-balance') !== false.toString();
       document.getElementById('show-balance').checked = showBalance;
@@ -316,6 +329,7 @@
           }
           launchPaymentModal({
             invoice: invoiceToPay,
+            paymentMethods,
             onPaid: (response) => {
               alert('Paid! ' + response.preimage);
             },
@@ -334,6 +348,7 @@
 
           const {setPaid} = launchPaymentModal({
             invoice: invoice.paymentRequest,
+            paymentMethods,
             onPaid: (response) => {
               clearInterval(checkPaymentInterval);
               alert('Received payment! ' + response.preimage);
@@ -396,6 +411,18 @@
         });
 
       document.addEventListener('bc:onpaid', (e) => console.log('PAID!', e));
+
+      if (paymentMethods) {
+        document
+          .getElementById('send-payment')
+          .setAttribute('payment-methods', paymentMethods);
+        document
+          .getElementById('payment-flow')
+          .setAttribute('payment-methods', paymentMethods);
+        document
+          .getElementById('pay-button')
+          .setAttribute('payment-methods', paymentMethods);
+      }
     </script>
     <script type="module">
       import * as bitcoinConnectSandbox from '../../src/index.ts';
