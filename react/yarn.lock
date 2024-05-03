@@ -1018,10 +1018,10 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@getalby/bitcoin-connect@^3.3.0-beta.2":
-  version "3.3.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-3.3.0-beta.2.tgz#9491763ddc731b9cf9c425f6de1cbe5c47af5cd8"
-  integrity sha512-U/ZzIGUQjM42KeN6F08bi//86MTmHxMmm9wrQZE4ir+DjrkXABcLXu6yxRkMV5MVWtpUlCj5OBO89+TVMciptA==
+"@getalby/bitcoin-connect@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-3.3.0.tgz#7a53bf884729e8ff3e692e059d2b9c02ba75fa4b"
+  integrity sha512-3e4oGasmz6EdX+xwzS/bFv9nZmZcFSafSgrabpX9ejvBGS93sntZ8yFwLf0ynyvpxcUbeCq4Ww0Vt3TlQmwgug==
   dependencies:
     "@getalby/lightning-tools" "^5.0.3"
     "@getalby/sdk" "^3.2.3"
