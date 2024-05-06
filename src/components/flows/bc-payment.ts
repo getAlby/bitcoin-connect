@@ -66,7 +66,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return this._showConnect && !this.paid
-      ? html` <bc-connect></bc-connect>`
+      ? html` <bc-connect closable=${true}></bc-connect>`
       : html`<div class="w-full flex-col justify-center items-center">
           <bc-modal-header class="flex w-full" ?closable=${this.closable}>
             <p
