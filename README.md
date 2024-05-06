@@ -430,7 +430,7 @@ These variables must be set at the root or on a container element wrapping any b
 ```css
 html {
   --bc-color-brand: #196ce7; /* Only 6-digit hex and rgb formats are supported! */
-  --bc-color-brand-text: #ffffff; /* override text color for buttons coloured in brand colour. Default is otherwise chosen between white and black based on luminance of the colour defined in --bc-colour-brand*/
+  --bc-color-brand-text: #ffffff; /* override text color for buttons coloured in brand colour. Default is otherwise chosen between white and black based on luminance of the colour defined in --bc-color-brand*/
 }
 ```
 
