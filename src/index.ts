@@ -22,4 +22,4 @@ export const WebLNProviders = {
   LnbitsWebLNProvider,
 };
 
-export {PaymentMethods} from './types/PaymentMethods';
+export * from './types/PaymentMethods';

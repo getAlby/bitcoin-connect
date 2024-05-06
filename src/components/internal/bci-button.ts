@@ -32,7 +32,11 @@ export class Button extends withTwind()(InternalElement) {
         ${this.ghost ? '' : 'shadow'} rounded-lg w-full ${classes.interactive}
         ${this.variant === 'primary' ? `${classes['bg-brand']}` : ''}
         ${this.variant === 'primary'
-        ? `${brandColorLuminance > 0.5 ? 'text-black' : 'text-white'}`
+        ? `${
+            brandColorLuminance > 0.5
+              ? 'text-brand-text-dark'
+              : 'text-brand-text-light'
+          }`
         : this.variant === 'secondary'
         ? `${classes['text-brand-mixed']}`
         : `${classes['text-neutral-tertiary']}`}
