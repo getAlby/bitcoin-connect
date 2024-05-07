@@ -18,6 +18,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
         class="absolute top-0 left-0 w-full h-full -z-10 ${classes[
           'bg-foreground'
         ]} animate-darken"
+        @click=${this._handleClose}
       ></div>
       <div
         class="transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
