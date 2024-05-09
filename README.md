@@ -429,7 +429,7 @@ These variables must be set at the root or on a container element wrapping any b
 
 ```css
 html {
-  --bc-color-brand: #196ce7; /* Only 6-digit hex and rgb formats are supported! */
+  --bc-color-brand: #196ce7;
   --bc-color-brand-dark: #3994ff; /* use a different brand color in dark mode */
   --bc-brand-mix: 100%; /* how much to mix the brand color with default foreground color */
   --bc-color-brand-button-text: #ffffff; /* override text color for primary button. Normally this is based on the luminance of the brand color */
