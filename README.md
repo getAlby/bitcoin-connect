@@ -430,16 +430,10 @@ These variables must be set at the root or on a container element wrapping any b
 ```css
 html {
   --bc-color-brand: #196ce7; /* Only 6-digit hex and rgb formats are supported! */
-  --bc-color-brand-text: #ffffff; /* override text color for buttons coloured in brand colour. Default is otherwise chosen between white and black based on luminance of the colour defined in --bc-color-brand*/
-}
-```
-
-Optional CSS variables for further customization:
-
-```css
-html {
   --bc-color-brand-dark: #3994ff; /* use a different brand color in dark mode */
   --bc-brand-mix: 100%; /* how much to mix the brand color with default foreground color */
+  --bc-color-brand-button-text: #ffffff; /* override text color for buttons coloured in brand colour. This colour will be used when lumminance of --bc-color-brand is >0.5. Default text colour will otherwise be #000000 */
+  --bc-color-brand-button-text-dark: #000000; /* override text color for buttons coloured in brand colour. With this variable you can define the colour to be used when luminance of brand colour is <=0.5. If this variable is not provided, the button text colour will default to --bc-color-brand-button-text or #FFFFFF*/
 }
 ```
 

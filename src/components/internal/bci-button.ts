@@ -34,8 +34,8 @@ export class Button extends withTwind()(InternalElement) {
         ${this.variant === 'primary'
         ? `${
             brandColorLuminance > 0.5
-              ? 'text-brand-text-dark'
-              : 'text-brand-text-light'
+              ? 'text-brand-text-light'
+              : 'text-brand-text-dark'
           }`
         : this.variant === 'secondary'
         ? `${classes['text-brand-mixed']}`
