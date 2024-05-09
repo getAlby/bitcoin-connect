@@ -25,14 +25,34 @@ export class Button extends withTwind()(InternalElement) {
   block = false;
 
   override render() {
-    const brandColorLuminance = this._getBrandColorLuminance();
+    const isDarkMode =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const hasBrandButtonTextColor =
+      window
+        .getComputedStyle(this as HTMLElement)
+        .getPropertyValue(
+          isDarkMode
+            ? '--bc-color-brand-button-text-dark'
+            : '--bc-color-brand-button-text'
+        ) ||
+      window
+        .getComputedStyle(this as HTMLElement)
+        .getPropertyValue('--bc-color-brand-button-text');
 
     return html`<button
       class="w-full relative h-10 px-4 font-sans font-semibold rounded-lg flex justify-center items-center
         ${this.ghost ? '' : 'shadow'} rounded-lg w-full ${classes.interactive}
         ${this.variant === 'primary' ? `${classes['bg-brand']}` : ''}
         ${this.variant === 'primary'
-        ? `${brandColorLuminance > 0.5 ? 'text-black' : 'text-white'}`
+        ? `${
+            hasBrandButtonTextColor
+              ? classes['text-brand-button-text']
+              : this._getBrandColorLuminance() > 0.5
+              ? 'text-black'
+              : 'text-white'
+          }`
         : this.variant === 'secondary'
         ? `${classes['text-brand-mixed']}`
         : `${classes['text-neutral-tertiary']}`}

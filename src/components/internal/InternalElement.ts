@@ -43,10 +43,19 @@ export class InternalElement extends LitElement {
     if (!globalThis.window) {
       return 0;
     }
+    const isDarkMode =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
     const brandColor =
       window
         .getComputedStyle(this as HTMLElement)
-        .getPropertyValue('--bc-color-brand') || '#196CE7';
+        .getPropertyValue(
+          isDarkMode ? '--bc-color-brand-dark' : '--bc-color-brand'
+        ) ||
+      window
+        .getComputedStyle(this as HTMLElement)
+        .getPropertyValue('--bc-color-brand') ||
+      '#196CE7';
     function calculateLuminance(color: string) {
       if (color.startsWith('#')) {
         color = color.slice(1); // Remove the '#' character

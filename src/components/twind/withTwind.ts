@@ -6,6 +6,9 @@ import {LitElement} from 'lit';
 const colors = {
   'brand-light': 'var(--bc-color-brand, #196CE7)',
   'brand-dark': 'var(--bc-color-brand-dark, var(--bc-color-brand, #3994FF))',
+  'brand-button-text-light': 'var(--bc-color-brand-button-text)',
+  'brand-button-text-dark':
+    'var(--bc-color-brand-button-text-dark, var(--bc-color-brand-button-text))',
   'brand-mixed-light':
     'color-mix(in srgb, var(--bc-color-brand, #196CE7) var(--bc-brand-mix, 100%), black)',
   'brand-mixed-dark':
