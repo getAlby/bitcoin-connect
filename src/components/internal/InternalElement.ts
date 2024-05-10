@@ -46,7 +46,7 @@ export class InternalElement extends LitElement {
     const isDarkMode =
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const brandColor =
+    let brandColor =
       window
         .getComputedStyle(this as HTMLElement)
         .getPropertyValue(
@@ -73,6 +73,18 @@ export class InternalElement extends LitElement {
         throw new Error('Unsupported luminance: ' + color);
       }
     }
+
+    // append a temporary element to the body to get the computed rgb value from any valid css color eg. 'red', 'rgb(0, 0, 0)', '#000'
+    //if colour is not a hex value with 6 digits, get the computed color
+    if (!brandColor.match(/^#[0-9A-F]{6}$/i)) {
+      const tempElement = document.createElement('div');
+      tempElement.style.color = brandColor;
+      tempElement.style.display = 'none';
+      document.body.appendChild(tempElement);
+      brandColor = window.getComputedStyle(tempElement).color;
+      tempElement.remove();
+    }
+
     return calculateLuminance(brandColor);
   }
 }
