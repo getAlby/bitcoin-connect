@@ -1018,28 +1018,28 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@getalby/bitcoin-connect@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-3.3.0.tgz#7a53bf884729e8ff3e692e059d2b9c02ba75fa4b"
-  integrity sha512-3e4oGasmz6EdX+xwzS/bFv9nZmZcFSafSgrabpX9ejvBGS93sntZ8yFwLf0ynyvpxcUbeCq4Ww0Vt3TlQmwgug==
+"@getalby/bitcoin-connect@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-3.4.0.tgz#60d51a9c7f98b6e3fdc22f9893d5884c07706f7d"
+  integrity sha512-xkGxaBkHA9Ugnz4eAAq22aV/17VhesRaF09mMLgA6s1PXXN8Q871T/4EOn4kYscKKtyqMg/OSZ698vGDU0sMEA==
   dependencies:
     "@getalby/lightning-tools" "^5.0.3"
-    "@getalby/sdk" "^3.2.3"
+    "@getalby/sdk" "^3.5.0"
     "@lightninglabs/lnc-web" "^0.3.1-alpha"
     qrcode-generator "^1.4.4"
-    zustand "^4.4.7"
+    zustand "^4.5.2"
 
 "@getalby/lightning-tools@^5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.0.3.tgz#4cc6ef1253a30fb4913af89b842645e0c04994bf"
   integrity sha512-QG3/SBI5n2py5IgsjP3K+c8eq55eiI3PQB12yo9Pot0b5hcN7TNNoTKn0fgLJjO1iEVCUkF513kDOpjjXwK0hQ==
 
-"@getalby/sdk@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.2.3.tgz#3031d64e935feea879b969da0a17ee05800fba1d"
-  integrity sha512-8eIqg1vEH2CdkNoHsIlL5q2bKLvLR+XiSWK2RQnTAB+Z0CNlVW2jRM8JxxeubHnKBDTiBrBMkPqBIAhQqc8now==
+"@getalby/sdk@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.5.0.tgz#8ef53cda9f22cf31d3e99d3ff4d00366aee0567d"
+  integrity sha512-gnjILgoXOMjCVD1fHcoS3ghhO0UpvFHXuCBb0hz5iuzRYxbPWHXt0eVd60y+z5kR/+T+/S3S2fRMnbCYma+ppQ==
   dependencies:
-    events "^3.3.0"
+    eventemitter3 "^5.0.1"
     nostr-tools "^1.17.0"
 
 "@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
@@ -1888,10 +1888,10 @@ eventemitter3@^4.0.4:
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
   integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
 
-events@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
-  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
+eventemitter3@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-5.0.1.tgz#53f5ffd0a492ac800721bb42c66b841de96423c4"
+  integrity sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==
 
 figures@^1.0.1:
   version "1.7.0"
@@ -3578,9 +3578,9 @@ yargs@^17.5.1:
     y18n "^5.0.5"
     yargs-parser "^21.1.1"
 
-zustand@^4.4.7:
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.7.tgz#355406be6b11ab335f59a66d2cf9815e8f24038c"
-  integrity sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==
+zustand@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.5.2.tgz#fddbe7cac1e71d45413b3682cdb47b48034c3848"
+  integrity sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==
   dependencies:
     use-sync-external-store "1.2.0"
