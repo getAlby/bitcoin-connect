@@ -1,6 +1,6 @@
 {
   "name": "@getalby/bitcoin-connect-react",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "type": "module",
   "source": "src/index.ts",
   "main": "./dist/index.cjs",
@@ -27,7 +27,7 @@
     "build": "microbundle --globals react=React --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react"
   },
   "dependencies": {
-    "@getalby/bitcoin-connect": "^3.3.0"
+    "@getalby/bitcoin-connect": "^3.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
