@@ -4,7 +4,7 @@ import {connectors} from '../connectors';
 import {Connector} from '../connectors/Connector';
 import {Route} from '../components/routes';
 import {ConnectorFilter} from '../types/ConnectorFilter';
-import {WebLNProvider} from '@webbtc/webln-types';
+import {GetInfoResponse, WebLNProvider} from '@webbtc/webln-types';
 import {WebLNProviderConfig} from '../types/WebLNProviderConfig';
 
 interface Store {
@@ -23,6 +23,7 @@ interface Store {
   readonly providerConfig: WebLNProviderConfig | undefined;
   readonly connector: Connector | undefined;
   readonly config: ConnectorConfig | undefined;
+  readonly info: GetInfoResponse | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -61,6 +62,7 @@ const store = createStore<Store>((set, get) => ({
   providerConfig: undefined,
   connector: undefined,
   config: undefined,
+  info: undefined,
   connect: async (config: ConnectorConfig) => {
     set({
       connecting: true,
@@ -70,11 +72,19 @@ const store = createStore<Store>((set, get) => ({
       const connector = new connectors[config.connectorType](config);
       const provider = await connector.init();
       await provider.enable();
+      let info: GetInfoResponse | undefined;
+      try {
+        info = await provider.getInfo();
+      } catch (error) {
+        console.error('Failed to request wallet info');
+      }
+
       set({
         config,
         connector,
         connected: true,
         connecting: false,
+        info,
         provider,
         connectorName: config.connectorName,
         route: '/start',

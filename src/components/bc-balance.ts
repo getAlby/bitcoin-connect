@@ -85,14 +85,18 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
         if (!provider) {
           return;
         }
-        // TODO: consider using getInfo to check if balance is supported
-        // and do not show an error if it is not supported
-        // (do not display the balance - needs to be handled somewhere else)
-        if (!provider.getBalance) {
+
+        const info = store.getState().info;
+        if (
+          !info?.methods ||
+          info.methods.indexOf('getBalance') < 0 ||
+          !provider.getBalance
+        ) {
           throw new Error(
             'The current WebLN provider does not support getBalance'
           );
         }
+
         const balanceResponse = await provider.getBalance();
         if (balanceResponse) {
           this._balanceSats = balanceResponse.balance;
