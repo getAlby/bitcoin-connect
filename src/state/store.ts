@@ -76,18 +76,18 @@ const store = createStore<Store>((set, get) => ({
         console.error('Failed to request wallet info');
       }
 
-      const canShowBalance =
+      const supportsGetBalance =
         !!info?.methods &&
         info.methods.indexOf('getBalance') > -1 &&
         !!provider?.getBalance;
 
       set({
-        connectorConfig: connectorConfig,
+        connectorConfig,
         connector,
         connected: true,
         connecting: false,
         info,
-        supportsGetBalance: canShowBalance,
+        supportsGetBalance,
         provider,
         connectorName: connectorConfig.connectorName,
         route: '/start',
