@@ -33,7 +33,7 @@ export class UmbrelPage extends withTwind()(BitcoinConnectElement) {
       authorizationUrl: 'http://umbrel.local:58000/apps/new',
     });
     await nwc.initNWC({
-      name: this._appName || 'Bitcoin Connect',
+      name: this._appName,
     });
 
     await store.getState().connect({

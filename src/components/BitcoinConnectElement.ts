@@ -1,4 +1,4 @@
-import {property, state} from 'lit/decorators.js';
+import {state} from 'lit/decorators.js';
 import store from '../state/store';
 import {InternalElement} from './internal/InternalElement';
 import {ConnectorFilter} from '../types/ConnectorFilter';
@@ -29,28 +29,13 @@ export class BitcoinConnectElement extends InternalElement {
   @state()
   protected _route: Route;
 
-  @property({
-    type: String,
-    attribute: 'app-name',
-  })
-  appName?: string;
-
-  @property({
-    type: Array,
-    attribute: 'filters',
-    converter(value, _type) {
-      return value?.split(',');
-    },
-  })
-  filters?: ConnectorFilter[];
-
   constructor() {
     super();
     this._connected = store.getState().connected;
     this._connecting = store.getState().connecting;
     this._connectorName = store.getState().connectorName;
-    this._appName = store.getState().appName;
-    this._filters = store.getState().filters;
+    this._appName = store.getState().bitcoinConnectConfig.appName;
+    this._filters = store.getState().bitcoinConnectConfig.filters;
     this._error = store.getState().error;
     this._route = store.getState().route;
     this._modalOpen = store.getState().modalOpen;
@@ -60,21 +45,11 @@ export class BitcoinConnectElement extends InternalElement {
       this._connected = currentState.connected;
       this._connecting = currentState.connecting;
       this._connectorName = currentState.connectorName;
-      this._appName = currentState.appName;
-      this._filters = currentState.filters;
+      this._appName = currentState.bitcoinConnectConfig.appName;
+      this._filters = currentState.bitcoinConnectConfig.filters;
       this._error = currentState.error;
       this._route = currentState.route;
       this._modalOpen = currentState.modalOpen;
     });
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.appName != undefined) {
-      store.getState().setAppName(this.appName);
-    }
-    if (this.filters != undefined) {
-      store.getState().setFilters(this.filters);
-    }
   }
 }

@@ -82,19 +82,8 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
     (async () => {
       try {
         const provider = store.getState().provider;
-        if (!provider) {
+        if (!provider?.getBalance) {
           return;
-        }
-
-        const info = store.getState().info;
-        if (
-          !info?.methods ||
-          info.methods.indexOf('getBalance') < 0 ||
-          !provider.getBalance
-        ) {
-          throw new Error(
-            'The current WebLN provider does not support getBalance'
-          );
         }
 
         const balanceResponse = await provider.getBalance();

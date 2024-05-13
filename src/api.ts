@@ -1,29 +1,7 @@
 import {SendPaymentResponse, WebLNProvider} from '@webbtc/webln-types';
 import store from './state/store';
-import {ConnectorFilter} from './types/ConnectorFilter';
-import {WebLNProviderConfig} from './types/WebLNProviderConfig';
 import {PaymentMethods} from './types/PaymentMethods';
-
-type BitcoinConnectConfig = {
-  /**
-   * Name of the application that the user is interacting with.
-   *   May be passed to the connector the user chooses to connect with (e.g. NWC)
-   */
-  appName?: string;
-  /**
-   * Limit which connectors are shown in the connect flow
-   */
-  filters?: ConnectorFilter[];
-  /**
-   * Set to false to not request or show the user's wallet balance
-   */
-  showBalance?: boolean;
-
-  /**
-   * Customize individual providers (NWC, LNC, LNbits etc)
-   */
-  providerConfig?: WebLNProviderConfig;
-};
+import {BitcoinConnectConfig} from './types/BitcoinConnectConfig';
 
 type LaunchPaymentModalArgs = {
   /**
@@ -193,10 +171,7 @@ export function isConnected() {
  * @param config
  */
 export function init(config: BitcoinConnectConfig = {}) {
-  store.getState().setAppName(config.appName);
-  store.getState().setFilters(config.filters);
-  store.getState().setShowBalance(config.showBalance);
-  store.getState().setProviderConfig(config.providerConfig);
+  store.getState().setBitcoinConnectConfig(config);
 }
 
 /**
@@ -312,5 +287,5 @@ export function disconnect() {
  * @returns the configuration of the current connector (if connected)
  */
 export function getConnectorConfig() {
-  return store.getState().config;
+  return store.getState().connectorConfig;
 }
