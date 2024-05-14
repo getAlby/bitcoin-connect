@@ -3,7 +3,7 @@ import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
 import {Connector} from '../connectors/Connector';
 import {Route} from '../components/routes';
-import {GetInfoResponse, WebLNProvider} from '@webbtc/webln-types';
+import {GetInfoResponse, WebLNMethod, WebLNProvider} from '@webbtc/webln-types';
 import {
   BitcoinConnectConfig,
   DEFAULT_BITCOIN_CONNECT_CONFIG,
@@ -14,7 +14,6 @@ interface Store {
   readonly routeHistory: Route[];
   readonly connected: boolean;
   readonly connecting: boolean;
-  readonly supportsGetBalance: boolean | undefined;
   readonly connectorName: string | undefined;
   readonly error: string | undefined;
   readonly modalOpen: boolean;
@@ -34,6 +33,7 @@ interface Store {
   clearRouteHistory(): void;
   setModalOpen(modalOpen: boolean): void;
   setCurrency(currency: string | undefined): void;
+  supportsMethod(weblnMethod: WebLNMethod): boolean;
 
   // provider functions
   // getBalance(): Promise<number | undefined>;
@@ -45,7 +45,6 @@ const store = createStore<Store>((set, get) => ({
   routeHistory: [],
   modalOpen: false,
   currency: undefined,
-  supportsGetBalance: false,
   connected: false,
   connecting: false,
   error: undefined,
@@ -76,18 +75,12 @@ const store = createStore<Store>((set, get) => ({
         console.error('Failed to request wallet info');
       }
 
-      const supportsGetBalance =
-        !!info?.methods &&
-        info.methods.indexOf('getBalance') > -1 &&
-        !!provider?.getBalance;
-
       set({
         connectorConfig,
         connector,
         connected: true,
         connecting: false,
         info,
-        supportsGetBalance,
         provider,
         connectorName: connectorConfig.connectorName,
         route: '/start',
@@ -157,6 +150,16 @@ const store = createStore<Store>((set, get) => ({
       window.localStorage.removeItem('bc:currency');
     }
     set({currency});
+  },
+  // TODO: move this method to Alby JS SDK NWCCLient
+  supportsMethod: (method: WebLNMethod) => {
+    const {info, provider} = get();
+
+    return (
+      !!info?.methods &&
+      info.methods.indexOf(method) > -1 &&
+      !!provider?.getBalance
+    );
   },
 }));
 

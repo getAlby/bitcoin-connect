@@ -21,12 +21,13 @@ export class Start extends withTwind()(BitcoinConnectElement) {
 
     this._showBalance =
       store.getState().bitcoinConnectConfig.showBalance &&
-      store.getState().supportsGetBalance;
+      store.getState().supportsMethod('getBalance');
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
       this._showBalance =
-        store.bitcoinConnectConfig.showBalance && store.supportsGetBalance;
+        store.bitcoinConnectConfig.showBalance &&
+        store.supportsMethod('getBalance');
     });
   }
 
