@@ -33,7 +33,7 @@ interface Store {
   clearRouteHistory(): void;
   setModalOpen(modalOpen: boolean): void;
   setCurrency(currency: string | undefined): void;
-  supportsMethod(weblnMethod: WebLNMethod): boolean;
+  supports(weblnMethod: WebLNMethod): boolean;
 
   // provider functions
   // getBalance(): Promise<number | undefined>;
@@ -152,7 +152,7 @@ const store = createStore<Store>((set, get) => ({
     set({currency});
   },
   // TODO: move this method to Alby JS SDK NWCCLient
-  supportsMethod: (method: WebLNMethod) => {
+  supports: (method: WebLNMethod) => {
     const {info, provider} = get();
 
     return (
