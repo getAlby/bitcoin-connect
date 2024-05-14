@@ -17,10 +17,10 @@ export class AlbyNWCConnector extends ConnectorElement {
 
   protected async _onClick() {
     const nwc = webln.NostrWebLNProvider.withNewSecret();
-    const providerConfig = store.getState().providerConfig;
+    const providerConfig = store.getState().bitcoinConnectConfig.providerConfig;
     await nwc.initNWC({
       ...(providerConfig?.nwc?.authorizationUrlOptions || {}),
-      name: this._appName || 'Bitcoin Connect',
+      name: this._appName,
     });
 
     this._connect({

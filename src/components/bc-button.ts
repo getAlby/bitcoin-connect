@@ -9,7 +9,6 @@ import {launchModal} from '../api.js';
 import './bc-balance';
 import store from '../state/store.js';
 import {waitingIcon} from './icons/waitingIcon.js';
-import {GetInfoResponse, WebLNProvider} from '@webbtc/webln-types';
 
 /**
  * A button that when clicked launches the modal.
@@ -21,33 +20,23 @@ export class Button extends withTwind()(BitcoinConnectElement) {
 
   @state()
   protected _showBalance: boolean | undefined = undefined;
-  @state()
-  protected _info: GetInfoResponse | undefined = undefined;
-  @state()
-  protected _provider: WebLNProvider | undefined = undefined;
 
   constructor() {
     super();
 
-    this._showBalance = store.getState().showBalance;
-    this._info = store.getState().info;
-    this._provider = store.getState().provider;
+    this._showBalance =
+      store.getState().bitcoinConnectConfig.showBalance &&
+      store.getState().supports('getBalance');
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
-      this._showBalance = store.showBalance;
-      this._info = store.info;
-      this._provider = store.provider;
+      this._showBalance =
+        store.bitcoinConnectConfig.showBalance && store.supports('getBalance');
     });
   }
 
   override render() {
     const isLoading = this._connecting || (!this._connected && this._modalOpen);
-    const showBalance =
-      !!this._showBalance &&
-      !!this._info?.methods &&
-      this._info.methods.indexOf('getBalance') > -1 &&
-      !!this._provider?.getBalance;
 
     return html`<div>
       <div
@@ -76,7 +65,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
               : html`${this.title}`}
           </span>
         </bci-button>
-        ${this._connected && showBalance
+        ${this._connected && this._showBalance
           ? html`<bc-balance class="select-none cursor-pointer"></bc-balance> `
           : null}
       </div>

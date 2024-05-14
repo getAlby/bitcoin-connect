@@ -3,40 +3,37 @@ import {ConnectorConfig} from '../types/ConnectorConfig';
 import {connectors} from '../connectors';
 import {Connector} from '../connectors/Connector';
 import {Route} from '../components/routes';
-import {ConnectorFilter} from '../types/ConnectorFilter';
-import {GetInfoResponse, WebLNProvider} from '@webbtc/webln-types';
-import {WebLNProviderConfig} from '../types/WebLNProviderConfig';
+import {GetInfoResponse, WebLNMethod, WebLNProvider} from '@webbtc/webln-types';
+import {
+  BitcoinConnectConfig,
+  DEFAULT_BITCOIN_CONNECT_CONFIG,
+} from '../types/BitcoinConnectConfig';
 
 interface Store {
   readonly route: Route;
   readonly routeHistory: Route[];
   readonly connected: boolean;
   readonly connecting: boolean;
-  readonly showBalance: boolean | undefined;
   readonly connectorName: string | undefined;
-  readonly appName: string | undefined;
-  readonly filters: ConnectorFilter[] | undefined;
   readonly error: string | undefined;
   readonly modalOpen: boolean;
   readonly provider: WebLNProvider | undefined;
   readonly currency: string | undefined;
-  readonly providerConfig: WebLNProviderConfig | undefined;
   readonly connector: Connector | undefined;
-  readonly config: ConnectorConfig | undefined;
+  readonly connectorConfig: ConnectorConfig | undefined;
+  readonly bitcoinConnectConfig: BitcoinConnectConfig;
   readonly info: GetInfoResponse | undefined;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
   pushRoute(route: Route): void;
   popRoute(): void;
-  setAppName(appName: string | undefined): void;
-  setShowBalance(showBalance: boolean | undefined): void;
-  setProviderConfig(providerConfig: WebLNProviderConfig | undefined): void;
-  setFilters(filters: ConnectorFilter[] | undefined): void;
+  setBitcoinConnectConfig(bitcoinConnectConfig: BitcoinConnectConfig): void;
   setError(error: string | undefined): void;
   clearRouteHistory(): void;
   setModalOpen(modalOpen: boolean): void;
   setCurrency(currency: string | undefined): void;
+  supports(weblnMethod: WebLNMethod): boolean;
 
   // provider functions
   // getBalance(): Promise<number | undefined>;
@@ -48,28 +45,27 @@ const store = createStore<Store>((set, get) => ({
   routeHistory: [],
   modalOpen: false,
   currency: undefined,
-  showBalance: undefined,
   connected: false,
   connecting: false,
   error: undefined,
   alias: undefined,
   balance: undefined,
   connectorName: undefined,
-  appName: undefined,
-  filters: undefined,
   invoice: undefined,
   provider: undefined,
-  providerConfig: undefined,
   connector: undefined,
-  config: undefined,
+  connectorConfig: undefined,
+  bitcoinConnectConfig: DEFAULT_BITCOIN_CONNECT_CONFIG,
   info: undefined,
-  connect: async (config: ConnectorConfig) => {
+  connect: async (connectorConfig: ConnectorConfig) => {
     set({
       connecting: true,
       error: undefined,
     });
     try {
-      const connector = new connectors[config.connectorType](config);
+      const connector = new connectors[connectorConfig.connectorType](
+        connectorConfig
+      );
       const provider = await connector.init();
       await provider.enable();
       let info: GetInfoResponse | undefined;
@@ -80,16 +76,16 @@ const store = createStore<Store>((set, get) => ({
       }
 
       set({
-        config,
+        connectorConfig,
         connector,
         connected: true,
         connecting: false,
         info,
         provider,
-        connectorName: config.connectorName,
+        connectorName: connectorConfig.connectorName,
         route: '/start',
       });
-      saveConfig(config);
+      saveConfig(connectorConfig);
     } catch (error) {
       console.error(error);
       set({
@@ -103,7 +99,7 @@ const store = createStore<Store>((set, get) => ({
   disconnect: () => {
     get().connector?.unload();
     set({
-      config: undefined,
+      connectorConfig: undefined,
       connector: undefined,
       connected: false,
       connectorName: undefined,
@@ -136,17 +132,13 @@ const store = createStore<Store>((set, get) => ({
   setModalOpen: (modalOpen) => {
     set({modalOpen});
   },
-  setAppName: (appName) => {
-    set({appName});
-  },
-  setShowBalance: (showBalance) => {
-    set({showBalance});
-  },
-  setFilters: (filters) => {
-    set({filters});
-  },
-  setProviderConfig: (providerConfig) => {
-    set({providerConfig});
+  setBitcoinConnectConfig: (bitcoinConnectConfig) => {
+    set({
+      bitcoinConnectConfig: {
+        ...DEFAULT_BITCOIN_CONNECT_CONFIG,
+        ...bitcoinConnectConfig,
+      },
+    });
   },
   setError: (error) => {
     set({error});
@@ -158,6 +150,16 @@ const store = createStore<Store>((set, get) => ({
       window.localStorage.removeItem('bc:currency');
     }
     set({currency});
+  },
+  // TODO: move this method to Alby JS SDK NWCCLient
+  supports: (method: WebLNMethod) => {
+    const {info, provider} = get();
+
+    return (
+      !!info?.methods &&
+      info.methods.indexOf(method) > -1 &&
+      !!provider?.getBalance
+    );
   },
 }));
 

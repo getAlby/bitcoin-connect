@@ -9,46 +9,34 @@ import {disconnectSection} from './templates/disconnectSection';
 import './bc-balance';
 import store from '../state/store';
 import './bc-currency-switcher';
-import {GetInfoResponse, WebLNProvider} from '@webbtc/webln-types';
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
 export class Start extends withTwind()(BitcoinConnectElement) {
   @state()
   protected _showBalance: boolean | undefined = undefined;
-  @state()
-  protected _info: GetInfoResponse | undefined = undefined;
-  @state()
-  protected _provider: WebLNProvider | undefined = undefined;
 
   constructor() {
     super();
 
-    this._showBalance = store.getState().showBalance;
-    this._info = store.getState().info;
-    this._provider = store.getState().provider;
+    this._showBalance =
+      store.getState().bitcoinConnectConfig.showBalance &&
+      store.getState().supports('getBalance');
 
     // TODO: handle unsubscribe
     store.subscribe((store) => {
-      this._showBalance = store.showBalance;
-      this._info = store.info;
-      this._provider = store.provider;
+      this._showBalance =
+        store.bitcoinConnectConfig.showBalance && store.supports('getBalance');
     });
   }
 
   override render() {
-    const showBalance =
-      !!this._showBalance &&
-      !!this._info?.methods &&
-      this._info.methods.indexOf('getBalance') > -1 &&
-      !!this._provider?.getBalance;
-
     return html`<div
       class="flex flex-col justify-center items-center w-full font-sans"
     >
       ${this._connected
         ? html`
-            ${showBalance
+            ${this._showBalance
               ? html`<span
                     class="text-xs font-medium mb-2 ${classes[
                       'text-neutral-secondary'
