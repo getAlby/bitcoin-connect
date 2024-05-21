@@ -1,7 +1,7 @@
-import {TemplateResult, html} from 'lit';
-import {withTwind} from './twind/withTwind.js';
-import {BitcoinConnectElement} from './BitcoinConnectElement.js';
-import {customElement} from 'lit/decorators.js';
+import { TemplateResult, html } from 'lit';
+import { withTwind } from './twind/withTwind.js';
+import { BitcoinConnectElement } from './BitcoinConnectElement.js';
+import { customElement } from 'lit/decorators.js';
 import './connectors/index.js';
 
 /**
@@ -17,6 +17,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     connectors.push(html`<bc-mutiny-nwc-connector></bc-mutiny-nwc-connector>`);
     connectors.push(html`<bc-umbrel-nwc-connector></bc-umbrel-nwc-connector>`);
     connectors.push(html`<bc-nwc-connector></bc-nwc-connector>`);
+    connectors.push(html`<bc-lnfi-nwc-connector></bc-lnfi-nwc-connector>`);
     if (!this._filters || this._filters.indexOf('nwc') === -1) {
       // TODO: is there a better way to check if a desktop extension exists?
       if (window.webln) {
@@ -26,6 +27,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
       }
       connectors.push(html`<bc-lnbits-connector></bc-lnbits-connector>`);
       connectors.push(html`<bc-lnc-connector></bc-lnc-connector>`);
+
     }
 
     return html`
