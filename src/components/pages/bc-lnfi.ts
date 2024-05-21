@@ -14,18 +14,26 @@ export class LnfiNWCPage extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return html`<div class="w-full">
-      <bc-navbar class="flex w-full" heading="Micro node Wallet Connect"></bc-navbar>
+      <bc-navbar class="flex w-full" heading="Micro node Wallet Connect">
+      </bc-navbar>
       <div class="font-sans text-sm w-full">
         <div class="px-8 pt-4 w-full">
-          <div class="mb-1 ${classes['text-neutral-secondary']}">
-            Enter your
+        <div class="mb-2 ${classes['text-neutral-secondary']}">
+            1. Add a new
             <a
-              href="https://mainnet.lnfi.network/"
+              href="https://doc.nostrassets.com/micronode-early-access/micronode-connect-mnc"
               target="_blank"
               class="font-bold"
-              >Micro node connection string
+              >Wallet Connection
             </a>
-            below
+            from
+            <span class="${classes['text-neutral-tertiary']}"
+              >MicroNode => Generate NWC</span
+            >
+            and copy the connection string.
+          </div>
+          <div class="mb-1 ${classes['text-neutral-secondary']}">
+            2. Paste the connection string below:
           </div>
 
           <input
