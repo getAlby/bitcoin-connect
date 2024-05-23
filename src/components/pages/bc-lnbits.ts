@@ -12,7 +12,7 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
   @state()
   private _lnbitsAdminKey = '';
   @state()
-  private _lnbitsUrl = 'https://legend.lnbits.com';
+  private _lnbitsUrl = '';
 
   override render() {
     return html`<div class="w-full">
@@ -46,6 +46,7 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
           <input
             value=${this._lnbitsUrl}
             @change=${this._lnbitsUrlChanged}
+            placeholder="https://legend.lnbits.com"
             class="w-full mb-8 rounded-lg p-2 border-1 ${classes[
               'border-neutral-secondary'
             ]}"
@@ -74,9 +75,17 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
       return;
     }
 
+    let lnbitsInstanceUrl = this._lnbitsUrl;
+    if (lnbitsInstanceUrl.endsWith('/')) {
+      lnbitsInstanceUrl = lnbitsInstanceUrl.substring(
+        0,
+        lnbitsInstanceUrl.length - 1
+      );
+    }
+
     await store.getState().connect({
       lnbitsAdminKey: this._lnbitsAdminKey,
-      lnbitsInstanceUrl: this._lnbitsUrl,
+      lnbitsInstanceUrl,
       connectorName: lnbitsConnectorTitle,
       connectorType: 'lnbits',
     });

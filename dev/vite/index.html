@@ -394,7 +394,7 @@
             const result = await provider.makeInvoice({
               amount: 1,
             });
-            alert('Invoice: ' + JSON.stringify(result));
+            prompt('Invoice created!', result.paymentRequest);
           } catch (error) {
             console.error(error);
             alert(
