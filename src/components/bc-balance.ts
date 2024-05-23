@@ -52,7 +52,7 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
   }
 
   private async _convertBalance() {
-    if (!this._balanceSats) {
+    if (this._balanceSats === undefined) {
       return;
     }
 
