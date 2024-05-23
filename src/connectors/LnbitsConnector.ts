@@ -66,10 +66,25 @@ export class LnbitsWebLNProvider implements WebLNProvider {
       supports: ['lightning'],
     };
   }
-  makeInvoice(
-    _args: string | number | RequestInvoiceArgs
+  async makeInvoice(
+    args: string | number | RequestInvoiceArgs
   ): Promise<MakeInvoiceResponse> {
-    throw new Error('Method not implemented.');
+    const response = await this.requestLnbits<{payment_request: string}>(
+      'POST',
+      '/api/v1/payments',
+      {
+        amount:
+          (args as RequestInvoiceArgs).amount ||
+          (args as RequestInvoiceArgs).defaultAmount ||
+          +args,
+        memo: (args as RequestInvoiceArgs).defaultMemo,
+        out: false,
+      }
+    );
+
+    return {
+      paymentRequest: response.payment_request,
+    };
   }
   async sendPayment(paymentRequest: string): Promise<SendPaymentResponse> {
     const response = await this.requestLnbits<{payment_hash: string}>(
