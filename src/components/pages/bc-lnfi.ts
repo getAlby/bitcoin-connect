@@ -14,7 +14,7 @@ export class LnfiNWCPage extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return html`<div class="w-full">
-      <bc-navbar class="flex w-full" heading="Micro node Wallet Connect">
+      <bc-navbar class="flex w-full" heading="MicroNode Connect">
       </bc-navbar>
       <div class="font-sans text-sm w-full">
         <div class="px-8 pt-4 w-full">

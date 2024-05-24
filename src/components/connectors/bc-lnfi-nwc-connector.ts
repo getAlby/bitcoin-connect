@@ -3,7 +3,7 @@ import { nwcIcon } from '../icons/connectors/lnfiIcon';
 import { ConnectorElement } from './ConnectorElement';
 import store from '../../state/store';
 
-export const lnfiConnectorTitle = 'Micro node connect';
+export const lnfiConnectorTitle = 'MicroNode Connect';
 
 @customElement('bc-lnfi-nwc-connector')
 export class LnfiNWCConnector extends ConnectorElement {
