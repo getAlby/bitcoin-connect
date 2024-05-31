@@ -14,21 +14,21 @@ export class LnfiNWCPage extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return html`<div class="w-full">
-      <bc-navbar class="flex w-full" heading="MicroNode Connect">
+      <bc-navbar class="flex w-full" heading="LN Link">
       </bc-navbar>
       <div class="font-sans text-sm w-full">
         <div class="px-8 pt-4 w-full">
         <div class="mb-2 ${classes['text-neutral-secondary']}">
             1. Add a new
             <a
-              href="https://doc.nostrassets.com/micronode-early-access/micronode-connect-mnc"
+              href="https://github.com/lnfi-network/ln-node/tree/main/LNLink"
               target="_blank"
               class="font-bold"
               >Wallet Connection
             </a>
             from
             <span class="${classes['text-neutral-tertiary']}"
-              >MicroNode => Generate NWC</span
+              >LN Node => Generate NWC</span
             >
             and copy the connection string.
           </div>
