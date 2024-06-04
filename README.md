@@ -36,13 +36,13 @@ You can use Bitcoin Connect without any build tools:
 
 ```html
 <script type="module">
-  import {launchModal} from 'https://esm.sh/@getalby/bitcoin-connect@3.5.1'; // jsdelivr.net, skypack.dev also work
+  import {launchModal} from 'https://esm.sh/@getalby/bitcoin-connect@3.5.3'; // jsdelivr.net, skypack.dev also work
 
   // use Bitcoin connect API normally...
   launchModal();
 
   // or if you just want access to the web components:
-  import 'https://esm.sh/@getalby/bitcoin-connect@3.5.1';
+  import 'https://esm.sh/@getalby/bitcoin-connect@3.5.3';
 </script>
 
 <!-- Bitcoin Connect components are now available -->
