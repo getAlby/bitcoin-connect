@@ -72,7 +72,7 @@ export class SendPaymentFlow extends withTwind()(BitcoinConnectElement) {
             <p
               class="font-sans font-medium ${classes['text-neutral-secondary']}"
             >
-              Payment Request
+              Payment . Request
             </p>
           </bc-modal-header>
           <div class="flex flex-col justify-center items-center w-full pt-8">
