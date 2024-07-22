@@ -23,7 +23,7 @@ export class NWCPage extends withTwind()(BitcoinConnectElement) {
               href="https://nwc.getalby.com/about"
               target="_blank"
               class="font-bold"
-              >NWC connection string
+              >Connection Secret
             </a>
             below
           </div>
