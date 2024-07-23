@@ -36,10 +36,10 @@ export class MutinyPage extends withTwind()(BitcoinConnectElement) {
             <span class="${classes['text-neutral-tertiary']}"
               >Requests => Create a Wallet Connection</span
             >
-            and copy the connection string.
+            and copy the Connection Secret.
           </div>
           <div class="mb-1 ${classes['text-neutral-secondary']}">
-            2. Paste the connection string below:
+            2. Paste the Connection Secret below:
           </div>
 
           <input
