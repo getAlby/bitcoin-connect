@@ -439,6 +439,23 @@ html {
 
 > 💡 using near-white or black brand colors? either set a lower `bc-brand-mix` or make sure to use an off-white for `bc-color-brand` and off-black for `bc-color-brand-dark` to avoid conflicts with the modal background color.
 
+### Fonts
+
+By default Bitcoin Connect does not use custom fonts for reduced footprint and privacy, however custom fonts can be used by providing CSS for the `Inter` (sans serif) and `Roboto Mono` (monospace) families. For example in the head section of your HTML:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto Mono:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+```
+
 ### Dark mode
 
 #### Automatic (Recommended)
