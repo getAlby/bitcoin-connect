@@ -17,6 +17,9 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
   @state()
   _balanceSats: number | undefined;
 
+  @state()
+  _loading = false;
+
   @state() _selectedCurrency: string | undefined;
 
   constructor() {
@@ -52,24 +55,35 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
   }
 
   private async _convertBalance() {
-    if (this._balanceSats === undefined) {
+    if (this._loading || this._balanceSats === undefined) {
       return;
     }
 
-    if (this._selectedCurrency && this._selectedCurrency !== 'sats') {
+    const currency = this._selectedCurrency || 'sats';
+
+    if (currency === 'BTC') {
+      const balanceSats = this._balanceSats / 1e8;
+      this._balance =
+        balanceSats.toLocaleString(undefined, {
+          minimumFractionDigits: 8,
+          useGrouping: true,
+        }) + ' BTC';
+    } else if (currency !== 'sats') {
       try {
+        this._loading = true;
         const fiatValue = await fiat.getFiatValue({
           satoshi: this._balanceSats,
-          currency: this._selectedCurrency,
+          currency,
         });
         const convertedValue = parseFloat(fiatValue.toFixed(2));
         this._balance = new Intl.NumberFormat(undefined, {
           style: 'currency',
-          currency: this._selectedCurrency,
+          currency,
         }).format(convertedValue);
       } catch (error) {
         console.error(error);
       }
+      this._loading = false;
     } else {
       this._balance =
         this._balanceSats.toLocaleString(undefined, {
