@@ -199,25 +199,45 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       return null;
     }
 
-    const errorCorrectionLevel = 'L';
-    const qr = qrcode(0, errorCorrectionLevel);
-    qr.addData(this.invoice);
-    qr.make();
+    const invoice = this.invoice;
+
+    // wait for the canvas to be added to the dom, then render it
+    setTimeout(() => {
+      const canvas = this.shadowRoot?.getElementById('qr') as HTMLCanvasElement;
+      if (!canvas) {
+        console.error('qr canvas not found');
+        return;
+      }
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        console.error('could not get context for qr canvas');
+        return;
+      }
+
+      const errorCorrectionLevel = 'L';
+      const qr = qrcode(0, errorCorrectionLevel);
+      qr.addData(invoice);
+      qr.make();
+      const moduleCount = qr.getModuleCount();
+      canvas.width = moduleCount * 4;
+      canvas.height = moduleCount * 4;
+      qr.renderTo2dContext(ctx, 4);
+    }, 100);
 
     return html`
       <!-- add margin only on dark mode because on dark mode the qr has a white border -->
       <a href="lightning:${this.invoice}" class="dark:mt-2">
-        <img src=${qr.createDataURL(4)} class="rounded-lg"></img>
+        <canvas id="qr" class="rounded-lg"></canvas>
       </a>
       <a
         @click=${this._copyInvoice}
         class="
         flex gap-1
         mt-4
-        ${classes['text-brand-mixed']} ${
-      classes.interactive
-    } font-semibold text-xs"
-        >
+        ${classes[
+          'text-brand-mixed'
+        ]} ${classes.interactive} font-semibold text-xs"
+      >
         ${this._hasCopiedInvoice ? copiedIcon : copyIcon}
         ${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
       </a>
