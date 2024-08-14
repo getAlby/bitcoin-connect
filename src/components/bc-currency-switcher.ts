@@ -1,7 +1,7 @@
 import {customElement, state} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
 import {withTwind} from './twind/withTwind';
-import {html} from 'lit';
+import {css, html} from 'lit';
 import './internal/bci-button';
 import './bc-connector-list';
 import './bc-balance';
@@ -13,6 +13,39 @@ import {getCurrencies} from '../utils/currencies';
 export class CurrencySwitcher extends withTwind()(BitcoinConnectElement) {
   @state() _isSwitchingCurrency = false;
   @state() _selectedCurrency: string | undefined;
+
+  static override styles = [
+    ...super.styles,
+    css`
+      .currencies-list {
+        mask-image: linear-gradient(
+          to bottom,
+          black calc(100% - 96px),
+          transparent 100%
+        );
+      }
+      /* width */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 18px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #66666666;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    `,
+  ];
 
   constructor() {
     super();
@@ -39,16 +72,20 @@ export class CurrencySwitcher extends withTwind()(BitcoinConnectElement) {
     const currencies = getCurrencies();
     const selectedCurrency = this._selectedCurrency || 'sats';
 
-    return html`<ul class="h-24 overflow-y-scroll px-4 grid grid-cols-2 gap-3">
+    return html`<ul
+      class="h-48 overflow-y-scroll px-4 grid grid-cols-2 gap-3 currencies-list -mb-10"
+    >
       ${currencies.map(
         (currency) => html`
           <li
             class="${selectedCurrency === currency.value
               ? 'bg-blue-500 text-white'
-              : ''} py-2 px-4 hover:text-white hover:bg-blue-500 rounded-lg hover:border-blue-500 cursor-pointer"
+              : ''} flex items-center justify-center py-2 px-4 hover:text-white hover:bg-blue-500 rounded-lg hover:border-blue-500 cursor-pointer"
             @click=${() => this._selectCurrency(currency.value)}
           >
-            <span class="text-orange-400 inline-block mr-2 size-4">${currency.flag}</span>${currency.value}
+            <span class="text-orange-400 inline-block mr-2 text-2xl"
+              >${currency.flag}</span
+            ><span class="text-2xl">${currency.value}</span>
           </li>
         `
       )}
