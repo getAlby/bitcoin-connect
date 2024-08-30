@@ -9,6 +9,7 @@ import {disconnectSection} from './templates/disconnectSection';
 import './bc-balance';
 import store from '../state/store';
 import './bc-currency-switcher';
+import {ConnectorFilterOptions} from "../types/ConnectorFilter";
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
@@ -23,14 +24,17 @@ export class Start extends withTwind()(BitcoinConnectElement) {
       store.getState().bitcoinConnectConfig.showBalance &&
       store.getState().supports('getBalance');
 
-    // TODO: handle unsubscribe
+      // TODO: handle unsubscribe
     store.subscribe((store) => {
       this._showBalance =
         store.bitcoinConnectConfig.showBalance && store.supports('getBalance');
+      this._filters = store.bitcoinConnectConfig.filters;
     });
   }
 
   override render() {
+    const isOneProviderOption = this._filters?.length === 1 && this._filters[0] !== 'nwc' && ConnectorFilterOptions.includes(this._filters[0]);
+
     return html`<div
       class="flex flex-col justify-center items-center w-full font-sans"
     >
@@ -60,8 +64,9 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                 'text-neutral-primary'
               ]} w-64 max-w-full text-center"
             >
-              How would you like to
-              connect${this._appName ? `\nto ${this._appName}` : ''}?
+              ${isOneProviderOption 
+                  ? 'Please connect your wallet' 
+                  : 'How would you like to connect'}${this._appName ? `\nto ${this._appName}` : ''}${isOneProviderOption ? '' : '?'}
             </h1>
 
             <bc-connector-list></bc-connector-list>
