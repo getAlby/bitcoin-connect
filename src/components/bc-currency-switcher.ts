@@ -83,9 +83,9 @@ export class CurrencySwitcher extends withTwind()(BitcoinConnectElement) {
               : ''} flex items-center justify-center py-2 px-4 hover:text-white hover:bg-blue-500 rounded-lg hover:border-blue-500 cursor-pointer"
             @click=${() => this._selectCurrency(currency.value)}
           >
-            <span class="text-orange-400 inline-block mr-2 text-2xl"
+            <span class="text-orange-400 inline-block mr-2 text-xl"
               >${currency.flag}</span
-            ><span class="text-2xl">${currency.value}</span>
+            ><span class="text-xl">${currency.value}</span>
           </li>
         `
       )}
