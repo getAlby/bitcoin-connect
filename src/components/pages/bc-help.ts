@@ -40,7 +40,7 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
             target="_blank"
             class="${classes['hover-animation']} flex-1"
           >
-            <bci-button>
+            <bci-button tabIndex=-1>
               <span class="${classes['text-brand-mixed']}">Learn more</span>
               ${linkIcon}
             </bci-button>
@@ -50,7 +50,7 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
             target="_blank"
             class="${classes['hover-animation']} flex-1"
           >
-            <bci-button>
+            <bci-button tabIndex=-1>
               <span class="${classes['text-brand-mixed']}">Use it</span>
               ${linkIcon}
             </bci-button>

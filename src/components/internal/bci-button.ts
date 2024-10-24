@@ -24,6 +24,11 @@ export class Button extends withTwind()(InternalElement) {
   })
   block = false;
 
+  @property({
+    type: Number,
+  })
+  override tabIndex = 0;
+
   override render() {
     const isDarkMode =
       window.matchMedia &&
@@ -57,6 +62,8 @@ export class Button extends withTwind()(InternalElement) {
         ? `${classes['text-brand-mixed']}`
         : `${classes['text-neutral-tertiary']}`}
         "
+      ?autofocus="${this.variant === 'primary'}"
+      tabindex="${this.tabIndex}"
     >
       ${this.ghost
         ? null

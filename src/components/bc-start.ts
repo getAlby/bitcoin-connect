@@ -74,12 +74,21 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                     'text-brand-mixed'
                   ]} "
                   @click=${() => store.getState().pushRoute('/new-wallet')}
+                  @keydown=${this._handleKeydown}
+                  tabindex="0"
                   >Get one here</a
                 >
               </h1>
             </div>
           `}
     </div>`;
+  }
+
+  public _handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      store.getState().pushRoute('/new-wallet');
+    }
   }
 }
 

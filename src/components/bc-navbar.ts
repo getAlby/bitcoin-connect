@@ -18,7 +18,9 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
       <div class="absolute left-8 h-full flex items-center justify-center">
         <div
           class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+          tabindex="0"
           @click=${this._goBack}
+          @keydown=${this._handleKeydown}
         >
           ${backIcon}
         </div>
@@ -33,6 +35,13 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
     store.getState().popRoute();
     store.getState().setError(undefined);
   };
+
+  public _handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._goBack();
+    }
+  }
 }
 
 declare global {
