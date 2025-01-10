@@ -10,6 +10,7 @@ import {closeModal} from '../api';
 
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
+  private isClosing = false;
   override render() {
     return html` <div
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
@@ -22,7 +23,9 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       ></div>
       <div
         class="transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
-        animate-fade-in"
+        animate-fade-in ${this.isClosing
+          ? 'animate-slide-down'
+          : 'animate-slide-up'} sm:animate-none"
       >
         <slot @onclose=${this._handleClose}></slot>
       </div>
@@ -30,7 +33,20 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   }
 
   private _handleClose = () => {
-    closeModal();
+    this.isClosing = true;
+
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+    this.requestUpdate();
+
+    if (isMobile) {
+      setTimeout(() => {
+        closeModal();
+        this.isClosing = false;
+      }, 300);
+    } else {
+      closeModal();
+    }
   };
 }
 
