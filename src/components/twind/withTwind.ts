@@ -60,7 +60,6 @@ export const withTwindExtended = () =>
             darken: 'darken 0.2s ease-out forwards',
             'fade-in': 'fade-in 0.2s ease-out forwards',
             'slide-up': 'slideUp 0.3s ease-out forwards',
-            'slide-down': 'slideDown 0.3s ease-in forwards',
           },
           keyframes: {
             darken: {
@@ -82,10 +81,6 @@ export const withTwindExtended = () =>
             slideUp: {
               from: {transform: 'translateY(100%)'},
               to: {transform: 'translateY(0)'},
-            },
-            slideDown: {
-              from: {transform: 'translateY(0)'},
-              to: {transform: 'translateY(100%)'},
             },
           },
         },
