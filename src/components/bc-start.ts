@@ -9,6 +9,7 @@ import {disconnectSection} from './templates/disconnectSection';
 import './bc-balance';
 import store from '../state/store';
 import './bc-currency-switcher';
+import {successAnimation} from './images/success';
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
@@ -46,12 +47,18 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                   <bc-currency-switcher>
                     <bc-balance class="text-2xl"></bc-balance>
                   </bc-currency-switcher>`
-              : html` <span
-                  class="text-lg font-medium mt-4 -mb-4 ${classes[
-                    'text-neutral-secondary'
-                  ]}"
-                  >Wallet Connected</span
-                >`}
+              : html`
+                  <div
+                    class="flex flex-col justify-center items-center ${classes[
+                      'text-brand-mixed'
+                    ]}"
+                  >
+                    <span class="text-lg font-bold mt-4 -mb-4"
+                      >Wallet Connected</span
+                    >
+                    ${successAnimation}
+                  </div>
+                `}
             ${disconnectSection(this._connectorName)}
           `
         : html`
