@@ -10,6 +10,7 @@ import './bc-balance';
 import store from '../state/store';
 import './bc-currency-switcher';
 import {successAnimation} from './images/success';
+import {closeModal} from '../api';
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
@@ -31,6 +32,12 @@ export class Start extends withTwind()(BitcoinConnectElement) {
     });
   }
 
+  private _closeModalAfterAnimation() {
+    setTimeout(() => {
+      closeModal();
+    }, 3500);
+  }
+
   override render() {
     return html`<div
       class="flex flex-col justify-center items-center w-full font-sans"
@@ -49,7 +56,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                   </bc-currency-switcher>`
               : html`
                   <div
-                    class="flex flex-col justify-center items-center ${classes[
+                    class="flex flex-col items-center ${classes[
                       'text-brand-mixed'
                     ]}"
                   >
@@ -58,6 +65,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                     >
                     ${successAnimation}
                   </div>
+                  ${this._closeModalAfterAnimation()}
                 `}
             ${disconnectSection(this._connectorName)}
           `
