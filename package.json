@@ -21,7 +21,7 @@
     "prepack": "yarn run build",
     "build": "microbundle --no-sourcemap",
     "clean": "rm -rf dist",
-    "dev": "yarn --cwd dev/vite dev",
+    "dev": "yarn --cwd dev/vite dev --force",
     "dev:build": "microbundle watch",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",

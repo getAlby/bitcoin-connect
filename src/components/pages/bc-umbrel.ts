@@ -5,7 +5,6 @@ import {html} from 'lit';
 import '../internal/bci-button';
 import {classes} from '../css/classes';
 import store from '../../state/store';
-import {webln} from '@getalby/sdk';
 
 @customElement('bc-umbrel')
 export class UmbrelPage extends withTwind()(BitcoinConnectElement) {
@@ -15,7 +14,7 @@ export class UmbrelPage extends withTwind()(BitcoinConnectElement) {
       <div class="font-sans text-sm w-full">
         <div class="px-8 pt-4 w-full">
           <div class="mb-4 ${classes['text-neutral-secondary']}">
-            Install the App "NWC" from the Umbrel app store and click the
+            Install the App "Alby Hub" from the Umbrel app store and click the
             connect button below. If you don't use
             <span class="italic">umbrel.local</span>
             as your umbrel domain use the Generic NWC connector instead.
@@ -29,18 +28,7 @@ export class UmbrelPage extends withTwind()(BitcoinConnectElement) {
   }
 
   private async onConnect() {
-    const nwc = webln.NostrWebLNProvider.withNewSecret({
-      authorizationUrl: 'http://umbrel.local:58000/apps/new',
-    });
-    await nwc.initNWC({
-      name: this._appName,
-    });
-
-    await store.getState().connect({
-      nwcUrl: nwc.getNostrWalletConnectUrl(),
-      connectorName: 'Umbrel',
-      connectorType: 'nwc.umbrel',
-    });
+    store.getState().pushRoute('/alby-hub');
   }
 }
 
