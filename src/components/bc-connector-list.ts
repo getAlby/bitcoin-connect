@@ -13,8 +13,6 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     // TODO: find a better way to filter these when multiple filters exist
     // TODO: allow re-ordering connectors
     const connectors: TemplateResult<1>[] = [];
-    // TODO: consider replacing alby connector with Alby OAuth API
-    // connectors.push(html`<bc-alby-nwc-connector></bc-alby-nwc-connector>`);
     // connectors.push(html`<bc-mutiny-nwc-connector></bc-mutiny-nwc-connector>`);
     // connectors.push(html`<bc-umbrel-nwc-connector></bc-umbrel-nwc-connector>`);
     connectors.push(html`<bc-alby-hub-connector></bc-alby-hub-connector>`);
