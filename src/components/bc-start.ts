@@ -7,7 +7,7 @@ import './bc-connector-list';
 import {classes} from './css/classes';
 import {disconnectSection} from './templates/disconnectSection';
 import './bc-balance';
-import store from '../state/store';
+import store, {Store} from '../state/store';
 import './bc-currency-switcher';
 import {successAnimation} from './images/success';
 import {closeModal} from '../api';
@@ -20,22 +20,26 @@ export class Start extends withTwind()(BitcoinConnectElement) {
 
   constructor() {
     super();
-
-    this._showBalance =
-      store.getState().bitcoinConnectConfig.showBalance &&
-      store.getState().supports('getBalance');
+    this.updateShowBalance(store.getState());
 
     // TODO: handle unsubscribe
-    store.subscribe((store) => {
-      this._showBalance =
-        store.bitcoinConnectConfig.showBalance && store.supports('getBalance');
+    store.subscribe((state) => {
+      this.updateShowBalance(state);
     });
   }
 
+  private updateShowBalance(state: Store) {
+    this._showBalance =
+      state.bitcoinConnectConfig.showBalance && state.supports('getBalance');
+  }
+
   private _closeModalAfterAnimation() {
-    setTimeout(() => {
-      closeModal();
-    }, 3500);
+    // Only auto-close if it's the first connection
+    if (store.getState().isFirstConnection) {
+      setTimeout(() => {
+        closeModal();
+      }, 3500);
+    }
   }
 
   override render() {
