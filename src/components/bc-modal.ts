@@ -22,7 +22,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       ></div>
       <div
         class="transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex justify-center items-center w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
-        animate-fade-in"
+        animate-fade-in max-sm:animate-slide-up"
       >
         <slot @onclose=${this._handleClose}></slot>
       </div>
