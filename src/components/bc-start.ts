@@ -44,18 +44,8 @@ export class Start extends withTwind()(BitcoinConnectElement) {
     >
       ${this._connected
         ? html`
-            ${this._showBalance
-              ? html`<span
-                    class="text-xs font-medium mb-2 ${classes[
-                      'text-neutral-secondary'
-                    ]}"
-                    >Balance</span
-                  >
-                  <bc-currency-switcher>
-                    <bc-balance class="text-2xl"></bc-balance>
-                  </bc-currency-switcher>`
-              : html`
-                  <div
+            ${store.getState().isFirstConnection
+              ? html` <div
                     class="flex flex-col items-center ${classes[
                       'text-brand-mixed'
                     ]}"
@@ -66,11 +56,24 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                     ${successAnimation}
                   </div>
                   ${this._closeModalAfterAnimation()}
+                  ${this._showBalanceAfterDelay()}`
+              : html`
+                  ${this._showBalance
+                    ? html` <span
+                          class="text-xs font-medium mb-2 ${classes[
+                            'text-neutral-secondary'
+                          ]}"
+                        >
+                          Balance
+                        </span>
+                        <bc-currency-switcher>
+                          <bc-balance class="text-2xl"></bc-balance>
+                        </bc-currency-switcher>`
+                    : null}
                 `}
             ${disconnectSection(this._connectorName)}
           `
-        : html`
-            <h1
+        : html` <h1
               class="my-8 ${classes[
                 'text-neutral-primary'
               ]} w-64 max-w-full text-center"
@@ -92,9 +95,15 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                   >Get one here</a
                 >
               </h1>
-            </div>
-          `}
+            </div>`}
     </div>`;
+  }
+
+  private _showBalanceAfterDelay() {
+    setTimeout(() => {
+      this._showBalance = true;
+    }, 2000);
+    return null;
   }
 }
 

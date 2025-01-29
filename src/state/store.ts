@@ -9,7 +9,7 @@ import {
   DEFAULT_BITCOIN_CONNECT_CONFIG,
 } from '../types/BitcoinConnectConfig';
 
-interface Store {
+export interface Store {
   readonly route: Route;
   readonly routeHistory: Route[];
   readonly connected: boolean;
@@ -23,6 +23,7 @@ interface Store {
   readonly connectorConfig: ConnectorConfig | undefined;
   readonly bitcoinConnectConfig: BitcoinConnectConfig;
   readonly info: GetInfoResponse | undefined;
+  readonly isFirstConnection: boolean;
 
   connect(config: ConnectorConfig): void;
   disconnect(): void;
@@ -39,7 +40,6 @@ interface Store {
   // getBalance(): Promise<number | undefined>;
   // getAlias(): Promise<string | undefined>;
 }
-
 const store = createStore<Store>((set, get) => ({
   route: '/start',
   routeHistory: [],
@@ -50,6 +50,7 @@ const store = createStore<Store>((set, get) => ({
   error: undefined,
   alias: undefined,
   balance: undefined,
+  isFirstConnection: true,
   connectorName: undefined,
   invoice: undefined,
   provider: undefined,
@@ -75,6 +76,7 @@ const store = createStore<Store>((set, get) => ({
         console.error('Failed to request wallet info');
       }
 
+      // First set the connection state
       set({
         connectorConfig,
         connector,
@@ -85,6 +87,14 @@ const store = createStore<Store>((set, get) => ({
         connectorName: connectorConfig.connectorName,
         route: '/start',
       });
+
+      // Then update isFirstConnection after a brief delay
+      setTimeout(() => {
+        set({
+          isFirstConnection: false,
+        });
+      }, 100);
+
       saveConfig(connectorConfig);
     } catch (error) {
       console.error(error);
@@ -105,6 +115,7 @@ const store = createStore<Store>((set, get) => ({
       connectorName: undefined,
       provider: undefined,
       modalOpen: false,
+      isFirstConnection: true, // Reset first connection flag on disconnect
     });
     deleteConfig();
   },
@@ -153,13 +164,17 @@ const store = createStore<Store>((set, get) => ({
   },
   // TODO: move this method to Alby JS SDK NWCCLient
   supports: (method: WebLNMethod) => {
-    const {info, provider} = get();
+    const {info, provider, connected} = get();
 
-    return (
-      !!info?.methods &&
-      info.methods.indexOf(method) > -1 &&
-      !!provider?.getBalance
-    );
+    if (!connected || !provider) {
+      return false;
+    }
+
+    if (method === 'getBalance') {
+      return !!provider.getBalance;
+    }
+
+    return !!info?.methods && info.methods.indexOf(method) > -1;
   },
 }));
 

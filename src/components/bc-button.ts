@@ -7,7 +7,7 @@ import {innerBorder} from './templates/innerBorder.js';
 import {classes} from './css/classes.js';
 import {launchModal} from '../api.js';
 import './bc-balance';
-import store from '../state/store.js';
+import store, {Store} from '../state/store.js';
 import {waitingIcon} from './icons/waitingIcon.js';
 
 /**
@@ -23,20 +23,24 @@ export class Button extends withTwind()(BitcoinConnectElement) {
 
   constructor() {
     super();
-
-    this._showBalance =
-      store.getState().bitcoinConnectConfig.showBalance &&
-      store.getState().supports('getBalance');
+    this.updateShowBalance(store.getState());
 
     // TODO: handle unsubscribe
-    store.subscribe((store) => {
-      this._showBalance =
-        store.bitcoinConnectConfig.showBalance && store.supports('getBalance');
+    store.subscribe((state) => {
+      this.updateShowBalance(state);
     });
+  }
+
+  private updateShowBalance(state: Store) {
+    this._showBalance =
+      state.bitcoinConnectConfig.showBalance &&
+      state.supports('getBalance') &&
+      state.connected;
   }
 
   override render() {
     const isLoading = this._connecting || (!this._connected && this._modalOpen);
+    const state = store.getState();
 
     return html`<div>
       <div
@@ -65,7 +69,7 @@ export class Button extends withTwind()(BitcoinConnectElement) {
               : html`${this.title}`}
           </span>
         </bci-button>
-        ${this._connected && this._showBalance
+        ${this._connected && this._showBalance && !state.isFirstConnection
           ? html`<bc-balance class="select-none cursor-pointer"></bc-balance> `
           : null}
       </div>
