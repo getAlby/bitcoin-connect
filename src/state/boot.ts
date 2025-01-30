@@ -5,7 +5,7 @@ function loadConfig() {
   const configJson = window.localStorage.getItem('bc:config');
   if (configJson) {
     const config = JSON.parse(configJson) as ConnectorConfig;
-    store.getState().connect(config, {showConnected: false});
+    store.getState().connect(config, {redirectTo: '/start'});
   }
 
   const currency = window.localStorage.getItem('bc:currency');
@@ -24,9 +24,7 @@ function addEventListeners() {
           connectorName: 'Extension',
           connectorType: 'extension.generic',
         },
-        {
-          showConnected: false,
-        }
+        {redirectTo: '/start'}
       );
     }
   });

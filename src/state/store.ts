@@ -10,7 +10,7 @@ import {
 } from '../types/BitcoinConnectConfig';
 
 type ConnectOptions = {
-  showConnected: boolean;
+  redirectTo?: Route;
 };
 
 interface Store {
@@ -63,7 +63,7 @@ const store = createStore<Store>((set, get) => ({
   info: undefined,
   connect: async (
     connectorConfig: ConnectorConfig,
-    connectOptions: ConnectOptions = {showConnected: true}
+    connectOptions: ConnectOptions = {redirectTo: '/connected'}
   ) => {
     set({
       connecting: true,
@@ -90,7 +90,7 @@ const store = createStore<Store>((set, get) => ({
         info,
         provider,
         connectorName: connectorConfig.connectorName,
-        route: connectOptions.showConnected ? '/connected' : '/start',
+        route: connectOptions.redirectTo,
       });
       saveConfig(connectorConfig);
     } catch (error) {
