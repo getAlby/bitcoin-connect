@@ -5,7 +5,7 @@ function loadConfig() {
   const configJson = window.localStorage.getItem('bc:config');
   if (configJson) {
     const config = JSON.parse(configJson) as ConnectorConfig;
-    store.getState().connect(config);
+    store.getState().connect(config, {redirectTo: '/start'});
   }
 
   const currency = window.localStorage.getItem('bc:currency');
@@ -19,10 +19,13 @@ function addEventListeners() {
     if (!store.getState().connecting) {
       // webln was enabled from outside
       // TODO: use the same name and logic for figuring out what extension as the extension connector
-      store.getState().connect({
-        connectorName: 'Extension',
-        connectorType: 'extension.generic',
-      });
+      store.getState().connect(
+        {
+          connectorName: 'Extension',
+          connectorType: 'extension.generic',
+        },
+        {redirectTo: '/start'}
+      );
     }
   });
 }

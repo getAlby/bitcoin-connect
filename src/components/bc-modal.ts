@@ -2,7 +2,6 @@ import {html} from 'lit';
 import {customElement} from 'lit/decorators.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
 import './bc-router-outlet.js';
-import './internal/bci-connecting';
 import {withTwind} from './twind/withTwind';
 import './bc-modal-header';
 import {classes} from './css/classes';

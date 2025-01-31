@@ -9,6 +9,10 @@ import {
   DEFAULT_BITCOIN_CONNECT_CONFIG,
 } from '../types/BitcoinConnectConfig';
 
+type ConnectOptions = {
+  redirectTo?: Route;
+};
+
 interface Store {
   readonly route: Route;
   readonly routeHistory: Route[];
@@ -24,7 +28,7 @@ interface Store {
   readonly bitcoinConnectConfig: BitcoinConnectConfig;
   readonly info: GetInfoResponse | undefined;
 
-  connect(config: ConnectorConfig): void;
+  connect(config: ConnectorConfig, connectOptions?: ConnectOptions): void;
   disconnect(): void;
   pushRoute(route: Route): void;
   popRoute(): void;
@@ -57,7 +61,10 @@ const store = createStore<Store>((set, get) => ({
   connectorConfig: undefined,
   bitcoinConnectConfig: DEFAULT_BITCOIN_CONNECT_CONFIG,
   info: undefined,
-  connect: async (connectorConfig: ConnectorConfig) => {
+  connect: async (
+    connectorConfig: ConnectorConfig,
+    connectOptions: ConnectOptions = {redirectTo: '/connected'}
+  ) => {
     set({
       connecting: true,
       error: undefined,
@@ -83,7 +90,7 @@ const store = createStore<Store>((set, get) => ({
         info,
         provider,
         connectorName: connectorConfig.connectorName,
-        route: '/start',
+        route: connectOptions.redirectTo,
       });
       saveConfig(connectorConfig);
     } catch (error) {
