@@ -244,6 +244,18 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     `;
   }
 
+  private renderMemo(decodedInvoice: Invoice) {
+    if (!decodedInvoice.description) {
+      return null;
+    }
+
+    return html`
+      <p class="text-center mb-6 ${classes['text-neutral-tertiary']}">
+        ${decodedInvoice.description}
+      </p>
+    `;
+  }
+
   override render() {
     if (!this.invoice) {
       return null;
@@ -284,7 +296,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
 
     return html`
       <div class="flex flex-col justify-center items-center font-sans w-full">
-        ${this.renderHeading(decodedInvoice)} ${paymentStateElement}
+        ${this.renderHeading(decodedInvoice)} ${this.renderMemo(decodedInvoice)}
+        ${paymentStateElement}
       </div>
     `;
   }
