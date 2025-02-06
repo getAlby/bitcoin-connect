@@ -109,6 +109,7 @@ const store = createStore<Store>((set, get) => ({
       connectorConfig: undefined,
       connector: undefined,
       connected: false,
+      connecting: false,
       connectorName: undefined,
       provider: undefined,
       modalOpen: false,
