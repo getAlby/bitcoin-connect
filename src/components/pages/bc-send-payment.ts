@@ -250,7 +250,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     }
 
     return html`
-      <p class="text-center mb-6 ${classes['text-neutral-secondary']}">
+      <p class="text-center mb-6 ${classes['text-neutral-tertiary']}">
         ${decodedInvoice.description}
       </p>
     `;

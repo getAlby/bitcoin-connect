@@ -1,13 +1,13 @@
-import React from 'react';
-import {PayButton} from '@getalby/bitcoin-connect-react';
+import {Payment} from '@getalby/bitcoin-connect-react';
 import {Invoice, LightningAddress} from '@getalby/lightning-tools';
+import React from 'react';
 import toast, {Toaster} from 'react-hot-toast';
 
-export default function PaymentButtonDemo() {
+export default function PaymentDemo() {
   const [invoice, setInvoice] = React.useState<Invoice | undefined>(undefined);
   const [preimage, setPreimage] = React.useState<string | undefined>(undefined);
 
-  const fetchInvoice = React.useCallback(() => {
+  React.useEffect(() => {
     (async () => {
       try {
         toast('Fetching invoice...');
@@ -30,6 +30,9 @@ export default function PaymentButtonDemo() {
             console.error(error);
           }
         }, 1000);
+        return () => {
+          clearInterval(checkPaymentInterval);
+        };
       } catch (error) {
         console.error(error);
       }
@@ -43,17 +46,18 @@ export default function PaymentButtonDemo() {
 
   return (
     <div>
-      <h2>Payment Button Demo</h2>
+      <h2>Payment Demo</h2>
       <Toaster />
-      <PayButton
-        invoice={invoice?.paymentRequest}
-        onPaid={(response) => {
-          toast('Paid! ' + response.preimage);
-          setPreimage(response.preimage);
-        }}
-        onClick={fetchInvoice}
-        payment={paymentResponse}
-      />
+      {invoice && (
+        <Payment
+          invoice={invoice.paymentRequest}
+          onPaid={(response) => {
+            toast('Paid! ' + response.preimage);
+            setPreimage(response.preimage);
+          }}
+          payment={paymentResponse}
+        />
+      )}
     </div>
   );
 }
