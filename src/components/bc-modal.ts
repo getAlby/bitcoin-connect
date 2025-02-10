@@ -1,10 +1,10 @@
 import {html} from 'lit';
 import {customElement} from 'lit/decorators.js';
-import {closeModal} from '../api';
-import './bc-modal-header';
-import './bc-router-outlet.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement';
+import './bc-router-outlet.js';
 import {withTwind} from './twind/withTwind';
+import './bc-modal-header';
+import {closeModal} from '../api';
 
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
