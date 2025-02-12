@@ -82,6 +82,12 @@ const store = createStore<Store>((set, get) => ({
         console.error('Failed to request wallet info');
       }
 
+      // In case user cancels the connection
+      // don't proceed
+      if (!get().connecting) {
+        return;
+      }
+
       set({
         connectorConfig,
         connector,
