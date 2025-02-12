@@ -35,7 +35,7 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
             @change=${this._lnbitsAdminKeyChanged}
             type="password"
             placeholder="Your 32 digit admin key"
-            class="w-full mb-8 rounded-lg p-2 border-1 ${classes[
+            class="w-full mb-8 rounded-lg p-2 border-1 bg-transparent ${classes[
               'border-neutral-secondary'
             ]}"
           />
@@ -47,7 +47,7 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
             value=${this._lnbitsUrl}
             @change=${this._lnbitsUrlChanged}
             placeholder="https://legend.lnbits.com"
-            class="w-full mb-8 rounded-lg p-2 border-1 ${classes[
+            class="w-full mb-8 rounded-lg p-2 border-1 bg-transparent ${classes[
               'border-neutral-secondary'
             ]}"
           />

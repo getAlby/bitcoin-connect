@@ -40,7 +40,7 @@ export class LnfiNWCPage extends withTwind()(BitcoinConnectElement) {
             @change=${this.nwcUrlChanged}
             placeholder="nostr+walletconnect://..."
             type="password"
-            class="w-full mb-8 rounded-lg p-2 border-1 ${classes[
+            class="w-full mb-8 rounded-lg p-2 border-1 bg-transparent ${classes[
               'border-neutral-secondary'
             ]}"
           />
