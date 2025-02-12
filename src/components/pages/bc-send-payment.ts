@@ -146,7 +146,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       <div class="mt-8 w-full flex flex-col gap-4">
         ${this.paymentMethods === 'all' || this.paymentMethods === 'external'
           ? html`<a href="lightning:${this.invoice}">
-              <bci-button variant="primary" block>
+              <bci-button variant="primary" block tabindex="-1">
                 ${walletIcon} Open in a Bitcoin Wallet
               </bci-button>
             </a>`
@@ -231,6 +231,8 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       </a>
       <a
         @click=${this._copyInvoice}
+        @keydown=${this._handleKeydown}
+        tabindex="0"
         class="
         flex gap-1
         mt-4
@@ -357,6 +359,14 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     }
     this._isPaying = false;
   }
+
+  public _handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._copyInvoice();
+    }
+  }
+
 }
 
 declare global {
