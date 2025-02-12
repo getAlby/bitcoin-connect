@@ -5,9 +5,12 @@ import store from '../../state/store';
 
 export function disconnectSection(connectorName: string | undefined) {
   return html`<div class="mt-12">
-    <span class="text-xs mb-1 ${classes['text-neutral-secondary']}"
-      >Connected through <span class="font-bold">${connectorName}</span></span
-    >
+    ${connectorName
+      ? html`<span class="text-xs mb-1 ${classes['text-neutral-secondary']}"
+          >Connected through
+          <span class="font-bold">${connectorName}</span></span
+        >`
+      : null}
 
     <bci-button
       @click=${handleDisconnect}
