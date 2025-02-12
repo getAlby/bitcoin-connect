@@ -1,20 +1,17 @@
 import {LitElement, html} from 'lit';
 import {withTwind} from '../twind/withTwind';
 import {customElement} from 'lit/decorators.js';
-import {InternalElement} from './InternalElement';
 import {classes} from '../css/classes';
-import {hr} from '../templates/hr';
 import {disconnectIcon} from '../icons/disconnectIcon';
 import store from '../../state/store';
+import {waitingIcon} from '../icons/waitingIcon';
 
 @customElement('bci-connecting')
 export class Connecting extends withTwind()(LitElement) {
   override render() {
     return html`
       <div class="flex flex-col items-center justify-center w-full">
-        <div
-          class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500 mb-4"
-        ></div>
+        ${waitingIcon(`w-20 h-20 ${classes['text-neutral-tertiary']} mb-4`)}
         <p class="text-center font-sans ${classes['text-neutral-secondary']}">
           Connecting to wallet...
         </p>
