@@ -23,5 +23,5 @@ export type BitcoinConnectConfig = {
 
 export const DEFAULT_BITCOIN_CONNECT_CONFIG: BitcoinConnectConfig = {
   showBalance: true,
-  appName: '',
+  appName: 'Bitcoin Connect',
 };
