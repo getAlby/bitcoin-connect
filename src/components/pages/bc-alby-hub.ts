@@ -31,12 +31,6 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
             <span class="${classes['text-brand-mixed']}">Alby Cloud</span>
           </bci-button>
 
-          <!-- <bci-button @click=${this.onClickAlbyGo} class="w-full">
-            albyGoIcon <span class="${classes[
-            'text-brand-mixed'
-          ]}">Alby Go</span>
-          </bci-button> -->
-
           <bci-button @click=${this.onClickConnectionSecret} class="w-full">
             ${nwcThickIcon}
             <span class="${classes['text-brand-mixed']}"
@@ -71,9 +65,6 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
       console.error(error);
       alert('' + error);
     }
-  }
-  private async onClickAlbyGo() {
-    alert('Coming soon');
   }
   private async onClickConnectionSecret() {
     store.getState().pushRoute('/nwc');
