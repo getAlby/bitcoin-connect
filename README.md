@@ -241,7 +241,7 @@ init({
 });
 ```
 
-- `appName` - Name of the app requesting access to wallet. Currently used for NWC connections (Alby and Mutiny)
+- `appName` - Name of the app requesting access to wallet. Currently used for NWC connections (e.g. Alby Hub)
 - `filters` - Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors).
 - `showBalance` - If false, do not request the connected wallet's balance
 - `providerConfig` - **Experimental**: add provider-specific configuration (for NWC, LNC, LNbits etc). Currently only `nwc.authorizationUrlOptions` is supported. `NWCAuthorizationUrlOptions` can be found in the [Alby JS SDK](https://github.com/getAlby/js-sdk).
@@ -596,11 +596,10 @@ Connectors with budget controls or confirmation dialogs (Alby extension or NWC) 
 
 ### What connectors are supported?
 
-- [Alby Browser extension](https://getalby.com)
-- [Alby NWC](https://nwc.getalby.com)
+- [Alby Browser Extension](https://getalby.com)
+- [Alby Hub](https://albyhub.com)
 - [LNC](https://github.com/lightninglabs/lightning-node-connect)
 - [LNbits](https://lnbits.com/)
-- [Mutiny NWC URL](https://www.mutinywallet.com/)
 - [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)
 
 ### If a user pays with another wallet why does the modal stay open?

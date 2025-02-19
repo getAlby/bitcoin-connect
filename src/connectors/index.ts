@@ -8,7 +8,6 @@ export const connectors = {
   'nwc.alby': NWCConnector,
   'nwc.albyhub': NWCConnector,
   'nwc.generic': NWCConnector,
-  'nwc.mutiny': NWCConnector,
   'nwc.umbrel': NWCConnector,
   'nwc.lnfi': NWCConnector,
   lnbits: LnbitsConnector,
