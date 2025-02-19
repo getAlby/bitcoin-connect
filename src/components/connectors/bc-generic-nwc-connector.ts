@@ -3,12 +3,12 @@ import {nwcIcon} from '../icons/connectors/nwcIcon';
 import {ConnectorElement} from './ConnectorElement';
 import store from '../../state/store';
 
-export const genericConnectorTitle = 'NWC';
+export const genericConnectorTitle = 'Nostr Wallet Connect';
 
 @customElement('bc-nwc-connector')
 export class GenericNWCConnector extends ConnectorElement {
   constructor() {
-    super('nwc.generic', genericConnectorTitle, '#000000', nwcIcon);
+    super('nwc.generic', genericConnectorTitle, '#ffffff', nwcIcon);
   }
 
   protected async _onClick() {

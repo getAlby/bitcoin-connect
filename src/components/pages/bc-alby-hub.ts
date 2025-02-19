@@ -7,6 +7,8 @@ import {classes} from '../css/classes';
 import store from '../../state/store';
 import {albyHubConnectorTitle} from '../connectors';
 import {nwc} from '@getalby/sdk';
+import {albyCloudIcon} from '../icons/connectors/albyCloudIcon';
+import {nwcThickIcon} from '../icons/connectors/nwcThickIcon';
 
 @customElement('bc-alby-hub')
 export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
@@ -14,25 +16,29 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
     return html`<div class="w-full">
       <bc-navbar
         class="flex w-full"
-        heading=${albyHubConnectorTitle}
+        heading=${'Connect ' + albyHubConnectorTitle}
       ></bc-navbar>
       <div class="font-sans text-sm w-full">
         <div
-          class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-2"
+          class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-4"
         >
           <div class="mb-2 ${classes['text-neutral-secondary']}">
             Choose how to connect
           </div>
 
           <bci-button @click=${this.onClickAlbyCloud} class="w-full">
+            ${albyCloudIcon}
             <span class="${classes['text-brand-mixed']}">Alby Cloud</span>
           </bci-button>
 
-          <bci-button @click=${this.onClickAlbyGo} class="w-full">
-            <span class="${classes['text-brand-mixed']}">Alby Go</span>
-          </bci-button>
+          <!-- <bci-button @click=${this.onClickAlbyGo} class="w-full">
+            albyGoIcon <span class="${classes[
+            'text-brand-mixed'
+          ]}">Alby Go</span>
+          </bci-button> -->
 
           <bci-button @click=${this.onClickConnectionSecret} class="w-full">
+            ${nwcThickIcon}
             <span class="${classes['text-brand-mixed']}"
               >Connection Secret</span
             >

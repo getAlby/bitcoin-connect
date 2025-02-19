@@ -44,8 +44,8 @@ export class LnfiNWCPage extends withTwind()(BitcoinConnectElement) {
               'border-neutral-secondary'
             ]}"
           />
-          <bci-button @click=${this.onConnect}>
-            <span class="${classes['text-brand-mixed']}">Connect</span>
+          <bci-button variant="primary" @click=${this.onConnect}>
+            Connect
           </bci-button>
         </div>
       </div>

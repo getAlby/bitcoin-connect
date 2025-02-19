@@ -12,26 +12,41 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
   override render() {
     // TODO: find a better way to filter these when multiple filters exist
     // TODO: allow re-ordering connectors
-    const connectors: TemplateResult<1>[] = [];
-    // connectors.push(html`<bc-mutiny-nwc-connector></bc-mutiny-nwc-connector>`);
-    // connectors.push(html`<bc-umbrel-nwc-connector></bc-umbrel-nwc-connector>`);
-    connectors.push(html`<bc-alby-hub-connector></bc-alby-hub-connector>`);
-    connectors.push(html`<bc-nwc-connector></bc-nwc-connector>`);
-    connectors.push(html`<bc-lnfi-nwc-connector></bc-lnfi-nwc-connector>`);
+    const connectors: {order: number; result: TemplateResult<1>}[] = [];
+    connectors.push({
+      order: 0,
+      result: html`<bc-alby-hub-connector></bc-alby-hub-connector>`,
+    });
+    connectors.push({
+      order: 0,
+      result: html`<bc-nwc-connector></bc-nwc-connector>`,
+    });
+    connectors.push({
+      order: 10,
+      result: html`<bc-lnfi-nwc-connector></bc-lnfi-nwc-connector>`,
+    });
     if (!this._filters || this._filters.indexOf('nwc') === -1) {
       // TODO: is there a better way to check if a desktop extension exists?
       if (window.webln) {
-        connectors.push(
-          html`<bc-extension-connector></bc-extension-connector>`
-        );
+        connectors.push({
+          order: 0,
+          result: html`<bc-extension-connector></bc-extension-connector>`,
+        });
       }
-      connectors.push(html`<bc-lnbits-connector></bc-lnbits-connector>`);
-      connectors.push(html`<bc-lnc-connector></bc-lnc-connector>`);
+      connectors.push({
+        order: 7,
+        result: html`<bc-lnbits-connector></bc-lnbits-connector>`,
+      });
+      connectors.push({
+        order: 9,
+        result: html`<bc-lnc-connector></bc-lnc-connector>`,
+      });
     }
+    connectors.sort((a, b) => a.order - b.order);
 
     return html`
       <div class="flex justify-center items-start flex-wrap gap-5">
-        ${connectors}
+        ${connectors.map((c) => c.result)}
       </div>
     `;
   }
