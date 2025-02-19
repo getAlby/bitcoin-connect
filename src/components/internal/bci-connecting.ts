@@ -1,33 +1,22 @@
-import {html} from 'lit';
+import {LitElement, html} from 'lit';
 import {withTwind} from '../twind/withTwind';
 import {customElement} from 'lit/decorators.js';
-import {InternalElement} from './InternalElement';
 import {classes} from '../css/classes';
-import {hr} from '../templates/hr';
+import {waitingIcon} from '../icons/waitingIcon';
+import {disconnectSection} from '../templates/disconnectSection';
 
 @customElement('bci-connecting')
-export class Connecting extends withTwind()(InternalElement) {
+export class Connecting extends withTwind()(LitElement) {
   override render() {
-    return html`<div
-      class="${classes['text-foreground']} w-full flex-1 animate-pulse"
-    >
-      <h1
-        class="w-1/2 h-7 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-      ></h1>
-      <div
-        class="w-1/2 h-4 mt-8 mb-2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-      ></div>
-      <div
-        class="mb-12 h-10 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-      ></div>
-      ${hr()}
-      <div
-        class="my-4 h-4 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-      ></div>
-      <div
-        class="h-10 w-1/2 mx-auto bg-gray-200 dark:bg-gray-700 rounded-md"
-      ></div>
-    </div>`;
+    return html`
+      <div class="flex flex-col items-center justify-center w-full">
+        ${waitingIcon(`w-20 h-20 ${classes['text-neutral-tertiary']} mb-4`)}
+        <p class="text-center font-sans ${classes['text-neutral-secondary']}">
+          Connecting to wallet...
+        </p>
+        ${disconnectSection(undefined)}
+      </div>
+    `;
   }
 }
 

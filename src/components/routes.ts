@@ -10,6 +10,7 @@ import './pages/bc-umbrel.js';
 import './pages/bc-send-payment.js';
 import './pages/bc-new-wallet.js';
 import './pages/bc-lnfi.js';
+import './pages/bc-connected.js';
 
 export const routes = {
   '/start': html`<bc-start class="flex w-full"></bc-start>`,
@@ -27,6 +28,7 @@ export const routes = {
   ></bc-send-payment>`
   },*/
   '/new-wallet': html`<bc-new-wallet class="flex w-full"></bc-new-wallet>`,
+  '/connected': html`<bc-connected class="flex w-full"></bc-connected>`,
 };
 
 export type Route = keyof typeof routes;
