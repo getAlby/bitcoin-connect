@@ -43,22 +43,28 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
   }
 
   private async onClickAlbyCloud() {
-    const providerConfig = store.getState().bitcoinConnectConfig.providerConfig;
-    const nwcClient = await nwc.NWCClient.fromAuthorizationUrl(
-      'http://localhost:5173/apps/new', // TODO: 'https://my.albyhub.com/apps/new'
-      {
-        ...(providerConfig?.nwc?.authorizationUrlOptions || {}),
-        name: this._appName,
-      }
-    );
+    try {
+      const providerConfig =
+        store.getState().bitcoinConnectConfig.providerConfig;
+      const nwcClient = await nwc.NWCClient.fromAuthorizationUrl(
+        'https://my.albyhub.com/apps/new',
+        {
+          ...(providerConfig?.nwc?.authorizationUrlOptions || {}),
+          name: this._appName,
+        }
+      );
 
-    nwcClient.close();
-    // TODO: it makes no sense to connect again
-    await store.getState().connect({
-      nwcUrl: nwcClient.nostrWalletConnectUrl,
-      connectorName: 'Alby Hub',
-      connectorType: 'nwc.albyhub',
-    });
+      nwcClient.close();
+      // TODO: it makes no sense to connect again
+      await store.getState().connect({
+        nwcUrl: nwcClient.nostrWalletConnectUrl,
+        connectorName: 'Alby Hub',
+        connectorType: 'nwc.albyhub',
+      });
+    } catch (error) {
+      console.error(error);
+      alert('' + error);
+    }
   }
   private async onClickAlbyGo() {
     alert('Coming soon');
