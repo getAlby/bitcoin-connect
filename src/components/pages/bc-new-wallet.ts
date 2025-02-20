@@ -61,7 +61,7 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
               class="no-underline font-bold ${classes.interactive} ${classes[
                 'text-brand-mixed'
               ]}"
-              >CoinOS</a
+              >Coinos</a
             >
             or
             <a
