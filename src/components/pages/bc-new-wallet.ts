@@ -4,7 +4,7 @@ import {withTwind} from '../twind/withTwind';
 import {html} from 'lit';
 import {classes} from '../css/classes';
 import '../internal/bci-button';
-import {albyIcon} from '../icons/new-wallet/albyIcon';
+import {albyhubIcon} from '../icons/connectors/albyHubIcon';
 
 @customElement('bc-new-wallet')
 export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
@@ -15,29 +15,62 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
         heading="Get a bitcoin lightning wallet"
       ></bc-navbar>
 
-      <div class="gap-4 w-full my-6 px-8 font-sans text-sm">
+      <div class="flex flex-col gap-5 w-full my-6 px-8 font-sans text-sm">
         <div class="flex flex-row items-center space-x-4">
           <div>
-            <div class="w-20 h-20">${albyIcon}</div>
+            <div
+              class="p-2 bg-black drop-shadow rounded-xl flex items-center justify-center"
+            >
+              ${albyhubIcon}
+            </div>
           </div>
           <p class="text-sm ${classes['text-neutral-secondary']}">
-            For quick setup of a bitcoin lightning wallet we recommend signing
-            up for the
+            To get the best self-custodial bitcoin lightning wallet that can
+            connect to apps, try
             <a
-              href="https://getalby.com/#alby-account"
+              href="https://albyhub.com"
               target="_blank"
               class="no-underline font-bold ${classes.interactive} ${classes[
                 'text-brand-mixed'
-              ]} "
-              >Alby Account</a
-            >, which you can pair with the
+              ]}"
+              >Alby Hub</a
+            >.
+          </p>
+        </div>
+        <div class="flex flex-row items-center space-x-4">
+          <div>
+            <div
+              class="p-2 bg-black drop-shadow rounded-xl flex items-center justify-center"
+            >
+              ${albyhubIcon}
+            </div>
+          </div>
+          <p class="text-sm ${classes['text-neutral-secondary']}">
+            For a quick setup of a custodial wallet, you can choose between
             <a
-              href="https://getalby.com/#alby-extension"
+              href="https://primal.net"
               target="_blank"
               class="no-underline font-bold ${classes.interactive} ${classes[
                 'text-brand-mixed'
-              ]} "
-              >Alby Browser Extension</a
+              ]}"
+              >Primal</a
+            >,
+            <a
+              href="https://coinos.io"
+              target="_blank"
+              class="no-underline font-bold ${classes.interactive} ${classes[
+                'text-brand-mixed'
+              ]}"
+              >CoinOS</a
+            >
+            or
+            <a
+              href="https://lifpay.me"
+              target="_blank"
+              class="no-underline font-bold ${classes.interactive} ${classes[
+                'text-brand-mixed'
+              ]}"
+              >LifPay</a
             >.
           </p>
         </div>
