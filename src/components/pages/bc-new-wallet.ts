@@ -5,6 +5,7 @@ import {html} from 'lit';
 import {classes} from '../css/classes';
 import '../internal/bci-button';
 import {albyhubIcon} from '../icons/connectors/albyHubIcon';
+import {custodialWalletIcons} from '../icons/new-wallet/custodialWalletIcons';
 
 @customElement('bc-new-wallet')
 export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
@@ -16,15 +17,15 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
       ></bc-navbar>
 
       <div class="flex flex-col gap-5 w-full my-6 px-8 font-sans text-sm">
-        <div class="flex flex-row items-center space-x-4">
-          <div>
+        <div class="flex flex-row justify-center items-center space-x-4">
+          <div class="w-20 h-20 flex items-center justify-center">
             <div
               class="p-2 bg-black drop-shadow rounded-xl flex items-center justify-center"
             >
               ${albyhubIcon}
             </div>
           </div>
-          <p class="text-sm ${classes['text-neutral-secondary']}">
+          <p class="flex-1 text-sm ${classes['text-neutral-secondary']}">
             To get the best self-custodial bitcoin lightning wallet that can
             connect to apps, try
             <a
@@ -38,14 +39,8 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
           </p>
         </div>
         <div class="flex flex-row items-center space-x-4">
-          <div>
-            <div
-              class="p-2 bg-black drop-shadow rounded-xl flex items-center justify-center"
-            >
-              ${albyhubIcon}
-            </div>
-          </div>
-          <p class="text-sm ${classes['text-neutral-secondary']}">
+          <div class="w-20 h-20">${custodialWalletIcons}</div>
+          <p class="flex-1 text-sm ${classes['text-neutral-secondary']}">
             For a quick setup of a custodial wallet, you can choose between
             <a
               href="https://primal.net"
@@ -54,7 +49,8 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
                 'text-brand-mixed'
               ]}"
               >Primal</a
-            >,
+            >
+            or
             <a
               href="https://coinos.io"
               target="_blank"
@@ -62,15 +58,6 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
                 'text-brand-mixed'
               ]}"
               >Coinos</a
-            >
-            or
-            <a
-              href="https://lifpay.me"
-              target="_blank"
-              class="no-underline font-bold ${classes.interactive} ${classes[
-                'text-brand-mixed'
-              ]}"
-              >LifPay</a
             >.
           </p>
         </div>
