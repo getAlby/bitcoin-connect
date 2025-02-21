@@ -23,7 +23,7 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
           ${backIcon}
         </div>
       </div>
-      <div class="font-sans font-medium ${classes['text-neutral-secondary']}">
+      <div class="font-sans font-medium ${classes['text-neutral-primary']}">
         ${this.heading}
       </div>
     </div>`;

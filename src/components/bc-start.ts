@@ -9,6 +9,7 @@ import {disconnectSection} from './templates/disconnectSection';
 import './bc-balance';
 import store from '../state/store';
 import './bc-currency-switcher';
+import {DEFAULT_BITCOIN_CONNECT_CONFIG} from '../types/BitcoinConnectConfig';
 
 // TODO: split up this component into disconnected and connected
 @customElement('bc-start')
@@ -61,7 +62,10 @@ export class Start extends withTwind()(BitcoinConnectElement) {
               ]} w-64 max-w-full text-center"
             >
               How would you like to
-              connect${this._appName ? `\nto ${this._appName}` : ''}?
+              connect${this._appName &&
+              this._appName !== DEFAULT_BITCOIN_CONNECT_CONFIG.appName
+                ? `\nto ${this._appName}`
+                : ''}?
             </h1>
 
             <bc-connector-list></bc-connector-list>

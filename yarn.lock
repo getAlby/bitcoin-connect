@@ -1434,12 +1434,11 @@
   resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.1.0.tgz#85fae6c6501e59e3fc1ae836e365a35df00bab41"
   integrity sha512-KhLnKu6hboNYxVmmegRi06ufW3J0o/5gZ5vMe4e94tKC1o8glN/fDn1fTL4hRIqgZjfzvDPPmV1A3YUkNtQttA==
 
-"@getalby/sdk@^3.8.2":
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-3.8.2.tgz#84a184c46fdebf18652d6c06b92f07ed36129d3d"
-  integrity sha512-0F4ub/e+t93V9wzR5Vr+Xdfhhy5kK+ZKls/J3yX2YBT27X1Rd3QIPLCTUFCb4RaV6a/e17aZAVJF8Af7r9BeAg==
+"@getalby/sdk@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-4.0.0.tgz#42ecedcff7a15612e50965b7bb4964803d3a96c7"
+  integrity sha512-EGWhpbyxnRVAo6tHRGV/s9Nkgxackg0WIcB8J5J9pqiv2WG9S4qIfPe9Ta9n0fj2dxPyxFKtHJYpWPnlDzSa2Q==
   dependencies:
-    emittery "^1.0.3"
     nostr-tools "2.9.4"
 
 "@humanwhocodes/config-array@^0.13.0":
@@ -3530,11 +3529,6 @@ electron-to-chromium@^1.4.431:
   version "1.4.459"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.459.tgz#25a23370f4ae8aaa8f77aaf00133aa4994f4148e"
   integrity sha512-XXRS5NFv8nCrBL74Rm3qhJjA2VCsRFx0OjHKBMPI0otij56aun8UWiKTDABmd5/7GTR021pA4wivs+Ri6XCElg==
-
-emittery@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/emittery/-/emittery-1.0.3.tgz#c9d2a9c689870f15251bb13b31c67715c26d69ac"
-  integrity sha512-tJdCJitoy2lrC2ldJcqN4vkqJ00lT+tOWNT1hBJjO/3FDMJa5TTIiYGCKGkn/WfCyOzUMObeohbVTj00fhiLiA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"

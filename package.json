@@ -21,7 +21,7 @@
     "prepack": "yarn run build",
     "build": "microbundle --no-sourcemap",
     "clean": "rm -rf dist",
-    "dev": "yarn --cwd dev/vite dev",
+    "dev": "yarn --cwd dev/vite dev --force",
     "dev:build": "microbundle watch",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",
@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@getalby/lightning-tools": "^5.1.0",
-    "@getalby/sdk": "^3.8.2",
+    "@getalby/sdk": "4.0.0",
     "@lightninglabs/lnc-web": "^0.3.2-alpha",
     "qrcode-generator": "^1.4.4",
     "zustand": "^4.5.5"
