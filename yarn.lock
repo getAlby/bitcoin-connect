@@ -1434,10 +1434,10 @@
   resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.1.2.tgz#8a018e98d5c13097dd98d93192cf5e4e455f4c20"
   integrity sha512-BwGm8eGbPh59BVa1gI5yJMantBl/Fdps6X4p1ZACnmxz9vDINX8/3aFoOnDlF7yyA2boXWCsReVQSr26Q2yjiQ==
 
-"@getalby/sdk@4.1.0-beta.2":
-  version "4.1.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-4.1.0-beta.2.tgz#fe16df603887ce8a06fda7fca4714f055b5030ef"
-  integrity sha512-WyzD6ujwNmTh9/FWnQQsRGwN4RvHEZdJBt2NvKPToRDFmxVrAnV7l2WZKo/NufC8behNzFJmdNqqD7YEkTna9Q==
+"@getalby/sdk@^4.1.0-beta.5":
+  version "4.1.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-4.1.0-beta.5.tgz#04b5f2de266dd39edbc3fd6ec1d4d36574fffabb"
+  integrity sha512-uuM3hccrSaTnaYc9iIxyN2cz0c2hY6UkTfLRfL1f8pcZ8ijgcn5PsJMXbe3lS+xqA1IWissYf/s4jHOjx1pywQ==
   dependencies:
     nostr-tools "2.9.4"
 

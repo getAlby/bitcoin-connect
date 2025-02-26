@@ -9,6 +9,7 @@ import {nwa} from '@getalby/sdk';
 import {copiedIcon} from '../icons/copiedIcon';
 import {copyIcon} from '../icons/copyIcon';
 import qrcode from 'qrcode-generator';
+import {waitingIcon} from '../icons/waitingIcon';
 
 @customElement('bc-alby-go')
 export class AlbyGoPage extends withTwind()(BitcoinConnectElement) {
@@ -33,25 +34,34 @@ export class AlbyGoPage extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return html`<div class="w-full">
-      <bc-navbar class="flex w-full" heading="Scan with Alby Go"></bc-navbar>
+      <bc-navbar class="flex w-full" heading="Connect Alby Hub with Alby Go"></bc-navbar>
       <div class="font-sans text-sm w-full">
         <div
           class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-4"
         >
-          <div class="mb-2 ${classes['text-neutral-secondary']}"></div>
+          <div class="mb-2 ${classes['text-neutral-secondary']}">
+            Scan with your camera, QR code scanner app, or from Alby Go -> Send
+          </div>
+
+          <div class="flex justify-center items-center">
+            ${waitingIcon(`w-7 h-7 ${classes['text-neutral-secondary']}`)}
+            <p class="${
+              classes['text-neutral-secondary']
+            }">Waiting for connection</p>
+          </div>
 
           ${this.renderQR()}
           
-          <a
+          <bci-button
             @click=${this._copyAuthString}
             class="
-flex gap-1
+flex gap-1 w-full
 mt-4
 ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
           >
             ${this._hasCopiedAuthString ? copiedIcon : copyIcon}
             ${this._hasCopiedAuthString ? 'Copied!' : 'Copy'}
-          </a>
+          </bci-button>
         </div>
         </div>
       </div>
@@ -128,6 +138,8 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
       }
 
       const nwaClient = new nwa.NWAClient({
+        name: this._appName,
+        // TODO: icon: this._appIcon,
         relayUrl: 'wss://relay.getalby.com/v1',
         requestMethods,
         notificationTypes: authorizationUrlOptions?.notificationTypes,
