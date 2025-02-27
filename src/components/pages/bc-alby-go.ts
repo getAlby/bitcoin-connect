@@ -139,7 +139,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
 
       const nwaClient = new nwa.NWAClient({
         name: this._appName,
-        // TODO: icon: this._appIcon,
+        icon: this._appIcon,
         relayUrl: 'wss://relay.getalby.com/v1',
         requestMethods,
         notificationTypes: authorizationUrlOptions?.notificationTypes,
@@ -150,8 +150,9 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
           : undefined,
         isolated: authorizationUrlOptions?.isolated,
         metadata: authorizationUrlOptions?.metadata,
+        returnTo: authorizationUrlOptions?.returnTo,
       });
-      this._authString = nwaClient.connectionUri;
+      this._authString = nwaClient.getConnectionUri('alby');
       // try to open in native app
       window.location.href = this._authString;
 
