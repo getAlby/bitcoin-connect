@@ -596,8 +596,9 @@ Connectors with budget controls or confirmation dialogs (Alby extension or NWC) 
 
 ### What connectors are supported?
 
-- [Alby Browser Extension](https://getalby.com)
+- [Alby Browser Extension](https://getalby.com) / [WebLN](https://webln.guide/)
 - [Alby Hub](https://albyhub.com)
+- [CoinOS](https://coinos.io)
 - [LNC](https://github.com/lightninglabs/lightning-node-connect)
 - [LNbits](https://lnbits.com/)
 - [Generic NWC URL](https://github.com/nostr-protocol/nips/blob/master/47.md)

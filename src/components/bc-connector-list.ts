@@ -19,6 +19,10 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     });
     connectors.push({
       order: 0,
+      result: html`<bc-coinos-connector></bc-coinos-connector>`,
+    });
+    connectors.push({
+      order: 0,
       result: html`<bc-nwc-connector></bc-nwc-connector>`,
     });
     connectors.push({
