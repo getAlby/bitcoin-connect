@@ -1,20 +1,21 @@
 import {customElement} from 'lit/decorators.js';
 import {ConnectorElement} from './ConnectorElement';
 import store from '../../state/store';
-import { coinosIcon } from '../icons/connectors/coinosIcon';
-import { nwc } from '@getalby/sdk';
+import {coinosIcon} from '../icons/connectors/coinosIcon';
+import {nwc} from '@getalby/sdk';
 
 export const coinosConnectorTitle = 'Coinos';
 
 @customElement('bc-coinos-connector')
 export class CoinosConnector extends ConnectorElement {
   constructor() {
-    super('nwc.coinos', coinosConnectorTitle, '#000000', coinosIcon);
+    super('nwc.coinos', coinosConnectorTitle, '#ffffff', coinosIcon);
   }
 
   protected async _onClick() {
     try {
-      const providerConfig = store.getState().bitcoinConnectConfig.providerConfig;
+      const providerConfig =
+        store.getState().bitcoinConnectConfig.providerConfig;
       const nwcClient = await nwc.NWCClient.fromAuthorizationUrl(
         'https://coinos.io/apps/new',
         {
@@ -35,8 +36,6 @@ export class CoinosConnector extends ConnectorElement {
       alert('' + error);
     }
   }
-
-
 }
 
 declare global {
