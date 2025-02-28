@@ -7,6 +7,11 @@ export type BitcoinConnectConfig = {
    */
   appName?: string;
   /**
+   * Icon of the application that the user is interacting with.
+   *   May be passed to the connector the user chooses to connect with (e.g. NWC)
+   */
+  appIcon?: string;
+  /**
    * Limit which connectors are shown in the connect flow
    */
   filters?: ConnectorFilter[];

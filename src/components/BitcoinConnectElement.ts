@@ -21,6 +21,9 @@ export class BitcoinConnectElement extends InternalElement {
   protected _appName: string | undefined = undefined;
 
   @state()
+  protected _appIcon: string | undefined = undefined;
+
+  @state()
   protected _filters: ConnectorFilter[] | undefined = undefined;
 
   @state()
@@ -35,6 +38,7 @@ export class BitcoinConnectElement extends InternalElement {
     this._connecting = store.getState().connecting;
     this._connectorName = store.getState().connectorName;
     this._appName = store.getState().bitcoinConnectConfig.appName;
+    this._appIcon = store.getState().bitcoinConnectConfig.appIcon;
     this._filters = store.getState().bitcoinConnectConfig.filters;
     this._error = store.getState().error;
     this._route = store.getState().route;
@@ -46,6 +50,7 @@ export class BitcoinConnectElement extends InternalElement {
       this._connecting = currentState.connecting;
       this._connectorName = currentState.connectorName;
       this._appName = currentState.bitcoinConnectConfig.appName;
+      this._appIcon = currentState.bitcoinConnectConfig.appIcon;
       this._filters = currentState.bitcoinConnectConfig.filters;
       this._error = currentState.error;
       this._route = currentState.route;

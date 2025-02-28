@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bitcoin Connect Demo</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0px;
+        @media (prefers-color-scheme: dark) {
+          background-color: black;
+          color: white;
+        }
+      }
+
+      .container {
+        padding: 20px;
+        max-width: 448px;
+      }
+    </style>
+    <script type="module">
+      import {init} from '../../src/index.ts';
+      init({
+        appName: 'ZapPlanner', // your app name
+        appIcon:
+          'https://zapplanner.albylabs.com/_next/image?url=%2Fnwc-periodic-payments.png&w=3840&q=75',
+        filters: ['nwc'],
+        showBalance: true,
+        providerConfig: {
+          nwc: {
+            authorizationUrlOptions: {
+              requestMethods: [
+                'get_balance',
+                'make_invoice',
+                'lookup_invoice',
+                'pay_invoice',
+              ],
+              notificationTypes: ['payment_received', 'payment_sent'],
+              maxAmount: 50_000_000, // 50k sats
+              budgetRenewal: 'weekly',
+              expiresAt: new Date('2030-01-01'),
+              // isolated: true,
+              returnTo: 'https://example.com',
+              metadata: {message: 'custom metadata from bitcoin connect demo'},
+            },
+          },
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <bc-button></bc-button>
+    </div>
+  </body>
+</html>
