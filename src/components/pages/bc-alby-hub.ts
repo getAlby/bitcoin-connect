@@ -1,4 +1,4 @@
-import {customElement, state} from 'lit/decorators.js';
+import {customElement} from 'lit/decorators.js';
 import {BitcoinConnectElement} from '../BitcoinConnectElement';
 import {withTwind} from '../twind/withTwind';
 import {html} from 'lit';
@@ -9,6 +9,7 @@ import {albyHubConnectorTitle} from '../connectors';
 import {nwc} from '@getalby/sdk';
 import {albyCloudIcon} from '../icons/connectors/albyCloudIcon';
 import {nwcThickIcon} from '../icons/connectors/nwcThickIcon';
+import {albyGoIcon} from '../icons/connectors/albyGoIcon';
 
 @customElement('bc-alby-hub')
 export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
@@ -29,6 +30,11 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
           <bci-button @click=${this.onClickAlbyCloud} class="w-full">
             ${albyCloudIcon}
             <span class="${classes['text-brand-mixed']}">Alby Cloud</span>
+          </bci-button>
+
+          <bci-button @click=${this.onClickAlbyGo} class="w-full">
+            ${albyGoIcon}
+            <span class="${classes['text-brand-mixed']}">Alby Go</span>
           </bci-button>
 
           <bci-button @click=${this.onClickConnectionSecret} class="w-full">
@@ -68,6 +74,9 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
   }
   private async onClickConnectionSecret() {
     store.getState().pushRoute('/nwc');
+  }
+  private async onClickAlbyGo() {
+    store.getState().pushRoute('/alby-go');
   }
 }
 

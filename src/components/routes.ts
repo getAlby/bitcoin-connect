@@ -4,6 +4,7 @@ import './bc-navbar.js';
 import './pages/bc-help.js';
 import './pages/bc-nwc.js';
 import './pages/bc-alby-hub.js';
+import './pages/bc-alby-go.js';
 import './pages/bc-lnbits.js';
 import './pages/bc-send-payment.js';
 import './pages/bc-new-wallet.js';
@@ -16,6 +17,7 @@ export const routes = {
   '/nwc': html`<bc-nwc class="flex w-full"></bc-nwc>`,
   '/lnfi': html`<bc-lnfi class="flex w-full"></bc-lnfi>`,
   '/alby-hub': html`<bc-alby-hub class="flex w-full"></bc-alby-hub>`,
+  '/alby-go': html`<bc-alby-go class="flex w-full"></bc-alby-go>`,
   '/lnbits': html`<bc-lnbits class="flex w-full"></bc-lnbits>`,
   /*(params) => {
   '/send-payment': html`<bc-send-payment
