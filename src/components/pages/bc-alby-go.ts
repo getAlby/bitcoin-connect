@@ -160,7 +160,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
         onSuccess: async (nwcClient) => {
           nwcClient.close();
           // TODO: it makes no sense to connect again
-          await store.getState().connect({
+          store.getState().connect({
             nwcUrl: nwcClient.nostrWalletConnectUrl,
             connectorName: 'Alby Hub',
             connectorType: 'nwc.albyhub',
