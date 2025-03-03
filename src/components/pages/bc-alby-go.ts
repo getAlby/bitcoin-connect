@@ -39,7 +39,7 @@ export class AlbyGoPage extends withTwind()(BitcoinConnectElement) {
         <div
           class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-4"
         >
-          <div class="mb-2 ${classes['text-neutral-secondary']}">
+          <div class="mb-2 text-center ${classes['text-neutral-secondary']}">
             Scan with your camera, QR code scanner app, or from Alby Go -> Send
           </div>
 
