@@ -10,15 +10,24 @@ import {classes} from '../css/classes';
 
 @customElement('bc-connected')
 export class ConnectedPage extends withTwind()(BitcoinConnectElement) {
-  constructor() {
-    super();
-    setTimeout(() => {
+  private _timeout: NodeJS.Timeout | undefined;
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this._timeout = setTimeout(() => {
       closeModal();
       store.setState({
         route: '/start',
       });
     }, 3000);
   }
+
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    if (this._timeout) {
+      clearTimeout(this._timeout);
+    }
+  }
+
   override render() {
     return html`<div
       class="flex flex-col justify-center items-center w-full mt-8 ${classes[

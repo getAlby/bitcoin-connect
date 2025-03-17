@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bitcoin Connect Demo</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0px;
+        @media (prefers-color-scheme: dark) {
+          background-color: black;
+          color: white;
+        }
+      }
+
+      .container {
+        padding: 20px;
+        max-width: 448px;
+      }
+    </style>
+    <script type="module">
+      import '../../src/index.ts';
+    </script>
+    <script type="module">
+      import {LightningAddress} from 'https://cdn.skypack.dev/@getalby/lightning-tools';
+
+      document
+        .getElementById('pay-button')
+        .addEventListener('click', async () => {
+          const ln = new LightningAddress('hello@getalby.com');
+          await ln.fetch();
+          const invoice = await ln.requestInvoice({satoshi: 1});
+          // fake a delay fetching an invoice
+          document
+            .getElementById('pay-button')
+            .setAttribute('invoice', invoice.paymentRequest);
+        });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <bc-pay-button id="pay-button"></bc-pay-button>
+    </div>
+  </body>
+</html>
