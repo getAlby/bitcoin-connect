@@ -10,6 +10,7 @@ import './pages/bc-send-payment.js';
 import './pages/bc-new-wallet.js';
 import './pages/bc-lnfi.js';
 import './pages/bc-connected.js';
+import './pages/bc-flash-wallet.js';
 
 export const routes = {
   '/start': html`<bc-start class="flex w-full"></bc-start>`,
@@ -19,6 +20,7 @@ export const routes = {
   '/alby-hub': html`<bc-alby-hub class="flex w-full"></bc-alby-hub>`,
   '/alby-go': html`<bc-alby-go class="flex w-full"></bc-alby-go>`,
   '/lnbits': html`<bc-lnbits class="flex w-full"></bc-lnbits>`,
+  '/flash-wallet': html`<bc-flash-wallet class="flex w-full"></bc-flash-wallet>`,
   /*(params) => {
   '/send-payment': html`<bc-send-payment
     invoice=${params.invoice}"
