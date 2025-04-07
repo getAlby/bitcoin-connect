@@ -158,7 +158,6 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
       this._authString = nwaClient.connectionUri;
 
 
-      console.log('nwcClient', nwaClient);
       // try to open in native app
       window.location.href = this._authString;
 
