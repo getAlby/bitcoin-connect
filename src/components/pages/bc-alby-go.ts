@@ -100,7 +100,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
     return html`
       <!-- add margin only on dark mode because on dark mode the qr has a white border -->
 
-      <canvas id="qr" class="rounded-lg"></canvas>
+      <canvas id="qr"></canvas>
     `;
   }
 
