@@ -11,8 +11,8 @@ import {copyIcon} from '../icons/copyIcon';
 import qrcode from 'qrcode-generator';
 import {waitingIcon} from '../icons/waitingIcon';
 
-@customElement('bc-alby-go')
-export class AlbyGoPage extends withTwind()(BitcoinConnectElement) {
+@customElement('bc-flash-wallet')
+export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
   @state()
   _authString: string | undefined;
 
@@ -34,13 +34,13 @@ export class AlbyGoPage extends withTwind()(BitcoinConnectElement) {
 
   override render() {
     return html`<div class="w-full">
-      <bc-navbar class="flex w-full" heading="Connect Alby Hub with Alby Go"></bc-navbar>
+      <bc-navbar class="flex w-full" heading="Connect Flash Wallet"></bc-navbar>
       <div class="font-sans text-sm w-full">
         <div
           class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-4"
         >
           <div class="mb-2 text-center ${classes['text-neutral-secondary']}">
-            Scan with your camera, QR code scanner app, or from Alby Go -> Send
+            Scan with your camera, QR code scanner app, or from the Flash Wallet
           </div>
 
           <div class="flex justify-center items-center">
@@ -50,7 +50,9 @@ export class AlbyGoPage extends withTwind()(BitcoinConnectElement) {
             }">Waiting for connection</p>
           </div>
 
-          ${this.renderQR()}
+ 
+            ${this.renderQR()}
+
           
           <bci-button
             @click=${this._copyAuthString}
@@ -99,12 +101,12 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
 
     return html`
       <!-- add margin only on dark mode because on dark mode the qr has a white border -->
-
-      <canvas id="qr"></canvas>
+      <canvas id="qr" class="dark:bg-[#fff] dark:p-4"></canvas>
     `;
   }
 
   private _copyAuthString() {
+    console.log('copying auth string');
     if (!this._authString) {
       return;
     }
@@ -140,7 +142,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
       const nwaClient = new nwa.NWAClient({
         name: this._appName,
         icon: this._appIcon,
-        relayUrl: 'wss://relay.getalby.com/v1',
+        relayUrl: 'wss://relay.paywithflash.com',
         requestMethods,
         notificationTypes: authorizationUrlOptions?.notificationTypes,
         maxAmount: authorizationUrlOptions?.maxAmount,
@@ -152,18 +154,22 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
         metadata: authorizationUrlOptions?.metadata,
         returnTo: authorizationUrlOptions?.returnTo,
       });
-      this._authString = nwaClient.getConnectionUri('alby');
+
+      this._authString = nwaClient.connectionUri;
+
+
       // try to open in native app
       window.location.href = this._authString;
 
       const {unsub} = await nwaClient.subscribe({
         onSuccess: async (nwcClient) => {
+          console.log('nwcClient.nostrWalletConnectUrl', nwcClient);
           nwcClient.close();
           // TODO: it makes no sense to connect again
           store.getState().connect({
             nwcUrl: nwcClient.nostrWalletConnectUrl,
-            connectorName: 'Alby Hub',
-            connectorType: 'nwc.albyhub',
+            connectorName: 'Flash Wallet',
+            connectorType: 'nwc.flash',
           });
         },
       });
@@ -177,6 +183,6 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-alby-go': AlbyGoPage;
+    'bc-flash-wallet': FlashWalletPage;
   }
 }

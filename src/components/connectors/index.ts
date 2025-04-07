@@ -4,3 +4,4 @@ export * from './bc-generic-nwc-connector';
 export * from './bc-lnc-connector';
 export * from './bc-lnfi-nwc-connector';
 export * from './bc-coinos-connector';
+export * from './bc-flash-connector';

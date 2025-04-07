@@ -10,6 +10,7 @@ export const connectors = {
   'nwc.generic': NWCConnector,
   'nwc.lnfi': NWCConnector,
   'nwc.coinos': NWCConnector,
+  'nwc.flash': NWCConnector,
   lnbits: LnbitsConnector,
   lnc: LNCConnector,
 };
