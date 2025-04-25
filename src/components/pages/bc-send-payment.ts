@@ -219,9 +219,18 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       qr.addData(invoice);
       qr.make();
       const moduleCount = qr.getModuleCount();
-      canvas.width = moduleCount * 4;
-      canvas.height = moduleCount * 4;
-      qr.renderTo2dContext(ctx, 4);
+      const padding = 4; // Adding padding for white borders
+      const scale = 4;
+      canvas.width = moduleCount * scale + padding * 2;
+      canvas.height = moduleCount * scale + padding * 2;
+
+      // Fill the entire canvas with white first
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Move the context to account for padding before rendering QR
+      ctx.translate(padding, padding);
+      qr.renderTo2dContext(ctx, scale);
     }, 100);
 
     return html`
