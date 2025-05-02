@@ -219,15 +219,19 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       qr.addData(invoice);
       qr.make();
       const moduleCount = qr.getModuleCount();
-      canvas.width = moduleCount * 4;
-      canvas.height = moduleCount * 4;
-      qr.renderTo2dContext(ctx, 4);
+      const scale = 4;
+      canvas.width = moduleCount * scale;
+      canvas.height = moduleCount * scale;
+
+      qr.renderTo2dContext(ctx, scale);
     }, 100);
 
     return html`
       <!-- add margin only on dark mode because on dark mode the qr has a white border -->
       <a href="lightning:${this.invoice}" class="dark:mt-2">
-        <canvas id="qr"></canvas>
+        <div class="bg-white p-1 inline-block">
+          <canvas id="qr"></canvas>
+        </div>
       </a>
       <a
         @click=${this._copyInvoice}
