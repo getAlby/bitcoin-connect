@@ -149,20 +149,20 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.46.0.tgz#3f7802972e8b6fe3f88ed1aabc74ec596c456db6"
   integrity sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==
 
-"@getalby/bitcoin-connect-react@^3.7.0-beta.0":
-  version "3.7.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-3.7.0-beta.0.tgz#54c18b86df96b5f1709bbbabcd4eee6d6c20f576"
-  integrity sha512-xLPbYG/zvxfgMJVwse3BcjISlN3Ig3G9SK4hDu1FDQKA1phcvKodcIYSTiFhG6CpaYd6/KMWprDYnPdG9Tirbw==
+"@getalby/bitcoin-connect-react@^3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect-react/-/bitcoin-connect-react-3.8.0.tgz#80e72b7fe04891f837f4dd334e448b0f2fe0066c"
+  integrity sha512-XDvCpMUam2LWE4ZuMTKDjpmFCjnzbjpZ6ycqvJPSFgdVnQYzWOfd3pA2isJsfJFKZcUdHe0FalgIUYED3d9eiA==
   dependencies:
-    "@getalby/bitcoin-connect" "^3.7.0-beta.1"
+    "@getalby/bitcoin-connect" "^3.8.0"
 
-"@getalby/bitcoin-connect@^3.7.0-beta.1":
-  version "3.7.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-3.7.0-beta.1.tgz#55308be98e9ab546d991411179764d32476d6bd2"
-  integrity sha512-Gda+G9/Qm06O2DDuMOj7NT92kmh8iKLaEQpBP99jLdQv8htza/Zs8kBm1xx6IqmefvavgLJx93h9e+awLLeiRw==
+"@getalby/bitcoin-connect@^3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@getalby/bitcoin-connect/-/bitcoin-connect-3.8.0.tgz#663ffbd60b7f7ea068d21ed415cb4ee776963492"
+  integrity sha512-mvNFQBogcE9Be/sHeDFk+30aJmLrjhmaxcpjDdSYhbnGWqK2gvj8SyUDAmdB43Tf+JRdXMa2vU0DuNtjLJiAUg==
   dependencies:
     "@getalby/lightning-tools" "^5.1.2"
-    "@getalby/sdk" "^4.1.1-beta.0"
+    "@getalby/sdk" "^4.1.1"
     "@lightninglabs/lnc-web" "^0.3.2-alpha"
     qrcode-generator "^1.4.4"
     zustand "^4.5.6"
@@ -172,7 +172,7 @@
   resolved "https://registry.yarnpkg.com/@getalby/lightning-tools/-/lightning-tools-5.1.2.tgz#8a018e98d5c13097dd98d93192cf5e4e455f4c20"
   integrity sha512-BwGm8eGbPh59BVa1gI5yJMantBl/Fdps6X4p1ZACnmxz9vDINX8/3aFoOnDlF7yyA2boXWCsReVQSr26Q2yjiQ==
 
-"@getalby/sdk@^4.1.1-beta.0":
+"@getalby/sdk@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@getalby/sdk/-/sdk-4.1.1.tgz#da7ecd658f32d7cb446919549b3e5a9369d8b08b"
   integrity sha512-Tm0Puqm3qpXxSfUhiO8W7Uaq9Fx/Ww2aOv3sjRYL1jukLi+GRj4s65QCsjCIWaKWUN+RCJMlW3LtKFnUQC/O3A==
