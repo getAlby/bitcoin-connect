@@ -63,6 +63,7 @@ export class CurrencySwitcher extends withTwind()(BitcoinConnectElement) {
         <div
           class="${classes.interactive}"
           @click=${this._showSelectVisibility}
+          @keydown=${this._handleKeydown}
         >
           <slot></slot>
         </div>
@@ -81,7 +82,10 @@ export class CurrencySwitcher extends withTwind()(BitcoinConnectElement) {
             class="${selectedCurrency === currency.value
               ? 'bg-blue-500 text-white'
               : ''} flex items-center justify-center py-2 px-4 hover:text-white hover:bg-blue-500 rounded-lg hover:border-blue-500 cursor-pointer"
+            tabindex="0"
             @click=${() => this._selectCurrency(currency.value)}
+            @keydown=${(event: KeyboardEvent) =>
+              this._handleCurrencyKeydown(event, currency.value)}
           >
             <span class="text-orange-400 inline-block mr-2 text-xl"
               >${currency.flag}</span
@@ -99,6 +103,22 @@ export class CurrencySwitcher extends withTwind()(BitcoinConnectElement) {
   private _selectCurrency(selectedCurrency: string) {
     store.getState().setCurrency(selectedCurrency);
     this._isSwitchingCurrency = false;
+  }
+
+  // Handle keydown events for currency selection
+  private _handleCurrencyKeydown(event: KeyboardEvent, currency: string) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._selectCurrency(currency);
+    }
+  }
+
+  // Handle keydown events for opening the currency list
+  public _handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._showSelectVisibility();
+    }
   }
 }
 
