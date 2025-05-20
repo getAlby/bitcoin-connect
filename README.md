@@ -499,6 +499,8 @@ See [Pure HTML](./demos/html/README.md)
 
 > [Example codepen](https://codepen.io/rolznz/pen/VwgNajr)
 
+For a more full example, see [dev/vite/index.html](./dev/vite/index.html) which can be run by following the development instructions below.
+
 ### React Demo
 
 See [React](./demos/react/README.md)
