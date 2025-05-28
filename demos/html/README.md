@@ -1,25 +1,12 @@
-# `demos/html`
-
-A simple demo showcasing how to use **Bitcoin Connect** web components in plain HTML.
-
-### Included Components
-
-<!-- * `<bc-button />` – Launches the wallet connection modal. -->
-* `<bc-pay-button />` – Opens a Lightning payment modal with a BOLT11 invoice.
-
-
----
-
 ## Previewing the Demos
 
 ### Option 1: Open HTML Files Directly
 
 You can open any of the demo files in your browser by double-clicking or using “Open with Browser”:
 
+* [`index.html`](./index.html)
 * [`bc-api-usage.html`](./bc-api-usage.html)
 * [`bc-pay-button.html`](./bc-pay-button.html)
-<!-- * [`bc-connect.html`](./bc-connect.html)
-* [`bc-payment.html`](./bc-payment.html) -->
 
 ---
 
@@ -31,23 +18,18 @@ We recommend using a local server for hot reloading and better cross-origin beha
 
 ```bash
 yarn install
-```
+````
 
 #### 2. Start the dev server
 
+Use any of the following scripts to preview a specific demo:
+
 ```bash
-yarn dev
+yarn dev               # Runs index.html 
+yarn bc-api-usage      # Runs bc-api-usage.html
+yarn bc-pay-button     # Runs bc-pay-button.html
 ```
 
-This will:
 
-* Start a dev server using [`@web/dev-server`](https://modern-web.dev/docs/dev-server/overview/).
-* Open `bc-api-usage.html` automatically in your default browser.
-* Watch for changes in the repo and reload the page live.
-
-To preview other demo files, manually open them in your browser:
-
-
-* [bc-pay-button.html](http://localhost:8000/demos/html/bc-pay-button.html)
-
+You can also manually visit any file at `http://localhost:8000/demos/html/<file>.html`
 
