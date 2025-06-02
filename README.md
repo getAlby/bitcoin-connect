@@ -274,10 +274,14 @@ To receive a payment the modal can be programmatically opened with:
 ```ts
 import {launchPaymentModal} from '@getalby/bitcoin-connect';
 
+let registeredExternalPayment = false;
 const {setPaid} = launchPaymentModal({
   invoice: 'lnbc...',
   //paymentMethods: "all" // "all" | "external" | "internal"
   onPaid: (response) => {
+    if (!registeredExternalPayment) {
+      return;
+    }
     clearInterval(checkPaymentInterval);
     alert('Received payment! ' + response.preimage);
   },
@@ -294,6 +298,7 @@ const checkPaymentInterval = setInterval(async () => {
   const paid = await invoice.verifyPayment();
 
   if (paid && invoice.preimage) {
+    registeredExternalPayment = true;
     setPaid({
       preimage: invoice.preimage,
     });
