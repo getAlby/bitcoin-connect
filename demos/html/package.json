@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "bc-button": "wds -r ../.. -o ./demos/html/bc-button.html --watch",
     "bc-api-usage": "wds -r ../.. -o ./demos/html/bc-api-usage.html --watch",
     "bc-pay-button": "wds -r ../.. -o ./demos/html/bc-pay-button.html --watch"
   },

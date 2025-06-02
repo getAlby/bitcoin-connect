@@ -4,7 +4,7 @@
 
 You can open any of the demo files in your browser by double-clicking or using “Open with Browser”:
 
-* [`index.html`](./index.html)
+* [`bc-button.html`](./bc-button.html)
 * [`bc-api-usage.html`](./bc-api-usage.html)
 * [`bc-pay-button.html`](./bc-pay-button.html)
 
@@ -25,7 +25,7 @@ yarn install
 Use any of the following scripts to preview a specific demo:
 
 ```bash
-yarn dev               # Runs index.html 
+yarn bc-button         # Runs bc-button.html 
 yarn bc-api-usage      # Runs bc-api-usage.html
 yarn bc-pay-button     # Runs bc-pay-button.html
 ```
