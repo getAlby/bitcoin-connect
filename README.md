@@ -479,7 +479,7 @@ import { WebLNProviders, requestProvider } from "@getalby/bitcoin-connect";
 const provider = await requestProvider();
 
 if (provider instanceof WebLNProviders.NostrWebLNProvider) {
-  provider.nostrWalletConnectUrl;
+  provider.client.nostrWalletConnectUrl;
 }
 
 if (provider instanceof WebLNProviders.LNCWebLNProvider) {
