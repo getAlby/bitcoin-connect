@@ -42,9 +42,7 @@
 
               if (paid) {
                 console.log('Payment received! Preimage:', invoice.preimage);
-                payButton._paid = true;
-                payButton.preimage = invoice.preimage;
-                payButton.requestUpdate();
+                payButton.setAttribute('preimage', invoice.preimage);
                 clearInterval(checkPaymentInterval);
               }
             } catch (error) {
