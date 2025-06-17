@@ -291,6 +291,8 @@ const {setPaid} = launchPaymentModal({
 // you can write your own polling function to check if your invoice has been paid
 // and then call the `setPaid` function.
 const checkPaymentInterval = setInterval(async () => {
+  // Make sure your verifyPayment function ONLY verifies the payment.
+  // If there are any side effects they will only happen when the payment is made externally.
   const paid = await invoice.verifyPayment();
 
   if (paid && invoice.preimage) {
