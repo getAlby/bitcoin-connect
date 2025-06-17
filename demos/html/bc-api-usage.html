@@ -51,7 +51,6 @@
       <!-- Demo buttons showing different API capabilities -->
       <button id="request-provider">Request provider</button>
       <button id="launch-modal">Open modal</button>
-      <button id="launch-modal-pay-invoice">Open modal to pay invoice</button>
       <button id="launch-modal-pay-invoice-lnurl-verify">
         LNURL-verify payment
       </button>
@@ -101,36 +100,7 @@
       });
 
       // ==============================================
-      // 3. Payment Modal with Manual Invoice Entry
-      // ==============================================
-      //! only payment made within the modal will be detected
-      document
-        .getElementById('launch-modal-pay-invoice')
-        .addEventListener('click', () => {
-          // Check for a stored invoice or prompt the user
-          const invoice = localStorage.getItem('invoice');
-          const invoiceToPay = invoice || window.prompt('paste invoice');
-
-          if (!invoiceToPay) {
-            alert('No invoice provided');
-            return;
-          }
-
-          // Launch payment modal with custom handlers
-          launchPaymentModal({
-            invoice: invoiceToPay,
-            paymentMethods,
-            onPaid: (response) => {
-              alert('Paid! ' + response.preimage);
-            },
-            onCancelled: () => {
-              alert('Payment cancelled');
-            },
-          });
-        });
-
-      // ==============================================
-      // 4. Payment with LNURL Verification
+      // 3. Payment with LNURL Verification
       // ==============================================
       document
         .getElementById('launch-modal-pay-invoice-lnurl-verify')
@@ -173,7 +143,7 @@
           }, 1000);
         });
       // ==============================================
-      // 5. Disconnect Wallet
+      // 4. Disconnect Wallet
       // ==============================================
       document
         .getElementById('disconnect-wallet')
