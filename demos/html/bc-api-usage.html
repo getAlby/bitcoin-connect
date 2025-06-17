@@ -55,6 +55,7 @@
       <button id="launch-modal-pay-invoice-lnurl-verify">
         LNURL-verify payment
       </button>
+      <button id="disconnect-wallet">Disconnect Wallet</button>
     </div>
 
     <script type="module">
@@ -64,6 +65,7 @@
         launchModal,
         launchPaymentModal,
         requestProvider,
+        disconnect,
       } from 'https://esm.sh/@getalby/bitcoin-connect@latest';
       import {LightningAddress} from 'https://esm.sh/@getalby/lightning-tools@latest';
 
@@ -83,7 +85,7 @@
             // Attempt to detect a WebLN provider (like Alby extension)
             const provider = await requestProvider();
             console.log('WebLN provider: ', provider);
-            alert('WebLN provider available');
+            alert('Wallet connected!');
           } catch (error) {
             console.error('Failed to request provider:', error);
             alert('Failed to request provider');
@@ -108,7 +110,7 @@
           // Check for a stored invoice or prompt the user
           const invoice = localStorage.getItem('invoice');
           const invoiceToPay = invoice || window.prompt('paste invoice');
-          
+
           if (!invoiceToPay) {
             alert('No invoice provided');
             return;
@@ -117,7 +119,7 @@
           // Launch payment modal with custom handlers
           launchPaymentModal({
             invoice: invoiceToPay,
-            paymentMethods, 
+            paymentMethods,
             onPaid: (response) => {
               alert('Paid! ' + response.preimage);
             },
@@ -136,7 +138,7 @@
           // Create a Lightning Address instance
           const ln = new LightningAddress('hello@getalby.com');
           await ln.fetch(); // Fetch LNURL metadata
-          
+
           // Request a new invoice for 1 satoshi
           const invoice = await ln.requestInvoice({satoshi: 1});
 
@@ -169,6 +171,15 @@
               console.error('Verification error:', error);
             }
           }, 1000);
+        });
+      // ==============================================
+      // 5. Disconnect Wallet
+      // ==============================================
+      document
+        .getElementById('disconnect-wallet')
+        .addEventListener('click', async () => {
+          disconnect();
+          alert('Disconnected wallet');
         });
     </script>
   </body>
