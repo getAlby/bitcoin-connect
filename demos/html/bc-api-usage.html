@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>bc-api-usage Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Basic styling for a clean demo interface */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        background: #f5f5f5;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        margin-top: 0;
+        font-size: 24px;
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        background: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #4338ca;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Programmatic Access Demo</h1>
+      <!-- Demo buttons showing different API capabilities -->
+      <button id="request-provider">Request provider</button>
+      <button id="launch-modal">Open modal</button>
+      <button id="launch-modal-pay-invoice-lnurl-verify">
+        LNURL-verify payment
+      </button>
+      <button id="disconnect-wallet">Disconnect Wallet</button>
+    </div>
+
+    <script type="module">
+      // Import required Bitcoin Connect functions and Lightning Tools
+      import {
+        init,
+        launchModal,
+        launchPaymentModal,
+        requestProvider,
+        disconnect,
+      } from 'https://esm.sh/@getalby/bitcoin-connect@latest';
+      import {LightningAddress} from 'https://esm.sh/@getalby/lightning-tools@latest';
+
+      // Initialize Bitcoin Connect with your app name
+      init({appName: 'Programmatic Access Demo'});
+
+      // Payment methods configuration: can be "all" | "external" | "internal"
+      const paymentMethods = 'all';
+
+      // ==============================================
+      // 1. Basic Provider Detection
+      // ==============================================
+      document
+        .getElementById('request-provider')
+        .addEventListener('click', async () => {
+          try {
+            // Attempt to detect a WebLN provider (like Alby extension)
+            const provider = await requestProvider();
+            console.log('WebLN provider: ', provider);
+            alert('Wallet connected!');
+          } catch (error) {
+            console.error('Failed to request provider:', error);
+            alert('Failed to request provider');
+          }
+        });
+
+      // ==============================================
+      // 2. Basic Modal Launch
+      // ==============================================
+      document.getElementById('launch-modal').addEventListener('click', () => {
+        // Opens the default Bitcoin Connect modal
+        launchModal();
+      });
+
+      // ==============================================
+      // 3. Payment with LNURL Verification
+      // ==============================================
+      document
+        .getElementById('launch-modal-pay-invoice-lnurl-verify')
+        .addEventListener('click', async () => {
+          // Create a Lightning Address instance
+          const ln = new LightningAddress('hello@getalby.com');
+          await ln.fetch(); // Fetch LNURL metadata
+
+          // Request a new invoice for 1 satoshi
+          const invoice = await ln.requestInvoice({satoshi: 1});
+
+          // Launch payment modal with enhanced verification
+          const {setPaid} = launchPaymentModal({
+            invoice: invoice.paymentRequest,
+            paymentMethods,
+            onPaid: (response) => {
+              console.log('Received payment! ' + response.preimage);
+              clearInterval(checkPaymentInterval);
+            },
+            onCancelled: () => {
+              clearInterval(checkPaymentInterval);
+              alert('Payment cancelled');
+            },
+          });
+
+          // Set up payment verification polling
+          // This checks every second if invoice was paid externally
+          const checkPaymentInterval = setInterval(async () => {
+            try {
+              const paid = await invoice.verifyPayment();
+              if (paid) {
+                // Update modal state if payment is detected
+                setPaid({
+                  preimage: invoice.preimage,
+                });
+              }
+            } catch (error) {
+              console.error('Verification error:', error);
+            }
+          }, 1000);
+        });
+      // ==============================================
+      // 4. Disconnect Wallet
+      // ==============================================
+      document
+        .getElementById('disconnect-wallet')
+        .addEventListener('click', async () => {
+          disconnect();
+          alert('Disconnected wallet');
+        });
+    </script>
+  </body>
+</html>

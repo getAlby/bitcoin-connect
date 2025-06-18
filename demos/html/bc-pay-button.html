@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bc-pay-button Demo</title>
+
+    <script type="module">
+      // Import necessary modules from esm.sh CDN
+      import {init} from 'https://esm.sh/@getalby/bitcoin-connect@latest';
+      import {LightningAddress} from 'https://esm.sh/@getalby/lightning-tools@latest';
+
+      // Initialize Bitcoin Connect with your app name
+      // This sets up the connection to Bitcoin wallets
+      init({appName: 'your app name'});
+
+      // Get reference to the pay button element in the DOM
+      const payButton = document.getElementById('pay-button');
+
+      // Add click event listener to the pay button
+      payButton.addEventListener('click', async () => {
+        try {
+          // Create a new LightningAddress instance for the recipient
+          const ln = new LightningAddress('hello@getalby.com');
+          await ln.fetch();
+
+          // Request an invoice from the Lightning address
+          // - satoshi: Amount to pay (1 satoshi = 0.00000001 BTC)
+          // - memo: Optional description of the payment
+          const invoice = await ln.requestInvoice({
+            satoshi: 1,
+            memo: 'bc-pay-button demo payment',
+          });
+
+          payButton.setAttribute('invoice', invoice.paymentRequest);
+
+          // Set up a payment verification loop
+          // Checks every second if payment was received
+          const checkPaymentInterval = setInterval(async () => {
+            try {
+              const paid = await invoice.verifyPayment();
+
+              if (paid) {
+                console.log('Payment received! Preimage:', invoice.preimage);
+                payButton.setAttribute('preimage', invoice.preimage);
+                clearInterval(checkPaymentInterval);
+              }
+            } catch (error) {
+              console.error('Verification error:', error);
+              clearInterval(checkPaymentInterval);
+            }
+          }, 1000);
+        } catch (error) {
+          console.error('Invoice creation failed:', error);
+          alert('Failed to create invoice: ' + error.message);
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <!-- Simple demo layout with the pay button -->
+    <div style="display: flex; flex-direction: column; gap: 1rem">
+      <code> &lt;bc-pay-button /&gt; Demo</code>
+
+      <bc-pay-button id="pay-button" title="Pay 1 Sats"></bc-pay-button>
+    </div>
+  </body>
+</html>
