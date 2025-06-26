@@ -142,7 +142,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
       const nwaClient = new nwa.NWAClient({
         name: this._appName,
         icon: this._appIcon,
-        relayUrl: 'wss://relay.paywithflash.com',
+        relayUrl: 'wss://nwclay.paywithflash.com',
         requestMethods,
         notificationTypes: authorizationUrlOptions?.notificationTypes,
         maxAmount: authorizationUrlOptions?.maxAmount,
