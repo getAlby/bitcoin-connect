@@ -50,7 +50,7 @@
     "@getalby/lightning-tools": "^5.2.0",
     "@getalby/sdk": "^4.1.1",
     "@lightninglabs/lnc-web": "^0.3.2-alpha",
-    "qrcode-generator": "^1.5.0",
+    "qrcode-generator": "1.4.4",
     "zustand": "^4.5.7"
   },
   "devDependencies": {

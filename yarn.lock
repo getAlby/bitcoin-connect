@@ -6150,10 +6150,10 @@ puppeteer-core@^19.8.1:
     unbzip2-stream "1.4.3"
     ws "8.13.0"
 
-qrcode-generator@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/qrcode-generator/-/qrcode-generator-1.5.0.tgz#045b18cdb5fd8d6c7005ba9208bc176b9864ce7d"
-  integrity sha512-sqo7otiDq5rA4djRkFI7IjLQqxRrLpIou0d3rqr03JJLUGf5raPh91xCio+lFFbQf0SlcVckStz0EmDEX3EeZA==
+qrcode-generator@1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/qrcode-generator/-/qrcode-generator-1.4.4.tgz#63f771224854759329a99048806a53ed278740e7"
+  integrity sha512-HM7yY8O2ilqhmULxGMpcHSF1EhJJ9yBj8gvDEuZ6M+KGJ0YY2hKpnXvRD+hZPLrDVck3ExIGhmPtSdcjC+guuw==
 
 qs@^6.5.2:
   version "6.11.2"
