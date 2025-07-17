@@ -80,7 +80,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
       <div>
         <div
           class="flex justify-center items-start flex-wrap gap-5 ${this._showAll
-            ? 'max-h-64 overflow-y-auto'
+            ? 'max-h-96 overflow-y-auto'
             : ''}"
         >
           ${(this._showAll
@@ -96,7 +96,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
                 ]}"
                 @click=${this._toggleShowAll}
               >
-                show all
+                show all (${connectors.length})
               </button>
             </div> `
           : null}
