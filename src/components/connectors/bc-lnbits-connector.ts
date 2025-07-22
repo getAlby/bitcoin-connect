@@ -6,7 +6,7 @@ import {lnbitsIcon} from '../icons/connectors/lnbitsIcon';
 export const lnbitsConnectorTitle = 'LNbits';
 
 @customElement('bc-lnbits-connector')
-export class GenericNWCConnector extends ConnectorElement {
+export class LNBitsConnector extends ConnectorElement {
   constructor() {
     super('lnbits', lnbitsConnectorTitle, '#673ab7', lnbitsIcon);
   }
@@ -18,6 +18,6 @@ export class GenericNWCConnector extends ConnectorElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-lnbits-connector': GenericNWCConnector;
+    'bc-lnbits-connector': LNBitsConnector;
   }
 }

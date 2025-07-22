@@ -1,14 +1,18 @@
 import {TemplateResult, html} from 'lit';
 import {withTwind} from './twind/withTwind.js';
 import {BitcoinConnectElement} from './BitcoinConnectElement.js';
-import {customElement} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 import './connectors/index.js';
+import {classes} from './css/classes.js';
 
 /**
  * A list of available connectors
  */
 @customElement('bc-connector-list')
 export class ConnectorList extends withTwind()(BitcoinConnectElement) {
+  @state()
+  _showAll = false;
+
   override render() {
     // TODO: find a better way to filter these when multiple filters exist
     // TODO: allow re-ordering connectors
@@ -24,6 +28,24 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     connectors.push({
       order: 0,
       result: html`<bc-flash-connector></bc-flash-connector>`,
+    });
+    connectors.push({
+      order: 0,
+      result: html`<bc-primal-connector></bc-primal-connector>`,
+    });
+    connectors.push({
+      order: 0,
+      result: html`<bc-cashu-me-connector></bc-cashu-me-connector>`,
+    });
+    if (this._filters && this._filters.indexOf('nwc') > -1) {
+      connectors.push({
+        order: 0,
+        result: html`<bc-lnbits-nwc-connector></bc-lnbits-nwc-connector>`,
+      });
+    }
+    connectors.push({
+      order: 0,
+      result: html`<bc-rizful-connector></bc-rizful-connector>`,
     });
     connectors.push({
       order: 0,
@@ -52,11 +74,37 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     }
     connectors.sort((a, b) => a.order - b.order);
 
+    const maxConnectors = 9;
+
     return html`
-      <div class="flex justify-center items-start flex-wrap gap-5">
-        ${connectors.map((c) => c.result)}
+      <div>
+        <div
+          class="flex justify-center items-start flex-wrap gap-5 ${this._showAll
+            ? 'max-h-96 overflow-y-auto'
+            : ''}"
+        >
+          ${(this._showAll
+            ? connectors
+            : connectors.slice(0, maxConnectors)
+          ).map((c) => c.result)}
+        </div>
+        ${!this._showAll && connectors.length > maxConnectors
+          ? html`<div class="text-center">
+              <button
+                class="${classes.interactive} text-xs font-medium mt-8 ${classes[
+                  'text-neutral-secondary'
+                ]}"
+                @click=${this._toggleShowAll}
+              >
+                show all (${connectors.length})
+              </button>
+            </div> `
+          : null}
       </div>
     `;
+  }
+  private _toggleShowAll() {
+    this._showAll = true;
   }
 }
 
