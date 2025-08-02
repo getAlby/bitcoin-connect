@@ -1,7 +1,7 @@
-import {types} from '@getalby/sdk';
+import {nwc} from '@getalby/sdk';
 
 export type WebLNProviderConfig = {
   nwc?: {
-    authorizationUrlOptions: types.NWCAuthorizationUrlOptions;
+    authorizationUrlOptions: nwc.NWCAuthorizationUrlOptions;
   };
 };
