@@ -5,7 +5,7 @@ import {html} from 'lit';
 import '../internal/bci-button';
 import {classes} from '../css/classes';
 import store from '../../state/store';
-import {nwa} from '@getalby/sdk';
+import {nwc} from '@getalby/sdk';
 import {copiedIcon} from '../icons/copiedIcon';
 import {copyIcon} from '../icons/copyIcon';
 import qrcode from 'qrcode-generator';
@@ -137,7 +137,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
         ];
       }
 
-      const nwaClient = new nwa.NWAClient({
+      const nwaClient = new nwc.NWAClient({
         name: this._appName,
         icon: this._appIcon,
         relayUrl: 'wss://relay.getalby.com/v1',
