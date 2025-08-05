@@ -106,7 +106,6 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
   }
 
   private _copyAuthString() {
-    console.log('copying auth string');
     if (!this._authString) {
       return;
     }
@@ -162,7 +161,6 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
 
       const {unsub} = await nwaClient.subscribe({
         onSuccess: async (nwcClient) => {
-          console.log('nwcClient.nostrWalletConnectUrl', nwcClient);
           nwcClient.close();
           // TODO: it makes no sense to connect again
           store.getState().connect({
