@@ -23,7 +23,6 @@ export class CoinosConnector extends ConnectorElement {
           name: this._appName,
         }
       );
-      console.log('nwcClient', nwcClient);
       nwcClient.close();
       // TODO: it makes no sense to connect again
       await store.getState().connect({
