@@ -12,7 +12,7 @@ export class RizfulConnector extends ConnectorElement {
   }
 
   protected async _onClick() {
-    store.getState().pushRoute('/lnbits-nwc');
+    store.getState().pushRoute('/rizful');
   }
 }
 
