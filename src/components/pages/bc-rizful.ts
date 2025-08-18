@@ -22,17 +22,16 @@ export class RizfulPage extends withTwind()(BitcoinConnectElement) {
         <div class="px-8 pt-4 w-full">
           <div class="mb-2 ${classes['text-neutral-secondary']}">
             1. Open
-            <a href="https://rizful.com" target="_blank" class="font-bold"
-              >Rizful
+            <a href="https://rizful.com/w" target="_blank" class="font-bold"
+              >Rizful Wallet
             </a>
           </div>
           <div class="mb-2 ${classes['text-neutral-secondary']}">
             2. Click on
             <span class="semibold"
-              >Apps -> New App Connection -> New Send & Receive Connection</span
-            >
-            and save the connection. Then click
-            <span class="semibold">Get Connection Code</span> and click
+              >Hamburger Menu -> NWC -> Get NWC codes -> New Connection</span
+            >. Then click <span class="semibold">Get Connection Code</span> and
+            click
             <span class="semibold">Copy Connection Code</span>
           </div>
 
