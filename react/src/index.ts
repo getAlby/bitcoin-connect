@@ -5,6 +5,8 @@ export * from './components/Payment';
 export {
   init,
   closeModal,
+  connect,
+  connectNWC,
   disconnect,
   isConnected,
   launchModal,
