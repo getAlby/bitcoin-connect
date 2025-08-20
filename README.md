@@ -313,6 +313,26 @@ import {closeModal} from '@getalby/bitcoin-connect';
 closeModal();
 ```
 
+#### Connect to a user's wallet
+
+```ts
+import {connect} from '@getalby/bitcoin-connect';
+
+connect({
+  connectorName: 'NWC',
+  connectorType: 'nwc.generic',
+  nwcUrl: 'nostr+walletconnect://...',
+});
+```
+
+#### Connect to a user's NWC wallet
+
+```ts
+import {connectNWC} from '@getalby/bitcoin-connect';
+
+connectNWC('nostr+walletconnect://...');
+```
+
 #### Disconnect from wallet
 
 ```ts

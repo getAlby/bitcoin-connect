@@ -2,6 +2,8 @@ import {SendPaymentResponse, WebLNProvider} from '@webbtc/webln-types';
 import store from './state/store';
 import {PaymentMethods} from './types/PaymentMethods';
 import {BitcoinConnectConfig} from './types/BitcoinConnectConfig';
+import {ConnectorConfig} from './types/ConnectorConfig';
+import {genericConnectorTitle} from './components/connectors/bc-generic-nwc-connector';
 
 type LaunchPaymentModalArgs = {
   /**
@@ -274,6 +276,24 @@ export function closeModal() {
   store.getState().setModalOpen(false);
   store.getState().clearRouteHistory();
   store.getState().setError(undefined);
+}
+
+/**
+ * Programmatically connect to a user's wallet
+ */
+export function connect(config: ConnectorConfig) {
+  store.getState().connect(config);
+}
+
+/**
+ * Programmatically connect to a user's NWC wallet
+ */
+export function connectNWC(nwcUrl: string) {
+  store.getState().connect({
+    connectorName: genericConnectorTitle,
+    connectorType: 'nwc.generic',
+    nwcUrl,
+  });
 }
 
 /**
