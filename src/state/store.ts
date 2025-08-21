@@ -202,15 +202,17 @@ function saveConfig(config: ConnectorConfig) {
 function autoConnect() {
   try {
     const {hash} = window.location;
-    const qsPos = hash.indexOf('?');
-    // handle /#/?nwc=... and /#nwc=... (or #/?nwc=... and #nwc=...)
-    const qsStr = hash.slice(qsPos > 0 ? qsPos : 1);
-    const params = new URLSearchParams(qsStr);
-    const nwc = params.get('nwc');
-    if (nwc && nwc.startsWith('nostr+walletconnect://')) {
-      const {searchParams} = new URL(nwc);
-      if (searchParams.get('relay') && searchParams.get('secret')) {
-        connectNWC(nwc);
+    if (hash) {
+      const qsPos = hash.indexOf('?');
+      // handle /#/?nwc=... and /#nwc=... (or #/?nwc=... and #nwc=...)
+      const qsStr = hash.slice(qsPos > 0 ? qsPos : 1);
+      const params = new URLSearchParams(qsStr);
+      const nwc = params.get('nwc');
+      if (nwc && nwc.startsWith('nostr+walletconnect://')) {
+        const {searchParams} = new URL(nwc);
+        if (searchParams.get('relay') && searchParams.get('secret')) {
+          connectNWC(nwc);
+        }
       }
     }
   } catch (e) {
