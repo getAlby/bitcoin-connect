@@ -211,6 +211,9 @@ function autoConnect() {
       if (nwc && nwc.startsWith('nostr+walletconnect://')) {
         const {searchParams} = new URL(nwc);
         if (searchParams.get('relay') && searchParams.get('secret')) {
+          params.delete('nwc');
+          window.location.hash =
+            hash.slice(0, qsPos > 0 ? qsPos + 1 : 1) + params.toString();
           connectNWC(nwc);
         }
       }
