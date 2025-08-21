@@ -21,6 +21,14 @@ export type BitcoinConnectConfig = {
   showBalance?: boolean;
 
   /**
+   * Automatically connect to a user's NWC wallet when the page loads
+   * NWC connection URL is passed as a hash parameter (URL encoded)
+   * Example: https://myapp.com/#/?nwc=nostr%2Bwalletconnect%3A%2F%2F...
+   * @default true
+   */
+  autoConnect?: boolean;
+
+  /**
    * Customize individual providers (NWC, LNC, LNbits etc)
    */
   providerConfig?: WebLNProviderConfig;

@@ -1,5 +1,6 @@
 import {createStore} from 'zustand/vanilla';
 import {ConnectorConfig} from '../types/ConnectorConfig';
+import {connectNWC} from '../api';
 import {connectors} from '../connectors';
 import {Connector} from '../connectors/Connector';
 import {Route} from '../components/routes';
@@ -153,6 +154,13 @@ const store = createStore<Store>((set, get) => ({
         ...bitcoinConnectConfig,
       },
     });
+    const state = get();
+    if (
+      state.bitcoinConnectConfig.autoConnect !== false &&
+      !(state.connected || state.connecting)
+    ) {
+      autoConnect();
+    }
   },
   setError: (error) => {
     set({error});
@@ -185,4 +193,27 @@ function deleteConfig() {
 
 function saveConfig(config: ConnectorConfig) {
   window.localStorage.setItem('bc:config', JSON.stringify(config));
+}
+
+/**
+ * Automatically connect to a user's NWC wallet if the URL hash parameter "nwc"
+ * contains a valid NWC connection URL
+ */
+function autoConnect() {
+  try {
+    const {hash} = window.location;
+    const qsPos = hash.indexOf('?');
+    // handle /#/?nwc=... and /#nwc=... (or #/?nwc=... and #nwc=...)
+    const qsStr = hash.slice(qsPos > 0 ? qsPos : 1);
+    const params = new URLSearchParams(qsStr);
+    const nwc = params.get('nwc');
+    if (nwc && nwc.startsWith('nostr+walletconnect://')) {
+      const {searchParams} = new URL(nwc);
+      if (searchParams.get('relay') && searchParams.get('secret')) {
+        connectNWC(nwc);
+      }
+    }
+  } catch (e) {
+    console.error(e);
+  }
 }
