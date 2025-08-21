@@ -3,7 +3,6 @@ import store from './state/store';
 import {PaymentMethods} from './types/PaymentMethods';
 import {BitcoinConnectConfig} from './types/BitcoinConnectConfig';
 import {ConnectorConfig} from './types/ConnectorConfig';
-import {genericConnectorTitle} from './components/connectors/bc-generic-nwc-connector';
 
 type LaunchPaymentModalArgs = {
   /**
@@ -289,11 +288,7 @@ export function connect(config: ConnectorConfig) {
  * Programmatically connect to a user's NWC wallet
  */
 export function connectNWC(nwcUrl: string) {
-  store.getState().connect({
-    connectorName: genericConnectorTitle,
-    connectorType: 'nwc.generic',
-    nwcUrl,
-  });
+  store.getState().connectNWC(nwcUrl);
 }
 
 /**

@@ -1,6 +1,5 @@
 import {createStore} from 'zustand/vanilla';
 import {ConnectorConfig} from '../types/ConnectorConfig';
-import {connectNWC} from '../api';
 import {connectors} from '../connectors';
 import {Connector} from '../connectors/Connector';
 import {Route} from '../components/routes';
@@ -30,6 +29,7 @@ interface Store {
   readonly info: GetInfoResponse | undefined;
 
   connect(config: ConnectorConfig, connectOptions?: ConnectOptions): void;
+  connectNWC(nwcUrl: string): void;
   disconnect(): void;
   pushRoute(route: Route): void;
   popRoute(): void;
@@ -62,6 +62,12 @@ const store = createStore<Store>((set, get) => ({
   connectorConfig: undefined,
   bitcoinConnectConfig: DEFAULT_BITCOIN_CONNECT_CONFIG,
   info: undefined,
+  connectNWC: (nwcUrl) =>
+    get().connect({
+      connectorName: 'NWC',
+      connectorType: 'nwc.generic',
+      nwcUrl,
+    }),
   connect: async (
     connectorConfig: ConnectorConfig,
     connectOptions: ConnectOptions = {redirectTo: '/connected'}
@@ -214,7 +220,7 @@ function autoConnect() {
           params.delete('nwc');
           window.location.hash =
             hash.slice(0, qsPos > 0 ? qsPos + 1 : 1) + params.toString();
-          connectNWC(nwc);
+          store.getState().connectNWC(nwc);
         }
       }
     }
