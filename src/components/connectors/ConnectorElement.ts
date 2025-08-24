@@ -30,7 +30,9 @@ export abstract class ConnectorElement extends withTwind()(
   override render() {
     return html`<div
       class="flex flex-col justify-between items-center w-32 -mx-4 cursor-pointer ${classes.interactive}"
+      tabindex="0"
       @click=${this._onClick}
+      @keydown=${this._handleKeydown}
     >
       <div
         class="w-16 h-16 drop-shadow rounded-2xl flex justify-center items-center overflow-hidden"
@@ -46,6 +48,14 @@ export abstract class ConnectorElement extends withTwind()(
         ${this._title}
       </span>
     </div>`;
+  }
+
+  // Handle keyboard events for accessibility (Enter/Space key triggers click)
+  public _handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._onClick();
+    }
   }
 
   protected _connect(
