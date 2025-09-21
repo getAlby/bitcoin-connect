@@ -31,7 +31,11 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
         ${this.showHelp
           ? html`<div
               class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+              role="button"
+              tabindex="0"
+              aria-label="Show help"
               @click=${() => store.getState().pushRoute('/help')}
+              @keydown=${this._onHelpKeyDown}
             >
               ${helpIcon}
             </div>`
@@ -39,7 +43,11 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
         ${this.closable
           ? html`<div
               class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+              role="button"
+              tabindex="0"
+              aria-label="Close modal"
               @click=${this._handleClose}
+              @keydown=${this._onCloseKeyDown}
             >
               ${crossIcon}
             </div>`
@@ -54,6 +62,20 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
   private _handleClose() {
     this.dispatchEvent(new Event('onclose', {bubbles: true, composed: true}));
   }
+
+  private _onHelpKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      store.getState().pushRoute('/help');
+    }
+  };
+
+  private _onCloseKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._handleClose();
+    }
+  };
 }
 
 declare global {
