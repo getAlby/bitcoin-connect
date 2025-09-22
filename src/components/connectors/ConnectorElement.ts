@@ -28,8 +28,9 @@ export abstract class ConnectorElement extends withTwind()(
   }
 
   override render() {
-    return html`<div
+    return html`<button
       class="flex flex-col justify-between items-center w-32 -mx-4 cursor-pointer ${classes.interactive}"
+      aria-label="Connect with ${this._title}"
       @click=${this._onClick}
     >
       <div
@@ -45,7 +46,7 @@ export abstract class ConnectorElement extends withTwind()(
       >
         ${this._title}
       </span>
-    </div>`;
+    </button>`;
   }
 
   protected _connect(

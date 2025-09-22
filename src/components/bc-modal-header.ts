@@ -29,20 +29,22 @@ export class ModalHeader extends withTwind()(BitcoinConnectElement) {
         class="absolute right-0 h-full flex items-center justify-center gap-2"
       >
         ${this.showHelp
-          ? html`<div
+          ? html`<button
               class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+              aria-label="Show help"
               @click=${() => store.getState().pushRoute('/help')}
             >
               ${helpIcon}
-            </div>`
+            </button>`
           : null}
         ${this.closable
-          ? html`<div
+          ? html`<button
               class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+              aria-label="Close modal"
               @click=${this._handleClose}
             >
               ${crossIcon}
-            </div>`
+            </button>`
           : null}
       </div>
       <div class="flex items-center justify-center">
