@@ -11,21 +11,6 @@ export class AlbyHubConnector extends ConnectorElement {
     super('nwc.albyhub', albyHubConnectorTitle, '#000000', albyhubIcon);
   }
 
-  override connectedCallback() {
-    super.connectedCallback();
-    // Auto-focus this connector since it's typically the first one shown
-    this.updateComplete.then(() => {
-      setTimeout(() => {
-        const buttonElement = this.shadowRoot?.querySelector(
-          '[role="button"]'
-        ) as HTMLElement;
-        if (buttonElement) {
-          buttonElement.focus();
-        }
-      }, 200);
-    });
-  }
-
   protected async _onClick() {
     store.getState().pushRoute('/alby-hub');
   }

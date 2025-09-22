@@ -8,26 +8,6 @@ import {closeModal} from '../api';
 
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
-  override connectedCallback() {
-    super.connectedCallback();
-
-    document.addEventListener('keydown', this._handleGlobalKeyDown);
-  }
-
-  override disconnectedCallback() {
-    super.disconnectedCallback();
-
-    document.removeEventListener('keydown', this._handleGlobalKeyDown);
-  }
-
-  private _handleGlobalKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      this._handleClose();
-      return;
-    }
-  };
-
   override render() {
     return html` <div
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
