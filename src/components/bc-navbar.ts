@@ -16,12 +16,16 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
       class="flex justify-center items-center gap-2 w-full relative pb-4"
     >
       <div class="absolute left-8 h-full flex items-center justify-center">
-        <div
-          class="${classes.interactive} ${classes['text-neutral-tertiary']}"
+        <button
+          class="${classes.interactive} ${classes[
+            'text-neutral-tertiary'
+          ]} border-none bg-transparent p-2 cursor-pointer"
           @click=${this._goBack}
+          aria-label="Go back"
+          title="Go back"
         >
           ${backIcon}
-        </div>
+        </button>
       </div>
       <div class="font-sans font-medium ${classes['text-neutral-primary']}">
         ${this.heading}
