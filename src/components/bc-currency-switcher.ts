@@ -60,36 +60,42 @@ export class CurrencySwitcher extends withTwind()(BitcoinConnectElement) {
   override render() {
     if (!this._isSwitchingCurrency) {
       return html`<div class="flex justify-center items-center gap-2">
-        <div
+        <button
           class="${classes.interactive}"
+          aria-label="Switch currency (current: ${this._selectedCurrency ||
+          'sats'})"
           @click=${this._showSelectVisibility}
         >
           <slot></slot>
-        </div>
+        </button>
       </div>`;
     }
 
     const currencies = getCurrencies();
     const selectedCurrency = this._selectedCurrency || 'sats';
 
-    return html`<ul
+    return html`<div
       class="h-48 overflow-y-scroll px-4 grid grid-cols-2 gap-3 currencies-list -mb-10"
+      role="list"
+      aria-label="Available currencies"
     >
       ${currencies.map(
         (currency) => html`
-          <li
+          <button
             class="${selectedCurrency === currency.value
               ? 'bg-blue-500 text-white'
               : ''} flex items-center justify-center py-2 px-4 hover:text-white hover:bg-blue-500 rounded-lg hover:border-blue-500 cursor-pointer"
+            aria-label="Select ${currency.value} currency"
+            aria-pressed="${selectedCurrency === currency.value}"
             @click=${() => this._selectCurrency(currency.value)}
           >
             <span class="text-orange-400 inline-block mr-2 text-xl"
               >${currency.flag}</span
             ><span class="text-xl">${currency.value}</span>
-          </li>
+          </button>
         `
       )}
-    </ul>`;
+    </div>`;
   }
 
   private _showSelectVisibility() {
