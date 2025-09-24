@@ -60,6 +60,8 @@ export class Start extends withTwind()(BitcoinConnectElement) {
               class="my-8 ${classes[
                 'text-neutral-primary'
               ]} w-64 max-w-full text-center"
+              role="heading"
+              aria-level="1"
             >
               How would you like to
               connect${this._appName &&
@@ -71,16 +73,18 @@ export class Start extends withTwind()(BitcoinConnectElement) {
             <bc-connector-list></bc-connector-list>
 
             <div class="flex flex-col items-center w-full font-sans text-sm">
-              <h1 class="mt-8 ${classes['text-neutral-primary']} text-center">
+              <p class="mt-8 ${classes['text-neutral-primary']} text-center">
                 Don't have a bitcoin lightning wallet?
-                <a
-                  class="no-underline font-bold ${classes.interactive} ${classes[
+                <button
+                  class="font-bold ${classes.interactive} ${classes[
                     'text-brand-mixed'
-                  ]} "
+                  ]}"
+                  aria-label="Get a bitcoin lightning wallet"
                   @click=${() => store.getState().pushRoute('/new-wallet')}
-                  >Get one here</a
                 >
-              </h1>
+                  Get one here
+                </button>
+              </p>
             </div>
           `}
     </div>`;

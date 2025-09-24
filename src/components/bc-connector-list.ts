@@ -94,6 +94,7 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
                 class="${classes.interactive} text-xs font-medium mt-8 ${classes[
                   'text-neutral-secondary'
                 ]}"
+                aria-label="Show all ${connectors.length} wallet connectors"
                 @click=${this._toggleShowAll}
               >
                 show all (${connectors.length})
