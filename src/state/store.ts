@@ -133,9 +133,9 @@ const store = createStore<Store>((set, get) => ({
       modalOpen: false,
     });
 
-    // Only delete config if persistConnection is enabled (default behavior)
+    // Only delete config if persistConnection is disabled
     const {bitcoinConnectConfig} = get();
-    if (bitcoinConnectConfig.persistConnection !== false) {
+    if (bitcoinConnectConfig.persistConnection === false) {
       deleteConfig();
     }
   },
