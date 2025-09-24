@@ -105,7 +105,12 @@ const store = createStore<Store>((set, get) => ({
         connectorName: connectorConfig.connectorName,
         route: connectOptions.redirectTo,
       });
-      saveConfig(connectorConfig);
+
+      // Only save config if persistConnection is enabled (default: true)
+      const {bitcoinConnectConfig} = get();
+      if (bitcoinConnectConfig.persistConnection !== false) {
+        saveConfig(connectorConfig);
+      }
     } catch (error) {
       console.error(error);
       set({
@@ -127,7 +132,12 @@ const store = createStore<Store>((set, get) => ({
       provider: undefined,
       modalOpen: false,
     });
-    deleteConfig();
+
+    // Only delete config if persistConnection is enabled (default behavior)
+    const {bitcoinConnectConfig} = get();
+    if (bitcoinConnectConfig.persistConnection !== false) {
+      deleteConfig();
+    }
   },
   // TODO: support passing route parameters as a second argument
   pushRoute: (route: Route) => {
@@ -154,12 +164,23 @@ const store = createStore<Store>((set, get) => ({
     set({modalOpen});
   },
   setBitcoinConnectConfig: (bitcoinConnectConfig) => {
+    const newConfig = {
+      ...DEFAULT_BITCOIN_CONNECT_CONFIG,
+      ...bitcoinConnectConfig,
+    };
+
     set({
-      bitcoinConnectConfig: {
-        ...DEFAULT_BITCOIN_CONNECT_CONFIG,
-        ...bitcoinConnectConfig,
-      },
+      bitcoinConnectConfig: newConfig,
     });
+
+    // If persistConnection is disabled, clear any existing stored config
+    if (newConfig.persistConnection === false) {
+      deleteConfig();
+    } else {
+      // If persistence is enabled, load any existing config
+      loadStoredConfig();
+    }
+
     const state = get();
     if (
       state.bitcoinConnectConfig.autoConnect !== false &&
@@ -199,6 +220,19 @@ function deleteConfig() {
 
 function saveConfig(config: ConnectorConfig) {
   window.localStorage.setItem('bc:config', JSON.stringify(config));
+}
+
+function loadStoredConfig() {
+  const configJson = window.localStorage.getItem('bc:config');
+  if (configJson) {
+    const config = JSON.parse(configJson) as ConnectorConfig;
+    store.getState().connect(config, {redirectTo: '/start'});
+  }
+
+  const currency = window.localStorage.getItem('bc:currency');
+  if (currency) {
+    store.getState().setCurrency(currency);
+  }
 }
 
 /**

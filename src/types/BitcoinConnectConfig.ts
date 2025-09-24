@@ -29,6 +29,13 @@ export type BitcoinConnectConfig = {
   autoConnect?: boolean;
 
   /**
+   * Save connection configuration to local storage for persistence
+   * Set to false for apps that only need to initialize connection and get NWC secret
+   * @default true
+   */
+  persistConnection?: boolean;
+
+  /**
    * Customize individual providers (NWC, LNC, LNbits etc)
    */
   providerConfig?: WebLNProviderConfig;
@@ -37,4 +44,5 @@ export type BitcoinConnectConfig = {
 export const DEFAULT_BITCOIN_CONNECT_CONFIG: BitcoinConnectConfig = {
   showBalance: true,
   appName: 'Bitcoin Connect',
+  persistConnection: true,
 };
