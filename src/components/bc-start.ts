@@ -78,7 +78,7 @@ export class Start extends withTwind()(BitcoinConnectElement) {
                 <button
                   class="font-bold ${classes.interactive} ${classes[
                     'text-brand-mixed'
-                  ]} bg-transparent border-none p-0 underline text-sm"
+                  ]}"
                   aria-label="Get a bitcoin lightning wallet"
                   @click=${() => store.getState().pushRoute('/new-wallet')}
                 >
