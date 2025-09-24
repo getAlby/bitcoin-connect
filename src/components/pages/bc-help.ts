@@ -35,26 +35,28 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
         </div>
 
         <div class="flex gap-4 w-full my-6 px-8">
-          <bci-button
-            class="flex-1"
+          <a
+            href="https://bitcoin-connect.com"
+            target="_blank"
+            class="${classes['hover-animation']} flex-1"
             aria-label="Learn more about Bitcoin Connect (opens in new tab)"
-            @click=${() => window.open('https://bitcoin-connect.com', '_blank')}
           >
-            <span class="${classes['text-brand-mixed']}">Learn more</span>
-            ${linkIcon}
-          </bci-button>
-          <bci-button
-            class="flex-1"
+            <bci-button tabindex="-1">
+              <span class="${classes['text-brand-mixed']}">Learn more</span>
+              ${linkIcon}
+            </bci-button>
+          </a>
+          <a
+            href="https://github.com/getAlby/bitcoin-connect"
+            target="_blank"
+            class="${classes['hover-animation']} flex-1"
             aria-label="Use Bitcoin Connect on GitHub (opens in new tab)"
-            @click=${() =>
-              window.open(
-                'https://github.com/getAlby/bitcoin-connect',
-                '_blank'
-              )}
           >
-            <span class="${classes['text-brand-mixed']}">Use it</span>
-            ${linkIcon}
-          </bci-button>
+            <bci-button tabindex="-1">
+              <span class="${classes['text-brand-mixed']}">Use it</span>
+              ${linkIcon}
+            </bci-button>
+          </a>
         </div>
         ${hr()}
         <div

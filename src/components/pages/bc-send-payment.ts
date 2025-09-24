@@ -236,9 +236,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
         class="
         flex gap-1
         mt-4
-        ${classes[
-          'text-brand-mixed'
-        ]} ${classes.interactive} font-semibold text-xs bg-transparent border-none p-0"
+        ${classes['text-brand-mixed']} ${classes.interactive}"
         aria-label="${this._hasCopiedInvoice
           ? 'Invoice copied to clipboard'
           : 'Copy invoice to clipboard'}"
