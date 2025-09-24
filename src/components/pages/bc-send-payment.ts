@@ -231,18 +231,21 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       <a href="lightning:${this.invoice}" class="dark:mt-2">
         <canvas id="qr" class="dark:bg-white dark:p-4"></canvas>
       </a>
-      <a
+      <button
         @click=${this._copyInvoice}
         class="
         flex gap-1
         mt-4
         ${classes[
           'text-brand-mixed'
-        ]} ${classes.interactive} font-semibold text-xs"
+        ]} ${classes.interactive} font-semibold text-xs bg-transparent border-none p-0"
+        aria-label="${this._hasCopiedInvoice
+          ? 'Invoice copied to clipboard'
+          : 'Copy invoice to clipboard'}"
       >
         ${this._hasCopiedInvoice ? copiedIcon : copyIcon}
         ${this._hasCopiedInvoice ? 'Copied!' : 'Copy Invoice'}
-      </a>
+      </button>
     `;
   }
 
