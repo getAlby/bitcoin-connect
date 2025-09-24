@@ -105,7 +105,12 @@ const store = createStore<Store>((set, get) => ({
         connectorName: connectorConfig.connectorName,
         route: connectOptions.redirectTo,
       });
-      saveConfig(connectorConfig);
+
+      // Only save config if persistConnection is enabled (default: true)
+      const {bitcoinConnectConfig} = get();
+      if (bitcoinConnectConfig.persistConnection !== false) {
+        saveConfig(connectorConfig);
+      }
     } catch (error) {
       console.error(error);
       set({
@@ -127,7 +132,12 @@ const store = createStore<Store>((set, get) => ({
       provider: undefined,
       modalOpen: false,
     });
-    deleteConfig();
+
+    // Only delete config if persistConnection is enabled (default behavior)
+    const {bitcoinConnectConfig} = get();
+    if (bitcoinConnectConfig.persistConnection !== false) {
+      deleteConfig();
+    }
   },
   // TODO: support passing route parameters as a second argument
   pushRoute: (route: Route) => {
@@ -154,12 +164,20 @@ const store = createStore<Store>((set, get) => ({
     set({modalOpen});
   },
   setBitcoinConnectConfig: (bitcoinConnectConfig) => {
+    const config = {
+      ...DEFAULT_BITCOIN_CONNECT_CONFIG,
+      ...bitcoinConnectConfig,
+    };
+
     set({
-      bitcoinConnectConfig: {
-        ...DEFAULT_BITCOIN_CONNECT_CONFIG,
-        ...bitcoinConnectConfig,
-      },
+      bitcoinConnectConfig: config,
     });
+
+    // If persistConnection is disabled, clear any existing stored config
+    if (config.persistConnection === false) {
+      deleteConfig();
+    }
+
     const state = get();
     if (
       state.bitcoinConnectConfig.autoConnect !== false &&

@@ -1,7 +1,8 @@
 import {ConnectorConfig} from '../types/ConnectorConfig';
+import {DEFAULT_BITCOIN_CONNECT_CONFIG} from '../types/BitcoinConnectConfig';
 import store from './store';
 
-function loadConfig() {
+export function loadConfig() {
   const configJson = window.localStorage.getItem('bc:config');
   if (configJson) {
     const config = JSON.parse(configJson) as ConnectorConfig;
@@ -31,6 +32,16 @@ function addEventListeners() {
 }
 
 if (globalThis.window) {
-  loadConfig();
+  // loadConfig is now called conditionally from setBitcoinConnectConfig
+  // only call loadConfig here if no init() will be called (for backward compatibility)
+  // We'll add a small delay to allow init() to be called first
+  setTimeout(() => {
+    const state = store.getState();
+    // Only auto-load if no config has been set via init() and persistConnection is not explicitly disabled
+    if (state.bitcoinConnectConfig === DEFAULT_BITCOIN_CONNECT_CONFIG) {
+      loadConfig();
+    }
+  }, 0);
+
   addEventListeners();
 }
