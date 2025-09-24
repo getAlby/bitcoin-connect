@@ -39,8 +39,9 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
             href="https://bitcoin-connect.com"
             target="_blank"
             class="${classes['hover-animation']} flex-1"
+            aria-label="Learn more about Bitcoin Connect (opens in new tab)"
           >
-            <bci-button>
+            <bci-button tabindex="-1">
               <span class="${classes['text-brand-mixed']}">Learn more</span>
               ${linkIcon}
             </bci-button>
@@ -49,8 +50,9 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
             href="https://github.com/getAlby/bitcoin-connect"
             target="_blank"
             class="${classes['hover-animation']} flex-1"
+            aria-label="Use Bitcoin Connect on GitHub (opens in new tab)"
           >
-            <bci-button>
+            <bci-button tabindex="-1">
               <span class="${classes['text-brand-mixed']}">Use it</span>
               ${linkIcon}
             </bci-button>
