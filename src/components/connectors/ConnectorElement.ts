@@ -34,7 +34,7 @@ export abstract class ConnectorElement extends withTwind()(
       @click=${this._onClick}
     >
       <div
-        class="w-16 h-16 drop-shadow rounded-2xl flex justify-center items-center overflow-hidden"
+        class="w-16 h-16 drop-shadow-lg rounded-2xl flex justify-center items-center overflow-hidden border border-white/20"
         style="background: ${this._background};"
       >
         ${this._icon}
