@@ -165,7 +165,6 @@ const store = createStore<Store>((set, get) => ({
         ...bitcoinConnectConfig,
       },
     });
-
     const state = get();
     if (
       state.bitcoinConnectConfig.autoConnect !== false &&
