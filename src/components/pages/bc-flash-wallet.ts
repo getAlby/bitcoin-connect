@@ -40,26 +40,7 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
           class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-4"
         >
           <div class="mb-2 text-center ${classes['text-neutral-secondary']}">
-            <h3 class="font-semibold mb-2 ${classes['text-neutral-primary']}">
-              Connect your Flash Wallet
-            </h3>
-            <p class="mb-3">
-              Open Flash Wallet on your phone and scan this QR code, or tap "Send" to connect automatically.
-            </p>
-            <div class="text-xs ${
-              classes['text-neutral-secondary']
-            } bg-gray-50 dark:bg-gray-800 p-3 rounded-lg mb-4">
-              <p class="font-medium mb-1">📱 <strong>For beginners:</strong></p>
-              <ol class="text-left space-y-1">
-                <li>1. Open the Flash Wallet app on your phone</li>
-                <li>2. Look for a "Scan QR" or camera icon</li>
-                <li>3. Point your camera at the QR code below</li>
-                <li>4. Approve the connection when prompted</li>
-              </ol>
-              <p class="mt-2 font-medium">
-                💡 <strong>Tip:</strong> Keep this screen open until the connection completes!
-              </p>
-            </div>
+            Open Flash Wallet on your phone and scan this QR code, or tap "Send" to connect automatically.
           </div>
 
           <div class="flex justify-center items-center">
@@ -72,7 +53,6 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
  
             ${this.renderQR()}
 
-          
           <bci-button
             @click=${this._copyAuthString}
             class="
@@ -88,28 +68,15 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
         </div>
 
         <div class="flex flex-col items-center w-full font-sans text-sm">
-          <div class="mt-8 text-center max-w-sm">
-            <h3 class="${classes['text-neutral-primary']} font-semibold mb-2">
-              Don't have Flash Wallet yet?
-            </h3>
-            <p class="${classes['text-neutral-secondary']} mb-3 text-xs">
-              Flash Wallet is a simple, beginner-friendly Lightning wallet that works great with apps like this one.
-            </p>
+          <h1 class="mt-8 ${classes['text-neutral-primary']} text-center">
+            Don't have the Flash Wallet app?
             <a
               class="no-underline font-bold ${classes.interactive} ${
       classes['text-brand-mixed']
-    } inline-block px-4 py-2 rounded-lg border ${
-      classes['border-neutral-tertiary']
     }" 
-              href="https://paywithflash.com/wallet" 
-              target="_blank"
-            >
-              📱 Download Flash Wallet
-            </a>
-            <p class="${classes['text-neutral-secondary']} mt-3 text-xs">
-              Available for iOS and Android • Takes 2 minutes to set up
-            </p>
-          </div>
+              href="https://paywithflash.com/wallet" target="_blank"
+            >Download one here</a>
+          </h1>
         </div>
         </div>
       </div>
