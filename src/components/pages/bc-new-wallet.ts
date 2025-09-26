@@ -102,19 +102,6 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
             >. These manage your keys for convenience.
           </p>
         </div>
-
-        <div
-          class="mt-4 p-3 rounded-lg border ${classes[
-            'border-neutral-tertiary'
-          ]}"
-        >
-          <p class="text-xs ${classes['text-neutral-secondary']}">
-            💡 <strong>Tip:</strong> If you're new to Bitcoin Lightning, start
-            with Flash Wallet or a custodial option for ease of use. As you get
-            comfortable, consider upgrading to Alby Hub for full control of your
-            funds.
-          </p>
-        </div>
       </div>
     </div>`;
   }
