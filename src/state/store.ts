@@ -105,7 +105,12 @@ const store = createStore<Store>((set, get) => ({
         connectorName: connectorConfig.connectorName,
         route: connectOptions.redirectTo,
       });
-      saveConfig(connectorConfig);
+
+      // Only save config if persistConnection is enabled (default: true)
+      const {bitcoinConnectConfig} = get();
+      if (bitcoinConnectConfig.persistConnection !== false) {
+        saveConfig(connectorConfig);
+      }
     } catch (error) {
       console.error(error);
       set({
