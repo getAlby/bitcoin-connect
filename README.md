@@ -231,6 +231,7 @@ init({
   appName: 'My Lightning App', // your app name
   // filters: ["nwc"],
   // showBalance: true,
+  // persistConnection: true, // if false, connection will not be saved to local storage
   // providerConfig: {
   //   nwc: {
   //     authorizationUrlOptions: {

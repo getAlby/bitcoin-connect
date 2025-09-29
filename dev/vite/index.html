@@ -165,6 +165,13 @@
         onchange="localStorage.setItem('show-balance', document.getElementById('show-balance').checked.toString()); window.location.reload()"
         style="width: 24px; height: 24px"
       />
+      <p>Persist Connection</p>
+      <input
+        id="persist-connection"
+        type="checkbox"
+        onchange="localStorage.setItem('persist-connection', document.getElementById('persist-connection').checked.toString()); window.location.reload()"
+        style="width: 24px; height: 24px"
+      />
       <br />
       <br />
       <h1>Colors</h1>
@@ -295,10 +302,15 @@
         localStorage.getItem('show-balance') !== false.toString();
       document.getElementById('show-balance').checked = showBalance;
 
+      const persistConnection =
+        localStorage.getItem('persist-connection') !== false.toString();
+      document.getElementById('persist-connection').checked = persistConnection;
+
       init({
         appName,
         filters: filters?.split(','),
         showBalance,
+        persistConnection,
         // turn off auto connect to NWC wallet when page loads
         // autoConnect: false,
 
