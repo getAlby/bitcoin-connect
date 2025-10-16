@@ -5,6 +5,7 @@ import './bc-router-outlet.js';
 import {withTwind} from './twind/withTwind';
 import './bc-modal-header';
 import {closeModal} from '../api';
+import {classes} from './css/classes';
 
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
@@ -13,7 +14,9 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       class="fixed top-0 left-0 w-full h-full flex justify-center items-end sm:items-center z-[21000]"
     >
       <div
-        class="absolute top-0 left-0 w-full h-full -z-10 bg-black animate-darken"
+        class="absolute top-0 left-0 w-full h-full -z-10 bg-black animate-darken ${classes[
+          'text-foreground'
+        ]}"
         @click=${this._handleClose}
       ></div>
       <div
