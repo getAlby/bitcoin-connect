@@ -7,10 +7,6 @@ export class InternalElement extends LitElement {
         // global css reset in shadow DOM
         all: initial;
         font-variant-numeric: slashed-zero;
-        color: black; /* set default text color in light mode */
-      }
-      :host .dark {
-        color: white; /* set default text color in dark mode */
       }
       // TODO: move to individual components - only needed by a couple of icons
       .hover-animation:hover .hover-right-up {

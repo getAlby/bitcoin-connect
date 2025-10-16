@@ -5,7 +5,6 @@ import './bc-router-outlet.js';
 import {withTwind} from './twind/withTwind';
 import './bc-modal-header';
 import {closeModal} from '../api';
-import {classes} from './css/classes';
 
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {

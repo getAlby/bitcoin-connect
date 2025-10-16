@@ -58,7 +58,7 @@ export class RizfulPage extends withTwind()(BitcoinConnectElement) {
               type="password"
               class="w-full mb-8 rounded-lg p-2 border-1 bg-transparent ${classes[
                 'border-neutral-secondary'
-              ]}"
+              ]} ${classes['text-foreground']}"
             />
             <bci-button variant="primary" @click=${this.onConnect}>
               Connect

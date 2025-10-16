@@ -37,7 +37,7 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
             placeholder="Your 32 digit admin key"
             class="w-full mb-8 rounded-lg p-2 border-1 bg-transparent ${classes[
               'border-neutral-secondary'
-            ]}"
+            ]} ${classes['text-foreground']}"
           />
           <div class="mb-1 ${classes['text-neutral-secondary']}">
             LNbits URL
@@ -49,7 +49,7 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
             placeholder="https://legend.lnbits.com"
             class="w-full mb-8 rounded-lg p-2 border-1 bg-transparent ${classes[
               'border-neutral-secondary'
-            ]}"
+            ]} ${classes['text-foreground']}"
           />
           <bci-button variant="primary" @click=${this.onConnect}>
             Connect
