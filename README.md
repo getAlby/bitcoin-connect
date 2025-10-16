@@ -443,10 +443,6 @@ onConnected((provider) => {
 
 _More methods coming soon. Is something missing that you'd need? let us know!_
 
-#### WebLN events
-
-Providers also should fire a `webln:connected` event. See `webln.guide`.
-
 ### Styling
 
 These variables must be set at the root or on a container element wrapping any bitcoin connect components.
