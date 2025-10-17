@@ -40,7 +40,7 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
           class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-4"
         >
           <div class="mb-2 text-center ${classes['text-neutral-secondary']}">
-            Scan with your camera, or by clicking "Send" in the Flash Wallet
+            Open Flash Wallet on your phone and scan this QR code, or tap "Send" to connect automatically.
           </div>
 
           <div class="flex justify-center items-center">
@@ -53,13 +53,14 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
  
             ${this.renderQR()}
 
-          
           <bci-button
             @click=${this._copyAuthString}
             class="
             flex gap-1 w-full
             mt-4
-        ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
+        ${classes['text-brand-mixed']} ${
+      classes.interactive
+    } font-semibold text-xs"
           >
             ${this._hasCopiedAuthString ? copiedIcon : copyIcon}
             ${this._hasCopiedAuthString ? 'Copied!' : 'Copy'}
@@ -70,7 +71,9 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
           <h1 class="mt-8 ${classes['text-neutral-primary']} text-center">
             Don't have the Flash Wallet app?
             <a
-              class="no-underline font-bold ${classes.interactive} ${classes['text-brand-mixed']}" 
+              class="no-underline font-bold ${classes.interactive} ${
+      classes['text-brand-mixed']
+    }" 
               href="https://paywithflash.com/wallet" target="_blank"
             >Download one here</a>
           </h1>
