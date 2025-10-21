@@ -5,11 +5,11 @@ import {html} from 'lit';
 import '../internal/bci-button';
 import {classes} from '../css/classes';
 import store from '../../state/store';
-import {nwc} from '@getalby/sdk';
 import {copiedIcon} from '../icons/copiedIcon';
 import {copyIcon} from '../icons/copyIcon';
 import qrcode from 'qrcode-generator';
 import {waitingIcon} from '../icons/waitingIcon';
+import {NWAClient} from '@getalby/sdk';
 
 @customElement('bc-alby-go')
 export class AlbyGoPage extends withTwind()(BitcoinConnectElement) {
@@ -136,7 +136,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
         ];
       }
 
-      const nwaClient = new nwc.NWAClient({
+      const nwaClient = new NWAClient({
         name: this._appName,
         icon: this._appIcon,
         relayUrl: 'wss://relay.getalby.com/v1',

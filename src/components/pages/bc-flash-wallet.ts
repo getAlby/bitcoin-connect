@@ -5,11 +5,11 @@ import {html} from 'lit';
 import '../internal/bci-button';
 import {classes} from '../css/classes';
 import store from '../../state/store';
-import {nwc} from '@getalby/sdk';
 import {copiedIcon} from '../icons/copiedIcon';
 import {copyIcon} from '../icons/copyIcon';
 import qrcode from 'qrcode-generator';
 import {waitingIcon} from '../icons/waitingIcon';
+import {NWAClient} from '@getalby/sdk';
 
 @customElement('bc-flash-wallet')
 export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
@@ -59,7 +59,9 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
             class="
             flex gap-1 w-full
             mt-4
-        ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
+        ${classes['text-brand-mixed']} ${
+      classes.interactive
+    } font-semibold text-xs"
           >
             ${this._hasCopiedAuthString ? copiedIcon : copyIcon}
             ${this._hasCopiedAuthString ? 'Copied!' : 'Copy'}
@@ -70,7 +72,9 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
           <h1 class="mt-8 ${classes['text-neutral-primary']} text-center">
             Don't have the Flash Wallet app?
             <a
-              class="no-underline font-bold ${classes.interactive} ${classes['text-brand-mixed']}" 
+              class="no-underline font-bold ${classes.interactive} ${
+      classes['text-brand-mixed']
+    }" 
               href="https://paywithflash.com/wallet" target="_blank"
             >Download one here</a>
           </h1>
@@ -148,7 +152,7 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
         ];
       }
 
-      const nwaClient = new nwc.NWAClient({
+      const nwaClient = new NWAClient({
         name: this._appName,
         icon: this._appIcon,
         relayUrl: 'wss://nwclay.paywithflash.com',

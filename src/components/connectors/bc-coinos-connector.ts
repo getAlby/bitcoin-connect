@@ -2,7 +2,7 @@ import {customElement} from 'lit/decorators.js';
 import {ConnectorElement} from './ConnectorElement';
 import store from '../../state/store';
 import {coinosIcon} from '../icons/connectors/coinosIcon';
-import {nwc} from '@getalby/sdk';
+import {NWCClient} from '@getalby/sdk';
 
 export const coinosConnectorTitle = 'Coinos';
 
@@ -16,7 +16,7 @@ export class CoinosConnector extends ConnectorElement {
     try {
       const providerConfig =
         store.getState().bitcoinConnectConfig.providerConfig;
-      const nwcClient = await nwc.NWCClient.fromAuthorizationUrl(
+      const nwcClient = await NWCClient.fromAuthorizationUrl(
         'https://coinos.io/apps/new',
         {
           ...(providerConfig?.nwc?.authorizationUrlOptions || {}),
