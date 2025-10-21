@@ -6,10 +6,10 @@ import '../internal/bci-button';
 import {classes} from '../css/classes';
 import store from '../../state/store';
 import {albyHubConnectorTitle} from '../connectors';
-import {nwc} from '@getalby/sdk';
 import {albyCloudIcon} from '../icons/connectors/albyCloudIcon';
 import {nwcThickIcon} from '../icons/connectors/nwcThickIcon';
 import {albyGoIcon} from '../icons/connectors/albyGoIcon';
+import {NWCClient} from '@getalby/sdk';
 
 @customElement('bc-alby-hub')
 export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
@@ -52,7 +52,7 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
     try {
       const providerConfig =
         store.getState().bitcoinConnectConfig.providerConfig;
-      const nwcClient = await nwc.NWCClient.fromAuthorizationUrl(
+      const nwcClient = await NWCClient.fromAuthorizationUrl(
         'https://my.albyhub.com/apps/new',
         {
           ...(providerConfig?.nwc?.authorizationUrlOptions || {}),

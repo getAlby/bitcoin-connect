@@ -4,7 +4,7 @@ import {BitcoinConnectElement} from './BitcoinConnectElement.js';
 import {withTwind} from './twind/withTwind.js';
 import {classes} from './css/classes.js';
 import store from '../state/store.js';
-import {fiat} from '@getalby/lightning-tools';
+import {getFiatValue} from '@getalby/lightning-tools';
 
 /**
  * Displays the balance of the connected wallet (could be sats or fiat)
@@ -71,7 +71,7 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
     } else if (currency !== 'sats') {
       try {
         this._loading = true;
-        const fiatValue = await fiat.getFiatValue({
+        const fiatValue = await getFiatValue({
           satoshi: this._balanceSats,
           currency,
         });

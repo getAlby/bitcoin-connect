@@ -1,4 +1,4 @@
-import {webln} from '@getalby/sdk';
+import {NostrWebLNProvider} from '@getalby/sdk';
 import {LNCWebLNProvider} from './connectors/LNCConnector';
 import {LnbitsWebLNProvider} from './connectors/LnbitsConnector';
 import './state/boot';
@@ -17,7 +17,7 @@ export * from './state/store';
 export * from './api';
 
 export const WebLNProviders = {
-  NostrWebLNProvider: webln.NostrWebLNProvider,
+  NostrWebLNProvider: NostrWebLNProvider,
   LNCWebLNProvider,
   LnbitsWebLNProvider,
 };

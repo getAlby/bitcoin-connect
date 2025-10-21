@@ -1,7 +1,7 @@
-import {webln} from '@getalby/sdk';
 import {Connector} from './Connector';
 import {ConnectorConfig} from '../types/ConnectorConfig';
 import {WebLNProvider} from '@webbtc/webln-types';
+import {NostrWebLNProvider} from '@getalby/sdk';
 
 export class NWCConnector extends Connector {
   constructor(config: ConnectorConfig) {
@@ -12,7 +12,7 @@ export class NWCConnector extends Connector {
     if (!this._config.nwcUrl) {
       throw new Error('no nwc URL provided');
     }
-    return new webln.NostrWebLNProvider({
+    return new NostrWebLNProvider({
       nostrWalletConnectUrl: this._config.nwcUrl,
     });
   }
