@@ -493,6 +493,8 @@ In case your site uses a manual theme switcher, you can force a theme by followi
 
 ## Access to underlying providers (NWC, LNC etc.)
 
+> Note: [WebLN Types](https://github.com/WebBTC/webln-types) is required for type definitions.
+
 ```ts
 import { WebLNProviders, requestProvider } from "@getalby/bitcoin-connect";
 
