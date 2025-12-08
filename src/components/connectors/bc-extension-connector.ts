@@ -5,7 +5,7 @@ import {ConnectorElement} from './ConnectorElement';
 @customElement('bc-extension-connector')
 export class ExtensionConnector extends ConnectorElement {
   constructor() {
-    super('extension.generic', 'Browser Extensions', '#ffffff', extensionIcon);
+    super('extension.generic', 'Browser Extensions', '#F4F4F4', extensionIcon);
   }
 
   protected _onClick() {
