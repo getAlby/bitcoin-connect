@@ -40,7 +40,7 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
           class="px-8 pt-4 w-full flex flex-col items-center justify-center gap-4"
         >
           <div class="mb-2 text-center ${classes['text-neutral-secondary']}">
-            Scan with your camera, or by clicking "Send" in the Flash Wallet
+            Open Flash Wallet on your phone and scan this QR code, or tap "Send" to connect automatically.
           </div>
 
           <div class="flex justify-center items-center">
@@ -53,7 +53,6 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
  
             ${this.renderQR()}
 
-          
           <bci-button
             @click=${this._copyAuthString}
             class="
