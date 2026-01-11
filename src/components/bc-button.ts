@@ -11,7 +11,7 @@ import store from '../state/store.js';
 import {waitingIcon} from './icons/waitingIcon.js';
 
 /**
- * A button that when clicked launches the modal.
+ * A button that launches the Bitcoin Connect modal.
  */
 @customElement('bc-button')
 export class Button extends withTwind()(BitcoinConnectElement) {
@@ -19,57 +19,78 @@ export class Button extends withTwind()(BitcoinConnectElement) {
   override title = 'Connect Wallet';
 
   @state()
-  protected _showBalance: boolean | undefined = undefined;
+  protected _showBalance = false;
+
+  private _unsubscribe?: () => void;
 
   constructor() {
     super();
 
-    this._showBalance =
-      store.getState().bitcoinConnectConfig.showBalance &&
-      store.getState().supports('getBalance');
+    this._updateShowBalance();
 
-    // TODO: handle unsubscribe
-    store.subscribe((store) => {
+    this._unsubscribe = store.subscribe((state) => {
       this._showBalance =
-        store.bitcoinConnectConfig.showBalance && store.supports('getBalance');
+        state.bitcoinConnectConfig.showBalance && state.supports('getBalance');
     });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._unsubscribe?.();
+    this._unsubscribe = undefined;
+  }
+
+  private _updateShowBalance() {
+    const state = store.getState();
+    this._showBalance =
+      state.bitcoinConnectConfig.showBalance && state.supports('getBalance');
   }
 
   override render() {
     const isLoading = this._connecting || (!this._connected && this._modalOpen);
 
-    return html`<div>
-      <div
-        class="relative inline-flex ${classes.interactive} cursor-pointer 
-          rounded-lg gap-2 justify-center items-center"
-        @click=${this._onClick}
-      >
+    const ariaLabel = isLoading
+      ? 'Connecting to wallet'
+      : this._connected
+      ? 'Wallet connected'
+      : this.title;
+
+    return html`
+      <div class="relative inline-flex gap-2 justify-center items-center">
         <div
-          class="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none ${this
-            ._connected
-            ? classes['bg-glass']
-            : ''}"
+          class="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none
+            ${this._connected ? classes['bg-glass'] : ''}"
         ></div>
+
         ${this._connected ? innerBorder() : ''}
-        <bci-button variant="primary">
+
+        <bci-button
+          variant="primary"
+          class="${classes.interactive}"
+          @click=${this._onClick}
+          aria-label=${ariaLabel}
+          aria-live="polite"
+        >
           ${isLoading
-            ? html` ${waitingIcon(`w-11 h-11 -mr-2 mr-1 -ml-2.5`)} `
+            ? html`${waitingIcon('w-11 h-11 -mr-2 mr-1 -ml-2.5')}`
             : this._connected
             ? null
             : html`<span class="-ml-0.5">${bcIcon}</span>`}
+
           <span class="font-semibold">
             ${isLoading
-              ? html`Connecting...`
+              ? 'Connecting...'
               : this._connected
-              ? html`Connected`
-              : html`${this.title}`}
+              ? 'Connected'
+              : this.title}
           </span>
         </bci-button>
+
         ${this._connected && this._showBalance
-          ? html`<bc-balance class="select-none cursor-pointer"></bc-balance> `
+          ? html`<bc-balance class="select-none cursor-pointer"></bc-balance>`
           : null}
       </div>
-    </div>`;
+    `;
   }
 
   private _onClick() {
