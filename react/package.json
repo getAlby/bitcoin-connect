@@ -24,13 +24,15 @@
   "scripts": {
     "dev": "microbundle --globals react=React --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react watch",
     "prepack": "yarn build",
-    "build": "microbundle --globals react=React --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react"
+    "build": "microbundle --globals react=React --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react",
+    "dts": "dts-bundle-generator dist/index.d.ts -o dist/bundle.d.ts --project tsconfig.dts.json --no-check"
   },
   "dependencies": {
     "@getalby/bitcoin-connect": "^3.11.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
+    "dts-bundle-generator": "^9.5.1",
     "microbundle": "^0.15.1"
   },
   "peerDependencies": {

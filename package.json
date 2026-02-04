@@ -27,7 +27,8 @@
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer",
     "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
-    "test": "wtr"
+    "test": "wtr",
+    "dts": "dts-bundle-generator dist/index.d.ts -o dist/bundle.d.ts --external-imports=\"qrcode-generator @types/node @getalby/sdk\" --external-inlines=\"@webbtc/webln-types\" --no-check"
   },
   "keywords": [
     "lightning",
@@ -66,6 +67,7 @@
     "@webbtc/webln-types": "^2.1.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "concurrently": "^8.2.2",
+    "dts-bundle-generator": "^9.5.1",
     "esbuild": "^0.25.12",
     "eslint": "^8.57.1",
     "lit": "^3.3.1",
