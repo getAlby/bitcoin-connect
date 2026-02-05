@@ -27,6 +27,10 @@ export class Balance extends withTwind()(BitcoinConnectElement) {
 
     this._loadBalance();
 
+    window.addEventListener('bc:balancerefresh', () => {
+      this._loadBalance();
+    });
+
     this._selectedCurrency = store.getState().currency;
     store.subscribe((currentState, prevState) => {
       this._selectedCurrency = currentState.currency;

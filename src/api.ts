@@ -176,6 +176,14 @@ export function init(config: BitcoinConnectConfig = {}) {
 }
 
 /**
+ * Refresh the balance of the connected wallet
+ */
+
+export function refreshBalance() {
+  window.dispatchEvent(new CustomEvent('bc:balancerefresh'));
+}
+
+/**
  * Programmatically launch the Bitcoin Connect modal
  */
 
