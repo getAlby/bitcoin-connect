@@ -32,9 +32,6 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
   @state()
   _showQR = false;
 
-  @state()
-  _qr = null as QRCode | null;
-
   @property({
     type: String,
   })
