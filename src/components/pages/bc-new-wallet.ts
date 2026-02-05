@@ -43,14 +43,13 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
           <p class="flex-1 text-sm ${classes['text-neutral-secondary']}">
             For a quick setup of a custodial wallet, you can choose between
             <a
-              href="https://primal.net"
+              href="https://rizful.com"
               target="_blank"
               class="no-underline font-bold ${classes.interactive} ${classes[
                 'text-brand-mixed'
               ]}"
-              >Primal</a
-            >
-            or
+              >Rizful</a
+            >,
             <a
               href="https://coinos.io"
               target="_blank"
@@ -58,6 +57,14 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
                 'text-brand-mixed'
               ]}"
               >Coinos</a
+            >, or
+            <a
+              href="https://primal.net"
+              target="_blank"
+              class="no-underline font-bold ${classes.interactive} ${classes[
+                'text-brand-mixed'
+              ]}"
+              >Primal</a
             >.
           </p>
         </div>
