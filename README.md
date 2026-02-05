@@ -36,13 +36,13 @@ You can use Bitcoin Connect without any build tools:
 
 ```html
 <script type="module">
-  import {launchModal} from 'https://esm.sh/@getalby/bitcoin-connect@^3.11.0'; // jsdelivr.net, skypack.dev also work
+  import {launchModal} from 'https://esm.sh/@getalby/bitcoin-connect@^3.12.0'; // jsdelivr.net, skypack.dev also work
 
   // use Bitcoin connect API normally...
   launchModal();
 
   // or if you just want access to the web components:
-  import 'https://esm.sh/@getalby/bitcoin-connect@^3.11.0';
+  import 'https://esm.sh/@getalby/bitcoin-connect@^3.12.0';
 </script>
 
 <!-- Bitcoin Connect components are now available -->
@@ -354,6 +354,16 @@ const connectorConfig = getConnectorConfig();
 if (connectorConfig) {
   // can now access e.g. connectorConfig.connectorName
 }
+```
+
+#### Refresh balance
+
+Programmatically trigger a balance refresh for all `<bc-balance>` components on the page. Useful after making a payment or receiving funds to update the displayed balance.
+
+```ts
+import {refreshBalance} from '@getalby/bitcoin-connect';
+
+refreshBalance();
 ```
 
 #### Events
