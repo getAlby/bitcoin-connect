@@ -77,7 +77,11 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
 
     let lnbitsInstanceUrl: string;
     try {
-      const url = new URL(this._lnbitsUrl);
+      let input = this._lnbitsUrl;
+      if (!/^https?:\/\//i.test(input)) {
+        input = 'https://' + input;
+      }
+      const url = new URL(input);
       lnbitsInstanceUrl = url.origin;
     } catch {
       store.getState().setError('Please enter a valid URL');

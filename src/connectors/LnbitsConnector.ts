@@ -149,7 +149,6 @@ export class LnbitsWebLNProvider implements WebLNProvider {
     args?: Record<string, unknown>
   ) {
     let body = null;
-    const query = '';
     const headers = new Headers();
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/json');
@@ -163,7 +162,7 @@ export class LnbitsWebLNProvider implements WebLNProvider {
     }
     const url = new URL(this._instanceUrl);
     url.pathname = path;
-    const res = await fetch(url.toString() + query, {
+    const res = await fetch(url.toString(), {
       method,
       headers,
       body,
