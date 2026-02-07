@@ -161,7 +161,9 @@ export class LnbitsWebLNProvider implements WebLNProvider {
       throw new Error('TODO: support args in GET');
       // query = ...
     }
-    const res = await fetch(this._instanceUrl + path + query, {
+    const url = new URL(this._instanceUrl);
+    url.pathname = path;
+    const res = await fetch(url.toString() + query, {
       method,
       headers,
       body,
