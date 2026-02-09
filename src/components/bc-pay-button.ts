@@ -54,6 +54,16 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
       this._launchModal();
     }
 
+    // Reset paid state when invoice changes (new payment)
+    if (changedProperties.has('invoice') && this.invoice && this._paid) {
+      this._paid = false;
+    }
+
+    // Reset paid state when preimage is cleared
+    if (changedProperties.has('preimage') && !this.preimage && this._paid) {
+      this._paid = false;
+    }
+
     if (changedProperties.has('preimage') && this.preimage) {
       this._setPaid?.({
         preimage: this.preimage,
