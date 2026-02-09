@@ -63,7 +63,7 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
     this._lnbitsAdminKey = event.target.value;
   }
   private _lnbitsUrlChanged(event: {target: HTMLInputElement}) {
-    this._lnbitsUrl = event.target.value;
+    this._lnbitsUrl = event.target.value.trim();
   }
   private async onConnect() {
     if (!this._lnbitsAdminKey) {
@@ -75,12 +75,13 @@ export class lnbitsPage extends withTwind()(BitcoinConnectElement) {
       return;
     }
 
-    let lnbitsInstanceUrl = this._lnbitsUrl;
-    if (lnbitsInstanceUrl.endsWith('/')) {
-      lnbitsInstanceUrl = lnbitsInstanceUrl.substring(
-        0,
-        lnbitsInstanceUrl.length - 1
-      );
+    let lnbitsInstanceUrl: string;
+    try {
+      const url = new URL(this._lnbitsUrl);
+      lnbitsInstanceUrl = url.href.replace(/\/+$/, '');
+    } catch {
+      store.getState().setError('Please enter a valid URL');
+      return;
     }
 
     await store.getState().connect({
