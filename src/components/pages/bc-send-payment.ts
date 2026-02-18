@@ -128,11 +128,13 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
     }
 
     if (this.paymentMethods === 'all' || this.paymentMethods === 'external') {
-      externalMethods = html`
-        <bci-button block @click=${this._copyAndDisplayInvoice}>
-          ${qrIcon} Copy & Display Invoice
-        </bci-button>
-      `;
+      if (!this._showQR) {
+        externalMethods = html`
+          <bci-button block @click=${this._copyAndDisplayInvoice}>
+            ${qrIcon} Copy & Display Invoice
+          </bci-button>
+        `;
+      }
 
       if (this._showQR) {
         qrSection = this.renderQR();
@@ -150,7 +152,9 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
           : null}
         ${internalMethods} ${externalMethods}
       </div>
-      ${qrSection}
+      ${qrSection
+        ? html`<div class="mt-4 flex flex-col items-center">${qrSection}</div>`
+        : null}
     `;
   }
 
@@ -216,7 +220,7 @@ export class SendPayment extends withTwind()(BitcoinConnectElement) {
       qr.addData(invoice);
       qr.make();
       const moduleCount = qr.getModuleCount();
-      const scale = 4;
+      const scale = 2;
       canvas.width = moduleCount * scale;
       canvas.height = moduleCount * scale;
 
