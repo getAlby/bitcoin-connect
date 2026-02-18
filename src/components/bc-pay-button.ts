@@ -54,8 +54,9 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
       this._launchModal();
     }
 
-    // Reset paid state when preimage is cleared (new payment)
-    if (changedProperties.has('preimage') && !this.preimage && this._paid) {
+    // Reset state when invoice is cleared
+    if (changedProperties.has('invoice') && !this.invoice) {
+      this._waitingForInvoice = false;
       this._paid = false;
     }
 
@@ -67,7 +68,7 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
   }
 
   override render() {
-    const isLoading = this._waitingForInvoice || this._modalOpen;
+    const isLoading = !this._paid && (this._waitingForInvoice || this._modalOpen);
 
     return html` <div class="inline-flex" @click=${this._onClick}>
       <bci-button variant="primary">
