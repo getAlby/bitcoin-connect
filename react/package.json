@@ -1,6 +1,6 @@
 {
   "name": "@getalby/bitcoin-connect-react",
-  "version": "3.12.1",
+  "version": "3.12.2",
   "type": "module",
   "source": "src/index.ts",
   "main": "./dist/index.cjs",
@@ -28,7 +28,7 @@
     "dts": "dts-bundle-generator dist/index.d.ts -o dist/bundle.d.ts --project tsconfig.dts.json --no-check"
   },
   "dependencies": {
-    "@getalby/bitcoin-connect": "^3.12.1"
+    "@getalby/bitcoin-connect": "^3.12.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
