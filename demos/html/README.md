@@ -33,3 +33,5 @@ yarn bc-pay-button     # Runs bc-pay-button.html
 
 You can also manually visit any file at `http://localhost:8000/demos/html/<file>.html`
 
+> Note: To make testing easy, the examples here use a faucet rather than real Bitcoin. You can grab some free testing sats from https://faucet.nwc.dev to get started.
+
