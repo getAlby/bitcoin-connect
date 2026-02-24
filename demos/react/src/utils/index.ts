@@ -31,6 +31,7 @@ export async function createTestLNAddr(): Promise<string> {
       if (attempt === 2) {
         throw new Error('Failed to create test wallet after 3 attempts');
       }
+      await new Promise((resolve) => setTimeout(resolve, 250 * (attempt + 1)));
       continue;
     }
   }
