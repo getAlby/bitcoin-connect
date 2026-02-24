@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bc-pay-button Demo</title>
-
+		
+		<script src="./util.js"></script>
     <script type="module">
       // Import necessary modules from esm.sh CDN
       import {init} from 'https://esm.sh/@getalby/bitcoin-connect@^3.12.2';
       import {LightningAddress} from 'https://esm.sh/@getalby/lightning-tools@^5.2.0';
-
       // Initialize Bitcoin Connect with your app name
       // This sets up the connection to Bitcoin wallets
       init({appName: 'your app name'});
@@ -21,7 +21,8 @@
       payButton.addEventListener('click', async () => {
         try {
           // Create a new LightningAddress instance for the recipient
-          const ln = new LightningAddress('hello@getalby.com');
+          const lnAddr = await createTestLNAddr();
+          const ln = new LightningAddress(lnAddr);
           await ln.fetch();
 
           // Request an invoice from the Lightning address
