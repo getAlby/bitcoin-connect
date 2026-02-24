@@ -13,7 +13,7 @@ export default function PaymentButtonDemo() {
       try {
         toast('Fetching invoice...');
         const lnAddr = await createTestLNAddr();
-        const ln = new LightningAddress(lnAddr!);
+        const ln = new LightningAddress(lnAddr);
         await ln.fetch();
         const invoice = await ln.requestInvoice({
           satoshi: 1,
