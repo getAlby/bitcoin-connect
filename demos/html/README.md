@@ -33,3 +33,5 @@ yarn bc-pay-button     # Runs bc-pay-button.html
 
 You can also manually visit any file at `http://localhost:8000/demos/html/<file>.html`
 
+> Note: To make testing easy, these examples use a test Lightning address. Invoices can't be paid with real sats; please use sats from the faucet: https://faucet.nwc.dev
+
