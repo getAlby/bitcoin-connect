@@ -2,8 +2,6 @@ import {Payment} from '@getalby/bitcoin-connect-react';
 import {Invoice, LightningAddress} from '@getalby/lightning-tools';
 import React from 'react';
 import toast, {Toaster} from 'react-hot-toast';
-import { createTestLNAddr } from '../utils';
-
 
 
 export default function PaymentDemo() {
@@ -14,8 +12,7 @@ export default function PaymentDemo() {
     (async () => {
       try {
         toast('Fetching invoice...');
-        const lnAddr = await createTestLNAddr();
-        const ln = new LightningAddress(lnAddr);
+        const ln = new LightningAddress("nwc1772378482@getalby.com");
         await ln.fetch();
         const invoice = await ln.requestInvoice({
           satoshi: 1,

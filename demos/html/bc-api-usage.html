@@ -57,7 +57,6 @@
       <button id="disconnect-wallet">Disconnect Wallet</button>
     </div>
 
-    <script src="./util.js"></script>
     <script type="module">
       // Import required Bitcoin Connect functions and Lightning Tools
       import {
@@ -107,8 +106,7 @@
         .getElementById('launch-modal-pay-invoice-lnurl-verify')
         .addEventListener('click', async () => {
           // Create a Lightning Address instance
-          const lnAddr = await createTestLNAddr();
-          const ln = new LightningAddress(lnAddr);
+          const ln = new LightningAddress("nwc1772378482@getalby.com");
           await ln.fetch(); // Fetch LNURL metadata
 
           // Request a new invoice for 1 satoshi

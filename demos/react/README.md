@@ -10,4 +10,4 @@ Run `yarn install`
 
 Run `yarn dev`
 
-> Note: To make testing easy, the examples here use a faucet rather than real Bitcoin. You can grab some free testing sats from https://faucet.nwc.dev to get started.
+> Note: To make testing easy, these examples use a test Lightning address. Invoices can't be paid with real sats; please use sats from the faucet: https://faucet.nwc.dev

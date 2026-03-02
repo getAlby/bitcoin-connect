@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bitcoin Connect Demo</title>
-    <script src="util.js"></script>
     <script type="module">
       import {LightningAddress} from 'https://cdn.skypack.dev/@getalby/lightning-tools';
       const bcTheme = window.localStorage.getItem('bcTheme');
@@ -28,8 +27,7 @@
       }
 
       (async () => {
-        const lnAddr = await createTestLNAddr();
-        const ln = new LightningAddress(lnAddr);
+        const ln = new LightningAddress("nwc1772378482@getalby.com");
         await ln.fetch();
         const paymentFlowInvoice = await ln.requestInvoice({satoshi: 1});
         document
@@ -386,8 +384,7 @@
       document
         .getElementById('launch-modal-pay-invoice-lnurl-verify')
         .addEventListener('click', async () => {
-          const lnAddr = await createTestLNAddr();
-          const ln = new LightningAddress(lnAddr);
+          const ln = new LightningAddress("nwc1772378482@getalby.com");
           await ln.fetch();
           const invoice = await ln.requestInvoice({satoshi: 1});
 
