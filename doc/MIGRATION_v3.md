@@ -5,12 +5,18 @@
 window.webln is no longer set by default. If you rely on WebLN being available in the global window object please add the following lines to a place in your application which will be called on every page:
 
 ```ts
-import {onConnected} from '@getalby/bitcoin-connect';
+import {onConnected, onDisconnected} from '@getalby/bitcoin-connect';
 
 onConnected((provider) => {
   window.webln = provider;
 });
+
+onDisconnected(() => {
+  delete window.webln;
+});
 ```
+
+If you are migrating from pre-v3 behavior and choose to expose `window.webln` manually, remove it on disconnect as part of your app's cleanup flow.
 
 ## Init
 

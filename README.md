@@ -170,15 +170,23 @@ const Button = dynamic(
 
 useEffect(() => {
   // init bitcoin connect to provide webln
-  const {onConnected} = await import('@getalby/bitcoin-connect-react').then(
-    (mod) => mod.onConnected
+  const {onConnected, onDisconnected} = await import('@getalby/bitcoin-connect-react').then(
+    (mod) => ({
+      onConnected: mod.onConnected,
+      onDisconnected: mod.onDisconnected,
+    })
   );
-  const unsub = onConnected((provider) => {
+  const unsubConnected = onConnected((provider) => {
     window.webln = provider;
   });
 
+  const unsubDisconnected = onDisconnected(() => {
+    delete window.webln;
+  });
+
   return () => {
-    unsub();
+    unsubConnected();
+    unsubDisconnected();
   };
 }, []);
 
@@ -408,10 +416,14 @@ This event fires when the user manually disconnects from Bitcoin Connect.
 import {onDisconnected} from '@getalby/bitcoin-connect';
 
 const unsub = onDisconnected(async () => {
-  // do something...
+  // If your app manually exposed the provider globally,
+  // remove that reference when the wallet disconnects.
+  delete window.webln;
 });
 unsub();
 ```
+
+If your app manually sets `window.webln`, clean it up in `onDisconnected`; Bitcoin Connect does not remove app-held references for you.
 
 ##### onModalOpened
 
@@ -441,13 +453,17 @@ unsub();
 
 ### WebLN global object
 
-> WARNING: webln is no longer injected into the window object by default. If you need this, execute the following code:
+> WARNING: webln is no longer injected into the window object by default. If your app manually sets `window.webln`, your app should also remove it on disconnect.
 
 ```ts
-import {onConnected} from '@getalby/bitcoin-connect';
+import {onConnected, onDisconnected} from '@getalby/bitcoin-connect';
 
 onConnected((provider) => {
   window.webln = provider;
+});
+
+onDisconnected(() => {
+  delete window.webln;
 });
 ```
 
