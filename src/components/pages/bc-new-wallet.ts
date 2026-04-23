@@ -49,7 +49,8 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
                 'text-brand-mixed'
               ]}"
               >Rizful</a
-            >,
+            >
+            and
             <a
               href="https://coinos.io"
               target="_blank"
@@ -57,14 +58,6 @@ export class NewWalletPage extends withTwind()(BitcoinConnectElement) {
                 'text-brand-mixed'
               ]}"
               >Coinos</a
-            >, or
-            <a
-              href="https://primal.net"
-              target="_blank"
-              class="no-underline font-bold ${classes.interactive} ${classes[
-                'text-brand-mixed'
-              ]}"
-              >Primal</a
             >.
           </p>
         </div>

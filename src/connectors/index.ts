@@ -11,7 +11,6 @@ export const connectors = {
   'nwc.lnfi': NWCConnector,
   'nwc.coinos': NWCConnector,
   'nwc.flash': NWCConnector,
-  'nwc.primal': NWCConnector,
   'nwc.cashume': NWCConnector,
   'nwc.lnbits': NWCConnector,
   'nwc.rizful': NWCConnector,

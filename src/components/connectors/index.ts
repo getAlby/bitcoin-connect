@@ -7,5 +7,4 @@ export * from './bc-lnbits-nwc-connector';
 export * from './bc-lnfi-nwc-connector';
 export * from './bc-coinos-connector';
 export * from './bc-flash-connector';
-export * from './bc-primal-connector';
 export * from './bc-rizful-connector';
