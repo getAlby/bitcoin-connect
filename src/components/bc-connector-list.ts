@@ -31,10 +31,6 @@ export class ConnectorList extends withTwind()(BitcoinConnectElement) {
     });
     connectors.push({
       order: 0,
-      result: html`<bc-primal-connector></bc-primal-connector>`,
-    });
-    connectors.push({
-      order: 0,
       result: html`<bc-cashu-me-connector></bc-cashu-me-connector>`,
     });
     if (this._filters && this._filters.indexOf('nwc') > -1) {

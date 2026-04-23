@@ -8,7 +8,7 @@ import store from '../../state/store';
 import {lnbitsNWCConnectorTitle} from '../connectors/bc-lnbits-nwc-connector';
 
 @customElement('bc-lnbits-nwc')
-export class PrimalPage extends withTwind()(BitcoinConnectElement) {
+export class LnbitsNwcPage extends withTwind()(BitcoinConnectElement) {
   @state()
   private _nwcUrl = '';
 
@@ -81,6 +81,6 @@ export class PrimalPage extends withTwind()(BitcoinConnectElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bc-lnbits-nwc': PrimalPage;
+    'bc-lnbits-nwc': LnbitsNwcPage;
   }
 }

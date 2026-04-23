@@ -13,7 +13,6 @@ import './pages/bc-connected.js';
 import './pages/bc-flash-wallet.js';
 import './pages/bc-lnbits.js';
 import './pages/bc-lnbits-nwc.js';
-import './pages/bc-primal.js';
 import './pages/bc-cashu-me.js';
 import './pages/bc-rizful.js';
 
@@ -29,7 +28,6 @@ export const routes = {
   '/flash-wallet': html`<bc-flash-wallet
     class="flex w-full"
   ></bc-flash-wallet>`,
-  '/primal': html`<bc-primal class="flex w-full"></bc-primal>`,
   '/cashu-me': html`<bc-cashu-me class="flex w-full"></bc-cashu-me>`,
   '/rizful': html`<bc-rizful class="flex w-full"></bc-rizful>`,
   '/new-wallet': html`<bc-new-wallet class="flex w-full"></bc-new-wallet>`,
