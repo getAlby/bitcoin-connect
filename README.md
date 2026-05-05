@@ -441,15 +441,20 @@ unsub();
 
 ### WebLN global object
 
-> WARNING: webln is no longer injected into the window object by default. If you need this, execute the following code:
+> WARNING: webln is no longer injected into the window object by default. If you need this, you must also clear it on disconnect. Bitcoin Connect does not own `window.webln` once you've assigned it, so a disconnected wallet remains reachable via the saved global until you remove it. Pair `onConnected` with `onDisconnected`:
 
 ```ts
-import {onConnected} from '@getalby/bitcoin-connect';
+import {onConnected, onDisconnected} from '@getalby/bitcoin-connect';
 
 onConnected((provider) => {
   window.webln = provider;
 });
+onDisconnected(() => {
+  delete window.webln;
+});
 ```
+
+Without the `onDisconnected` cleanup, your app can still call `window.webln.sendPayment()` after the user clicks Disconnect (see [#215](https://github.com/getAlby/bitcoin-connect/issues/215) for the original report).
 
 _More methods coming soon. Is something missing that you'd need? let us know!_
 
