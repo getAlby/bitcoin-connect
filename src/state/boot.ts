@@ -16,7 +16,11 @@ function loadConfig() {
 
 function addEventListeners() {
   window.addEventListener('webln:enabled', () => {
-    if (!store.getState().connecting) {
+    // Skip if Bitcoin Connect itself dispatched the event (after a successful
+    // connect) or is already connecting. Otherwise we'd loop, or override
+    // the active connector with the extension one.
+    const {connecting, connected} = store.getState();
+    if (!connecting && !connected) {
       // webln was enabled from outside
       // TODO: use the same name and logic for figuring out what extension as the extension connector
       store.getState().connect(

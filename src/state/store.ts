@@ -106,6 +106,12 @@ const store = createStore<Store>((set, get) => ({
         route: connectOptions.redirectTo,
       });
 
+      // Notify external listeners that a WebLN provider is now available.
+      // See https://www.webln.guide/building-lightning-apps/webln-events
+      if (globalThis.window) {
+        window.dispatchEvent(new Event('webln:enabled'));
+      }
+
       // Only save config if persistConnection is enabled (default: true)
       const {bitcoinConnectConfig} = get();
       if (bitcoinConnectConfig.persistConnection !== false) {
