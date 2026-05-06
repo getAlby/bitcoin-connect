@@ -454,7 +454,7 @@ onDisconnected(() => {
 });
 ```
 
-Without the `onDisconnected` cleanup, your app can still call `window.webln.sendPayment()` after the user clicks Disconnect (see [#215](https://github.com/getAlby/bitcoin-connect/issues/215) for the original report).
+Without the `onDisconnected` cleanup, your app can still call `window.webln.sendPayment()` after the user clicks Disconnect.
 
 _More methods coming soon. Is something missing that you'd need? let us know!_
 
