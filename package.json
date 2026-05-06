@@ -69,7 +69,7 @@
     "concurrently": "^8.2.2",
     "dts-bundle-generator": "^9.5.1",
     "esbuild": "^0.25.12",
-    "eslint": "^9.39.2",
+    "eslint": "^9.39.3",
     "lit": "^3.3.2",
     "lit-analyzer": "^1.2.1",
     "microbundle": "^0.15.1",
