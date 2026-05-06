@@ -27,7 +27,7 @@
       }
 
       (async () => {
-        const ln = new LightningAddress('rolznz@getalby.com');
+        const ln = new LightningAddress("nwc1772378482@getalby.com");
         await ln.fetch();
         const paymentFlowInvoice = await ln.requestInvoice({satoshi: 1});
         document
@@ -384,7 +384,7 @@
       document
         .getElementById('launch-modal-pay-invoice-lnurl-verify')
         .addEventListener('click', async () => {
-          const ln = new LightningAddress('rolznz@getalby.com');
+          const ln = new LightningAddress("nwc1772378482@getalby.com");
           await ln.fetch();
           const invoice = await ln.requestInvoice({satoshi: 1});
 
