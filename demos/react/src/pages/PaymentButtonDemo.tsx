@@ -11,7 +11,7 @@ export default function PaymentButtonDemo() {
     (async () => {
       try {
         toast('Fetching invoice...');
-        const ln = new LightningAddress("nwc1772378482@getalby.com");
+        const ln = new LightningAddress('nwc1778843738867@getalby.com');
         await ln.fetch();
         const invoice = await ln.requestInvoice({
           satoshi: 1,

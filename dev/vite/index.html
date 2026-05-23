@@ -27,7 +27,7 @@
       }
 
       (async () => {
-        const ln = new LightningAddress("nwc1772378482@getalby.com");
+        const ln = new LightningAddress('nwc1778843738867@getalby.com');
         await ln.fetch();
         const paymentFlowInvoice = await ln.requestInvoice({satoshi: 1});
         document
@@ -119,6 +119,12 @@
   </head>
   <body>
     <div class="container">
+      <h1>Testing Wallets</h1>
+      <p>
+        Use <a href="https://faucet.nwc.dev" target="_blank">NWC Faucet</a> to
+        get a test connection secret and paste it into the "NWC" option.
+      </p>
+
       <h1>Programmatic Access</h1>
       <button id="request-provider">Request provider</button>
       <button id="launch-modal">Open modal</button>
@@ -384,7 +390,7 @@
       document
         .getElementById('launch-modal-pay-invoice-lnurl-verify')
         .addEventListener('click', async () => {
-          const ln = new LightningAddress("nwc1772378482@getalby.com");
+          const ln = new LightningAddress('nwc1778843738867@getalby.com');
           await ln.fetch();
           const invoice = await ln.requestInvoice({satoshi: 1});
 
@@ -393,7 +399,7 @@
             paymentMethods,
             onPaid: (response) => {
               clearInterval(checkPaymentInterval);
-              alert('Received payment! ' + response.preimage);
+              alert('Payment sent! ' + response.preimage);
             },
             onCancelled: () => {
               clearInterval(checkPaymentInterval);

@@ -3,7 +3,6 @@ import {Invoice, LightningAddress} from '@getalby/lightning-tools';
 import React from 'react';
 import toast, {Toaster} from 'react-hot-toast';
 
-
 export default function PaymentDemo() {
   const [invoice, setInvoice] = React.useState<Invoice | undefined>(undefined);
   const [preimage, setPreimage] = React.useState<string | undefined>(undefined);
@@ -12,7 +11,7 @@ export default function PaymentDemo() {
     (async () => {
       try {
         toast('Fetching invoice...');
-        const ln = new LightningAddress("nwc1772378482@getalby.com");
+        const ln = new LightningAddress('nwc1778843738867@getalby.com');
         await ln.fetch();
         const invoice = await ln.requestInvoice({
           satoshi: 1,
