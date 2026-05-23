@@ -139,7 +139,7 @@ ${classes['text-brand-mixed']} ${classes.interactive} font-semibold text-xs"
       const nwaClient = new NWAClient({
         name: this._appName,
         icon: this._appIcon,
-        relayUrl: 'wss://relay.getalby.com/v1',
+        relayUrls: ['wss://relay.getalby.com/v1'],
         requestMethods,
         notificationTypes: authorizationUrlOptions?.notificationTypes,
         maxAmount: authorizationUrlOptions?.maxAmount,
