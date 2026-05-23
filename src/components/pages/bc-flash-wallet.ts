@@ -155,7 +155,7 @@ export class FlashWalletPage extends withTwind()(BitcoinConnectElement) {
       const nwaClient = new NWAClient({
         name: this._appName,
         icon: this._appIcon,
-        relayUrl: 'wss://nwclay.paywithflash.com',
+        relayUrls: ['wss://nwclay.paywithflash.com'],
         requestMethods,
         notificationTypes: authorizationUrlOptions?.notificationTypes,
         maxAmount: authorizationUrlOptions?.maxAmount,
