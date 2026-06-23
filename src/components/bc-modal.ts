@@ -6,13 +6,12 @@ import {withTwind} from './twind/withTwind';
 import './bc-modal-header';
 import {closeModal} from '../api';
 
-const FOCUSABLE_SELECTOR =
+const FOCUSABLE =
   'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
   private _previouslyFocused: Element | null = null;
-  private _inertedElements: Element[] = [];
 
   override connectedCallback() {
     super.connectedCallback();
@@ -20,18 +19,14 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
     for (const child of document.body.children) {
       if (child !== this) {
         (child as HTMLElement).inert = true;
-        this._inertedElements.push(child);
       }
     }
-    document.addEventListener('keydown', this._handleKeyDown);
   }
 
   override disconnectedCallback() {
-    document.removeEventListener('keydown', this._handleKeyDown);
-    for (const child of this._inertedElements) {
+    for (const child of document.body.children) {
       (child as HTMLElement).inert = false;
     }
-    this._inertedElements = [];
     if (this._previouslyFocused instanceof HTMLElement) {
       this._previouslyFocused.focus();
     }
@@ -40,10 +35,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
 
   override async firstUpdated() {
     await this.updateComplete;
-    requestAnimationFrame(() => {
-      const focusable = this._getFocusableElements();
-      focusable[0]?.focus();
-    });
+    requestAnimationFrame(() => this._getFocusableElements()[0]?.focus());
   }
 
   override render() {
@@ -64,32 +56,24 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
           tabindex="0"
           aria-hidden="true"
           class="absolute w-px h-px p-0 -m-px overflow-hidden border-0"
-          @focus=${this._focusLastContent}
+          @focus=${this._focusLast}
         ></div>
         <slot @onclose=${this._handleClose}></slot>
         <div
           tabindex="0"
           aria-hidden="true"
           class="absolute w-px h-px p-0 -m-px overflow-hidden border-0"
-          @focus=${this._focusFirstContent}
+          @focus=${this._focusFirst}
         ></div>
       </div>
     </div>`;
-  }
-
-  private _isVisible(element: HTMLElement): boolean {
-    return element.getClientRects().length > 0;
   }
 
   private _getFocusableElements(): HTMLElement[] {
     const elements: HTMLElement[] = [];
 
     const walk = (node: Element) => {
-      if (
-        node instanceof HTMLElement &&
-        node.matches(FOCUSABLE_SELECTOR) &&
-        this._isVisible(node)
-      ) {
+      if (node instanceof HTMLElement && node.matches(FOCUSABLE)) {
         elements.push(node);
       }
       if (node.shadowRoot) {
@@ -106,52 +90,16 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       walk(child);
     }
 
-    const deduped = elements.filter(
-      (element, _, all) =>
-        !all.some(
-          (other) => other !== element && other.contains(element)
-        )
-    );
-
-    return deduped.sort((a, b) => {
-      const position = a.compareDocumentPosition(b);
-      if (position & Node.DOCUMENT_POSITION_FOLLOWING) {
-        return -1;
-      }
-      if (position & Node.DOCUMENT_POSITION_PRECEDING) {
-        return 1;
-      }
-      return 0;
-    });
+    return elements;
   }
 
-  private _containsFocus(element: Element): boolean {
-    return element === this || this.contains(element);
-  }
+  private _focusFirst = () => {
+    this._getFocusableElements()[0]?.focus();
+  };
 
-  private _focusFirstContent() {
-    const focusable = this._getFocusableElements();
-    focusable[0]?.focus();
-  }
-
-  private _focusLastContent() {
+  private _focusLast = () => {
     const focusable = this._getFocusableElements();
     focusable[focusable.length - 1]?.focus();
-  }
-
-  private _handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key !== 'Tab') {
-      return;
-    }
-
-    const active = document.activeElement;
-    if (!active || this._containsFocus(active)) {
-      return;
-    }
-
-    event.preventDefault();
-    const focusable = this._getFocusableElements();
-    (event.shiftKey ? focusable[focusable.length - 1] : focusable[0])?.focus();
   };
 
   private _handleClose = () => {
