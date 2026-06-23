@@ -12,15 +12,26 @@ const FOCUSABLE_SELECTOR =
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
   private _previouslyFocused: Element | null = null;
+  private _inertedElements: Element[] = [];
 
   override connectedCallback() {
     super.connectedCallback();
     this._previouslyFocused = document.activeElement;
+    for (const child of document.body.children) {
+      if (child !== this) {
+        (child as HTMLElement).inert = true;
+        this._inertedElements.push(child);
+      }
+    }
     document.addEventListener('keydown', this._handleKeyDown);
   }
 
   override disconnectedCallback() {
     document.removeEventListener('keydown', this._handleKeyDown);
+    for (const child of this._inertedElements) {
+      (child as HTMLElement).inert = false;
+    }
+    this._inertedElements = [];
     if (this._previouslyFocused instanceof HTMLElement) {
       this._previouslyFocused.focus();
     }
@@ -46,20 +57,40 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       <div
         role="dialog"
         aria-modal="true"
-        class="transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex flex-col w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
+        class="relative transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex flex-col w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
         animate-fade-in max-sm:animate-slide-up max-h-[90vh] overflow-y-auto"
       >
+        <div
+          tabindex="0"
+          aria-hidden="true"
+          class="absolute w-px h-px p-0 -m-px overflow-hidden border-0"
+          @focus=${this._focusLastContent}
+        ></div>
         <slot @onclose=${this._handleClose}></slot>
+        <div
+          tabindex="0"
+          aria-hidden="true"
+          class="absolute w-px h-px p-0 -m-px overflow-hidden border-0"
+          @focus=${this._focusFirstContent}
+        ></div>
       </div>
     </div>`;
+  }
+
+  private _isVisible(element: HTMLElement): boolean {
+    return element.getClientRects().length > 0;
   }
 
   private _getFocusableElements(): HTMLElement[] {
     const elements: HTMLElement[] = [];
 
     const walk = (node: Element) => {
-      if (node.matches(FOCUSABLE_SELECTOR)) {
-        elements.push(node as HTMLElement);
+      if (
+        node instanceof HTMLElement &&
+        node.matches(FOCUSABLE_SELECTOR) &&
+        this._isVisible(node)
+      ) {
+        elements.push(node);
       }
       if (node.shadowRoot) {
         for (const child of node.shadowRoot.children) {
@@ -75,11 +106,37 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       walk(child);
     }
 
-    return elements;
+    const deduped = elements.filter(
+      (element, _, all) =>
+        !all.some(
+          (other) => other !== element && other.contains(element)
+        )
+    );
+
+    return deduped.sort((a, b) => {
+      const position = a.compareDocumentPosition(b);
+      if (position & Node.DOCUMENT_POSITION_FOLLOWING) {
+        return -1;
+      }
+      if (position & Node.DOCUMENT_POSITION_PRECEDING) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
   private _containsFocus(element: Element): boolean {
     return element === this || this.contains(element);
+  }
+
+  private _focusFirstContent() {
+    const focusable = this._getFocusableElements();
+    focusable[0]?.focus();
+  }
+
+  private _focusLastContent() {
+    const focusable = this._getFocusableElements();
+    focusable[focusable.length - 1]?.focus();
   }
 
   private _handleKeyDown = (event: KeyboardEvent) => {
@@ -87,28 +144,14 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       return;
     }
 
-    const focusable = this._getFocusableElements();
-    if (focusable.length === 0) {
-      return;
-    }
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
     const active = document.activeElement;
-
-    if (!active || !this._containsFocus(active)) {
-      event.preventDefault();
-      (event.shiftKey ? last : first).focus();
+    if (!active || this._containsFocus(active)) {
       return;
     }
 
-    if (event.shiftKey && active === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && active === last) {
-      event.preventDefault();
-      first.focus();
-    }
+    event.preventDefault();
+    const focusable = this._getFocusableElements();
+    (event.shiftKey ? focusable[focusable.length - 1] : focusable[0])?.focus();
   };
 
   private _handleClose = () => {
