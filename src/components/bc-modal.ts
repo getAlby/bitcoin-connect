@@ -49,6 +49,7 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       <div
         role="dialog"
         aria-modal="true"
+        aria-label="Bitcoin Connect"
         class="relative transition-all p-4 pt-6 pb-8 rounded-2xl shadow-2xl flex flex-col w-full bg-white dark:bg-black max-w-md max-sm:rounded-b-none
         animate-fade-in max-sm:animate-slide-up max-h-[90vh] overflow-y-auto"
       >
