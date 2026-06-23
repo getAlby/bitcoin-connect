@@ -16,17 +16,32 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
   override connectedCallback() {
     super.connectedCallback();
     this._previouslyFocused = document.activeElement;
+export class Modal extends withTwind()(BitcoinConnectElement) {
+  private _previouslyFocused: Element | null = null;
+  private _previousInertState = new Map<HTMLElement, boolean>();
+
+  override connectedCallback() {
+    super.connectedCallback();
+    this._previouslyFocused = document.activeElement;
     for (const child of document.body.children) {
       if (child !== this) {
-        (child as HTMLElement).inert = true;
+        const el = child as HTMLElement;
+        this._previousInertState.set(el, el.inert);
+        el.inert = true;
       }
     }
   }
 
   override disconnectedCallback() {
-    for (const child of document.body.children) {
-      (child as HTMLElement).inert = false;
+    for (const [el, wasInert] of this._previousInertState.entries()) {
+      el.inert = wasInert;
     }
+    this._previousInertState.clear();
+    if (this._previouslyFocused instanceof HTMLElement) {
+      this._previouslyFocused.focus();
+    }
+    super.disconnectedCallback();
+  }
     if (this._previouslyFocused instanceof HTMLElement) {
       this._previouslyFocused.focus();
     }
