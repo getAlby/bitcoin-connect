@@ -12,12 +12,6 @@ const FOCUSABLE =
 @customElement('bc-modal')
 export class Modal extends withTwind()(BitcoinConnectElement) {
   private _previouslyFocused: Element | null = null;
-
-  override connectedCallback() {
-    super.connectedCallback();
-    this._previouslyFocused = document.activeElement;
-export class Modal extends withTwind()(BitcoinConnectElement) {
-  private _previouslyFocused: Element | null = null;
   private _previousInertState = new Map<HTMLElement, boolean>();
 
   override connectedCallback() {
@@ -37,11 +31,6 @@ export class Modal extends withTwind()(BitcoinConnectElement) {
       el.inert = wasInert;
     }
     this._previousInertState.clear();
-    if (this._previouslyFocused instanceof HTMLElement) {
-      this._previouslyFocused.focus();
-    }
-    super.disconnectedCallback();
-  }
     if (this._previouslyFocused instanceof HTMLElement) {
       this._previouslyFocused.focus();
     }
