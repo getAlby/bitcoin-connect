@@ -86,7 +86,8 @@ const store = createStore<Store>((set, get) => ({
       try {
         info = await provider.getInfo();
       } catch (error) {
-        console.error('Failed to request wallet info');
+        console.error('Failed to request wallet info', error);
+        throw error;
       }
 
       // In case user cancels the connection
