@@ -11,7 +11,7 @@ import {waitingIcon} from './icons/waitingIcon.js';
 import {PaymentMethods} from '../types/PaymentMethods.js';
 
 /**
- * A button that when clicked launches a modal to pay an invoice.
+ * A button that launches a modal to pay a Lightning invoice.
  */
 @customElement('bc-pay-button')
 export class PayButton extends withTwind()(BitcoinConnectElement) {
@@ -21,25 +21,17 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
   @property()
   invoice?: string;
 
-  @property({
-    type: String,
-    attribute: 'payment-methods',
-  })
+  @property({type: String, attribute: 'payment-methods'})
   paymentMethods: PaymentMethods = 'all';
 
-  @property({})
+  @property()
   preimage?: string;
 
-  /**
-   * This will be set to true if the button was clicked
-   * when no invoice is set on the button. The loading
-   * state will show until an invoice is set.
-   */
   @state()
-  _waitingForInvoice = false;
+  private _waitingForInvoice = false;
 
   @state()
-  _paid = false;
+  private _paid = false;
 
   private _setPaid?: (response: SendPaymentResponse) => void;
 
@@ -61,36 +53,46 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
     }
 
     if (changedProperties.has('preimage') && this.preimage) {
-      this._setPaid?.({
-        preimage: this.preimage,
-      });
+      this._setPaid?.({preimage: this.preimage});
     }
   }
 
   override render() {
     const isLoading = !this._paid && (this._waitingForInvoice || this._modalOpen);
 
-    return html` <div class="inline-flex" @click=${this._onClick}>
-      <bci-button variant="primary">
+    const ariaLabel = this._paid
+      ? 'Invoice paid'
+      : isLoading
+      ? 'Loading payment modal'
+      : this.title;
+
+    return html`
+      <bci-button
+        variant="primary"
+        class="inline-flex rounded-lg focus-visible:ring-2 focus-visible:ring-primary-500"
+        @click=${this._onClick}
+        ?disabled=${this._paid}
+        aria-label=${ariaLabel}
+        aria-live="polite"
+      >
         ${isLoading
-          ? html`${waitingIcon(`w-11 h-11 -mr-2 -ml-2.5 `)}`
+          ? html`${waitingIcon('w-11 h-11 -mr-2 -ml-2.5')}`
           : this._paid
           ? html`<span class="-ml-0.5">${checkIcon}</span>`
           : html`<span class="-ml-0.5">${bcIcon}</span>`}
+
         <span class="font-semibold">
-          ${isLoading
-            ? html`Loading...`
-            : html`${this._paid ? 'Paid' : this.title}`}
+          ${isLoading ? 'Loading...' : this._paid ? 'Paid' : this.title}
         </span>
       </bci-button>
-    </div>`;
+    `;
   }
 
   private _onClick() {
-    if (this._paid) {
-      return;
-    }
+    if (this._paid) return;
+
     this._waitingForInvoice = true;
+
     if (this.invoice) {
       this._launchModal();
     }
@@ -98,16 +100,19 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
 
   private _launchModal() {
     this._waitingForInvoice = false;
+
     if (!this.invoice) {
       throw new Error('No invoice available');
     }
+
     const {setPaid} = launchPaymentModal({
+      invoice: this.invoice,
+      paymentMethods: this.paymentMethods,
       onPaid: () => {
         this._paid = true;
       },
-      invoice: this.invoice,
-      paymentMethods: this.paymentMethods,
     });
+
     this._setPaid = setPaid;
   }
 }
