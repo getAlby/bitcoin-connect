@@ -68,7 +68,7 @@
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "concurrently": "^8.2.2",
     "dts-bundle-generator": "^9.5.1",
-    "esbuild": "^0.25.12",
+    "esbuild": "^0.28.1",
     "eslint": "^9.39.4",
     "lit": "^3.3.2",
     "lit-analyzer": "^1.2.1",
