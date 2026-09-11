@@ -1,6 +1,6 @@
 import {svg} from 'lit';
 
-export const rizfulIcon = svg`<svg class="w-12 h-12" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export const rizfulIcon = (className = '') => svg`<svg class=${className} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="17.2816" height="20" fill="url(#pattern0_6321_527)"/>
 <defs>
 <pattern id="pattern0_6321_527" patternContentUnits="objectBoundingBox" width="1" height="1">

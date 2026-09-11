@@ -22,7 +22,7 @@ export class Navbar extends withTwind()(BitcoinConnectElement) {
           aria-label="Go back"
           title="Go back"
         >
-          ${backIcon}
+          ${backIcon('w-7 h-7')}
         </button>
       </div>
       <div class="font-sans font-medium ${classes['text-neutral-primary']}">

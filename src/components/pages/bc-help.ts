@@ -65,7 +65,9 @@ export class HelpPage extends withTwind()(BitcoinConnectElement) {
           <span class="block ${classes['text-neutral-tertiary']}"
             >Made with love by</span
           >
-          <span class="${classes['text-foreground']}"> ${albyLogo} </span>
+          <span class="${classes['text-foreground']}">
+            ${albyLogo('w-16 h-16 -my-4')}
+          </span>
         </div>
       </div>
     </div>`;

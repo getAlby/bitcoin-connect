@@ -18,7 +18,7 @@ export function disconnectSection(connectorName: string | undefined) {
       variant="neutral"
       class=${classes['hover-animation']}
     >
-      ${disconnectIcon}
+      ${disconnectIcon('w-6 h-6')}
       <span class="text-sm ${classes['text-neutral-tertiary']}"
         >Disconnect</span
       >
