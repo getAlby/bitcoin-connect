@@ -8,7 +8,12 @@ export const rizfulConnectorTitle = 'Rizful';
 @customElement('bc-rizful-connector')
 export class RizfulConnector extends ConnectorElement {
   constructor() {
-    super('nwc.rizful', rizfulConnectorTitle, '#000000', rizfulIcon);
+    super(
+      'nwc.rizful',
+      rizfulConnectorTitle,
+      '#000000',
+      rizfulIcon('w-12 h-12')
+    );
   }
 
   protected async _onClick() {

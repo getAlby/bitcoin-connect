@@ -6,7 +6,7 @@ import {getLNC} from '../../connectors/LNCConnector';
 @customElement('bc-lnc-connector')
 export class LNCConnector extends ConnectorElement {
   constructor() {
-    super('lnc', 'Lightning Node Connect', '#101727', lncIcon);
+    super('lnc', 'Lightning Node Connect', '#101727', lncIcon('w-10 h-10'));
   }
 
   protected async _onClick() {

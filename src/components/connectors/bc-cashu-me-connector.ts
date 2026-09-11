@@ -8,7 +8,12 @@ export const cashuMeConnectorTitle = 'Cashu.me';
 @customElement('bc-cashu-me-connector')
 export class CashuMeConnector extends ConnectorElement {
   constructor() {
-    super('nwc.cashume', cashuMeConnectorTitle, '#7f38ca', cashuMeIcon);
+    super(
+      'nwc.cashume',
+      cashuMeConnectorTitle,
+      '#7f38ca',
+      cashuMeIcon('w-20 h-20')
+    );
   }
 
   protected async _onClick() {

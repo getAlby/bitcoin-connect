@@ -75,7 +75,7 @@ export class PayButton extends withTwind()(BitcoinConnectElement) {
         ${isLoading
           ? html`${waitingIcon(`w-11 h-11 -mr-2 -ml-2.5 `)}`
           : this._paid
-          ? html`<span class="-ml-0.5">${checkIcon}</span>`
+          ? html`<span class="-ml-0.5">${checkIcon('w-6 h-6')}</span>`
           : html`<span class="-ml-0.5">${bcIcon}</span>`}
         <span class="font-semibold">
           ${isLoading
