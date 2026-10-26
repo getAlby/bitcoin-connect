@@ -10,6 +10,7 @@ import {albyCloudIcon} from '../icons/connectors/albyCloudIcon';
 import {nwcThickIcon} from '../icons/connectors/nwcThickIcon';
 import {albyGoIcon} from '../icons/connectors/albyGoIcon';
 import {NWCClient} from '@getalby/sdk';
+import {withNwcAppIcon} from '../../utils/withNwcAppIcon';
 
 @customElement('bc-alby-hub')
 export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
@@ -53,10 +54,11 @@ export class AlbyHubPage extends withTwind()(BitcoinConnectElement) {
       const providerConfig =
         store.getState().bitcoinConnectConfig.providerConfig;
       const nwcClient = await NWCClient.fromAuthorizationUrl(
-        'https://my.albyhub.com/apps/new',
+        withNwcAppIcon('https://my.albyhub.com/apps/new', this._appIcon),
         {
           ...(providerConfig?.nwc?.authorizationUrlOptions || {}),
           name: this._appName,
+          icon: this._appIcon,
         }
       );
 

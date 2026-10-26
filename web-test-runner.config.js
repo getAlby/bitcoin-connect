@@ -102,5 +102,5 @@ export default {
       timeout: '60000',
     },
   },
-  plugins: [esbuildPlugin({ ts: true })],
+  plugins: [esbuildPlugin({ ts: true, tsconfig: 'tsconfig.json' })],
 };

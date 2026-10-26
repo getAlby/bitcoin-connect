@@ -2,6 +2,10 @@ import {NWCAuthorizationUrlOptions} from '@getalby/sdk';
 
 export type WebLNProviderConfig = {
   nwc?: {
-    authorizationUrlOptions: NWCAuthorizationUrlOptions;
+    /**
+     * Configure NWC authorization. Use BitcoinConnectConfig.appIcon for the icon
+     * so the same icon is used across all connection flows.
+     */
+    authorizationUrlOptions: Omit<NWCAuthorizationUrlOptions, 'icon'>;
   };
 };

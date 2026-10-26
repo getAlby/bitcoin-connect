@@ -64,6 +64,7 @@ import {
 // Initialize Bitcoin Connect
 init({
   appName: 'My Lightning App', // your app name
+  // appIcon: 'https://your-app.com/icon.png',
 });
 
 // launch modal programmatically
@@ -243,10 +244,11 @@ init({
 ```
 
 - `appName` - Name of the app requesting access to wallet. Currently used for NWC connections (e.g. Alby Hub)
+- `appIcon` - Icon URL for the app requesting access to a wallet. Used consistently across NWC connection flows, including one-click connections.
 - `filters` - Filter the type of connectors you want to show. Example: "nwc" (only show NWC connectors).
 - `showBalance` - If false, do not request the connected wallet's balance
 - `autoConnect` - If false, prevent automatically connect to a user's NWC wallet when the page load. NWC connection URL is passed as a hash `nwc` parameter (URL encoded). Example: `https://myapp.com/#/?nwc=nostr%2Bwalletconnect%3A%2F%2F...`
-- `providerConfig` - **Experimental**: add provider-specific configuration (for NWC, LNC, LNbits etc). Currently only `nwc.authorizationUrlOptions` is supported. `NWCAuthorizationUrlOptions` can be found in the [Alby JS SDK](https://github.com/getAlby/js-sdk).
+- `providerConfig` - **Experimental**: add provider-specific configuration (for NWC, LNC, LNbits etc). Currently only `nwc.authorizationUrlOptions` is supported. Options follow `NWCAuthorizationUrlOptions` from the [Alby JS SDK](https://github.com/getAlby/js-sdk), except for `icon`: set the top-level `appIcon` instead.
 
 #### Requesting a provider
 
