@@ -15,6 +15,7 @@ import {
 } from '@webbtc/webln-types';
 import type LNC from '@lightninglabs/lnc-web';
 import {base64ToHex} from '../utils/base64ToHex';
+import {hexToBase64} from '../utils/hexToBase64';
 
 // global instance of LNC
 let lnc: LNC;
@@ -93,10 +94,18 @@ export class LNCWebLNProvider implements WebLNProvider {
     return Promise.resolve();
   }
   async getInfo(): Promise<GetInfoResponse> {
-    const data = await lnc.lnd.lightning.getInfo();
+    const data = await this.lnc.lnd.lightning.getInfo();
     return {
-      // TODO: support makeInvoice and webln.request
-      methods: ['enable', 'getBalance', 'getInfo', 'sendPayment'],
+      // TODO: support webln.request
+      methods: [
+        'enable',
+        'getBalance',
+        'getInfo',
+        'makeInvoice',
+        'lookupInvoice',
+        'sendPayment',
+        'signMessage',
+      ],
       version: '1.0',
       node: {
         alias: data.alias,
@@ -106,14 +115,29 @@ export class LNCWebLNProvider implements WebLNProvider {
       supports: ['lightning'],
     };
   }
-  makeInvoice(
-    _args: string | number | RequestInvoiceArgs
+  async makeInvoice(
+    args: string | number | RequestInvoiceArgs
   ): Promise<MakeInvoiceResponse> {
-    // TODO: implement (See Alby extension implementation)
-    throw new Error('Method not implemented.');
+    const requestArgs: RequestInvoiceArgs =
+      typeof args === 'object' ? args : {amount: args};
+    const amount = requestArgs.amount ?? requestArgs.defaultAmount;
+    const value = amount === undefined || amount === '' ? 0 : Number(amount);
+    if (!Number.isSafeInteger(value) || value < 0) {
+      throw new Error('Invalid amount: ' + amount);
+    }
+
+    const data = await this.lnc.lnd.lightning.addInvoice({
+      // LND treats a value of 0 as an amountless invoice
+      value: value.toString(),
+      memo: requestArgs.defaultMemo,
+    });
+
+    return {
+      paymentRequest: data.paymentRequest,
+    };
   }
   async sendPayment(paymentRequest: string): Promise<SendPaymentResponse> {
-    const data = await lnc.lnd.lightning.sendPaymentSync({
+    const data = await this.lnc.lnd.lightning.sendPaymentSync({
       paymentRequest,
     });
 
@@ -133,7 +157,7 @@ export class LNCWebLNProvider implements WebLNProvider {
   }
 
   async getBalance(): Promise<GetBalanceResponse> {
-    const balance = await lnc.lnd.lightning.channelBalance();
+    const balance = await this.lnc.lnd.lightning.channelBalance();
     return {
       balance: parseInt(balance.localBalance?.sat || '0'),
     };
@@ -147,16 +171,50 @@ export class LNCWebLNProvider implements WebLNProvider {
   ): Promise<{status: 'OK'} | {status: 'ERROR'; reason: string}> {
     throw new Error('Method not implemented.');
   }
-  lookupInvoice(_args: LookupInvoiceArgs): Promise<LookupInvoiceResponse> {
-    throw new Error('Method not implemented.');
+  async lookupInvoice(args: LookupInvoiceArgs): Promise<LookupInvoiceResponse> {
+    let paymentHash = args.payment_hash;
+    if (!paymentHash && args.invoice) {
+      const decoded = await this.lnc.lnd.lightning.decodePayReq({
+        payReq: args.invoice,
+      });
+      paymentHash = decoded.paymentHash;
+    }
+    if (!paymentHash) {
+      throw new Error('lookupInvoice requires a payment_hash or an invoice');
+    }
+
+    const invoice = await this.lnc.lnd.lightning.lookupInvoice({
+      rHash: hexToBase64(paymentHash),
+    });
+
+    return {
+      paymentRequest: invoice.paymentRequest,
+      paid: invoice.state === 'SETTLED',
+    };
   }
   request:
     | ((method: WebLNRequestMethod, args?: unknown) => Promise<unknown>)
     | undefined;
-  signMessage(_message: string): Promise<SignMessageResponse> {
-    throw new Error('Method not implemented.');
+  async signMessage(message: string): Promise<SignMessageResponse> {
+    const data = await this.lnc.lnd.lightning.signMessage({
+      // bytes fields are passed to LNC as base64
+      msg: utf8ToBase64(message),
+    });
+    return {
+      message,
+      signature: data.signature,
+    };
   }
   verifyMessage(_signature: string, _message: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
+}
+
+function utf8ToBase64(value: string) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = '';
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary);
 }
