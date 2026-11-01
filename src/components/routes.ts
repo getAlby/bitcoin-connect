@@ -15,6 +15,7 @@ import './pages/bc-lnbits.js';
 import './pages/bc-lnbits-nwc.js';
 import './pages/bc-cashu-me.js';
 import './pages/bc-rizful.js';
+import './pages/bc-lnc.js';
 
 export const routes = {
   '/start': html`<bc-start class="flex w-full"></bc-start>`,
@@ -30,6 +31,7 @@ export const routes = {
   ></bc-flash-wallet>`,
   '/cashu-me': html`<bc-cashu-me class="flex w-full"></bc-cashu-me>`,
   '/rizful': html`<bc-rizful class="flex w-full"></bc-rizful>`,
+  '/lnc': html`<bc-lnc class="flex w-full"></bc-lnc>`,
   '/new-wallet': html`<bc-new-wallet class="flex w-full"></bc-new-wallet>`,
   '/connected': html`<bc-connected class="flex w-full"></bc-connected>`,
 };
