@@ -125,6 +125,26 @@ export class LNCWebLNProvider implements WebLNProvider {
     if (!Number.isSafeInteger(value) || value < 0) {
       throw new Error('Invalid amount: ' + amount);
     }
+    // Respect the WebLN bounds for a fixed-amount invoice
+    // (an amountless invoice, value 0, lets the payer choose)
+    const minimum =
+      requestArgs.minimumAmount === undefined
+        ? undefined
+        : Number(requestArgs.minimumAmount);
+    const maximum =
+      requestArgs.maximumAmount === undefined
+        ? undefined
+        : Number(requestArgs.maximumAmount);
+    if (value > 0 && minimum !== undefined && value < minimum) {
+      throw new Error(
+        'Amount ' + value + ' is below the minimum amount ' + minimum
+      );
+    }
+    if (value > 0 && maximum !== undefined && value > maximum) {
+      throw new Error(
+        'Amount ' + value + ' is above the maximum amount ' + maximum
+      );
+    }
 
     const data = await this.lnc.lnd.lightning.addInvoice({
       // LND treats a value of 0 as an amountless invoice
