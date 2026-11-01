@@ -13,6 +13,8 @@ export class LNCPage extends withTwind()(BitcoinConnectElement) {
   @state()
   private _pairingPhrase = '';
 
+  private _isConnecting = false;
+
   override render() {
     return html`<div class="w-full">
       <bc-navbar class="flex w-full" heading=${lncConnectorTitle}></bc-navbar>
@@ -68,6 +70,10 @@ export class LNCPage extends withTwind()(BitcoinConnectElement) {
   }
 
   private async _onConnect() {
+    // ignore repeated clicks while a connection attempt is in flight
+    if (this._isConnecting) {
+      return;
+    }
     // tolerate extra spaces/newlines from copy-pasting
     const pairingPhrase = this._pairingPhrase.trim().split(/\s+/).join(' ');
     if (!pairingPhrase) {
@@ -75,19 +81,24 @@ export class LNCPage extends withTwind()(BitcoinConnectElement) {
       return;
     }
 
-    let lnc;
+    this._isConnecting = true;
     try {
-      lnc = await getLNC();
-    } catch (error) {
-      store.getState().setError((error as Error).message);
-      return;
-    }
-    lnc.credentials.pairingPhrase = pairingPhrase;
+      let lnc;
+      try {
+        lnc = await getLNC();
+      } catch (error) {
+        store.getState().setError((error as Error).message);
+        return;
+      }
+      lnc.credentials.pairingPhrase = pairingPhrase;
 
-    await store.getState().connect({
-      connectorName: lncConnectorTitle,
-      connectorType: 'lnc',
-    });
+      await store.getState().connect({
+        connectorName: lncConnectorTitle,
+        connectorType: 'lnc',
+      });
+    } finally {
+      this._isConnecting = false;
+    }
   }
 }
 
